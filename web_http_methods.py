@@ -12,19 +12,14 @@ class Web_HTTP_Methods(Task):
     """
     DANGEROUS_METHODS = ( 'TRACE', 'PUT', 'DELETE' )
 
-    def main(self, host=[]):
+    def main(self):
         """
         Main function
         """
-        if host and host[0]:
-            self.host = host[0]
-
         target = self.host
 
         if not target:
             target = self.ip
-
-        results = []
 
         self._check_stop()
 
@@ -64,18 +59,17 @@ class Web_HTTP_Methods(Task):
                         methods.append(method)
 
             if len(methods) > 0:
-                results.append('Dangerous methods allowed: %s.' % ', '.join(methods))
+                self._write_result('Dangerous methods allowed: %s.' % ', '.join(methods))
             else:
-                results.append('No dangerous methods allowed.')
+                self._write_result('No dangerous methods allowed.')
 
         except HTTPException:
-            return 'HTTP error.'
+            self._write_result('HTTP error.')
+            return
 
         self._check_stop()
 
-        if len(results) > 0:
-            return '\n'.join(results)
-
-        return 'No result.'
+        if not self.produced_output:
+            self._write_result('No result.')
 
 execute_task(Web_HTTP_Methods)

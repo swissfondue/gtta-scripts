@@ -3,7 +3,7 @@
 from sys import path
 path.append('lib')
 
-from subprocess import check_output, STDOUT
+from subprocess import Popen, PIPE, STDOUT
 from platform import system
 from gtta import Task, execute_task
 
@@ -23,20 +23,42 @@ class TCP_Traceroute(Task):
         if not target:
             target = self.ip
 
-        output = []
-
         self._check_stop()
 
         if system() == 'Windows':
-            output.append(check_output([ 'tracetcp.exe', '%s:%i' % ( target, self.port ), '-m', str(self.MAX_HOPS) ], stderr=STDOUT))
+            self._write_result(
+                Popen(
+                    [
+                        'tracetcp.exe',
+                        '%s:%i' % ( target, self.port ),
+                        '-m',
+                        str(self.MAX_HOPS)
+                    ],
+                    stdout = PIPE,
+                    stderr = STDOUT,
+                    shell  = False
+                ).communicate()[0]
+            )
+
         else:
-            output.append(check_output([ 'tcptraceroute', '-m', str(self.MAX_HOPS), target, str(self.port) ], stderr=STDOUT))
+            self._write_result(
+                Popen(
+                    [
+                        'tcptraceroute',
+                        '-m',
+                        str(self.MAX_HOPS),
+                        target,
+                        str(self.port)
+                    ],
+                    stdout = PIPE,
+                    stderr = STDOUT,
+                    shell  = False
+                ).communicate()[0]
+            )
 
         self._check_stop()
 
-        if len(output) > 0:
-            return '\n'.join(output).replace('\r', '')
-
-        return 'No result.'
+        if not self.produced_output:
+            self._write_result('No result.')
 
 execute_task(TCP_Traceroute)

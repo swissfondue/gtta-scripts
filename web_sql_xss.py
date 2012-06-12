@@ -14,14 +14,11 @@ class Web_SQL_XSS(Task):
     DEFAULT_PAGETYPE  = 'php'
     DEFAULT_URL_LIMIT = 100
 
-    def main(self, url=[], domains=[], pagetype=[ DEFAULT_PAGETYPE ], cookies=[], url_limit=[ DEFAULT_URL_LIMIT ]):
+    def main(self, domains=[], pagetype=[ DEFAULT_PAGETYPE ], cookies=[], url_limit=[ DEFAULT_URL_LIMIT ]):
         """
         Main function
         """
         target = self.host
-
-        if url and url[0]:
-            target = url[0]
 
         if not target:
             target = self.ip
@@ -58,8 +55,6 @@ class Web_SQL_XSS(Task):
         else:
             url_limit = self.DEFAULT_URL_LIMIT
 
-        results = []
-
         self._check_stop()
 
         results = detect(target, domains, pagetype, cookies, url_limit, self._check_stop, self.HTTP_TIMEOUT)
@@ -67,8 +62,9 @@ class Web_SQL_XSS(Task):
         self._check_stop()
 
         if len(results) > 0:
-            return '\n'.join(results)
+            self._write_result('\n'.join(results))
 
-        return 'No result.'
+        if not self.produced_output:
+            self._write_result('No result.')
 
 execute_task(Web_SQL_XSS)
