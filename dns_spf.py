@@ -125,35 +125,33 @@ class DNS_SPF(Task):
                     pass
 
         except NoAnswer:
-            return 'No answer from name server.'
+            self._write_result('No answer from name server.')
 
         except NoNameservers:
-            return 'No name servers.'
+            self._write_result('No name servers.')
 
         except NXDOMAIN:
-            return 'Host not found.'
+            self._write_result('Host not found.')
 
         except Timeout:
-            return 'DNS request timeout.'
+            self._write_result('DNS request timeout.')
 
         except DNSException:
-            return 'DNS error.'
+            self._write_result('DNS error.')
 
         self._check_stop()
 
         if spf_record or txt_record:
-            output = []
-
             if spf_record:
-                output.append('SPF "%s"' % spf_record)
+                self._write_result('SPF "%s"' % spf_record)
 
             if txt_record:
-                output.append('TXT "%s"' % txt_record)
+                self._write_result('TXT "%s"' % txt_record)
 
             if spf_valid:
-                output.append('SPF record is valid.')
+                self._write_result('SPF record is valid.')
             else:
-                errors.append('SPF record is invalid.')
+                self._write_result('SPF record is invalid.')
 
             if (spf_record and not txt_record) or (not spf_record and txt_record):
                 errors.append('It\'s recommended to have SPF records of both SPF and TXT record types, RFC 4408.')
@@ -161,10 +159,9 @@ class DNS_SPF(Task):
                 errors.append('SPF record contents should be identical for TXT and SPF record types.')
 
             if errors:
-                output.append('%s' % '\n'.join(errors))
+                self._write_result('\n'.join(errors))
 
-            return '\n'.join(output)
-
-        return 'No SPF records.'
+        else:
+            self._write_result('No SPF records.')
 
 execute_task(DNS_SPF)

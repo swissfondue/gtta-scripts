@@ -13,13 +13,10 @@ class DNS_Hosting(Task):
     """
     Checks if there are other websites on the same server.
     """
-    def main(self, host=[], show_all=[]):
+    def main(self, show_all=[]):
         """
         Main function
         """
-        if host and host[0]:
-            self.host = host[0]
-
         target = self.host
 
         if not target:
@@ -30,7 +27,6 @@ class DNS_Hosting(Task):
         else:
             show_all = False
 
-        output  = []
         domains = []
         offset  = 0
         first   = True
@@ -69,7 +65,7 @@ class DNS_Hosting(Task):
                     first = False
 
                 doc  = html.fromstring(response)
-                rows = doc.xpath('.//body/table/tr')
+                rows = doc.xpath('.//body/table/tbody/tr')
 
                 for row in rows:
                     domain = row.xpath('.//td[2]/b/text()')
@@ -90,21 +86,21 @@ class DNS_Hosting(Task):
                 offset += 100
 
             if len(domains) > 0:
-                output += domains
+                self._write_result('\n'.join(domains))
             else:
-                output.append('No host names found.')
+                self._write_result('No host names found.')
 
         except URLError, e:
-            return '%s: %s' % ( e.__class__.__name__, e.reason )
+            self._write_result('%s: %s' % ( e.__class__.__name__, e.reason ))
+            return
 
         except HTTPError, e:
-            return 'HTTP error: %s' % str(e)
+            self._write_result('HTTP error: %s' % str(e))
+            return
 
         self._check_stop()
 
-        if len(output) > 0:
-            return '\n'.join(output)
-
-        return 'No result.'
+        if not self.produced_output:
+            self._write_result('No result.')
 
 execute_task(DNS_Hosting)

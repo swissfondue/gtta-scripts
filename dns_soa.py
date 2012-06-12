@@ -206,34 +206,33 @@ class DNS_SOA(Task):
                 results.append(result)
 
         except NoAnswer:
-            return 'No answer from name server.'
+            self._write_result('No answer from name server.')
+            return
 
         except NoNameservers:
-            return 'No name servers.'
+            self._write_result('No name servers.')
 
         except NXDOMAIN:
-            return 'Host not found.'
+            self._write_result('Host not found.')
 
         except Timeout:
-            return 'DNS request timeout.'
+            self._write_result('DNS request timeout.')
 
         except DNSException:
-            return 'DNS error.'
+            self._write_result('DNS error.')
 
         self._check_stop()
 
         if len(results) > 0:
-            output = []
-
-            output.append('Nameserver                     IP                  SOA Serial      Refresh    Retry      Expire     Minimum')
-            output.append('-----------------------------------------------------------------------------------------------------------')
+            self._write_result('Nameserver                     IP                  SOA Serial      Refresh    Retry      Expire     Minimum')
+            self._write_result('-----------------------------------------------------------------------------------------------------------')
             for result in results:
                 line = '%-30s IP %-16s SOA %s' % ( result['server'], result['ip'], result['soa'] )
 
                 if result['message']:
                     line += ' (%s)' % result['message']
 
-                output.append(line)
+                self._write_result(line)
 
             serials_equal = True
             sample_serial = serials[0]
@@ -247,10 +246,9 @@ class DNS_SOA(Task):
                 errors.append('SOA record serial numbers should be equal across all name servers.')
 
             if errors:
-                output.append('%s' % '\n'.join(errors))
+                self._write_result('\n'.join(errors))
 
-            return '\n'.join(output)
-
-        return 'No SOA records.'
+        else:
+            self._write_result('No SOA records.')
 
 execute_task(DNS_SOA)
