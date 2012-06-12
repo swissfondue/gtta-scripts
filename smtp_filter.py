@@ -55,8 +55,6 @@ class SMTP_Filter(Task):
         else:
             sender = sender[0]
 
-        output = []
-
         self._check_stop()
 
         messages_sent = 0
@@ -78,33 +76,34 @@ class SMTP_Filter(Task):
             try:
                 smtp = SMTP(target, 25, timeout=self.SMTP_TIMEOUT)
             except Exception:
-                return 'Error connecting to SMTP server.'
+                self._write_result('Error connecting to SMTP server.')
+                return
 
             try:
                 smtp.login(login, password)
             except Exception:
-                return 'SMTP login failed.'
+                self._write_result('SMTP login failed.')
+                return
 
             try:
                 smtp.sendmail(sender, recipient, message.as_string())
             except Exception:
-                return 'Error sending email message.'
+                self._write_result('Error sending e-mail message.')
+                return
 
             smtp.close()
 
-            output.append(file)
+            self._write_result(file)
             messages_sent += 1
 
         if messages_sent == 0:
-            output.append('No messages sent.')
+            self._write_result('No messages sent.')
         else:
-            output.append('%i messages sent.' % messages_sent)
+            self._write_result('%i messages sent.' % messages_sent)
 
         self._check_stop()
 
-        if len(output) > 0:
-            return '\n'.join(output)
-
-        return 'No result.'
+        if not self.produced_output:
+            self._write_result('No result.')
 
 execute_task(SMTP_Filter)

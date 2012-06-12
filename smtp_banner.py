@@ -20,8 +20,6 @@ class SMTP_Banner(Task):
         if not target:
             target = self.ip
 
-        results = []
-
         self._check_stop()
 
         try:
@@ -31,28 +29,26 @@ class SMTP_Banner(Task):
             file = s.makefile('rb')
 
         except:
-            return 'Error connecting to SMTP server.'
-
-        banner = []
+            self._write_result('Error connecting to SMTP server.')
+            return
 
         try:
             while True:
                 line = file.readline()
                 line = strip(line)
 
-                banner.append(line)
+                self._write_result(line)
 
                 if line[:4] == '220 ':
                     break
 
         except:
-            return 'Error reading SMTP banner.'
+            self._write_result('Error reading SMTP banner.')
+            return
 
         self._check_stop()
 
-        if len(banner) > 0:
-            return '\n'.join(banner)
-
-        return 'No SMTP banner.'
+        if not self.produced_output:
+            self._write_result('No SMTP banner.')
 
 execute_task(SMTP_Banner)

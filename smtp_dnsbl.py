@@ -41,9 +41,7 @@ class SMTP_DNSBL(Task):
             try:
                 ip = gethostbyname(self.host)
             except:
-                return 'Host not found.'
-
-        results = []
+                raise InvalidTarget('Host not found.')
 
         self._check_stop()
 
@@ -86,16 +84,14 @@ class SMTP_DNSBL(Task):
                     if info:
                         message = '%s\nDetails: %s\n' % ( message, info )
 
-                    results.append(message)
+                    self._write_result(message)
 
             except:
                 pass
 
         self._check_stop()
 
-        if len(results) > 0:
-            return '\n'.join(results)
-
-        return 'Server is not listed in any known blocklist.'
+        if not self.produced_output:
+            self._write_result('Server is not listed in any known blocklist.')
 
 execute_task(SMTP_DNSBL)
