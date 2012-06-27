@@ -29,7 +29,7 @@ class TCP_Traceroute(Task):
             self._write_result(
                 Popen(
                     [
-                        'tracetcp.exe',
+                        'pythonlib/tracetcp.exe',
                         '%s:%i' % ( target, self.port ),
                         '-m',
                         str(self.MAX_HOPS)
