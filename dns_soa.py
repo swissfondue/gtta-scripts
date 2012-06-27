@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path
-path.append('lib')
+path.append('pythonlib')
 
 from dns.resolver import NXDOMAIN, NoAnswer, NoNameservers, Resolver
 from dns.exception import DNSException, Timeout

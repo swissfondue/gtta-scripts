@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path
-path.append('lib')
+path.append('pythonlib')
 
 from string import strip
 from socket import socket, AF_INET, SOCK_STREAM

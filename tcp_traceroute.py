@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path
-path.append('lib')
+path.append('pythonlib')
 
 from subprocess import Popen, PIPE, STDOUT
 from platform import system

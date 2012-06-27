@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path
-path.append('lib')
+path.append('pythonlib')
 
 from dns import rdatatype, rdataclass, flags, query as dns_query, rcode, name as dns_name
 from dns.message import make_query

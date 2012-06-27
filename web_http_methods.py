@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path
-path.append('lib')
+path.append('pythonlib')
 
 from httplib import HTTPConnection, HTTPException
 from gtta import Task, execute_task
