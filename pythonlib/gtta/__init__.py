@@ -47,11 +47,12 @@ class Task(Thread):
         self.produced_output = True
 
         if self._result:
-            self._result.write(str, '\n')
+            self._result.write(str.encode('utf-8'))
+            self._result.write('\n')
             self._result.flush()
 
         else:
-            print str
+            print str.encode('utf-8')
 
     def stop(self):
         """
@@ -102,7 +103,7 @@ class Task(Thread):
         self.lang = lines[3]
 
         # open output file
-        self.result = open(argv[2], 'w')
+        self._result = open(argv[2], 'w')
 
         # parse the remaining arguments
         for arg in argv[3:]:

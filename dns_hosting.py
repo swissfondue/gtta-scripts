@@ -65,7 +65,7 @@ class DNS_Hosting(Task):
                     first = False
 
                 doc  = html.fromstring(response)
-                rows = doc.xpath('.//body/table/tbody/tr')
+                rows = doc.xpath('/html/div/table/tr')
 
                 for row in rows:
                     domain = row.xpath('.//td[2]/b/text()')
@@ -86,7 +86,7 @@ class DNS_Hosting(Task):
                 offset += 100
 
             if len(domains) > 0:
-                self._write_result('\n'.join(domains))
+                self._write_result(u'\n'.join(domains))
             else:
                 self._write_result('No host names found.')
 
