@@ -14,24 +14,11 @@ class DNS_SPF(Task):
     """
     Get DNS SPF records
     """
-    def main(self, host=[]):
+    def main(self):
         """
         Main function
         """
-        target = self.ip
-
-        if self.host:
-            try:
-                target = gethostbyname(self.host)
-            except:
-                raise InvalidTarget('Host not found.')
-
-        domain = None
-
-        if host and host[0]:
-            domain = host[0]
-
-        if not domain:
+        if not self.host:
             raise NoHostName('No host name specified.')
 
         errors     = []
@@ -42,13 +29,30 @@ class DNS_SPF(Task):
         self._check_stop()
 
         try:
+            # get all name servers
+            r          = Resolver()
+            r.lifetime = self.DNS_TIMEOUT
+
+            name_servers = r.query(self.host, 'NS')
+            name_servers = map(lambda x: str(x), name_servers)
+
+            self._check_stop()
+
+            ns_list = []
+
+            for name_server in name_servers:
+                if name_server[-1] == '.':
+                    name_server = name_server[:-1]
+
+                ns_list.append(gethostbyname(name_server))
+
             try:
                 # check TXT record type for SPF records
                 r             = Resolver()
                 r.lifetime    = self.DNS_TIMEOUT
-                r.nameservers = [ target ]
+                r.nameservers = ns_list
 
-                txt_records = r.query(domain, 'TXT')
+                txt_records = r.query(self.host, 'TXT')
                 txt_records = map(lambda x: str(x), txt_records)
 
                 for txt in txt_records:
@@ -69,10 +73,11 @@ class DNS_SPF(Task):
 
             try:
                 # check SPF record type for SPF records
-                r          = Resolver()
-                r.lifetime = self.DNS_TIMEOUT
+                r             = Resolver()
+                r.lifetime    = self.DNS_TIMEOUT
+                r.nameservers = ns_list
 
-                spf_records = r.query(domain, 'SPF')
+                spf_records = r.query(self.host, 'SPF')
                 spf_records = map(lambda x: str(x), spf_records)
 
                 if len(spf_records) > 0:
@@ -96,10 +101,11 @@ class DNS_SPF(Task):
                         record = spf_record
 
                     # get MX records
-                    r          = Resolver()
-                    r.lifetime = self.DNS_TIMEOUT
+                    r             = Resolver()
+                    r.lifetime    = self.DNS_TIMEOUT
+                    r.nameservers = ns_list
 
-                    mx_records = r.query(domain, 'MX')
+                    mx_records = r.query(self.host, 'MX')
                     mx_records = map(lambda x: str(x), mx_records)
 
                     self._check_stop()
@@ -112,7 +118,7 @@ class DNS_SPF(Task):
 
                     self._check_stop()
 
-                    spf_query = spf.query(i=mx_ip, h=None, s='admin@%s' % domain, timeout=self.DNS_TIMEOUT)
+                    spf_query = spf.query(i=mx_ip, h=None, s='admin@%s' % self.host, timeout=self.DNS_TIMEOUT)
                     result = spf_query.check(record)
 
                     if result[0] == 'pass':

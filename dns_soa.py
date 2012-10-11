@@ -111,13 +111,10 @@ class DNS_SOA(Task):
 
         return errors
 
-    def main(self, host=[]):
+    def main(self):
         """
         Main function
         """
-        if host and host[0]:
-            self.host = host[0]
-
         if not self.host:
             raise NoHostName('No host name specified.')
 

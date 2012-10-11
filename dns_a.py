@@ -7,30 +7,17 @@ from dns.resolver import NXDOMAIN, NoAnswer, NoNameservers, Resolver
 from dns.exception import DNSException, Timeout
 from socket import gethostbyname
 from gtta import Task, execute_task
-from gtta.error import NoHostName, InvalidTarget
+from gtta.error import NoHostName
 
 class DNS_A(Task):
     """
     Get DNS A records
     """
-    def main(self, host=[]):
+    def main(self):
         """
         Main function
         """
-        target = self.ip
-
-        if self.host:
-            try:
-                target = gethostbyname(self.host)
-            except:
-                raise InvalidTarget('Host not found.')
-
-        domain = None
-
-        if host and host[0]:
-            domain = host[0]
-
-        if not domain:
+        if not self.host:
             raise NoHostName('No host name specified.')
 
         results = []
@@ -38,11 +25,28 @@ class DNS_A(Task):
         self._check_stop()
 
         try:
+            # get all name servers
+            r          = Resolver()
+            r.lifetime = self.DNS_TIMEOUT
+
+            name_servers = r.query(self.host, 'NS')
+            name_servers = map(lambda x: str(x), name_servers)
+
+            self._check_stop()
+
+            ns_list = []
+
+            for name_server in name_servers:
+                if name_server[-1] == '.':
+                    name_server = name_server[:-1]
+
+                ns_list.append(gethostbyname(name_server))
+
             r             = Resolver()
             r.lifetime    = self.DNS_TIMEOUT
-            r.nameservers = [ target ]
+            r.nameservers = ns_list
 
-            a_records = r.query(domain, 'A')
+            a_records = r.query(self.host, 'A')
             a_records = map(lambda x: str(x), a_records)
 
             for a in a_records:
