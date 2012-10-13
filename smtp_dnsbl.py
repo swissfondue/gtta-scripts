@@ -28,7 +28,6 @@ class SMTP_DNSBL(Task):
         'dnsbl.dronebl.org',
         'ix.dnsbl.manitu.net',
         'dnsbl.inps.de',
-        'dnsbl.mailer.mobi',
     )
 
     def main(self):
