@@ -50,7 +50,7 @@ my $this_ip;
 my $version_num = 'Version 0.9.9 - Beta 03/24/2007';
 my $webservers = 0;
 my $wildcard_dns;
-my @wildcards;
+my @wildcards = ();
 my @zone;
 
 my $count;
@@ -295,6 +295,7 @@ if ($dns) {
     share(%known_ips);
     share(%known_names);
     share(@output);
+    share(@wildcards);
     my $stream = new Thread::Queue;
     foreach my $host (@common_cnames) {
       $stream->enqueue("$host.$dns");
@@ -325,13 +326,18 @@ foreach my $current_name (sort keys(%known_names)) {
   }
 }
 
-if (%subnets)
+if (%subnets || @wildcards)
 {
     output("\nSubnets found:");
 
     foreach my $athroughc (sort keys(%subnets)) {
         $count_hostnames += $subnets{$athroughc};
-        output("\t$athroughc.0-255 : $subnets{$athroughc} hostname(s) found.");
+        output("\t$athroughc.0-255 : $subnets{$athroughc} hostname(s) found");
+    }
+
+    if (@wildcards)
+    {
+        output("\t$wildcard_dns : wildcard DNS - " . scalar(@wildcards) . " hostname(s) found");
     }
 }
 else
@@ -377,25 +383,18 @@ sub search_host {
   # only runs once if not threaded
   while (my $search_item = $threads ? $upstream->dequeue : shift) {
     my $packet = $resbf->search($search_item);
-    unless ($packet)
-    {
-        output("\t$search_item - Not Found");
-        next;
-    }
+    next unless ($packet);
+
     foreach my $answer ($packet->answer) {
       my @name = split (/\t/, $answer->string);
-      unless ($name[3] eq 'A' || $name[3] eq 'PTR')
-      {
-          output("\t$search_item - Not Found");
-          next;
-      }
+      next unless ($name[3] eq 'A' || $name[3] eq 'PTR');
 
       chop $name[0];
       if ($name[4] eq $wildcard_dns) {
         $this_ip = $name[4];
         find_nearby($this_ip) if !$known_ips{$this_ip};
         $known_ips{$answer->address} = 1;
-        output("\t$search_item - $wildcard_dns (wildcard)");
+        push(@wildcards, $search_item);
         next;
       }
 

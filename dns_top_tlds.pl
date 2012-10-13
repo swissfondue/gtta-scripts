@@ -20,24 +20,41 @@ my $tlds	= &getinput( $tld );
 
 my $res   	= Net::DNS::Resolver->new;
 
+undef $/;
+
 map {
 
 	my $cur   = $_;
-	unless ( $cur eq $my_tld ){
+	unless ( $cur eq $my_tld )
+    {
+        my $cur_domain = $dom . '.' . $cur;
 
-	  my $cur_domain = $dom . '.' . $cur;
+        my $query = $res->search( $cur_domain );
+        if ( $query ) {
 
-	  my $query = $res->search( $cur_domain );
-	  if ( $query ) {
+            foreach my $rr ($query->answer) 
+            {
+                next unless $rr->type eq 'A';
 
-		  foreach my $rr ($query->answer) {
+                open(READ, "whois $cur_domain |" );
+                my $whois = <READ>;
+                close(READ);
 
-			  next unless $rr->type eq 'A';
-			  print OUTFILE $cur_domain, "\t\t",$rr->address, "\n";
+                my $whois_link = "http://whois.domaintools.com/$cur_domain";
 
-		  }
-	  }
+                if ($whois =~ /Company:(?: +)?([^\n]+)\n/si || $whois =~ /Organi[sz]ation:(?: +)?([^\n]+)\n/si || $whois =~ /Name:(?: +)?([^\n]+)\n/si)
+                {
+                    $whois = $1;
+                }
+                else
+                {
+                    $whois = 'N/A';
+                }
 
+                print OUTFILE $cur_domain, "\t",$rr->address, "\t", "$whois\t$whois_link\n";
+                last;
+            }
+        }
 	}
 
 } @{ $tlds };
