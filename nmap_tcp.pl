@@ -89,11 +89,12 @@ if ($extract)
             print OUTFILE "Not shown: " . join(', ', @not_shown). "\n";
         }
 
+        printf OUTFILE "PORT      STATE         SERVICE      VERSION\n";
+
         for my $port ($ports->findnodes('port'))
         {
-            my ($id, $proto, $service, $state);
+            my ($id, $proto, $service, $state, $product);
 
-            #<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="ssh" product="OpenSSH" version="5.5p1 Debian 6+squeeze2" extrainfo="protocol 2.0" ostype="Linux" method="probed" conf="10" /></port>
             $id = $port->getAttribute('portid');
             $proto = $port->getAttribute('protocol');
             
@@ -104,17 +105,22 @@ if ($extract)
 
             if ($service)
             {
-                my ($sv, $product, $version, $ostype);
+                my ($sv, $version, $ostype);
 
                 $sv = $service->getAttribute('name');
                 $product = $service->getAttribute('product');
                 $version = $service->getAttribute('version');
                 $ostype = $service->getAttribute('ostype');
 
-                $service = "$sv" . ($product ? "\t$product " . ($version ? "$version " : "") . ($ostype ? "($ostype)" : "") : "");
+                $service = $sv; 
+                
+                if ($product)
+                {
+                    $product = $product . ($version ? "$version " : "") . ($ostype ? "($ostype)" : "");
+                }
             }
 
-            print OUTFILE $id . ($proto ? "/$proto" : "") . "\t$state" . ($service ? $service : "") . "\n";
+            printf OUTFILE "%-9s %-13s %-12s %s", $id . ($proto ? "/$proto" : "") , "$state" , $service, $product . "\n";
         }
 
         print OUTFILE "\n";
