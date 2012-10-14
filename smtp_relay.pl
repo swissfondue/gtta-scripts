@@ -21,16 +21,36 @@ $mail_to   = $mbto[0];
 my $srvr = $target[0];
 
 if ( $smtp = Net::SMTP->new( $srvr, 'Debug'  => 0, 'Timeout' => $timeout[0] ) ) {
+    my $msg = $smtp->message();
+    my @lines = split /\n/, $msg;
 
-    print OUTFILE qq[OK: server $srvr connect successful\n];
+    print OUTFILE $smtp->code() . ' ' . $lines[0] . "\n";
+    shift @lines;
 
-    $smtp->mail( $mail_from );
-    $smtp->to( $mail_to );
-    my $ok = $smtp->data( ".\r\n" );
+    for my $line (@lines)
+    {
+        print OUTFILE $smtp->code() . '-' . $line . "\n";
+    }
 
-    print OUTFILE qq[OK: test data accepted for mailing\n] if $ok;
+    print OUTFILE "MAIL FROM:<$mail_from>\n";
+    my $ok = $smtp->mail( $mail_from );
+    print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
 
-} else { print OUTFILE qq[NOT OK: server $srvr connect failed\n] }
+    if ($ok)
+    {
+        print OUTFILE "RCPT TO:<$mail_to>\n";
+        $ok = $smtp->to( $mail_to );
+        print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
+
+        if ($ok)
+        {
+            print OUTFILE "DATA";
+            $smtp->data( ".\r\n" );
+            print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
+        }
+    }
+
+} else { print OUTFILE qq[Error: server $srvr connection failed\n] }
 
 close(OUTFILE);
 
