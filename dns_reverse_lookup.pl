@@ -31,13 +31,17 @@ if ( $target) {
 
 		foreach my $rr ( $query->answer ) {
 
-			 next unless $rr->type eq 'PTR';
+			 unless ($rr->type eq 'PTR')
+             {
+                 print OUTFILE $IP,"\t\tN/A\n";
+                 next;
+             }
 			 print OUTFILE $IP,"\t\t",$rr->rdatastr, "\n";
 
 		}
 
 	  }
-	  else { print OUTFILE 'Error for ', $IP, ' - ', $res->errorstring, "\n"; }
+      else { print OUTFILE $IP, "\t\tN/A\n"; }
 
   } while (++$ip);
 }
