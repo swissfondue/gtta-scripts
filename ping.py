@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*-
+
+from sys import path
+path.append('pythonlib')
+
+import gtta
+import call
+
+
+def ping(target, packet):
+    """
+    Call ping
+    """
+    ok, out = call.call(['ping', '-s', str(packet - 8), '-c', '1', target])
+
+    if not ok:
+        raise ValueError('"ping" calling error!')
+
+    for line in out.split('\n'):
+        if 'unknown host' in line:
+            raise ValueError('Unknown host: %s' % target)
+
+        elif 'bytes from' in line or '0 received' in line:
+            return '%s: %s' % ( packet, line )
+
+    print out
+
+    return ''
+
+class PingTask(gtta.Task):
+    """
+    Ping task
+    """
+    def main(self):
+        """
+        Main function
+        """
+        target = self.host or self.ip
+        result = []
+
+        for packet in [2 ** x for x in xrange(4, 15)] + [64000]:
+            try:
+                result.append(ping(target, packet))
+            except ValueError as err:
+                self._write_result(unicode(err))
+                return
+
+            self._check_stop
+
+        self._write_result('\n'.join(result))
+
+gtta.execute_task(PingTask)

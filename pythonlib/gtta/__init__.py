@@ -10,7 +10,7 @@ class Task(Thread):
     """
     Base class for all tasks
     """
-    TIMEOUT        = 60    # task timeout
+    TIMEOUT        = 0     # task timeout
     DNS_TIMEOUT    = 10    # DNS request timeout
     SOCKET_TIMEOUT = 2     # socket timeout
     HTTP_TIMEOUT   = 30    # HTTP timeout
@@ -143,7 +143,11 @@ def execute_task(task_class):
     try:
         task = task_class()
         task.start()
-        task.join(task.TIMEOUT)
+
+        if task.TIMEOUT:
+            task.join(task.TIMEOUT)
+        else:
+            task.join()
 
         if task.isAlive():
             task.stop()
