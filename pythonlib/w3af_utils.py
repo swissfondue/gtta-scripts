@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-w3af communication utils
-"""
 
 import os
 import tempfile
-
 import call
 
 SCRIPT_TEMPLATE = '''target
@@ -19,15 +15,13 @@ start
 exit
 '''
 
-W3AF_CMD = os.path.join(
-    os.path.dirname(__file__), "w3af", "w3af_console")
+W3AF_CMD = os.path.join(os.path.dirname(__file__), "w3af", "w3af_console")
 
 def call_w3af(target, commands, timeout=15):
     """
     Call w2af_console with a defined command sequence
     Result: (success: boolean, data: unicode)
     """
-
     script = SCRIPT_TEMPLATE.format(
         target=target,
         timeout=timeout,
@@ -50,6 +44,9 @@ class W3AFScriptLauncher(object):
         return ["help"]
 
     def main(self):
+        """
+        Main function
+        """
         target = self.host or self.ip
         protocol = self.proto or 'http'
 
@@ -69,16 +66,21 @@ class W3AFScriptLauncher(object):
             data = iter(output.split('\r\n'))
 
             self._check_stop()
+
             # collecting of the script errors
             param_errors = []
+
             for line in data:
                 if line.startswith('w3af>>> exit'):
                     param_errors.append('Unexpected end of script')
                     break
+
                 if line.startswith('w3af>>> start'):
                     break
+
                 if not line.startswith('w3af'):
                     param_errors.append(line)
+
             else:
                 param_errors.append('Unexpected end of script')
 
@@ -88,8 +90,10 @@ class W3AFScriptLauncher(object):
                 return
 
             self._check_stop()
+
             # collecting the w3af output
             for line in data:
                 if line.startswith('w3af>>> exit'):
                     break
+
                 self._write_result(line)
