@@ -13,6 +13,7 @@ class CallByIPTask(gtta.Task):
     """
     Calling by IP task
     """
+    TIMEOUT = 60
     BODY_FRAGMENT_SIZE = 1000
 
     def main(self):

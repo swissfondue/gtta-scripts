@@ -12,6 +12,8 @@ class SSLCertificateUsageTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     """
     SSL certificate usage checker
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function

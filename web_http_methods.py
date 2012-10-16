@@ -10,6 +10,7 @@ class Web_HTTP_Methods(Task):
     """
     Web HTTP methods
     """
+    TIMEOUT = 60
     DANGEROUS_METHODS = ( 'TRACE', 'PUT', 'DELETE' )
 
     def main(self):

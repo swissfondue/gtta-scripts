@@ -23,14 +23,14 @@ def ping(target, packet):
         elif 'bytes from' in line or '0 received' in line:
             return '%s: %s' % ( packet, line )
 
-    print out
-
     return ''
 
 class PingTask(gtta.Task):
     """
     Ping task
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function
@@ -45,7 +45,7 @@ class PingTask(gtta.Task):
                 self._write_result(unicode(err))
                 return
 
-            self._check_stop
+            self._check_stop()
 
         self._write_result('\n'.join(result))
 

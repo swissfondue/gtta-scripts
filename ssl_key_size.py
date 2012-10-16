@@ -11,6 +11,8 @@ class KeySizeTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     """
     Size of SSL certificate public key
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function

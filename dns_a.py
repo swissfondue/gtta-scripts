@@ -13,6 +13,8 @@ class DNS_A(Task):
     """
     Get DNS A records
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function

@@ -10,6 +10,8 @@ class AccessUserDirsTask(Task):
     """
     Check access to user directory
     """
+    TIMEOUT = 60
+
     def main(self, usernames):
         """
         Main function

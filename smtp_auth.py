@@ -10,6 +10,7 @@ class SMTP_Auth(gtta.Task, smtp_utils.SMTPExtensionChecker):
     """
     Check SMTP AUTH extension
     """
+    TIMEOUT = 60
     EXTENSION = 'AUTH'
 
     def main(self):

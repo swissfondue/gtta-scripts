@@ -10,6 +10,7 @@ class SMTP_StartTLS(gtta.Task, smtp_utils.SMTPExtensionChecker):
     """
     Check SMTP STARTTLS extension
     """
+    TIMEOUT = 60
     EXTENSION = 'STARTTLS'
 
     def main(self):

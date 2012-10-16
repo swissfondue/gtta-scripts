@@ -10,6 +10,7 @@ class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     """
     SSL quality checker
     """
+    TIMEOUT = 60
     def main(self):
         """
         Main function

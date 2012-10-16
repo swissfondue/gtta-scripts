@@ -13,6 +13,8 @@ class SSLValidityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     """
     SSL validity checker
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function

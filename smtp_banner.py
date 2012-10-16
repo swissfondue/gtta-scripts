@@ -11,6 +11,8 @@ class SMTP_Banner(Task):
     """
     Return SMTP Banner
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function

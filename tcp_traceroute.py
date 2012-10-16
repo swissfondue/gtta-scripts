@@ -12,7 +12,6 @@ class TCP_Traceroute(Task):
     Check TCP traceroute port
     """
     MAX_HOPS = 30
-    TIMEOUT  = 120
 
     def main(self):
         """
@@ -25,36 +24,20 @@ class TCP_Traceroute(Task):
 
         self._check_stop()
 
-        if system() == 'Windows':
-            self._write_result(
-                Popen(
-                    [
-                        'pythonlib/tracetcp.exe',
-                        '%s:%i' % ( target, self.port ),
-                        '-m',
-                        str(self.MAX_HOPS)
-                    ],
-                    stdout = PIPE,
-                    stderr = STDOUT,
-                    shell  = False
-                ).communicate()[0]
-            )
-
-        else:
-            self._write_result(
-                Popen(
-                    [
-                        'tcptraceroute',
-                        '-m',
-                        str(self.MAX_HOPS),
-                        target,
-                        str(self.port)
-                    ],
-                    stdout = PIPE,
-                    stderr = STDOUT,
-                    shell  = False
-                ).communicate()[0]
-            )
+        self._write_result(
+            Popen(
+                [
+                    'tcptraceroute',
+                    '-m',
+                    str(self.MAX_HOPS),
+                    target,
+                    str(self.port)
+                ],
+                stdout = PIPE,
+                stderr = STDOUT,
+                shell  = False
+            ).communicate()[0]
+        )
 
         self._check_stop()
 
