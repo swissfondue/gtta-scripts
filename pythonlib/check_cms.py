@@ -39,9 +39,10 @@ def get_cms_type(url):
                 return (False, '')
 
             if out.find('Installed:') >= 0:
-                return (True, cms)
+                output = '%s Detected\n%s' % ( cms.capitalize(), out )
+                return (True, output)
 
-    return (True, 'Unknown type')
+    return (True, 'Nothing found.')
 
 if __name__ == '__main__':
     print get_cms_type('http://www.ubuntu.com')

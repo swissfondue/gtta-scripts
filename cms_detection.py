@@ -22,7 +22,7 @@ class CMSDetectionTask(gtta.Task):
         ok, cms = check_cms.get_cms_type(target)
 
         if not ok:
-            self._write_result('CMS-Explorer calling error!')
+            self._write_result('CMS-Explorer call error!')
 
         self._write_result(cms)
 
