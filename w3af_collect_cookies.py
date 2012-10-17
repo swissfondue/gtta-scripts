@@ -24,7 +24,6 @@ class CollectCookiesTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         return [
             "plugins",
             "grep collectCookies",
-            "discovery webSpider",
             "back"
         ]
 
