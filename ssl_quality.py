@@ -11,6 +11,7 @@ class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     SSL quality checker
     """
     TIMEOUT = 60
+
     def main(self):
         """
         Main function
@@ -22,7 +23,11 @@ class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
         Returns the list of sslyze options
         """
         return [
-            "--regular",
+            '--sslv2',
+            '--sslv3',
+            '--tlsv1',
+            #'--tlsv1_1',
+            #'--tlsv1_2',
         ]
 
 gtta.execute_task(SSLQualityTask)
