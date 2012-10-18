@@ -40,10 +40,10 @@ class SNMP_Community(Task):
                 return
 
             if ICMP in data:
-                self._write_result('Failed to get data: %s' % repr(data.getlayer('ICMP')))
+                self._write_result('No SNMP response.')
                 return
 
-            self._write_result('Got SNMP response: %s' % repr(data))
+            self._write_result('Received SNMP response: %s' % repr(data))
 
         except Exception as e:
             self._write_result(str(e))
