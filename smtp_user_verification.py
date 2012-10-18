@@ -47,10 +47,10 @@ class SMTP_User_Verification(Task):
 
                 try:
                     reply = smtp.verify(email)
-                    self._write_result('VRFY %s\n%s' % ( email, ' '.join(map(str, reply)) ))
+                    self._write_result('VRFY <%s>\n%s' % ( email, ' '.join(map(str, reply)) ))
 
                 except Exception as e:
-                    self._write_result('VRFY %s\nError (%s)' % ( email, str(e) ))
+                    self._write_result('VRFY <%s>\nError (%s)' % ( email, str(e) ))
 
                 self._write_result(' ')
 
