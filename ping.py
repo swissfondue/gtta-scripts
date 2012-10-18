@@ -6,7 +6,6 @@ path.append('pythonlib')
 import gtta
 import call
 
-
 def ping(target, packet):
     """
     Call ping

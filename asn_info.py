@@ -16,6 +16,8 @@ class ASNInfoTask(gtta.Task):
     """
     ASN Information task
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function
@@ -31,7 +33,7 @@ class ASNInfoTask(gtta.Task):
             """
             Get ASN info
             """
-            result = '<Unavailable>'
+            result = None
 
             try:
                 db_obj = pygeoip.GeoIP(db)
@@ -51,13 +53,13 @@ class ASNInfoTask(gtta.Task):
         company = None
         
         if asnum and asnum.find(' ') >= 0:
-            asnum = asnum[:asnum.find(' ')]
             company = asnum[asnum.find(' ') + 1:]
+            asnum = asnum[:asnum.find(' ')]
 
         country = get_info(GIP_DB, 'country_name_by_name', self.ip)
 
         self._write_result('Host IP: %s' % self.ip)
-        self._write_result('AS Num: %s' % ( asnum or 'N/A' ))
+        self._write_result('AS Number: %s' % ( asnum or 'N/A' ))
         self._write_result('Company: %s' % ( company or 'N/A' ))
         self._write_result('Country: %s' % ( country or 'N/A' ))
 

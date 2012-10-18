@@ -10,6 +10,8 @@ class RenegotiationTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
     """
     Renegotiation checker
     """
+    TIMEOUT = 60
+
     def main(self):
         """
         Main function
