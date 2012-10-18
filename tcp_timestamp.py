@@ -29,12 +29,11 @@ class TCP_Timestamp(Task):
             except Exception:
                 raise InvalidTarget('Host not found.')
 
-        packet = IP(dst=self.ip) / TCP(dport=self.port or self.DEFAULT_PORT)
         timestamps = []
 
         # sending packets
         for i in xrange(self.NUMBER_OF_PACKETS):
-            packet = IP(dst=self.ip) / TCP(dport=self.port)
+            packet = IP(dst=self.ip) / TCP(dport=self.port or self.DEFAULT_PORT)
 
             try:
                 data = sr1(packet, timeout=self.TCP_TIMEOUT)
