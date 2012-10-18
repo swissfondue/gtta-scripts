@@ -33,6 +33,8 @@ class ICMP_IP_ID(Task):
 
         # sending packets
         for i in xrange(self.NUMBER_OF_PACKETS):
+            self._check_stop()
+
             packet = IP(dst=self.ip) / ICMP()
             packet.id = id
 

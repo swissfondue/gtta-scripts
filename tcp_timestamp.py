@@ -33,6 +33,8 @@ class TCP_Timestamp(Task):
 
         # sending packets
         for i in xrange(self.NUMBER_OF_PACKETS):
+            self._check_stop()
+
             packet = IP(dst=self.ip) / TCP(dport=self.port or self.DEFAULT_PORT)
 
             try:
