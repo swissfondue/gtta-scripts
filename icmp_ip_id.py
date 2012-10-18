@@ -10,7 +10,7 @@ from gtta import Task, execute_task
 
 class ICMP_IP_ID(Task):
     """
-    Ping task
+    ICMP IP ID task
     """
     TIMEOUT = 60
     ICMP_TIMEOUT = 10
@@ -31,7 +31,7 @@ class ICMP_IP_ID(Task):
         id = randint(0, self.MAX_ID - self.NUMBER_OF_PACKETS)
         ids = []
 
-        # sending 3 packets
+        # sending packets
         for i in xrange(self.NUMBER_OF_PACKETS):
             packet = IP(dst=self.ip) / ICMP()
             packet.id = id
@@ -49,13 +49,9 @@ class ICMP_IP_ID(Task):
 
             id += 1
 
-        if ids:
-            self._write_result('#\tSrc ID\tDst ID')
+        self._write_result('#\tSrc ID\tDst ID')
 
-            for id in ids:
-                self._write_result('%i\t%s\t%s' % id)
-
-        else:
-            self._write_result('Destination host unreachable.')
+        for id in ids:
+            self._write_result('%i\t%s\t%s' % id)
 
 execute_task(ICMP_IP_ID)
