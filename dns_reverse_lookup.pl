@@ -37,17 +37,16 @@ if ( $target) {
 
         if ( $query ) {
 
-            foreach my $rr ( $query->answer ) {
+            my $found = 0;
 
-                unless ($rr->type eq 'PTR')
-                {
-                    print OUTFILE $IP,"\t\tN/A\n";
-                    next;
-                }
+            foreach my $rr ( $query->answer ) 
+            {
+                next unless ($rr->type eq 'PTR');
                 print OUTFILE $IP,"\t\t",$rr->rdatastr, "\n";
-
+                $found = 1;
             }
 
+            print OUTFILE $IP, "\t\tN/A\n" unless ($found);
         }
         else { print OUTFILE $IP, "\t\tN/A\n"; }
 
