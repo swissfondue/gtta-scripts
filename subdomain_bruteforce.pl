@@ -326,23 +326,13 @@ foreach my $current_name (sort keys(%known_names)) {
   }
 }
 
-if (%subnets || @wildcards)
-{
-    output("\nSubnets found:");
-
-    foreach my $athroughc (sort keys(%subnets)) {
-        $count_hostnames += $subnets{$athroughc};
-        output("\t$athroughc.0-255 : $subnets{$athroughc} hostname(s) found");
-    }
-
-    if (@wildcards)
-    {
-        output("\t$wildcard_dns : wildcard DNS - " . scalar(@wildcards) . " hostname(s) found");
-    }
-}
-else
+unless (%subnets || @wildcards)
 {
     output("\nNo subdomains found.");
+}
+elsif (@wildcards)
+{
+    output("\n$wildcard_dns : wildcard DNS - " . scalar(@wildcards) . " hostname(s) found");
 }
 
 &http_connect if $http_connect;
@@ -447,7 +437,7 @@ sub find_nearby {
             $count++;
             $known_names{"$octet[0].$octet[1].$octet[2].$octet[3],"
                          . "$name[$#name]"} = 1;
-            output("$octet[0].$octet[1].$octet[2].$octet[3]\t$name[$#name]");
+            output("\t$name[$#name] - $octet[0].$octet[1].$octet[2].$octet[3]");
             find_nearby("$octet[0].$octet[1].$octet[2].$octet[3]"); # recurse
           }
         }
@@ -456,7 +446,7 @@ sub find_nearby {
       $count++;
       $known_names{"$octet[0].$octet[1].$octet[2].$octet[3],"
                    . "$name[$#name]"} = 1;
-      output("$octet[0].$octet[1].$octet[2].$octet[3]\t$name[$#name]");
+      output("\t$name[$#name] - $octet[0].$octet[1].$octet[2].$octet[3]");
       find_nearby("$octet[0].$octet[1].$octet[2].$octet[3]");  # recurse
     }
   }

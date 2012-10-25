@@ -54,42 +54,14 @@ if ($extract)
 {
     my $parser = XML::LibXML->new();
     my $xml = $parser->parse_file($tmp->filename);
+    my $produced_output = 0;
 
     for my $host ($xml->findnodes('/nmaprun/host'))
     {
-        my ($address, $hostname, $status, $ports, $extraports, @not_shown);
+        my ($address, $hostname, $status, $ports, $extraports, @not_shown, @open_ports);
 
-        ($address) = $host->findnodes('./address');
-        $address = $address->getAttribute('addr');
-
-        ($hostname) = $host->findnodes('./hostnames/hostname');
-
-        if ($hostname)
-        {
-            $hostname = $hostname->getAttribute('name');
-        }
-
-        ($status) = $host->findnodes('status');
-        $status = $status->getAttribute('state');
-
-        print OUTFILE "Scan report for $address " . ($hostname ? "($hostname) " : "") . "\n";
-        print OUTFILE "Host is $status\n";
-        
+        @open_ports = ();
         ($ports) = $host->findnodes('ports');
-
-        @not_shown = ();
-
-        for my $port ($ports->findnodes('extraports'))
-        {
-            push(@not_shown, $port->getAttribute('count') . " " . $port->getAttribute('state') . " ports");
-        }
-
-        if (scalar @not_shown)
-        {
-            print OUTFILE "Not shown: " . join(', ', @not_shown). "\n";
-        }
-
-        printf OUTFILE "PORT      STATE         SERVICE      VERSION\n";
 
         for my $port ($ports->findnodes('port'))
         {
@@ -120,11 +92,55 @@ if ($extract)
                 }
             }
 
-            printf OUTFILE "%-9s %-13s %-12s %s", $id . ($proto ? "/$proto" : "") , "$state" , $service, $product . "\n";
+            if ($state =~ /^open/)
+            {
+                push(@open_ports, sprintf("%-9s %-13s %-12s %s", $id . ($proto ? "/$proto" : "") , "$state" , $service, $product . "\n"));
+            }
+        }    
+
+        next unless (@open_ports);
+
+        ($address) = $host->findnodes('./address');
+        $address = $address->getAttribute('addr');
+
+        ($hostname) = $host->findnodes('./hostnames/hostname');
+
+        if ($hostname)
+        {
+            $hostname = $hostname->getAttribute('name');
+        }
+
+        ($status) = $host->findnodes('status');
+        $status = $status->getAttribute('state');
+
+        print OUTFILE "Scan report for $address " . ($hostname ? "($hostname) " : "") . "\n";
+        print OUTFILE "Host is $status\n";
+
+        @not_shown = ();
+
+        for my $port ($ports->findnodes('extraports'))
+        {
+            push(@not_shown, $port->getAttribute('count') . " " . $port->getAttribute('state') . " ports");
+        }
+
+        if (scalar @not_shown)
+        {
+            print OUTFILE "Not shown: " . join(', ', @not_shown). "\n";
+        }
+
+        printf OUTFILE "PORT      STATE         SERVICE      VERSION\n";
+
+        for my $port (@open_ports)
+        {
+            print OUTFILE $port;
         }
 
         print OUTFILE "\n";
+
+        $produced_output = 1;
     }
+
+    print OUTFILE "No open ports.\n" unless ($produced_output);
 }
 else
 {

@@ -32,11 +32,9 @@ my $query = $res->query( $host, 'NS' );
 
 if ( $query ) {
 
-	print OUTFILE "\n", $cnt++, q[) ], $host, ' (', &hostname( $host ), ")\n";
-
 	foreach my $rr ( grep { $_->type eq 'NS' } $query->answer ) {
 
-		print OUTFILE "\t", $rr->nsdname, ' (', &hostname( $rr->nsdname ), ")\n";
+		print OUTFILE $rr->nsdname, ' (', &hostname( $rr->nsdname ), ")\n";
 
 	}
 }

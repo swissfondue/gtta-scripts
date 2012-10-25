@@ -3,6 +3,8 @@
 use strict;
 use Data::Dumper;
 use Net::DNS;
+use LWP::UserAgent;
+use HTTP::Request;
 
 unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
 
@@ -11,16 +13,20 @@ my $outfile = $ARGV[1];
 my $option	= &getinput( $ARGV[2] ) if ( $ARGV[2] );
 
 open(OUTFILE, ">>$outfile");
+binmode(OUTFILE, ":utf8");
 
 my ($dom, $my_tld) = split/\./,$target->[0];
 
 my $tld 	= 'dns_top_tlds_files/short_tld.txt'; # '0' - short, '1' - long TLD list
-$tld 		= 'dns_top_tlds_files/tld.txt' if ( $option == 1 );
+$tld 		= 'dns_top_tlds_files/tlds.txt' if ( $option == 1 );
 my $tlds	= &getinput( $tld );
 
 my $res   	= Net::DNS::Resolver->new;
 
 undef $/;
+
+my $ua = LWP::UserAgent->new;
+$ua->timeout(60);
 
 map {
 
@@ -40,8 +46,6 @@ map {
                 my $whois = <READ>;
                 close(READ);
 
-                my $whois_link = "http://whois.domaintools.com/$cur_domain";
-
                 if ($whois =~ /Company:(?: +)?([^\n]+)\n/si || $whois =~ /Organi[sz]ation:(?: +)?([^\n]+)\n/si || $whois =~ /Name:(?: +)?([^\n]+)\n/si)
                 {
                     $whois = $1;
@@ -51,7 +55,19 @@ map {
                     $whois = 'N/A';
                 }
 
-                print OUTFILE $cur_domain, "\t",$rr->address, "\t", "$whois\t$whois_link\n";
+                my $request  = HTTP::Request->new('GET' => 'http://' . $cur_domain);
+                my $response = $ua->request($request);
+                
+                my $title = 'N/A';
+
+                unless ($response->is_error())
+                {
+                    my $content = $response->content();
+                    $title = $1 if ($content =~ /<title>(.*?)<\/title>/si);
+                    $title =~ s/[\r\n]+//gi;
+                }
+
+                print OUTFILE $cur_domain, "\t\t", $rr->address, "\t\t", $whois, "\t\t", $title, "\n";
                 last;
             }
         }
@@ -70,8 +86,7 @@ sub getinput {
   if ( open( IN, '<:utf8', $fi ) ) {
 
 	my @fo;
-
-	while( <IN> ){ next unless m/^[a-z]/i; s/^(\S+)$/{ push @fo, $1; }/e; }
+    while( <IN> ){ chomp; push @fo, $_; }
 
 	close( IN );
 

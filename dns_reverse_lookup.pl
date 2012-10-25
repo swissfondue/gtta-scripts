@@ -15,35 +15,44 @@ my $res = Net::DNS::Resolver->new;
 
 if ( $target) {
 
-  my $ip = new Net::IP ( $target );
+  my @ranges = split /\s+/, $target;
 
-  do {
-      unless ($ip)
-      {
-          print OUTFILE 'Invalid IP or range.';
-      }
+  foreach my $t (@ranges)
+  {
+      $t =~ s/^\s+//gi;
+      $t =~ s/\s+$//gi;
 
-	  my $IP = $ip->ip();
-	  my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
-	  my $query = $res->query( $target_IP, 'PTR' );
+    my $ip = new Net::IP ( $t );
 
-	  if ( $query ) {
+    do {
+        unless ($ip)
+        {
+            print OUTFILE 'Invalid IP or range: ' . $t;
+            next;
+        }
 
-		foreach my $rr ( $query->answer ) {
+        my $IP = $ip->ip();
+        my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
+        my $query = $res->query( $target_IP, 'PTR' );
 
-			 unless ($rr->type eq 'PTR')
-             {
-                 print OUTFILE $IP,"\t\tN/A\n";
-                 next;
-             }
-			 print OUTFILE $IP,"\t\t",$rr->rdatastr, "\n";
+        if ( $query ) {
 
-		}
+            foreach my $rr ( $query->answer ) {
 
-	  }
-      else { print OUTFILE $IP, "\t\tN/A\n"; }
+                unless ($rr->type eq 'PTR')
+                {
+                    print OUTFILE $IP,"\t\tN/A\n";
+                    next;
+                }
+                print OUTFILE $IP,"\t\t",$rr->rdatastr, "\n";
 
-  } while (++$ip);
+            }
+
+        }
+        else { print OUTFILE $IP, "\t\tN/A\n"; }
+
+    } while (++$ip);
+  }
 }
 else { print OUTFILE 'Error: no IP range is provided', "\n"; }
 

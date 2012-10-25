@@ -48,7 +48,7 @@ else
 
                 if ($class eq 'chaos' && $out =~ m/got version.bind\/TXT\/IN/si)
                 {
-                    print OUTFILE "Possible misconfiguration - expects version.bind in IN-class record.\n\n";
+                    print OUTFILE "Possible misconfiguration - expects version.bind. in IN-class record.\n\n";
                     $class = 'in';
                     next;
                 }
