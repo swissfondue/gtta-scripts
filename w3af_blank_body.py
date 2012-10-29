@@ -44,6 +44,6 @@ class BlankBodyTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         if len(urls):
             return 'Found %i URLs with blank body:\n%s' % ( len(urls), '\n'.join(urls) )
 
-        return 'No blank bodies found.'
+        return 'No URLs with blank bodies found.'
 
 gtta.execute_task(BlankBodyTask)
