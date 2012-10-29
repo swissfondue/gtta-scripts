@@ -24,6 +24,9 @@ class GetMailsTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         return [
             "plugins",
             "grep getMails",
+            "grep config getMails",
+            "set onlyTargetDomain False",
+            "back",
             "discovery webSpider",
             "back"
         ]
