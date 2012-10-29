@@ -43,6 +43,12 @@ class W3AFScriptLauncher(object):
         """
         return ["help"]
 
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        return '\n'.join(result)
+
     def main(self):
         """
         Main function
@@ -91,9 +97,13 @@ class W3AFScriptLauncher(object):
 
             self._check_stop()
 
+            result = []
+
             # collecting the w3af output
             for line in data:
                 if line.startswith('w3af>>> exit'):
                     break
 
-                self._write_result(line)
+                result.append(line)
+
+            self._write_result(self._filter_result(result))
