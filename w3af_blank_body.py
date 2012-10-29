@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -27,5 +28,22 @@ class BlankBodyTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery webSpider",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        urls = []
+
+        for line in result:
+            url = match(r'The URL: "([^"]+)" returned an empty body', line)
+
+            if url and not url.groups()[0] in urls:
+                urls.append(url.groups()[0])
+
+        if len(urls):
+            return 'Found %i URLs with blank body:\n%s' % ( len(urls), '\n'.join(urls) )
+
+        return 'No blank bodies found.'
 
 gtta.execute_task(BlankBodyTask)
