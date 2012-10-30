@@ -370,23 +370,26 @@ class collectCookies(baseGrepPlugin):
         # Group correctly
         tmp = []
         for c in cookies:
-            tmp.append( (c['cookie-string'], c.getURL() ) )
+            tmp.append( c.getDesc() )
+            #tmp.append( ( c['cookie-string'], c.getURL() ) )
         
         # And don't print duplicates
         tmp = list(set(tmp))
-        
-        resDict, itemIndex = groupbyMinKey( tmp )
-        if itemIndex == 0:
+
+        #resDict, itemIndex = groupbyMinKey( tmp )
+        #if itemIndex == 0:
             # Grouped by cookies
-            msg = 'The cookie: "%s" was sent by these URLs:'
-        else:
+            #msg = 'The cookie: "%s" was sent by these URLs:'
+        #else:
             # Grouped by URLs
-            msg = 'The URL: "%s" sent these cookies:'
+        #    msg = 'The URL: "%s" sent these cookies:'
             
-        for k in resDict:
-            om.out.information(msg % k)
-            for i in resDict[k]:
-                om.out.information('- ' + i )
+        #for k in resDict:
+        #    om.out.information(msg % k)
+        #    for i in resDict[k]:
+        #        om.out.information('- ' + i )
+        for k in tmp:
+            om.out.information(k)
             
     def getPluginDeps( self ):
         '''
