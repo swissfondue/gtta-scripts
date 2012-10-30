@@ -57,7 +57,7 @@ class feeds(baseGrepPlugin):
         '''
         dom = response.getDOM()
         uri = response.getURI()
-        
+
         # In some strange cases, we fail to normalize the document
         if uri not in self._already_inspected and dom is not None:
 
@@ -67,7 +67,7 @@ class feeds(baseGrepPlugin):
                 
                 # Find all tags with tag_name
                 element_list = dom.xpath('//%s' % tag_name)
-            
+
                 for element in element_list:
                     
                     if attr_name in element.attrib:
