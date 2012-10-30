@@ -57,7 +57,7 @@ class findCaptchas(baseDiscoveryPlugin):
         
         # Re-GET the document, and fetch the images
         image_map_2 = self._get_images( fuzzableRequest )
-        
+
         # Compare the images (different images may be captchas)
         changed_images_list = []
         if image_map_1.keys() != image_map_2.keys():
@@ -105,6 +105,7 @@ class findCaptchas(baseDiscoveryPlugin):
             else:
                 image_list = document_parser.getReferencesOfTag('img')
                 image_list = [ i.uri2url() for i in image_list]
+
                 for img_src in image_list:
                     # TODO: Use self._tm.startFunction
                     try:
