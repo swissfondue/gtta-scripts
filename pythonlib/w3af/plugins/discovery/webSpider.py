@@ -201,7 +201,7 @@ class webSpider(baseDiscoveryPlugin):
                                     args=targs, ownerObj=self)
             
         self._tm.join(self)
-        
+
         return self._fuzzableRequests
     
     
