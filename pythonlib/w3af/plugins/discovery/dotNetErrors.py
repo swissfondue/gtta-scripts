@@ -99,7 +99,7 @@ class dotNetErrors(baseDiscoveryPlugin):
         '''
         # Remember that httpResponse objects have a faster "__in__" than
         # the one in strings; so string in response.getBody() is slower than
-        # string in response        
+        # string in response
         viewable_remote_machine = '<b>Details:</b> To enable the details of this'
         viewable_remote_machine += ' specific error message to be viewable on remote machines'
         if viewable_remote_machine not in response\
