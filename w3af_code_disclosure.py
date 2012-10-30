@@ -38,7 +38,7 @@ class CodeDisclosureTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         for line in result:
             url = match(r'The URL: "([^"]+)" has a (.*?) code disclosure vulnerability', line)
 
-            if url and not url.groups()[0] in urls:
+            if url and not ('%s (%s)' % url.groups()) in urls:
                 urls.append('%s (%s)' % url.groups())
 
         if len(urls):
