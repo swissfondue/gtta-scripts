@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -26,5 +27,22 @@ class DetectReverseProxyTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery detectReverseProxy",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        output = []
+
+        for line in result:
+            out_line = match(r'(The remote web server seems to have a reverse proxy installed.|The remote web server doesn\'t seem to have a reverse proxy.)', line)
+
+            if out_line:
+                output.append(out_line.groups()[0])
+
+        if len(output):
+            return '\n'.join(output)
+
+        return 'The remote web server doesn\'t seem to have a reverse proxy.'
 
 gtta.execute_task(DetectReverseProxyTask)
