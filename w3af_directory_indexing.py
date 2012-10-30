@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -27,5 +28,22 @@ class DirectoryIndexingTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery webSpider",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        urls = []
+
+        for line in result:
+            url = match(r'The URL: "([^"]+)" has a directory indexing vulnerability', line)
+
+            if url and not url.groups()[0] in urls:
+                urls.append(url.groups()[0])
+
+        if len(urls):
+            return 'Found %i directories with indexing vulnerability:\n%s' % ( len(urls), '\n'.join(urls) )
+
+        return 'No directory indexing vulnerabilities found.'
 
 gtta.execute_task(DirectoryIndexingTask)
