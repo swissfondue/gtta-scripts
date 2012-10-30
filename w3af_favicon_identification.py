@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -26,5 +27,22 @@ class FaviconIdentificationTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery favicon_identification",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        output = []
+
+        for line in result:
+            out_line = match(r'(Favicon.ico file was identified as "[^"]+".)', line)
+
+            if out_line:
+                output.append(out_line.groups()[0])
+
+        if len(output):
+            return '\n'.join(output)
+
+        return 'Favicon identification failed.'
 
 gtta.execute_task(FaviconIdentificationTask)
