@@ -170,6 +170,7 @@ class pathDisclosure(baseGrepPlugin):
                             v.setName( 'Path disclosure vulnerability' )
                             v['path'] = match
                             v.addToHighlight( match )
+                            om.out.information( v.getDesc() )
                             kb.kb.append( self, 'pathDisclosure', v )
         
         self._update_KB_path_list()
@@ -275,46 +276,6 @@ class pathDisclosure(baseGrepPlugin):
         '''    
         ol = optionList()
         return ol
-
-    def end(self):
-        '''
-        This method is called when the plugin wont be used anymore.
-        '''
-        inform = kb.kb.getData( 'pathDisclosure', 'pathDisclosure' )
-        
-        tmp = {}
-        ids = {}
-        for v in inform:
-            if v.getURL() in tmp.keys():
-                tmp[ v.getURL() ].append( v['path'] )
-            else:
-                tmp[ v.getURL() ] = [ v['path'], ]
-                                
-            if v['path'] in ids.keys():
-                ids[ v['path'] ].append( v.getId() )
-            else:
-                ids[ v['path'] ] = [ v.getId(), ]
-        
-        # Avoid duplicates
-        for url in tmp.keys():
-            tmp[ url ] = list( set( tmp[ url ] ) )
-        
-        for url in tmp.keys():
-            om.out.information( 'The URL: "' + url + '" has the following path disclosure problems:' )
-            for path in tmp[ url ]:
-                to_print = '    - ' + path + ' . Found in request with'
-                
-                list_of_id_list = ids[ path ]
-                complete_list = []
-                for list_of_id in list_of_id_list:
-                    complete_list.extend(list_of_id)
-                
-                complete_list = list( set( complete_list ) )
-                if len(complete_list)==1:
-                    to_print += ' id ' + str( complete_list[0] ) + '.'
-                else:
-                    to_print += ' ids ' + str( complete_list )
-                om.out.information( to_print )
 
     def _get_path_disclosure_strings(self):
         '''

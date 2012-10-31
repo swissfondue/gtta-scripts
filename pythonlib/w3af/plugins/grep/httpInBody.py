@@ -111,18 +111,6 @@ class httpInBody (baseGrepPlugin):
         ol = optionList()
         return ol
         
-    #def end(self):
-        '''
-        This method is called when the plugin wont be used anymore.
-        '''
-    #    for info_type in ['request', 'response']:
-            
-    #        if kb.kb.getData('httpInBody', info_type):
-    #            msg = 'The following URLs have an HTTP '+ info_type +' in the HTTP response body:'
-    #            om.out.information(msg)
-    #            for i in kb.kb.getData('httpInBody', info_type):
-    #                om.out.information('- ' + i.getURI() + '  (id:' + str(i.getId()) + ')' )
-        
     def getPluginDeps( self ):
         '''
         @return: A list with the names of the plugins that should be runned before the

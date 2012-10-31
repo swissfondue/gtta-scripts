@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -27,5 +28,25 @@ class PathDisclosureTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery webSpider",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        urls = []
+
+        for line in result:
+            url = match(r'The URL: "([^"]+)" has a path disclosure vulnerability which discloses: "([^"]+)".', line)
+
+            if url:
+                url = '%s (%s)' % url.groups()
+
+                if url not in urls:
+                    urls.append(url)
+
+        if len(urls):
+            return 'Found %i URLs with path disclosure vulnerability:\n%s' % ( len(urls), '\n'.join(urls) )
+
+        return 'No URLs with path disclosure vulnerability found.'
 
 gtta.execute_task(PathDisclosureTask)
