@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -27,5 +28,25 @@ class MetaTagsTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery webSpider",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        tags = []
+
+        for line in result:
+            tag = match(r'The URI: "([^"]+)" sent a META tag with attribute \S+ "([^"]+)" which looks interesting.', line)
+
+            if tag:
+                tag = '%s (%s)' % tag.groups()
+
+                if tag not in tags:
+                    tags.append(tag)
+
+        if len(tags):
+            return 'Found %i interesting meta tags:\n%s' % ( len(tags), '\n'.join(tags) )
+
+        return 'No interesting meta tags found.'
 
 gtta.execute_task(MetaTagsTask)
