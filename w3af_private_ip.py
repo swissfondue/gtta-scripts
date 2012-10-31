@@ -64,6 +64,6 @@ class PrivateIPTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         if msg:
             return '\n\n'.join(msg)
 
-        return 'No IP addresses found.'
+        return 'No private IP addresses found.'
 
 gtta.execute_task(PrivateIPTask)
