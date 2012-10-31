@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -27,5 +28,25 @@ class StrangeHTTPCodeTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery webSpider",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        urls = []
+
+        for line in result:
+            url = match(r'The remote Web server sent a strange HTTP response code: "([^"]+)" with the message: "([^"]+)" at "([^"]+)"', line)
+
+            if url:
+                url = '%s (%s %s)' % ( url.groups()[2], url.groups()[0], url.groups()[1] )
+
+                if url not in urls:
+                    urls.append(url)
+
+        if len(urls):
+            return 'Found %i URLs with strange HTTP codes:\n%s' % ( len(urls), '\n'.join(urls) )
+
+        return 'No strange HTTP codes found.'
 
 gtta.execute_task(StrangeHTTPCodeTask)
