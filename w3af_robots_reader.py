@@ -41,7 +41,7 @@ class RobotsReaderTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
 
             if out_line:
                 found = True
-                output.append('Found robots.txt file at %s' % out_line.groups()[0])
+                output.append('Found robots file at %s' % out_line.groups()[0])
 
             url = match(r'New URL found by robotsReader plugin: (.*)', line)
 
@@ -50,11 +50,11 @@ class RobotsReaderTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
                     urls.append(url.groups()[0])
 
         if found and urls:
-            output.append('Found %i URLs:\n%s' % ( len(urls), '\n'.join(urls) ))
+            output.append('Found %i URLs in robots file:\n%s' % ( len(urls), '\n'.join(urls) ))
 
         if len(output):
             return '\n\n'.join(output)
 
-        return 'Robots.txt file not found.'
+        return 'Robots file not found.'
 
 gtta.execute_task(RobotsReaderTask)

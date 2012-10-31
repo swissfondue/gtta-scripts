@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from re import match
 from sys import path
 path.append('pythonlib')
 
@@ -26,5 +27,23 @@ class SitemapReaderTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
             "discovery sitemapReader",
             "back"
         ]
+
+    def _filter_result(self, result):
+        """
+        Filter w3af result
+        """
+        output = []
+
+        for line in result:
+            url = match(r'New URL found by sitemapReader plugin: (.*)', line)
+
+            if url and url.groups()[0] not in output:
+                if not url.groups()[0].endswith('sitemap.xml'):
+                    output.append(url.groups()[0])
+
+        if len(output):
+            return 'Found %i URLs in sitemap:\n%s' % ( len(output), '\n'.join(output) )
+
+        return 'Sitemap file not found.'
 
 gtta.execute_task(SitemapReaderTask)
