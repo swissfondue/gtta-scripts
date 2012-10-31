@@ -55,7 +55,8 @@ class DotNetEventValidationTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         if len(urls_encryption):
             msg.append('Found %i URLs with disabled ViewState encryption (exploitable programming/configuration error):\n%s' % ( len(urls_encryption), '\n'.join(urls_encryption) ))
 
-        return '\n\n'.join(msg)
+        if msg:
+            return '\n\n'.join(msg)
 
         return 'No URLs with incorrect event validation found.'
 

@@ -85,8 +85,9 @@ class httpInBody (baseGrepPlugin):
                     i.setName('HTTP Request in HTTP body')
                     i.setURI(uri)
                     i.setId(response.id)
-                    i.setDesc('An HTTP request was found in the HTTP body of a response')
+                    i.setDesc('An HTTP request was found in the HTTP body of a response: "' + response.getURL() + '"')
                     i.addToHighlight(res.group(0))
+                    om.out.information( i.getDesc() )
                     kb.kb.append(self, 'request', i)
 
                 res = self._re_response.search(body_without_tags)
@@ -96,7 +97,8 @@ class httpInBody (baseGrepPlugin):
                     i.setName('HTTP Response in HTTP body')
                     i.setURI(uri)
                     i.setId(response.id)
-                    i.setDesc('An HTTP response was found in the HTTP body of a response')
+                    i.setDesc('An HTTP response was found in the HTTP body of a response: "' + response.getURL() + '"')
+                    om.out.information( i.getDesc() )
                     kb.kb.append(self, 'response', i)
 
     def setOptions( self, optionsMap ):
@@ -109,17 +111,17 @@ class httpInBody (baseGrepPlugin):
         ol = optionList()
         return ol
         
-    def end(self):
+    #def end(self):
         '''
         This method is called when the plugin wont be used anymore.
         '''
-        for info_type in ['request', 'response']:
+    #    for info_type in ['request', 'response']:
             
-            if kb.kb.getData('httpInBody', info_type):
-                msg = 'The following URLs have an HTTP '+ info_type +' in the HTTP response body:'
-                om.out.information(msg)
-                for i in kb.kb.getData('httpInBody', info_type):
-                    om.out.information('- ' + i.getURI() + '  (id:' + str(i.getId()) + ')' )
+    #        if kb.kb.getData('httpInBody', info_type):
+    #            msg = 'The following URLs have an HTTP '+ info_type +' in the HTTP response body:'
+    #            om.out.information(msg)
+    #            for i in kb.kb.getData('httpInBody', info_type):
+    #                om.out.information('- ' + i.getURI() + '  (id:' + str(i.getId()) + ')' )
         
     def getPluginDeps( self ):
         '''

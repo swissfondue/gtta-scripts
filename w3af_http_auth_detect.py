@@ -79,7 +79,8 @@ class HttpAuthDetectTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         if len(auth_urls):
             msg.append('Found %i URLs that require authentication:\n%s' % ( len(auth_urls), '\n'.join(auth_urls) ))
 
-        return '\n\n'.join(msg)
+        if msg:
+            return '\n\n'.join(msg)
 
         return 'No URLs with required authentication found.'
 
