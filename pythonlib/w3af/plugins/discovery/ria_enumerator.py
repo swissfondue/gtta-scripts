@@ -164,7 +164,7 @@ class ria_enumerator(baseDiscoveryPlugin):
                     i.setName('Crossdomain allow ACL')
                     i.setURL( response.getURL() )
                     i.setMethod( 'GET' )
-                    i.setDesc( file_name + '" file allows access from: "' + url  + '".')
+                    i.setDesc('The "' + file_name + '" file at "' + response.getURL() + '" allows access from: "' + url  + '".')
                     i.setId( response.id )
                     kb.kb.append( self, 'info', i )
                     om.out.information( i.getDesc() ) 	
