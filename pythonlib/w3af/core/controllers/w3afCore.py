@@ -502,6 +502,7 @@ class w3afCore(object):
 
                 for url in cf.cf.getData('targets'):
                     try:
+                        url.setPath('/')
                         #
                         #    GET the initial target URLs in order to save them
                         #    in a list and use them as our bootstrap URLs
@@ -532,7 +533,7 @@ class w3afCore(object):
                                      'output for more information.' % e)
                         om.out.error('Traceback for this error: %s' % 
                                      traceback.format_exc())
-                
+
                 # Load the target URLs to the KB
                 self._updateURLsInKb( self._fuzzableRequestList )
                 
