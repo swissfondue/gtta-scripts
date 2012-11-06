@@ -61,13 +61,13 @@ class directoryIndexing(baseGrepPlugin):
         @parameter response: The HTTP response object
         @return: None
         '''
-        if response.getURL().getDomainPath() in self._already_visited:
+        if response.getURL() in self._already_visited:
             # Already worked for this URL, no reason to work twice
             return
         
         else:
             # Save it,
-            self._already_visited.add( response.getURL().getDomainPath() )
+            self._already_visited.add( response.getURL() )
             
             # Work,
             if response.is_text_or_html():
