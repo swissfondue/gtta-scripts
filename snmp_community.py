@@ -27,23 +27,26 @@ class SNMP_Community(Task):
             except Exception:
                 raise InvalidTarget('Host not found.')
 
-        packet = IP(dst=self.ip) / UDP() / SNMP(
+        packet = IP(dst=self.ip) / UDP(dport=self.SNMP_PORT, sport=self.SNMP_PORT) / SNMP(
             community = 'public',
             PDU = SNMPget(varbindlist=[ SNMPvarbind(oid=ASN1_OID(self.OID_SYSTEM_DESCRIPTION)) ])
         )
 
+        self._write_result('Trying to read the system description through SNMP...')
+
         try:
             data = sr1(packet, timeout=self.SNMP_TIMEOUT)
 
-            if not data:
-                self._write_result('No answer.')
+            if not data or ICMP in data:
+                self._write_result('No response received.')
                 return
 
-            if ICMP in data:
-                self._write_result('No SNMP response.')
-                return
+            value = data[SNMPvarbind].value.val
 
-            self._write_result('Received SNMP response: %s' % repr(data))
+            if not value:
+                value = 'no such object'
+
+            self._write_result('Received response: %s' % str(value))
 
         except Exception as e:
             self._write_result(str(e))
