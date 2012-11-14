@@ -3,6 +3,7 @@
 from sys import path
 path.append('pythonlib')
 
+from re import match
 from string import strip
 from socket import socket, AF_INET, SOCK_STREAM
 from gtta import Task, execute_task
@@ -12,6 +13,7 @@ class SMTP_Banner(Task):
     Return SMTP Banner
     """
     TIMEOUT = 60
+    MAX_LINES = 5
 
     def main(self):
         """
@@ -36,13 +38,16 @@ class SMTP_Banner(Task):
             return
 
         try:
+            lines = 0
+
             while True:
                 line = file.readline()
                 line = strip(line)
 
                 self._write_result(line)
+                lines += 1
 
-                if line[:4] == '220 ':
+                if match('^\d{3} ', line) or lines > self.MAX_LINES:
                     break
 
         except:
