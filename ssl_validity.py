@@ -35,12 +35,12 @@ class SSLValidityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
         """
         def as_datetime(s):
             month, day, h, m, s, year = re.match(
-                    (r'([A-Z][a-z]{2})\s+(\d+) (\d\d):(\d\d):(\d\d) '
-                    r'(\d{4}) GMT'), s
-                ).groups()
+                (r'([A-Z][a-z]{2})\s+(\d+) (\d\d):(\d\d):(\d\d) '
+                r'(\d{4}) GMT'), s
+            ).groups()
 
             month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
-                'JUL', 'AUG', 'SEP', 'OCT', 'DEC'].index(month.upper())
+                'JUL', 'AUG', 'SEP', 'OCT', 'DEC'].index(month.upper()) + 1
 
             return datetime.datetime(
                 int(year), month, int(day),
