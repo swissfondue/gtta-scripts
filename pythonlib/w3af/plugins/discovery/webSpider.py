@@ -134,7 +134,12 @@ class webSpider(baseDiscoveryPlugin):
             #
             if response.getCode() == 401:
                 return []
-                
+
+            parsed_refs = []
+            re_refs = []
+
+            originalURL = response.getRedirURI()
+
             #
             # Note: I WANT to follow links that are in the 404 page.
             #
@@ -145,7 +150,6 @@ class webSpider(baseDiscoveryPlugin):
             # consumes CPU power.
             if response.is_text_or_html() or response.is_pdf() or \
                 response.is_swf():
-                originalURL = response.getRedirURI()
                 try:
                     doc_parser = dpCache.dpc.getDocumentParserFor(response)
                 except w3afException, w3:
@@ -160,45 +164,45 @@ class webSpider(baseDiscoveryPlugin):
                     # which in some cases are just false positives.
                     parsed_refs, re_refs = doc_parser.getReferences()
                     
-                    # I also want to analyze all directories, if the URL I just
-                    # fetched is:
-                    # http://localhost/a/b/c/f00.php I want to GET:
-                    # http://localhost/a/b/c/
-                    # http://localhost/a/b/
-                    # http://localhost/a/
-                    # http://localhost/
-                    # And analyze the responses...
-                    dirs = response.getURL().getDirectories()
-                    seen = set()
-                    only_re_refs = set(re_refs) - set(dirs + parsed_refs)
-                    
-                    for ref in itertools.chain(dirs, parsed_refs, re_refs):
-                        
-                        if ref in seen:
-                            continue
-                        seen.add(ref)
-                        
-                        # I don't want w3af sending requests to 3rd parties!
-                        if ref.getDomain() != self._target_domain:
-                            continue
-                        
-                        # Filter the URL's according to the configured regexs
-                        urlstr = ref.url_string
-                        if not self._compiled_follow_re.match(urlstr) or \
-                            self._compiled_ignore_re.match(urlstr):
-                            continue
-                        
-                        # Work with the parsed references and report broken
-                        # links. Then work with the regex references and DO NOT
-                        # report broken links
-                        if self._need_more_variants(ref):
-                            self._already_crawled.append(ref)
-                            possibly_broken = ref in only_re_refs
-                            targs = (ref, fuzzableRequest, originalURL,
-                                     possibly_broken)
-                            self._tm.startFunction(
-                                    target=self._verify_reference,
-                                    args=targs, ownerObj=self)
+            # I also want to analyze all directories, if the URL I just
+            # fetched is:
+            # http://localhost/a/b/c/f00.php I want to GET:
+            # http://localhost/a/b/c/
+            # http://localhost/a/b/
+            # http://localhost/a/
+            # http://localhost/
+            # And analyze the responses...
+            dirs = response.getURL().getDirectories()
+            seen = set()
+            only_re_refs = set(re_refs) - set(dirs + parsed_refs)
+
+            for ref in itertools.chain(dirs, parsed_refs, re_refs):
+
+                if ref in seen:
+                    continue
+                seen.add(ref)
+
+                # I don't want w3af sending requests to 3rd parties!
+                if ref.getDomain() != self._target_domain:
+                    continue
+
+                # Filter the URL's according to the configured regexs
+                urlstr = ref.url_string
+                if not self._compiled_follow_re.match(urlstr) or \
+                    self._compiled_ignore_re.match(urlstr):
+                    continue
+
+                # Work with the parsed references and report broken
+                # links. Then work with the regex references and DO NOT
+                # report broken links
+                if self._need_more_variants(ref):
+                    self._already_crawled.append(ref)
+                    possibly_broken = ref in only_re_refs
+                    targs = (ref, fuzzableRequest, originalURL,
+                             possibly_broken)
+                    self._tm.startFunction(
+                            target=self._verify_reference,
+                            args=targs, ownerObj=self)
             
         self._tm.join(self)
 
