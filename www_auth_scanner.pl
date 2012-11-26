@@ -11,6 +11,7 @@ open(OUTFILE, ">>$outfile");
 my $host = $target[0];
 my $protocol = $target[1];
 my $port = $target[2];
+my $found = 0;
 
 if (!$protocol)
 {
@@ -40,9 +41,15 @@ my $error_code = $output->code;
 if ( $error_code == 401) 
 {
 print OUTFILE "Possible Admin Access found here: $protocol://$host:$port/$line   The response code was:";
-print OUTFILE $output->status_line . "\n";        
+print OUTFILE $output->status_line . "\n";
+$found = 1;
 }
 
+}
+
+if (!$found)
+{
+    print OUTFILE "No URLs with HTTP authorization detected."
 }
 
 close(OUTFILE);
