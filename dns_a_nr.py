@@ -32,60 +32,61 @@ class DNS_A_NR(Task):
 
         domain = None
 
-        if host and host[0]:
-            domain = host[0]
-
-        if not domain:
+        if not host or not host[0]:
             raise NoHostName('No host name specified.')
 
-        results = []
+        for domain in host:
+            if not domain:
+                continue
 
-        self._check_stop()
+            self._check_stop()
 
-        try:
-            # make DNS query manually, clearing the RD (recursion desired) flag
-            query = make_query(domain, rdatatype.A, rdataclass.IN)
-            query.flags ^= flags.RD
-
-            found = False
+            self._write_result('%s:' % domain)
+            results = []
 
             try:
-                response = dns_query.udp(query, target, self.DNS_TIMEOUT, self.DNS_PORT, None)
+                # make DNS query manually, clearing the RD (recursion desired) flag
+                query = make_query(domain, rdatatype.A, rdataclass.IN)
+                query.flags ^= flags.RD
 
-            except Exception:
-                response = None
+                found = False
 
-            if response and response.rcode() == rcode.NXDOMAIN:
-                raise NXDOMAIN
+                try:
+                    response = dns_query.udp(query, target, self.DNS_TIMEOUT, self.DNS_PORT, None)
 
-            if response and response.rcode() == rcode.NOERROR:
-                found = True
-            else:
-                raise NXDOMAIN
+                except Exception:
+                    response = None
 
-            a_records = Answer(dns_name.from_text(domain), rdatatype.A, rdataclass.IN, response, True)
-            a_records = map(lambda x: str(x), a_records)
+                if response and response.rcode() == rcode.NXDOMAIN:
+                    raise NXDOMAIN
 
-            for a in a_records:
-                if str(a) not in results:
-                    results.append(str(a))
-                    self._write_result(str(a))
+                if response and response.rcode() == rcode.NOERROR:
+                    found = True
+                else:
+                    raise NXDOMAIN
 
-        except ( NoAnswer, NXDOMAIN ):
-            self._write_result('Host not found.')
-            return
+                a_records = Answer(dns_name.from_text(domain), rdatatype.A, rdataclass.IN, response, True)
+                a_records = map(lambda x: str(x), a_records)
 
-        except Timeout:
-            self._write_result('DNS request timeout.')
-            return
+                for a in a_records:
+                    if str(a) not in results:
+                        results.append(str(a))
+                        self._write_result(str(a))
 
-        except DNSException:
-            self._write_result('DNS error.')
-            return
+                if len(results) == 0:
+                    self._write_result('No A records.')
+
+            except ( NoAnswer, NXDOMAIN ):
+                self._write_result('Host not found.')
+
+            except Timeout:
+                self._write_result('DNS request timeout.')
+
+            except DNSException:
+                self._write_result('DNS error.')
+
+            self._write_result('')
 
         self._check_stop()
-
-        if len(results) == 0:
-            self._write_result('No A records.')
 
 execute_task(DNS_A_NR)
