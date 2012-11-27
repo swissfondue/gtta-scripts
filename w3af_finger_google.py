@@ -12,10 +12,22 @@ class FingerGoogleTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
     GTTA task:
         w3af: fingerGoogle
     """
-    def main(self):
+    _result_limit = 300
+    _fast_search = False
+
+    def main(self, result_limit=[], fast_search=[]):
         """
         Main function
         """
+        self._result_limit = 300
+        self._fast_search = False
+
+        if result_limit and result_limit[0]:
+            self._result_limit = result_limit[0]
+
+        if fast_search and fast_search[0] and fast_search[0] != '0':
+            self._fast_search = True
+
         super(FingerGoogleTask, self).main()
 
     def _get_commands(self):
@@ -25,7 +37,11 @@ class FingerGoogleTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         return [
             "plugins",
             "discovery fingerGoogle",
-            "back"
+            "discovery config fingerGoogle",
+            "set fastSearch " + str(self._fast_search),
+            "set resultLimit " + str(self._result_limit),
+            "back",
+            "back",
         ]
 
     def _filter_result(self, result):
