@@ -6,23 +6,25 @@ use HTTP::Response;
 use Data::Dumper;
 my $def = new LWP::UserAgent;
 my $ua = LWP::UserAgent->new( 'agent' => "Log", 'env_proxy' => 1, 'keep_alive' => 1,'timeout' => 1 );
-my @database=("http://HOST/FUZZ/\n");
 my ($cnt, $found) = ( 0, 0 );
 
 unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
 my @target		= &getinput( $ARGV[0] ) if ( $ARGV[0] );
 my $outfile = $ARGV[1];
 my @fuzzz		= &getinput( 'fuzz_check_files/fuzz.txt' );
+my @database=("PROTO://HOST/FUZZ/\n");
 
 open(OUTFILE, ">>$outfile");
 
 my $host = $target[0];
+my $proto = $target[1];
 
 foreach my $fuzz ( @fuzzz ) {
 
 foreach (@database) {
 
   my $url = $_;
+  $url =~ s/PROTO/$proto/;
   $url =~ s/FUZZ/$fuzz/;
   $url =~ s/HOST/$host/;
 
