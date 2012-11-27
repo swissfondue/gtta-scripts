@@ -48,7 +48,7 @@ class ajax(baseGrepPlugin):
         
         # Create the regular expression to search for AJAX
         ajax_regex_string = '(XMLHttpRequest|eval\(|ActiveXObject|Msxml2\.XMLHTTP|'
-        ajax_regex_string += 'ActiveXObject|Microsoft\.XMLHTTP)'
+        ajax_regex_string += 'ActiveXObject|Microsoft\.XMLHTTP|\$\.ajax)'
         self._ajax_regex_re = re.compile( ajax_regex_string, re.IGNORECASE )
 
     def grep(self, request, response):
@@ -172,6 +172,19 @@ class ajax(baseGrepPlugin):
                             i.addToHighlight(res.group(0))
                             kb.kb.append(self, 'ajax', i)
 
+        else:
+            # just try to find something
+            res = self._ajax_regex_re.search(response.getBody())
+
+            if res:
+                i = info.info()
+                i.setPluginName(self.getName())
+                i.setName('AJAX code')
+                i.setURL(url)
+                i.setDesc('The URL: "%s" has an AJAX code.' % url)
+                i.setId(response.id)
+                i.addToHighlight(res.group(0))
+                kb.kb.append(self, 'ajax', i)
     
     def setOptions( self, OptionList ):
         pass
