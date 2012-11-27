@@ -6,6 +6,20 @@ unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
 
 my @target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
 my $outfile = $ARGV[1];
+my @urlPath = &getinput( $ARGV[2] ) if ( $ARGV[2] );
+my $urlPath;
+
+if (@urlPath && $urlPath[0])
+{
+    $urlPath = $urlPath[0];
+}
+
+$urlPath = '/' unless ($urlPath);
+
+if (substr($urlPath, 0, 1) ne '/')
+{
+    $urlPath = '/' . $urlPath;
+}
 
 open(OUTFILE, ">>$outfile");
 
@@ -17,7 +31,7 @@ if (!$target[1])
     $target[1] = 'http';
 }
 
-my $request		= HTTP::Request->new( GET => $target[1] . '://' . $target[0] );
+my $request		= HTTP::Request->new( GET => $target[1] . '://' . $target[0] . $urlPath);
 my $response	= $ua->request( $request );
 
 print OUTFILE $response->dump(), "\n";
