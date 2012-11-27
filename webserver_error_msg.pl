@@ -27,6 +27,7 @@ my $Ws; # Web services
 my $e; # EVERYTHINGGGGGGGG
 my $ProxyServer; #use a proxy
 my $Fd; # files and dirs
+my $okFound = 0;
 
 my $ua = LWP::UserAgent->new('conn_cache' => 1);
 $ua->conn_cache(LWP::ConnCache->new); # use connection cacheing (faster)
@@ -53,6 +54,11 @@ my $resAnalIndex = $ua->get("http://$Host/");
 &webServices() 			if(defined $Ws);
 &FilesAndDirsGoodies() 	if(defined $Fd);
 &runAll() 				if(defined $e);
+
+unless ($okFound)
+{
+print OUTFILE 'No error pages found.';
+}
 
 close(OUTFILE);
 exit(0);
@@ -460,9 +466,6 @@ sub Standard{ #some standard stuff
 
 # I don't know if this method has be used in other tools or has even been discovered before but I think it should allways be fixed
 sub ErrorBegging{
-
-		print OUTFILE "**** runnning  Error begging scanner ****\n";
-
 		my $getErrorString = &genErrorString();
 		my $_404responseGet = $ua->get("http://$Host/$getErrorString");
 		&checkError($_404responseGet);
@@ -498,14 +501,15 @@ sub ErrorBegging{
 
 				my $siteNaked = $siteHTML;
 				if(length($siteNaked) > 1000){
-					my $Opt = &PromtUser("! the Error page was found but its a bit big\n! do you still want to see it (y/n) ? ");
-					if($Opt =~ /y/i){
-						print OUTFILE $siteNaked . "\n\n";
-					} else {
+					##my $Opt = &PromtUser("! the Error page was found but its a bit big\n! do you still want to see it (y/n) ? ");
+					##if($Opt =~ /y/i){
+					##	print OUTFILE $siteNaked . "\n\n";
+					##} else {
 						print OUTFILE "\n+ Found 404 page but not printing. To Big :(\n";
-					}
+					##}
 				} else {
 					print OUTFILE "+ Error page found  -- " . $siteNaked . "\n\n";
+					$okFound = 1;
 				}
 			}
 		}
