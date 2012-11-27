@@ -171,7 +171,7 @@ class strangeHTTPCode(baseGrepPlugin):
         codes.extend([200, ])
         codes.extend([301, 302, 303, 304])
         codes.extend([401, 403, 404])
-        codes.extend([500, 501])
+        codes.extend([501])
         return codes
 
     def getPluginDeps( self ):
