@@ -30,4 +30,27 @@ class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
             #'--tlsv1_2',
         ]
 
+    def _parse_result(self, data):
+        """
+        Parses the sslyze output (@data)
+        """
+        data = data.split('\n')
+        out_data = []
+        skip = False
+
+        for line in data:
+            if skip and not line:
+                skip = False
+
+            if line.find('Rejected Cipher Suite(s):') != -1:
+                skip = True
+                continue
+
+            if skip:
+                continue
+
+            out_data.append(line)
+
+        return '\n'.join(out_data)
+
 gtta.execute_task(SSLQualityTask)

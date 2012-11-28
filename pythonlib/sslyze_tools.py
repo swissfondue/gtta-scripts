@@ -33,6 +33,9 @@ class SSLyzeLauncher(object):
         return data
 
     def main(self):
+        """
+        Main function
+        """
         target = self.host or self.ip
 
         self._check_stop()
