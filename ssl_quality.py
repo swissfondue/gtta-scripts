@@ -35,21 +35,58 @@ class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
         Parses the sslyze output (@data)
         """
         data = data.split('\n')
-        out_data = []
+        protocols = {
+            'TLS 1.0' : False,
+            #'TLS 1.1' : False,
+            #'TLS 1.2' : False,
+            'SSL 2.0' : False,
+            'SSL 3.0' : False
+        }
+
+        proto = None
         skip = False
 
         for line in data:
-            if skip and not line:
+            if line.startswith('  *'):
+                proto = line[4:line.find(' ', 5)]
+
+                if proto == 'SSLV2':
+                    proto = 'SSL 2.0'
+                elif proto == 'SSLV3':
+                    proto = 'SSL 3.0'
+                elif proto == 'TLSV1':
+                    proto = 'TLS 1.0'
+                #elif proto == 'TLSV1_1':
+                #    proto = 'TLS 1.1'
+                #elif proto == 'TLSV1_2':
+                #    proto = 'TLS 1.2'
+
                 skip = False
 
-            if line.find('Rejected Cipher Suite(s):') != -1:
-                skip = True
                 continue
 
             if skip:
                 continue
 
-            out_data.append(line)
+            if line.find('Accepted Cipher Suite(s): None') != -1:
+                protocols[proto] = False
+                skip = True
+                continue
+
+            if line.find('Accepted Cipher Suite(s):') != -1:
+                protocols[proto] = True
+                skip = True
+                continue
+
+        out_data = []
+
+        for key, value in protocols.iteritems():
+            if value:
+                value = 'Supported'
+            else:
+                value = 'Not Supported'
+
+            out_data.append('%s: %s' % ( key, value ))
 
         return '\n'.join(out_data)
 
