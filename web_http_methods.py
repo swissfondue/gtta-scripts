@@ -3,7 +3,7 @@
 from sys import path
 path.append('pythonlib')
 
-from httplib import HTTPConnection, HTTPException
+from httplib import HTTPConnection, HTTPSConnection, HTTPException
 from gtta import Task, execute_task
 
 class Web_HTTP_Methods(Task):
@@ -24,8 +24,22 @@ class Web_HTTP_Methods(Task):
 
         self._check_stop()
 
+        if not self.proto:
+            self.proto = 'http'
+
+        if not self.port:
+            if self.proto == 'http':
+                self.port = 80
+            elif self.proto == 'https':
+                self.port = 443
+
+        class_name = HTTPConnection
+
+        if self.proto == 'https':
+            class_name = HTTPSConnection
+
         try:
-            conn = HTTPConnection(self.host, timeout=self.HTTP_TIMEOUT)
+            conn = class_name(host=target, port=self.port, timeout=self.HTTP_TIMEOUT)
             conn.request('OPTIONS', '/')
 
             response = conn.getresponse()
