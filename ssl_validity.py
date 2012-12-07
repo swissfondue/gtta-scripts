@@ -40,7 +40,7 @@ class SSLValidityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
             ).groups()
 
             month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
-                'JUL', 'AUG', 'SEP', 'OCT', 'DEC'].index(month.upper()) + 1
+                'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'].index(month.upper()) + 1
 
             return datetime.datetime(
                 int(year), month, int(day),
@@ -53,7 +53,7 @@ class SSLValidityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
         parser['Certificate is Trusted'] = 'trusted'
         data = parser.parse(data.split('\n'))
 
-        if ('trusted' in data and data['from'] <= datetime.datetime.now() <= data['to']):
+        if 'trusted' in data and data['from'] <= datetime.datetime.now() <= data['to']:
             return 'Certificate is valid (expires %s)' % data['to']
         else:
             return 'Certificate is not valid (expires %s)' % data['to']
