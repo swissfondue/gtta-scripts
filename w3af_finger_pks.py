@@ -33,14 +33,12 @@ class FingerPKSTask(gtta.Task, w3af_utils.W3AFScriptLauncher):
         Filter w3af result
         """
         mails = []
-        known_mails = []
 
         for line in result:
             mail = match(r'The mail account: "([^"]+)" was found in the (.+?) server', line)
 
-            if mail and not mail.groups()[0] in known_mails:
+            if mail:
                 mails.append(( mail.groups()[0], mail.groups()[1] ))
-                known_mails.append(mail.groups()[0])
 
         if len(mails):
             table = gtta.ResultTable((
