@@ -15,6 +15,7 @@ my $verbose = &getinput( $ARGV[4] ) if ($ARGV[4]);
 my $probe = &getinput( $ARGV[5] ) if ($ARGV[5]);
 my $timing = &getinput( $ARGV[6] ) if ($ARGV[6]);
 my $extract = &getinput( $ARGV[7] ) if ($ARGV[7]);
+my @data;
 
 if (defined($timing) && !grep $_ == $timing, qw/0 1 2 3 4 5/)
 {
@@ -94,7 +95,8 @@ if ($extract)
 
             if ($state =~ /^open/)
             {
-                push(@open_ports, sprintf("%-9s %-13s %-12s %s", $id . ($proto ? "/$proto" : "") , "$state" , $service, $product . "\n"));
+                $product = 'N/A' unless ($product);
+                push(@open_ports, [ $id, $service, $product ]);
             }
         }    
 
@@ -113,34 +115,42 @@ if ($extract)
         ($status) = $host->findnodes('status');
         $status = $status->getAttribute('state');
 
-        print OUTFILE "Scan report for $address " . ($hostname ? "($hostname) " : "") . "\n";
-        print OUTFILE "Host is $status\n";
-
-        @not_shown = ();
-
-        for my $port ($ports->findnodes('extraports'))
-        {
-            push(@not_shown, $port->getAttribute('count') . " " . $port->getAttribute('state') . " ports");
-        }
-
-        if (scalar @not_shown)
-        {
-            print OUTFILE "Not shown: " . join(', ', @not_shown). "\n";
-        }
-
-        printf OUTFILE "PORT      STATE         SERVICE      VERSION\n";
+        $address = $hostname ? $address . " ($hostname)" : $address;
 
         for my $port (@open_ports)
         {
-            print OUTFILE $port;
+            push(@data, [ $address, $port->[0], $port->[1], $port->[2] ]);
         }
-
-        print OUTFILE "\n";
-
-        $produced_output = 1;
     }
 
-    print OUTFILE "No open ports.\n" unless ($produced_output);
+    if (scalar(@data) > 0)
+    {
+        print OUTFILE '<gtta-table><columns><column width="0.3" name="Address"/><column width="0.2" name="Port"/><column width="0.2" name="Service"/><column width="0.3" name="Product"/></columns>';
+
+        for (my $i = 0; $i < scalar(@data); $i++)
+        {
+            print OUTFILE '<row>';
+
+            for (my $k = 0; $k < scalar(@{$data[$i]}); $k++)
+            {
+                $data[$i][$k] =~ s/</&lt;/g;
+                $data[$i][$k] =~ s/>/&gt;/g;
+                $data[$i][$k] =~ s/&/&amp;/g;
+
+                print OUTFILE '<cell>';
+                print OUTFILE $data[$i][$k];
+                print OUTFILE '</cell>';
+            }
+
+            print OUTFILE '</row>';
+        }
+
+        print OUTFILE '</gtta-table>';
+    }
+    else
+    {
+        print OUTFILE 'No open ports.';
+    }
 }
 else
 {
