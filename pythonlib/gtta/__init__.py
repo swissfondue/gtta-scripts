@@ -1,10 +1,55 @@
 # -*- coding: utf-8 -*-
 
 from threading import Thread, Event
-from Queue import Queue
 from sys import argv, exit
 from socket import inet_aton
+from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
+
+class ResultTable(object):
+    """
+    Result table class
+    """
+    TAG_MAIN    = 'gtta-table'
+    TAG_ROW     = 'row'
+    TAG_CELL    = 'cell'
+    TAG_COLUMNS = 'columns'
+    TAG_COLUMN  = 'column'
+
+    ATTR_NAME  = 'name'
+    ATTR_WIDTH = 'width'
+
+    def __init__(self, columns):
+        """
+        Constructor
+        """
+        self._columns = columns
+        self._rows = []
+
+    def add_row(self, row):
+        """
+        Add row
+        """
+        self._rows.append(row)
+
+    def render(self):
+        """
+        Render to tags
+        """
+        table = etree.Element(self.TAG_MAIN)
+        columns = etree.SubElement(table, self.TAG_COLUMNS)
+
+        for column in self._columns:
+            etree.SubElement(columns, self.TAG_COLUMN, name=column['name'], width=unicode(column['width']))
+
+        for row in self._rows:
+            row_element = etree.SubElement(table, self.TAG_ROW)
+
+            for cell in row:
+                cell_element = etree.SubElement(row_element, self.TAG_CELL)
+                cell_element.text = cell
+
+        return etree.tostring(table)
 
 class Task(Thread):
     """
