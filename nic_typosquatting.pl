@@ -16,6 +16,8 @@ my $outfile = $ARGV[1];
 @maxres	= &getinput( $ARGV[3] ) if ( $ARGV[3] );
 @mode	= &getinput( $ARGV[4] ) if ( $ARGV[4] );
 
+my @data;
+
 open(OUTFILE, ">>$outfile");
 
 my @set = split//, $target[0];
@@ -46,8 +48,7 @@ if (
 			  foreach my $rr ($query->answer) {
 
 				  next unless $rr->type eq "A";
-				  print OUTFILE $host,"\t\t\t", $rr->address, "\n";
-
+				  push(@data, [ $host, $rr->address ]);
 			  }
 
 		  }
@@ -55,10 +56,50 @@ if (
 	  } @lst;
 
 	}
-	else { map { print OUTFILE $_,"\n"; } sort { $a cmp $b } keys %{ $doms }; }
+	else { map { push(@data, [ $_ ]); } sort { $a cmp $b } keys %{ $doms }; }
 
 }
 else { print OUTFILE 'Error: target must be 3+ symbols in length', "\n"; exit(0); }
+
+if (scalar(@data) > 0)
+{
+    print OUTFILE '<gtta-table><columns>';
+
+    if ($mode[0])
+    {
+        print OUTFILE '<column width="0.5" name="Domain"/><column width="0.5" name="IP"/>';
+    }
+    else
+    {
+        print OUTFILE '<column width="1" name="Domain"/>';
+    }
+
+    print OUTFILE '</columns>';
+
+    for (my $i = 0; $i < scalar(@data); $i++)
+    {
+        print OUTFILE '<row>';
+
+        for (my $k = 0; $k < scalar(@{$data[$i]}); $k++)
+        {
+            $data[$i][$k] =~ s/</&lt;/g;
+            $data[$i][$k] =~ s/>/&gt;/g;
+            $data[$i][$k] =~ s/&/&amp;/g;
+
+            print OUTFILE '<cell>';
+            print OUTFILE $data[$i][$k];
+            print OUTFILE '</cell>';
+        }
+
+        print OUTFILE '</row>';
+    }
+
+    print OUTFILE '</gtta-table>';
+}
+else
+{
+    print OUTFILE 'No domains found.';
+}
 
 close(OUTFILE);
 

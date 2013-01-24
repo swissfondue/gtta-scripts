@@ -26,6 +26,7 @@ my $res   	= Net::DNS::Resolver->new;
 undef $/;
 
 my $ua = LWP::UserAgent->new;
+my @domains;
 $ua->timeout(60);
 
 map {
@@ -67,13 +68,42 @@ map {
                     $title =~ s/[\r\n]+//gi;
                 }
 
-                print OUTFILE $cur_domain, "\t\t", $rr->address, "\t\t", $whois, "\t\t", $title, "\n";
+                push(@domains, [ $cur_domain, $rr->address, $whois, $title ]);
                 last;
             }
         }
 	}
 
 } @{ $tlds };
+
+if (scalar(@domains) > 0)
+{
+    print OUTFILE '<gtta-table><columns><column width="0.3" name="Domain"/><column width="0.2" name="IP"/><column width="0.2" name="Whois"/><column width="0.3" name="Title"/></columns>';
+
+    for (my $i = 0; $i < scalar(@domains); $i++)
+    {
+        print OUTFILE '<row>';
+
+        for (my $k = 0; $k < scalar(@{$domains[$i]}); $k++)
+        {
+            $domains[$i][$k] =~ s/</&lt;/g;
+            $domains[$i][$k] =~ s/>/&gt;/g;
+            $domains[$i][$k] =~ s/&/&amp;/g;
+
+            print OUTFILE '<cell>';
+            print OUTFILE $domains[$i][$k];
+            print OUTFILE '</cell>';
+        }
+
+        print OUTFILE '</row>';
+    }
+
+    print OUTFILE '</gtta-table>';
+}
+else
+{
+    print OUTFILE 'No domains found.';
+}
 
 close(OUTFILE);
 
