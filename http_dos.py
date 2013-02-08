@@ -47,7 +47,7 @@ class HTTP_DOS(Task):
 
         headers.update(self.DEFAULT_HEADERS)
 
-        if url[0]:
+        if url and url[0]:
             url = url[0]
 
             if url.startswith('/'):
@@ -55,20 +55,23 @@ class HTTP_DOS(Task):
 
             target += url
 
-        if len(test_urls) > 0 and test_urls[0]:
+        if test_urls and test_urls[0]:
             for test_url in test_urls:
                 if test_url.startswith('/'):
                     test_url = test_url[1:]
 
-                self.test_urls.append(target + test_url)
+                test_url = target + test_url
+
+                if test_url not in self.test_urls:
+                    self.test_urls.append(test_url)
 
         else:
             self.test_urls.append(target)
 
-        if cookie[0]:
+        if cookie and cookie[0]:
             headers['Cookie'] = cookie[0]
 
-        if referer[0]:
+        if referer and referer[0]:
             headers['Referer'] = referer[0]
 
         self._check_stop()
@@ -152,7 +155,7 @@ class HTTP_DOS(Task):
             if result:
                 self._write_result('%s: %s' % ( url, result ))
 
-            self._write_result('')
+        self._write_result('')
 
     def check_value(self, value_name, value):
         """
