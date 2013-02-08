@@ -233,7 +233,6 @@ sub nonSyntDatabaseScan{ # for DBs without the dir;msg format
 		if($checkDir->is_success){
 			print OUTFILE "+ $scanMSGNonSynt: \"/$DataFromDBNonSynt\"\n";
 			&analyzeResponse($checkDir->as_string() ,$DataFromDBNonSynt);
-			exit();
 		}
 		$checkDir = undef;
 }
