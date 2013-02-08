@@ -5,14 +5,14 @@ path.append('pythonlib')
 
 from time import time
 from urllib2 import Request, urlopen, URLError, HTTPError
-from threading import Thread
+from threading import Thread, Lock
 from gtta import Task, execute_task
 
 class HTTP_DOS(Task):
     """
-    Fetching pages
+    HTTP DoS
     """
-    HEADERS = {
+    DEFAULT_HEADERS = {
         'User-Agent'      : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:16.0) Gecko/20100101 Firefox/16.0',
         'Accept'          : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language' : 'de-de,de;q=0.8,en-us;q=0.5,en;q=0.3',
@@ -21,7 +21,9 @@ class HTTP_DOS(Task):
         'Connection'      : 'keep-alive',
     }
 
-    any_thread_complete = False
+    first_thread_completed = False
+    lock = None
+    test_urls = []
 
     def main(self, thread_number=[], repeat_number=[], url=[], test_urls=[], cookie=[], referer=[]):
         """
@@ -43,7 +45,7 @@ class HTTP_DOS(Task):
             headers['Host'] = self.ip
             target = self.proto + '://' + self.ip + '/'
 
-        headers.update(self.HEADERS)
+        headers.update(self.DEFAULT_HEADERS)
 
         if url[0]:
             url = url[0]
@@ -53,19 +55,15 @@ class HTTP_DOS(Task):
 
             target += url
 
-        _test_urls = []
-
         if len(test_urls) > 0 and test_urls[0]:
             for test_url in test_urls:
                 if test_url.startswith('/'):
                     test_url = test_url[1:]
 
-                _test_urls.append(target + test_url)
+                self.test_urls.append(target + test_url)
 
         else:
-            _test_urls.append(target)
-
-        test_urls = _test_urls
+            self.test_urls.append(target)
 
         if cookie[0]:
             headers['Cookie'] = cookie[0]
@@ -74,14 +72,15 @@ class HTTP_DOS(Task):
             headers['Referer'] = referer[0]
 
         self._check_stop()
-        self.check_test_urls(test_urls, headers)
+        self.check_test_urls(headers)
 
         thread_list = []
+        self.lock = Lock()
 
         for i in xrange(threads):
             thread_list.append(Thread(target=self.worker, args=( target, headers, repeats )))
 
-        self._write_result('Starting %i threads (%i repeats)' % ( threads, repeats ))
+        self._write_result('Starting %i threads (%i repeats per thread)\n' % ( threads, repeats ))
 
         for thread in thread_list:
             thread.start()
@@ -95,9 +94,7 @@ class HTTP_DOS(Task):
         self._check_stop()
 
         total_time = time() - start_time
-        self._write_result('All threads finished, requests took %.2f seconds' % total_time)
-
-        self.check_test_urls(test_urls, headers)
+        self._write_result('All threads finished, requests took %.2f seconds\n' % total_time)
 
         if not self.produced_output:
             self._write_result('No result.')
@@ -114,13 +111,21 @@ class HTTP_DOS(Task):
             except Exception:
                 pass
 
-    def check_test_urls(self, test_urls, headers):
+        self.lock.acquire()
+
+        if not self.first_thread_completed:
+            self.first_thread_completed = True
+            self.check_test_urls(headers)
+
+        self.lock.release()
+
+    def check_test_urls(self, headers):
         """
         Check urls from testing URL list for response time
         """
         self._write_result('Testing URLs...')
 
-        for url in test_urls:
+        for url in self.test_urls:
             self._check_stop()
 
             request = Request(url, headers=headers)
@@ -146,6 +151,8 @@ class HTTP_DOS(Task):
 
             if result:
                 self._write_result('%s: %s' % ( url, result ))
+
+            self._write_result('')
 
     def check_value(self, value_name, value):
         """
