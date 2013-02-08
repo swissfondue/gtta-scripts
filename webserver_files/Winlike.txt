@@ -1,0 +1,12 @@
+winlike/winedit/hlp-api.html
+winlike/winedit/hlp-info.html
+winlike/winedit/hlp-quickstart.html
+winlike/winedit/hlp-scripting.html
+winlike/winedit/hlp-user-de.html
+winlike/winedit/hlp-user-en.html
+winlike/winedit/we-save.html
+winlike/winedit/we-editor.html
+winlike/winedit/we-tools.html
+winlike/winedit/we-winlist.html
+winlike/winman/hlp-error.html 
+winlike/winman/wm-border.html
