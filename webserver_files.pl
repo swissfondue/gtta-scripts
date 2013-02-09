@@ -180,7 +180,7 @@ sub nonSyntDatabaseScan{ # for DBs without the dir;msg format
 	my $DataFromDBNonSynt = shift;
 	my $scanMSGNonSynt = shift;
 	chomp $DataFromDBNonSynt;
-     print "http://$Host/" . $DataFromDBNonSynt . "\n";
+    return unless ($DataFromDBNonSynt);
 		# send req and check if it's valid
 		if (substr($DataFromDBNonSynt, 0, 1) eq '/')
 		{
