@@ -11,65 +11,23 @@ use encoding "utf-8";
 use strict;
 
 unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
-
-my @files = (
-    'Admin_Logins.txt',
-    'Adobe_xml.txt',
-    'Apache_Dojo_Framework.txt',
-    'Apache_Tomcat_Application_Server.txt',
-    'Apache_Web_Server.txt',
-    'Backend_Dirs.txt',
-    'CA_Siteminder_Adminstration.txt',
-    'Checkpoint_Firewall_Web_Interface.txt',
-    'Citrix_Application_Server.txt',
-    'Cold_Fusion_Application_Server.txt',
-    'ContentXXL_Cms.txt',
-    'DotProject.txt',
-    'Drupal_Cms.txt',
-    'Fatwire_CMS.txt',
-    'Hyperion_CMS.txt',
-    'Ibm_Websphere_Application_Server.txt',
-    'Iis_Web_Server.txt',
-    'J2EE_JRUN_Application_Server.txt',
-    'Java_servlets_and_jboss.txt',
-    'Jira_JSP.txt',
-    'Joomla_Cms_Dirs.txt',
-    'Lotus_Domino_Web_Server.txt',
-    'Mbrs_Php.txt',
-    'Nikto_Database_Checks.txt',
-    'Novell_Access_Manager_and_Netware.txt',
-    'Oracle_Web_and_Application_Server.txt',
-    'Php_requests.txt',
-    'Phpmyadmin_Cms.txt',
-    'Piwik_Webalyzer.txt',
-    'Proxy_Test.txt',
-    'SAP_Web_Server.txt',
-    'Sharepoint_Application_Server.txt',
-    'Symfony_Cms.txt',
-    'Typo3_Cms.txt',
-    'Unix_Files.txt',
-    'Vignette_Cms.txt',
-    'Vuln_Files.txt',
-    'Winlike.txt',
-    'Wordpress_Cms.txt',
-    'checkpoint_sslnetwork_extender.txt'
-);
-
 my $Host = &getinput( $ARGV[0] ) if ( $ARGV[0] );
 my $outfile = $ARGV[1];
 open(OUTFILE, ">>$outfile");
 
 my $i;
 
-my @selected_files = ();
+my @files = ();
 
-for ($i = 0; $i < scalar(@files); $i++)
+if (scalar(@ARGV) > 2)
 {
-    my $value = &getinput($ARGV[2 + $i]) if ($ARGV[2 + $i]);
-    push(@selected_files, $files[$i]) if ($value);
+    for ($i = 2; $i < scalar(@ARGV); $i++)
+    {
+        push(@files, $ARGV[$i]);
+    }
 }
 
-if (scalar(@selected_files) == 0)
+if (scalar(@files) == 0)
 {
     print OUTFILE "No input files selected.";
     exit();
@@ -242,14 +200,12 @@ sub FilesAndDirsGoodies{ # databases provided by: raft team
 
 	print OUTFILE "+ interesting Files And Dirs takes awhile....\n";
 
-	foreach my $FilesAndDirsDB (@selected_files){
-			print OUTFILE "+ Testing Files And Dirs with Database: $FilesAndDirsDB\n";
-
-			open(FilesAndDirsDBFile, "+< webserver_files/$FilesAndDirsDB");
+	foreach my $FilesAndDirsDB (@files){
+			open(FilesAndDirsDBFile, "+< $FilesAndDirsDB");
 			my @parseFilesAndDirsDB = <FilesAndDirsDBFile>;
 
 			foreach my $JustDir (@parseFilesAndDirsDB){
-				&nonSyntDatabaseScan($JustDir,"interesting File or Dir Found ($FilesAndDirsDB)");
+				&nonSyntDatabaseScan($JustDir,"interesting File or Dir Found");
 			}
 		close(FilesAndDirsDBFile);
 	}
