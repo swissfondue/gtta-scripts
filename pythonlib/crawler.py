@@ -4,6 +4,7 @@ import re
 import urlparse
 import requests
 
+
 def have_same_base(this, that):
     """
     Have some base
@@ -12,6 +13,7 @@ def have_same_base(this, that):
     that = urlparse.urlsplit(that)[1]
 
     return this == that
+
 
 class LinkCrawler(object):
     """
@@ -47,6 +49,7 @@ class LinkCrawler(object):
         cache = set()
 
         def populate(url):
+
             resp = requests.get(
                 url,
                 headers={'User-agent': 'Mozilla/5.0'}
