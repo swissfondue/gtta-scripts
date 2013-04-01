@@ -33,6 +33,7 @@ class LinkCrawler(object):
         skip = lambda arg: None
 
         self.link_callback = skip
+        self.link_content_callback = skip
         self.ext_link_callback = skip
         self.redirect_callback = skip
         self.error_callback = skip
@@ -73,12 +74,15 @@ class LinkCrawler(object):
                     return
 
             # parse pages
+            self.link_content_callback(dict(url=url, content=resp.text))
+
             for item in re.finditer(self.LINK_PATTERN, resp.text):
                 link = urlparse.urljoin(url, item.group(1))
                 # populate all parsed link (if not cached)
                 if link not in cache:
                     if self.ext_link_test(url, link):
                         cache.add(link)
+                        self.link_callback(link)
 
                         self.stop_callback()  # check for stopping
 

@@ -16,11 +16,16 @@ class Doc_Craw(Task):
 
     DOC_TYPES = ('.xls', '.xlsx', '.doc', '.docx', '.pdf', '.odt', '.txt', '.rtf')
 
-    def collect_unique_urls(self, url):
+    def collect_unique_urls_filter_docs(self, url):
         """
-        Using as callback function for crawler
+        Using as callback function for crawler, which collect unique urls and outputting documents link
         """
-        self.urls_set.add(url)
+        if url not in self.urls_set:
+            if (url[-4:].lower() in self.DOC_TYPES) or (url[-5:].lower() in self.DOC_TYPES):
+                self._write_result(url)
+
+            self.urls_set.add(url)
+            self._check_stop()
 
     def main(self):
         """
@@ -29,11 +34,8 @@ class Doc_Craw(Task):
         link_crawler = LinkCrawler()
 
         link_crawler.stop_callback = self._check_stop
-        link_crawler.redirect_callback = lambda x: False
-
-        link_crawler.ext_link_callback = self.collect_unique_urls
-        link_crawler.nonhtml_callback = self.collect_unique_urls
-        link_crawler.error_callback = self.collect_unique_urls
+        link_crawler.ext_link_callback = self.collect_unique_urls_filter_docs
+        link_crawler.nonhtml_callback = self.collect_unique_urls_filter_docs
 
         if not self.proto:
             self.proto = 'http'
@@ -44,17 +46,12 @@ class Doc_Craw(Task):
         else:
             target = self.proto + '://' + self.ip + '/'
 
-        link_crawler.process(target)
+        link_crawler.process(target)  # Starting recursive process of link crawling on target
 
         self._check_stop()
 
-        for curr_link in self.urls_set:
-            if (curr_link[-4:] in self.DOC_TYPES) or (curr_link[-5:] in self.DOC_TYPES):
-                self._write_result(curr_link)
-
         if not self.produced_output:
             self._write_result('No link to any documents found')
-
 
 
 execute_task(Doc_Craw)
