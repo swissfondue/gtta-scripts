@@ -14,10 +14,10 @@ def get_injections(url):
     """
     with call.cd(SQID_PATH):
         res, out = call.call([
-        './sqid.rb',
-        '--mode', 'c',
-        '--crawl', url,
-        '--accept-cookies'
+            './sqid.rb',
+            '--mode', 'c',
+            '--crawl', url,
+            '--accept-cookies'
         ])
 
         if not res:
