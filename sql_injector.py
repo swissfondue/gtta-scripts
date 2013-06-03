@@ -28,7 +28,7 @@ class Sql_Injector(Task):
         ok, sqlis = sql_inject.get_injections(target + '/')
 
         if not ok:
-            self._write_result('SQID call error!')
+            self._write_result('SQID call error.')
         else:
             self._write_result(sqlis)
 
