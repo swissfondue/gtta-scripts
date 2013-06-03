@@ -6,14 +6,11 @@ path.append('pythonlib')
 from crawler import LinkCrawler
 from gtta import Task, execute_task
 
-
 class Doc_Craw(Task):
     """
     GET document files from page by url, using crawler.py
     """
-
     urls_set = set()
-
     DOC_TYPES = ('.xls', '.xlsx', '.doc', '.docx', '.pdf', '.odt', '.txt', '.rtf')
 
     def collect_unique_urls_filter_docs(self, url):
@@ -32,9 +29,7 @@ class Doc_Craw(Task):
         Main function
         """
         link_crawler = LinkCrawler()
-
         link_crawler.stop_callback = self._check_stop
-        link_crawler.ext_link_callback = self.collect_unique_urls_filter_docs
         link_crawler.nonhtml_callback = self.collect_unique_urls_filter_docs
 
         if not self.proto:
@@ -42,7 +37,6 @@ class Doc_Craw(Task):
 
         if self.host:
             target = self.proto + '://' + self.host + '/'
-
         else:
             target = self.proto + '://' + self.ip + '/'
 
@@ -51,7 +45,6 @@ class Doc_Craw(Task):
         self._check_stop()
 
         if not self.produced_output:
-            self._write_result('No link to any documents found')
-
+            self._write_result('No documents found.')
 
 execute_task(Doc_Craw)
