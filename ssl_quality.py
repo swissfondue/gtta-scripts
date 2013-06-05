@@ -2,92 +2,49 @@
 
 from sys import path
 path.append('pythonlib')
+from subprocess import call
 
 import gtta
-import sslyze_tools
 
-class SSLQualityTask(gtta.Task, sslyze_tools.SSLyzeLauncher):
+
+class SSLQualityTask(gtta.Task):
     """
     SSL quality checker
     """
-    TIMEOUT = 60
+    _PROTOCOLS = ('ssl2', 'ssl3', 'tls1', 'tls1_1', 'tls1_2')
+    _PROTOCOL_NAMES = {
+        'ssl2': 'SSL 2.0',
+        'ssl3': 'SSL 3.0',
+        'tls1': 'TLS 1.0',
+        'tls1_1': 'TLS 1.1',
+        'tls1_2': 'TLS 1.2'
+    }
 
     def main(self):
         """
         Main function
         """
-        super(SSLQualityTask, self).main()
+        target = self.host
 
-    def _get_commands(self):
-        """
-        Returns the list of sslyze options
-        """
-        return [
-            '--sslv2',
-            '--sslv3',
-            '--tlsv1',
-            #'--tlsv1_1',
-            #'--tlsv1_2',
-        ]
+        if not target:
+            target = self.ip
 
-    def _parse_result(self, data):
-        """
-        Parses the sslyze output (@data)
-        """
-        data = data.split('\n')
-        protocols = {
-            'TLS 1.0' : False,
-            #'TLS 1.1' : False,
-            #'TLS 1.2' : False,
-            'SSL 2.0' : False,
-            'SSL 3.0' : False
-        }
+        port = self.port
 
-        proto = None
-        skip = False
+        if not port:
+            port = 443
 
-        for line in data:
-            if line.startswith('  *'):
-                proto = line[4:line.find(' ', 5)]
+        for protocol in self._PROTOCOLS:
+            return_code = call(
+                'echo "GET /" | openssl s_client -%s -connect %s:%i' % (protocol, target, port),
+                shell=True
+            )
 
-                if proto == 'SSLV2':
-                    proto = 'SSL 2.0'
-                elif proto == 'SSLV3':
-                    proto = 'SSL 3.0'
-                elif proto == 'TLSV1':
-                    proto = 'TLS 1.0'
-                #elif proto == 'TLSV1_1':
-                #    proto = 'TLS 1.1'
-                #elif proto == 'TLSV1_2':
-                #    proto = 'TLS 1.2'
+            result = "No"
 
-                skip = False
+            if return_code == 0:
+                result = "Yes"
 
-                continue
-
-            if skip:
-                continue
-
-            if line.find('Accepted Cipher Suite(s): None') != -1:
-                protocols[proto] = False
-                skip = True
-                continue
-
-            if line.find('Accepted Cipher Suite(s):') != -1:
-                protocols[proto] = True
-                skip = True
-                continue
-
-        out_data = []
-
-        for key, value in protocols.iteritems():
-            if value:
-                value = 'Supported'
-            else:
-                value = 'Not Supported'
-
-            out_data.append('%s: %s' % ( key, value ))
-
-        return '\n'.join(out_data)
+            self._write_result("%s: %s" % (self._PROTOCOL_NAMES[protocol], result))
 
 gtta.execute_task(SSLQualityTask)

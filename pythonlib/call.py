@@ -12,8 +12,8 @@ except ImportError:
             stdout=subprocess.PIPE,
             **kwargs
         ).communicate()
-        return (out or '') + (err or '')
 
+        return (out or '') + (err or '')
 
 def call(cmd):
     """
