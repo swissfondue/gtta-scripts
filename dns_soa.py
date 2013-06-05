@@ -58,11 +58,22 @@ class DNS_SOA(Task):
                 errors.append('Serial number should be between 1 and 4294967295, RFC 1035 (%i)' % int(serial))
 
             else:
-                century = int(serial[:2])
-                month   = int(serial[4:6])
-                day     = int(serial[6:8])
+                try:
+                    century = int(serial[:2])
+                except:
+                    century = 0
 
-                if century not in ( 19, 20 ) or month < 1 or month > 12 or day < 1 or day > 31:
+                try:
+                    month = int(serial[4:6])
+                except:
+                    month = 0
+
+                try:
+                    day = int(serial[6:8])
+                except:
+                    day = 0
+
+                if century not in (19, 20, 21) or month < 1 or month > 12 or day < 1 or day > 31:
                     errors.append(
                         'The recommended syntax for serial number is YYYYMMDDnn '\
                         '(YYYY=year, MM=month, DD=day, nn=revision number), RFC 1912 (%i)' % int(serial)
