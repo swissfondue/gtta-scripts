@@ -38,7 +38,6 @@ my $wordlist;
 my @common_cnames;
 my $count_hostnames = 0;
 my @domain_ns;
-my @data;
 my $h;
 my @ip_and_hostname;
 my $logging;
@@ -68,11 +67,13 @@ unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
 my @target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
 my $outfile = $ARGV[1];
 my @options	= &getinput( $ARGV[2] ) if ( $ARGV[2] );
+my @option2     = &getinput( $ARGV[3] ) if ( $ARGV[3] );
 
 open(OUTFILE, ">>$outfile");
 
 my $hosts	= q[subdomain_bruteforce_files/hosts_small.txt];
 $hosts		= q[subdomain_bruteforce_files/hosts_big.txt] if ( $options[0] );
+
 
 # ignore all errors while trying to load up thead stuff
 BEGIN {
@@ -128,6 +129,15 @@ my $result = GetOptions (
 
 help()                   if $help;
 quit_early($version_num) if $version;
+
+
+if ($option2[0]) {
+	my @theHarvester_output = `python /opt/gtta/scripts/theHarvest-2.2a/theHarvester_domains.py -b all -t -d $target[0]`;
+	foreach (@theHarvester_output) {
+                chomp($_);
+		output($_);
+	}
+}
 
 if ( $ARGV[0] ) { $dns = $target[0] }
 
@@ -225,10 +235,10 @@ my @search_strings = split(/\x2C/, $search) if $search;
 my $query          = $res->query($dns, 'NS');
 
 if ($query) {
-  #output("DNS Servers for $dns:");
+  output("DNS Servers for $dns:");
   foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
     my $dnssrv = $rr->nsdname;
-    #output("\t$dnssrv");
+    output("\t$dnssrv");
     push (@domain_ns, $rr->nsdname);
   }
 }
@@ -277,20 +287,20 @@ if ($dns) {
   } else {
     quit_early("Can't open $wordlist or the default wordlist");
   }
-  #output("\nChecking for wildcard DNS...");
+  output("\nChecking for wildcard DNS...");
   srand;
   $wildcard_dns = 1e11 - int(rand(1e10));
   if ($h = gethost("$wildcard_dns.$dns")) {
     my $wildcard_addr = inet_ntoa($h->addr);
-    #output("\t** Found $wildcard_dns.$dns at $wildcard_addr.");
-    #output("\t** High probability of wildcard DNS.");
+    output("\t** Found $wildcard_dns.$dns at $wildcard_addr.");
+    output("\t** High probability of wildcard DNS.");
     $wildcard_dns = $wildcard_addr;
   } else {
-    #output('Nope. Good.');
+    output('Nope. Good.');
     $wildcard_dns = q{};
   }
   my $total_cnames = @common_cnames;
-  #output("\nNow performing $total_cnames test(s)...");
+  output("\nNow performing $total_cnames test(s)...");
   if ($threads) {
     share($count);
     share(%known_ips);
@@ -327,41 +337,15 @@ foreach my $current_name (sort keys(%known_names)) {
   }
 }
 
-if (@wildcards)
+unless (%subnets || @wildcards)
 {
-    push(@data, [ 'Wildcard DNS: ' . scalar(@wildcards) . ' hostname(s)', $wildcard_dns ]);
+    output("\nNo subdomains found.");
+}
+elsif (@wildcards)
+{
+    output("\n$wildcard_dns : wildcard DNS - " . scalar(@wildcards) . " hostname(s) found");
 }
 
-if (@data)
-{
-    print OUTFILE '<gtta-table><columns>';
-    print OUTFILE '<column width="0.5" name="Domain"/><column width="0.5" name="IP"/>';
-    print OUTFILE '</columns>';
-
-    for (my $i = 0; $i < scalar(@data); $i++)
-    {
-        print OUTFILE '<row>';
-
-        for (my $k = 0; $k < scalar(@{$data[$i]}); $k++)
-        {
-            $data[$i][$k] =~ s/</&lt;/g;
-            $data[$i][$k] =~ s/>/&gt;/g;
-            $data[$i][$k] =~ s/&/&amp;/g;
-
-            print OUTFILE '<cell>';
-            print OUTFILE $data[$i][$k];
-            print OUTFILE '</cell>';
-        }
-
-        print OUTFILE '</row>';
-    }
-
-    print OUTFILE '</gtta-table>';
-}
-else
-{
-    print OUTFILE "\nNo subdomains found.";
-}
 
 &http_connect if $http_connect;
 
@@ -422,7 +406,7 @@ sub search_host {
       next if $known_names{"$this_ip,$search_item"};
       $count++;
       $known_names{"$this_ip,$search_item"} = 1;
-      push(@data, [ $search_item, $this_ip ]);
+      output("\t$search_item - $this_ip");
     }
   }
 }
@@ -465,7 +449,7 @@ sub find_nearby {
             $count++;
             $known_names{"$octet[0].$octet[1].$octet[2].$octet[3],"
                          . "$name[$#name]"} = 1;
-            push(@data, [ $name[$#name], "$octet[0].$octet[1].$octet[2].$octet[3]" ]);
+            output("\t$name[$#name] - $octet[0].$octet[1].$octet[2].$octet[3]");
             find_nearby("$octet[0].$octet[1].$octet[2].$octet[3]"); # recurse
           }
         }
@@ -474,7 +458,7 @@ sub find_nearby {
       $count++;
       $known_names{"$octet[0].$octet[1].$octet[2].$octet[3],"
                    . "$name[$#name]"} = 1;
-      push(@data, [ $name[$#name], "$octet[0].$octet[1].$octet[2].$octet[3]" ]);
+      output("\t$name[$#name] - $octet[0].$octet[1].$octet[2].$octet[3]");
       find_nearby("$octet[0].$octet[1].$octet[2].$octet[3]");  # recurse
     }
   }
