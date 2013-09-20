@@ -18,7 +18,8 @@ def _call_cms_explorer(url, cms):
     Call CMS explorer
     """
     return call.call([
-        './cms-explorer.pl',
+        "perl",
+        'cms-explorer.pl',
         '-url', url,
         '-type', cms,
         '-verbosity', '1'

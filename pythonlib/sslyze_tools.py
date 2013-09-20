@@ -14,7 +14,7 @@ def call_sslyze(target, commands, timeout=15):
     commands.insert(0, '--timeout=%s' % timeout)
     commands.append(target)
 
-    return call.call([SSLYZE_CMD] + commands)
+    return call.call(["python", SSLYZE_CMD] + commands)
 
 class SSLyzeLauncher(object):
     """

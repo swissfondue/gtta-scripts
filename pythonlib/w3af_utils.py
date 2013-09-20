@@ -31,7 +31,7 @@ def call_w3af(target, commands, timeout=15):
     with tempfile.NamedTemporaryFile() as tmpf:
         tmpf.write(script)
         tmpf.file.flush()
-        return call.call([W3AF_CMD, "-s", tmpf.name])
+        return call.call(["python", W3AF_CMD, "-s", tmpf.name])
 
 class W3AFScriptLauncher(object):
     """

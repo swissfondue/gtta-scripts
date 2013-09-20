@@ -14,7 +14,8 @@ def get_injections(url):
     """
     with call.cd(SQID_PATH):
         res, out = call.call([
-            './sqid.rb',
+            "ruby",
+            'sqid.rb',
             '--mode', 'c',
             '--crawl', url,
             '--accept-cookies'
