@@ -132,7 +132,7 @@ quit_early($version_num) if $version;
 
 
 if ($option2[0]) {
-	my @theHarvester_output = `python /opt/gtta/scripts/theHarvest-2.2a/theHarvester_domains.py -b all -t -d $target[0]`;
+	my @theHarvester_output = `python /opt/gtta/current/scripts/pythonlib/harvester/theHarvester_domains.py -b all -t -d $target[0]`;
 	foreach (@theHarvester_output) {
                 chomp($_);
 		output($_);

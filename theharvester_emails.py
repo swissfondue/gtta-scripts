@@ -1,20 +1,35 @@
-# -*- coding: utf-8 -*-
-"""
-Get all emails from theHarvester script
-"""
+# coding: utf-8
 
-import socket
-import sys
-sys.path.append('pythonlib')
+from sys import path
+path.append('pythonlib')
 from gtta import Task, execute_task
 import call
+import os
+
+HARVESTER_CMD = os.path.join(os.path.dirname(__file__), "pythonlib", "harvester", "theHarvester_email.py")
 
 class TheHarvesterEmailsTask(Task):
-    TIMEOUT=60
-    def main(self,*args,**kwargs):
-        ok, output = call.call(['python',
-            '/opt/gtta/scripts/theHarvest-2.2a/theHarvester_email.py',
-            '-b','all','-d',self.host])
+    """
+    Get all emails from theHarvester script
+    """
+    TIMEOUT = 60
+
+    def main(self, *args, **kwargs):
+        """
+        Main function
+        @param args:
+        @param kwargs:
+        @return:
+        """
+        ok, output = call.call([
+            "python",
+            HARVESTER_CMD,
+            '-b',
+            'all',
+            '-d',
+            self.host
+        ])
+
         if ok:
             self._write_result(output)
         else:
