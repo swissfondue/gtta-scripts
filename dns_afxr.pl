@@ -13,32 +13,35 @@ my $outfile = $ARGV[1];
 
 open(OUTFILE, ">>$outfile");
 
-my ($dns, @zone, @domain_ns, $search, $dns_server, );
-
-$dns = $target;
+my (@zone, @domain_ns);
 
 my $res = Net::DNS::Resolver->new;
-my @search_strings = split(/\x2C/, $search) if $search;
-my $query          = $res->query($dns, 'NS');
+my $query = $res->query($target, 'NS');
 
 if ($query) {
-  output("DNS Servers for $dns:");
-  foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
-    my $dnssrv = $rr->nsdname;
-    output("\t$dnssrv");
-    push (@domain_ns, $rr->nsdname);
-  }
+    output("DNS Servers for $target:");
+
+    foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
+        my $dnssrv = lc($rr->nsdname);
+        output(" - $dnssrv");
+        push (@domain_ns, lc($rr->nsdname));
+    }
+} else {
+    output("Please specify a domain name which DNS records should be tested.");
+    exit(0);
 }
 
-if ($dns_server) {
-  @zone = $res->axfr($dns);
-} else {
-  for (@domain_ns) {
+output("\nTesting NS servers:");
+
+for (@domain_ns) {
     $res->nameservers($_);
-    output("\tTesting $_");
-    @zone = $res->axfr($dns);
-    @zone ? last : output("\t\tRequest timed out or transfer not allowed.");
-  }
+    @zone = $res->axfr($target);
+
+    if (@zone) {
+        output(" - $_: found " . scalar(@zone) . " records, AXFR is enabled");
+    } else {
+        output(" - $_: no response");
+    }
 }
 
 exit(0);
