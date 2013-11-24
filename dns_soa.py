@@ -130,6 +130,9 @@ class DNS_SOA(Task):
         if not self.host:
             raise NoHostName('No host name specified.')
 
+        if self.host.startswith("www."):
+            self.host = self.host[4:]
+
         results = []
         serials = []
         errors  = []
