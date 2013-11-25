@@ -22,6 +22,9 @@ class DNS_A(Task):
         if not self.host:
             raise NoHostName('No host name specified.')
 
+        if self.host.startswith("www."):
+            self.host = self.host[4:]
+
         results = []
 
         self._check_stop()
@@ -44,8 +47,8 @@ class DNS_A(Task):
 
                 ns_list.append(gethostbyname(name_server))
 
-            r             = Resolver()
-            r.lifetime    = self.DNS_TIMEOUT
+            r = Resolver()
+            r.lifetime = self.DNS_TIMEOUT
             r.nameservers = ns_list
 
             a_records = r.query(self.host, 'A')
