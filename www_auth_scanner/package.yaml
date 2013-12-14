@@ -1,0 +1,4 @@
+type: script
+name: www_auth_scanner
+version: 1.7
+system: true

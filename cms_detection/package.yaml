@@ -1,0 +1,4 @@
+type: script
+name: cms_detection
+version: 1.7
+system: true

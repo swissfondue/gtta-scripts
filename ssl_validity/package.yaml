@@ -1,0 +1,4 @@
+type: script
+name: ssl_validity
+version: 1.7
+system: true

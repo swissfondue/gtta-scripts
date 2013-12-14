@@ -1,0 +1,4 @@
+type: script
+name: check_as_peers
+version: 1.7
+system: true

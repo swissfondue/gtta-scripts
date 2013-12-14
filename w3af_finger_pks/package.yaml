@@ -1,0 +1,4 @@
+type: script
+name: w3af_finger_pks
+version: 1.7
+system: true

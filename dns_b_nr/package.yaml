@@ -1,0 +1,4 @@
+type: script
+name: dns_b_nr
+version: 1.7
+system: true

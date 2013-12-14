@@ -1,0 +1,4 @@
+type: script
+name: nic_whois
+version: 1.7
+system: true

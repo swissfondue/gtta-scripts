@@ -1,0 +1,4 @@
+type: script
+name: w3af_get_mails
+version: 1.7
+system: true

@@ -1,0 +1,4 @@
+type: script
+name: nmap_tcp_os
+version: 1.7
+system: true

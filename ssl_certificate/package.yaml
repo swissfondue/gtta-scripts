@@ -1,0 +1,4 @@
+type: script
+name: ssl_certificate
+version: 1.7
+system: true

@@ -1,0 +1,4 @@
+type: script
+name: smtp_filter
+version: 1.7
+system: true

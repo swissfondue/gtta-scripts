@@ -1,0 +1,4 @@
+type: script
+name: sql_injector
+version: 1.7
+system: true

@@ -1,0 +1,4 @@
+type: script
+name: smtp_auth
+version: 1.7
+system: true

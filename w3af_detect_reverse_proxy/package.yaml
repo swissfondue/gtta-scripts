@@ -1,0 +1,4 @@
+type: script
+name: w3af_detect_reverse_proxy
+version: 1.7
+system: true

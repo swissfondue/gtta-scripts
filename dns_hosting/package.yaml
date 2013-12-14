@@ -1,0 +1,4 @@
+type: script
+name: dns_hosting
+version: 1.7
+system: true

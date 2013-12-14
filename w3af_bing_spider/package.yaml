@@ -1,0 +1,4 @@
+type: script
+name: w3af_bing_spider
+version: 1.7
+system: true

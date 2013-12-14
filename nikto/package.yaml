@@ -1,0 +1,4 @@
+type: script
+name: nikto
+version: 1.7
+system: true

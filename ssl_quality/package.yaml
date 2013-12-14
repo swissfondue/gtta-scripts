@@ -1,0 +1,4 @@
+type: script
+name: ssl_quality
+version: 1.7
+system: true
