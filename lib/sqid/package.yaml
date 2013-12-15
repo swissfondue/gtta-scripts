@@ -1,0 +1,4 @@
+type: library
+name: sqid
+version: 1.7
+system: true

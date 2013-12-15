@@ -1,0 +1,4 @@
+type: library
+name: core
+version: 1.7
+system: true

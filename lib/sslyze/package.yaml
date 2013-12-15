@@ -1,0 +1,4 @@
+type: library
+name: sslyze
+version: 1.7
+system: true
