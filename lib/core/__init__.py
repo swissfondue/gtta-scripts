@@ -2,6 +2,7 @@
 
 from threading import Thread, Event
 from sys import argv, exit
+from os.path import isdir
 from socket import inet_aton
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
@@ -61,6 +62,8 @@ class Task(Thread):
     HTTP_TIMEOUT   = 30    # HTTP timeout
     SMTP_TIMEOUT   = 10    # SMTP timeout
     PARSE_FILES    = True  # read & parse all input files by default
+    SYSTEM_LIBRARY_PATH = "/opt/gtta/scripts/system/lib"
+    USER_LIBRARY_PATH = "/opt/gtta/scripts/lib"
 
     def __init__(self):
         """
@@ -161,6 +164,22 @@ class Task(Thread):
                 output_arguments.append(arg)
 
         return output_arguments
+
+    def _get_library_path(self, library):
+        """
+        Get library path0['
+        """
+        path = None
+
+        if isdir("%s/%s" % (self.SYSTEM_LIBRARY_PATH, library)):
+            path = self.SYSTEM_LIBRARY_PATH
+        elif isdir("%s/%s" % (self.USER_LIBRARY_PATH, library)):
+            path = self.USER_LIBRARY_PATH
+
+        if not path:
+            raise Exception("Library not exists: %s" % library)
+
+        return "%s/%s" % (path, library)
 
     def run(self):
         """

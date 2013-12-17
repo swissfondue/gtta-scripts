@@ -3,8 +3,6 @@
 from core import Task, execute_task, call
 import os
 
-HARVESTER_CMD = os.path.join(os.path.dirname(__file__), "..", "lib", "harvester", "theHarvester_email.py")
-
 class TheHarvesterEmailsTask(Task):
     """
     Get all emails from theHarvester script
@@ -18,9 +16,11 @@ class TheHarvesterEmailsTask(Task):
         @param kwargs:
         @return:
         """
+        cmd = os.path.join(self._get_library_path("harvester"), "theHarvester_email.py")
+
         ok, output = call.call([
             "python",
-            HARVESTER_CMD,
+            cmd,
             '-b',
             'all',
             '-d',
