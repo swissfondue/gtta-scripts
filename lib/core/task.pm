@@ -89,7 +89,9 @@ class Task {
         $self->_result($result_file);
 
         # parse the remaining arguments
-        foreach my $arg (@ARGV[2, -1]) {
+        for (my $i = 2; $i < scalar(@ARGV); $i++) {
+            my $arg = $ARGV[$i];
+
             unless ($arg) {
                 next;
             }
