@@ -7,6 +7,7 @@ from socket import inet_aton
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
 
+
 class ResultTable(object):
     """
     Result table class
@@ -51,6 +52,7 @@ class ResultTable(object):
                 cell_element.text = cell
 
         return etree.tostring(table)
+
 
 class Task(Thread):
     """
@@ -181,13 +183,23 @@ class Task(Thread):
 
         return "%s/%s" % (path, library)
 
+    def test(self):
+        """
+        Test the task
+        """
+        raise Exception("Test is not implemented")
+
     def run(self):
         """
         Run a task
         """
         try:
-            arguments = self._parse_input()
-            self.main(*arguments)
+            if len(argv) == 2 and argv[1] == "--test":
+                self.produced_output = True
+                self.test()
+            else:
+                arguments = self._parse_input()
+                self.main(*arguments)
 
         except TaskTimeout:
             pass
@@ -199,6 +211,7 @@ class Task(Thread):
                 error_str += ': %s' % str(e)
 
             self._write_result(error_str)
+
 
 def execute_task(task_class):
     """
