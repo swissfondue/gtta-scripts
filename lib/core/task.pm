@@ -2,7 +2,6 @@ package core::task;
 
 use Exporter;
 use MooseX::Declare;
-use Socket qw(inet_aton AF_INET);
 use threads;
 
 our @ISA = qw(Exporter);
