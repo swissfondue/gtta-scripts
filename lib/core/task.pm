@@ -129,6 +129,11 @@ class Task {
         return $path;
     }
     
+    # Default test method
+    method test {
+        die("Test not implemented.");
+    }
+    
     # Stop the task
     method stop {
         $self->_stop = 1;
@@ -141,13 +146,17 @@ class Task {
                 die("Task has timed out.\n");
             };
 
-            my @arguments = $self->_parse_input();
-
             if ($self->TIMEOUT > 0) {
                 alarm($self->TIMEOUT);
             }
-                        
-            $self->main(\@arguments);
+            
+            if (scalar(@ARGV) == 1 && $ARGV[0] eq "--test") {
+                $self->produced_output(1);
+                $self->test();                
+            } else {
+                my @arguments = $self->_parse_input();           
+                $self->main(\@arguments);   
+            }            
         };
 
         alarm(0);
@@ -155,6 +164,10 @@ class Task {
         if ($@) {
             my $error = $@;
             $self->_write_result($error);
+        }
+        
+        unless ($self->produced_output) {
+            $self->_write_result("No data returned.");
         }
     }
 }
@@ -184,7 +197,7 @@ sub execute {
         }
 
         sleep(1);
-    }
+    }    
 }
 
 1;

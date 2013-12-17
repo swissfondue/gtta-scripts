@@ -187,7 +187,7 @@ class Task(Thread):
         """
         Test the task
         """
-        raise Exception("Test is not implemented")
+        raise Exception("Test not implemented.")
 
     def run(self):
         """
