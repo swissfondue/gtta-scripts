@@ -12,7 +12,9 @@ our @EXPORT_OK = qw(execute);
 class Task {
     use constant {
         TIMEOUT => 30,
-        PARSE_FILES => 1
+        PARSE_FILES => 1,
+        USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
+        SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib"
     };
     
     has "host" => (isa => "Str", is => "rw");
@@ -110,6 +112,19 @@ class Task {
         }
 
         return @output_arguments;
+    }
+
+    # Get library path
+    method _get_library_path($library) {
+        my $path = undef;
+        
+        if (-d $self->SYSTEM_LIBRARY_PATH . "/" . $library) {
+            $path = $self->SYSTEM_LIBRARY_PATH . "/" . $library;
+        } elsif (-d $self->USER_LIBRARY_PATH . "/" . $library) {
+            $path = $self->USER_LIBRARY_PATH . "/" . $library;
+        } 
+        
+        return $path;
     }
     
     # Stop the task
