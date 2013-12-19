@@ -1,80 +1,62 @@
-#!perl
+# DNS reverse lookup
+# ---
 
-use strict;
-use Net::DNS;
-use Net::IP;
+use MooseX::Declare;
+use core::task qw(execute);
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# DNS reverse lookup task
+class DNS_Reverse_Lookup extends Task {
+    use Net::DNS;
+    use Net::IP;
 
-my $target  = &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
+    # Process
+    method _process(Str $target) {
+        my $res = Net::DNS::Resolver->new;
 
-open(OUTFILE, ">>$outfile");
+        my @ranges = split /\s+/, $target;
 
-my $res = Net::DNS::Resolver->new;
+        foreach my $t (@ranges) {
+            $t =~ s/^\s+//gi;
+            $t =~ s/\s+$//gi;
 
-if ( $target) {
+            my $ip = new Net::IP($t);
 
-  my @ranges = split /\s+/, $target;
+            do {
+                unless ($ip) {
+                    $self->_write_result('Invalid IP or range: ' . $t);
+                    next;
+                }
 
-  foreach my $t (@ranges)
-  {
-      $t =~ s/^\s+//gi;
-      $t =~ s/\s+$//gi;
+                my $IP = $ip->ip();
+                my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
+                my $query = $res->query($target_IP, 'PTR');
 
-    my $ip = new Net::IP ( $t );
+                if ($query) {
+                    my $found = 0;
 
-    do {
-        unless ($ip)
-        {
-            print OUTFILE 'Invalid IP or range: ' . $t;
-            next;
+                    foreach my $rr ($query->answer) {
+                        next unless ($rr->type eq 'PTR');
+                        $self->_write_result($IP . "\t\t" . $rr->rdatastr .  "\n");
+                        $found = 1;
+                    }
+
+                    $self->_write_result($IP .  "\t\tN/A\n") unless ($found);
+                } else {
+                    $self->_write_result($IP .  "\t\tN/A\n");
+                }
+            } while (++$ip);
         }
+    }
 
-        my $IP = $ip->ip();
-        my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
-        my $query = $res->query( $target_IP, 'PTR' );
+    # Main function
+    method main($args) {
+        $self->_process($self->target);
+    }
 
-        if ( $query ) {
-
-            my $found = 0;
-
-            foreach my $rr ( $query->answer ) 
-            {
-                next unless ($rr->type eq 'PTR');
-                print OUTFILE $IP,"\t\t",$rr->rdatastr, "\n";
-                $found = 1;
-            }
-
-            print OUTFILE $IP, "\t\tN/A\n" unless ($found);
-        }
-        else { print OUTFILE $IP, "\t\tN/A\n"; }
-
-    } while (++$ip);
-  }
+    # Test function
+    method test {
+        $self->_process("8.8.8.8");
+    }
 }
-else { print OUTFILE 'Error: no IP range is provided', "\n"; }
 
-close(OUTFILE);
-
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){  chomp; push @fo, $_; }
-
-	close( IN );
-
-	# return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(DNS_Reverse_Lookup->new());

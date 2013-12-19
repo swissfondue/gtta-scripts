@@ -1,96 +1,68 @@
-#!perl
+# DNS Domain MX
+# ---
 
-# Find the MX records for a domain.
-use Data::Dumper;
-use strict;
-use Net::DNS;
-use Socket;
+use MooseX::Declare;
+use core::task qw(execute);
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# DNS MX task
+class DNS_MX extends Task {
+    use Net::DNS;
 
-my ( $target, $timeout, $debug, $outfile ) = ( undef, 120, 0, undef ); # defaults
+    # Get hostname
+    method _hostname(Str $hostname) {
+        my (@bytes, @octets, $packedaddr, $raw_addr, $host_name, $ip);
 
-$target	 = &getinput( $ARGV[0] ) if ( $ARGV[0] );
-$outfile = $ARGV[1];
-$timeout = &getinput( $ARGV[2] ) if ( $ARGV[2] );
-$debug	 = &getinput( $ARGV[3] ) if ( $ARGV[3] );
+        if ($hostname =~ /[a-zA-Z]/g) {
+            $raw_addr = (gethostbyname($hostname))[4];
+            @octets	= unpack('C4', $raw_addr);
+            $host_name = join('.', @octets);
+        } else {
+            @bytes = split(/\./, $hostname);
+            $packedaddr	= pack('C4', @bytes);
+            $host_name = (gethostbyaddr($packedaddr, 2))[0];
+        }
 
-open(OUTFILE, ">>$outfile");
+        return $host_name;
+    }
 
-  my $res = Net::DNS::Resolver->new( 'debug' => $debug );
-  my $cnt = 1;
+    # Process
+    method _process(Str $host, Int $timeout, Int $debug) {
+        no warnings; # no unicode garbage
+        my $res = Net::DNS::Resolver->new('debug' => $debug);
+        my $cnt = 1;
 
-  no warnings; # no unicode garbage
+        unless ($host =~ m/^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/) {
+            $self->_write_result("\n" . $cnt++ . ') Error: not valid domain name ' . $host . "\n");
+        } else {
+            $host =~ s/^www\.//;
 
-my $host  = $target;
-unless ( $host =~ m/^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/ ) {
+            $res->tcp_timeout($timeout);
+            my @mx = mx($res, $host);
 
-print OUTFILE "\n", $cnt++, ') Error: not valid domain name ', $host, "\n";
+            if (@mx) {
+                foreach my $rr ( @mx ) {
+                    $self->_write_result($rr->preference . ' ' . $rr->exchange . ' (' . $self->_hostname($rr->exchange) . ")\n");
+                }
+            } else {
+                $self->_write_result("\n" . $cnt++ . ') Warning: no MX records for domain ' . $host . ' (' . $res->errorstring . ")\n");
+            }
+        }
+    }
 
+    # Main function
+    method main($args) {
+        my ($timeout, $debug);
+
+        $timeout = $self->_get_int($args, 0, 10);
+        $debug = $self->_get_int($args, 1, 0);
+
+        $self->_process($self->target, $timeout, $debug);
+    }
+
+    # Test function
+    method test {
+        $self->_process("google.com", 10, 1);
+    }
 }
-else{
 
-$host =~ s/^www\.//;
-
-$res->tcp_timeout( $timeout );
-my @mx = mx( $res, $host );
-
-if ( @mx ) {
-
-    #print OUTFILE "\n", $cnt++, q[) ], $host, ' (', &hostname( $host ), ")\n";
-	foreach my $rr ( @mx ) {
-
-		print OUTFILE $rr->preference, ' ', $rr->exchange, ' (', &hostname( $rr->exchange ), ")\n";
-
-	}
-}
-else { print OUTFILE "\n", $cnt++, ') Warning: no MX records for domain ', $host, ' (', $res->errorstring, ")\n"; }
-
-}
-
-close(OUTFILE);
-
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ s/^(\S+)$/{ push @fo, $1; }/e; }
-
-	close( IN );
-
-	#return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
-
-sub hostname {
-
-  my ( @bytes, @octets, $packedaddr, $raw_addr, $host_name, $ip );
-
-  if( $_[0] =~ /[a-zA-Z]/g ) {
-
-     $raw_addr		= ( gethostbyname( $_[0] ) )[4];
-     @octets		= unpack('C4', $raw_addr);
-     $host_name 	= join('.', @octets);
-
-  }
-  else {
-
-     @bytes			= split(/\./, $_[0]);
-     $packedaddr	= pack('C4',@bytes);
-     $host_name		= ( gethostbyaddr( $packedaddr, 2 ) )[0];
-
-  }
-
-  return $host_name;
-
-};
+execute(DNS_MX->new());

@@ -1,74 +1,55 @@
-#!perl
+# DNS AFXR
+# ---
 
-use strict;
-use Net::hostent;
-use Net::DNS;
-use IO::Socket;
-use Socket;
+use MooseX::Declare;
+use core::task qw(execute);
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# DNS AFXR task
+class DNS_AFXR extends Task {
+    use Net::DNS;
 
-my $target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
+    # Process host
+    method _process(Str $host) {
+        my (@zone, @domain_ns);
+        my $res = Net::DNS::Resolver->new;
+        my $query = $res->query($host, 'NS');
 
-open(OUTFILE, ">>$outfile");
+        if ($query) {
+            $self->_write_result("DNS Servers for $host:");
 
-my (@zone, @domain_ns);
+            foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
+                my $dnssrv = lc($rr->nsdname);
+                $self->_write_result(" - $dnssrv");
+                push (@domain_ns, lc($rr->nsdname));
+            }
+        } else {
+            $self->_write_result("Please specify a domain name which DNS records should be tested.");
+            return;
+        }
 
-my $res = Net::DNS::Resolver->new;
-my $query = $res->query($target, 'NS');
+        $self->_write_result("\nTesting NS servers:");
 
-if ($query) {
-    output("DNS Servers for $target:");
+        for (@domain_ns) {
+            $res->nameservers($_);
+            @zone = $res->axfr($host);
 
-    foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
-        my $dnssrv = lc($rr->nsdname);
-        output(" - $dnssrv");
-        push (@domain_ns, lc($rr->nsdname));
+            if (@zone) {
+                $self->_write_result(" - $_: found " . scalar(@zone) . " records, AXFR is enabled");
+            } else {
+                $self->_write_result(" - $_: no response");
+            }
+        }
     }
-} else {
-    output("Please specify a domain name which DNS records should be tested.");
-    exit(0);
-}
 
-output("\nTesting NS servers:");
+    # Main function
+    method main($args) {
+        $self->_process($self->target);
+    }
 
-for (@domain_ns) {
-    $res->nameservers($_);
-    @zone = $res->axfr($target);
-
-    if (@zone) {
-        output(" - $_: found " . scalar(@zone) . " records, AXFR is enabled");
-    } else {
-        output(" - $_: no response");
+    # Test function
+    method test {
+        $self->_process("google.com");
     }
 }
 
-exit(0);
-
-close(OUTFILE);
-
-sub output {
-  my $text = shift;
-  print OUTFILE "$text\n";
-}
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ s/^(\S+)$/{ push @fo, $1; }/e; }
-
-	close( IN );
-
-	#return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(DNS_AFXR->new());
