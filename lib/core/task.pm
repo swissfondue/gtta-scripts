@@ -5,14 +5,15 @@ use MooseX::Declare;
 use threads;
 
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(execute);
+our @EXPORT_OK = qw(execute call_external);
 
 # Base class for all tasks
 class Task {
+    use IO::Handle;
     use Scalar::Util qw(looks_like_number);
 
     use constant {
-        TIMEOUT => 30,
+        TIMEOUT => 60,
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
         SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib"
@@ -110,7 +111,9 @@ class Task {
 
         # output file
         my $result_file;
+
         open($result_file, ">" . $ARGV[1]) or die("Unable to open result file: " . $ARGV[1] . ".\n");
+        $result_file->autoflush(1);
         $self->_result($result_file);
 
         # parse the remaining arguments
@@ -270,6 +273,20 @@ sub execute {
 
         sleep(1);
     }    
+}
+
+# External program call
+sub call_external {
+    my ($cmd, $output, $status);
+
+    $cmd = shift;
+    $output = `$cmd`;
+
+    if ($? == -1) {
+        die("Error executing command: $cmd.\n");
+    }
+
+    return $output;
 }
 
 1;

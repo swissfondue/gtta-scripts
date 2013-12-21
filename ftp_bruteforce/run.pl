@@ -10,10 +10,10 @@ class FTP_Bruteforce extends Task {
     use Net::FTP;
 
     # Process
-    method _process(Str $target, $users, $passw) {
+    method _process(Str $target, Int $port, $users, $passw) {
         my ($cnt, $ftp);
 
-        unless ($ftp = Net::FTP->new($target)) {
+        unless ($ftp = Net::FTP->new($target, Port => $port)) {
             $self->_write_result("Failed to connect to $target.");
             return;
         }
@@ -29,7 +29,7 @@ class FTP_Bruteforce extends Task {
                 chomp($try);
 
                 if ($ftp->login($user, $try)) {
-                    $self->_write_result("pair $user:$try is good for $target\n");
+                    $self->_write_result("pair $user:$try is good for $target");
                     return;
                 }
 
@@ -38,7 +38,7 @@ class FTP_Bruteforce extends Task {
             } @$passw;
         } @$users;
 
-        $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...\n");
+        $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...");
         $ftp->quit();
     }
 
@@ -49,12 +49,12 @@ class FTP_Bruteforce extends Task {
         $users = $self->_get_arg($args, 0);
         $passw = $self->_get_arg($args, 1);
 
-        $self->_process($self->target, $users, $passw);
+        $self->_process($self->target, $self->port || 21, $users, $passw);
     }
 
     # Test function
     method test {
-        $self->_process("ftp.debian.org", ["root", "test"], ["123", "qwerty"]);
+        $self->_process("ftp.debian.org", 21, ["root", "test"], ["123", "qwerty"]);
     }
 }
 

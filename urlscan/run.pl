@@ -1,56 +1,38 @@
-use LWP::UserAgent;
-use warnings;
-use strict;
+# URL Scan
+# --
 
-my @target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-my @inputlistfile = &getinput( $ARGV[2] ) if ( $ARGV[2] );
+use MooseX::Declare;
+use core::task qw(execute);
 
-open(OUTFILE, ">>$outfile");
+# URL Scan task
+class URL_Scan extends Task {
+    use LWP::UserAgent;
 
-if (!$target[1])
-{
-    $target[1] = 'http';
-}
+    # Process
+    method _process(Str $target, Str $proto, $input_list) {
+        my $url = "$proto://$target";
 
-my $targeturl = $target[1] . '://' . $target[0];
+        foreach my $line (@$input_list) {
+            my $request = new LWP::UserAgent;
+            my $output = $request->get("$url/$line");
 
-#	print "Timeout is at 5 seconds for each attempt. Please wait...\n";
-foreach my $line (@inputlistfile)
-{
-    my $request = new LWP::UserAgent;	
-#		 $request->timeout(5);
-    my $output = $request->get("$targeturl/$line");
-    if($output->is_success) 
-    {
-        print OUTFILE "FOUND: $targeturl/$line\n";		
-    } 
-    else
-    {
-#		print "nothing found under $targeturl$line\n";
+            if ($output->is_success) {
+                $self->_write_result("FOUND: $url/$line");
+            }
+        }
+    }
+
+    # Main function
+    method main($args) {
+        my $input_list = $self->_get_arg($args, 0);
+        $self->_process($self->target, $self->proto || "http", $input_list);
+    }
+
+    # Test function
+    method test {
+        $self->_process("google.com", "http", ["index.html", "test", "about"]);
     }
 }
 
-close(OUTFILE);
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	return @fo; # if ( scalar @fo > 1 );
-	# return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(URL_Scan->new());
 

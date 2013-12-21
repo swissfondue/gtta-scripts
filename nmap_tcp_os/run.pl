@@ -1,173 +1,150 @@
-#!perl
+# NMAP TCP OS
+# --
 
-use File::Spec;
-use File::Temp;
-use XML::LibXML;
-use strict;
+use MooseX::Declare;
+use core::task qw(execute);
+use core::resulttable;
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+# NMAP TCP OS task
+class NMAP_TCP_OS extends Task {
+    use constant TIMEOUT => 3600;
+    use File::Spec;
+    use File::Temp;
+    use XML::LibXML;
+    use core::task qw(call_external);
 
-my $host  = &getinput( $ARGV[0] );
-my $outfile = $ARGV[1];
-my $ports = &getinput( $ARGV[2] ) if ($ARGV[2]);
-my $skip_discovery = &getinput( $ARGV[3] ) if ($ARGV[3]);
-my $verbose = &getinput( $ARGV[4] ) if ($ARGV[4]);
-my $probe = &getinput( $ARGV[5] ) if ($ARGV[5]);
-my $timing = &getinput( $ARGV[6] ) if ($ARGV[6]);
-my $extract = &getinput( $ARGV[7] ) if ($ARGV[7]);
-my @data;
+    # Process
+    method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {
+        my @data;
 
-if (defined($timing) && !grep $_ == $timing, qw/0 1 2 3 4 5/)
-{
-    print q[Error: timing must be within 0..5 range], "\n";
-    exit(0);
-}
+        if (!grep $_ == $timing, qw/0 1 2 3 4 5/) {
+            die("Error: timing must be within 0..5 range\n");
+        }
 
-open(OUTFILE, ">>$outfile");
+        my $tmp;
 
-my $tmp;
+        if ($extract) {
+            $tmp = File::Temp->new(UNLINK => 1);
+        }
 
-if ($extract)
-{
-    $tmp = File::Temp->new(UNLINK => 1);
-}
+        my $nmap_cmd = "nmap -O -sT " . ($skip_discovery ? '-PN ' : '') . ($verbose ? '-v ' : '') . ($probe ? '-sV ' : '') . ($timing ? "-T$timing " : '-T3 ') . ($ports ? "-p $ports " : '') . ($extract ? "-oX $tmp " : '') . "$host";
+        my $output = call_external($nmap_cmd);
 
-my $nmap_cmd = "nmap -O -sT " . ($skip_discovery ? '-PN ' : '') . ($verbose ? '-v ' : '') . ($probe ? '-sV ' : '') . ($timing ? "-T$timing " : '-T3 ') . ($ports ? "-p $ports " : '') . ($extract ? "-oX $tmp " : '') . "$host |";
+        unless ($extract) {
+            $self->_write_result($output);
+            return;
+        }
 
-undef $/;
+        my $parser = XML::LibXML->new();
+        my $xml = $parser->parse_file($tmp->filename);
 
-open( READ, $nmap_cmd );
-my $output = <READ>;
-close(READ);
+        for my $host ($xml->findnodes('/nmaprun/host')) {
+            my ($address, $hostname, $status, $ports, $extraports, @not_shown, @open_ports);
 
-if ($extract)
-{
-    my $parser = XML::LibXML->new();
-    my $xml = $parser->parse_file($tmp->filename);
-    my $produced_output = 0;
+            @open_ports = ();
+            ($ports) = $host->findnodes('ports');
 
-    for my $host ($xml->findnodes('/nmaprun/host'))
-    {
-        my ($address, $hostname, $status, $ports, $extraports, @not_shown, @open_ports);
+            for my $port ($ports->findnodes('port')) {
+                my ($id, $proto, $service, $state, $product);
 
-        @open_ports = ();
-        ($ports) = $host->findnodes('ports');
+                $id = $port->getAttribute('portid');
+                $proto = $port->getAttribute('protocol');
 
-        for my $port ($ports->findnodes('port'))
-        {
-            my ($id, $proto, $service, $state, $product);
+                ($state) = $port->findnodes('./state');
+                $state = $state->getAttribute('state');
 
-            $id = $port->getAttribute('portid');
-            $proto = $port->getAttribute('protocol');
-            
-            ($state) = $port->findnodes('./state');
-            $state = $state->getAttribute('state');
-            
-            ($service) = $port->findnodes('./service');
+                ($service) = $port->findnodes('./service');
 
-            if ($service)
-            {
-                my ($sv, $version, $ostype);
+                if ($service) {
+                    my ($sv, $version, $ostype);
 
-                $sv = $service->getAttribute('name');
-                $product = $service->getAttribute('product');
-                $version = $service->getAttribute('version');
-                $ostype = $service->getAttribute('ostype');
+                    $sv = $service->getAttribute('name');
+                    $product = $service->getAttribute('product');
+                    $version = $service->getAttribute('version');
+                    $ostype = $service->getAttribute('ostype');
 
-                $service = $sv; 
-                
-                if ($product)
-                {
-                    $product = $product . ($version ? "$version " : "") . ($ostype ? "($ostype)" : "");
+                    $service = $sv;
+
+                    if ($product) {
+                        $product = $product . ($version ? "$version " : "") . ($ostype ? "($ostype)" : "");
+                    }
+                }
+
+                if ($state =~ /^open/) {
+                    $product = 'N/A' unless ($product);
+                    push(@open_ports, [ $id, $service, $product ]);
                 }
             }
 
-            if ($state =~ /^open/)
-            {
-                $product = 'N/A' unless ($product);
-                push(@open_ports, [ $id, $service, $product ]);
+            next unless (@open_ports);
+
+            ($address) = $host->findnodes('./address');
+            $address = $address->getAttribute('addr');
+
+            ($hostname) = $host->findnodes('./hostnames/hostname');
+
+            if ($hostname) {
+                $hostname = $hostname->getAttribute('name');
             }
-        }    
 
-        next unless (@open_ports);
+            ($status) = $host->findnodes('status');
+            $status = $status->getAttribute('state');
 
-        ($address) = $host->findnodes('./address');
-        $address = $address->getAttribute('addr');
+            $address = $hostname ? $address . " ($hostname)" : $address;
 
-        ($hostname) = $host->findnodes('./hostnames/hostname');
-
-        if ($hostname)
-        {
-            $hostname = $hostname->getAttribute('name');
+            for my $port (@open_ports) {
+                push(@data, [ $address, $port->[0], $port->[1], $port->[2] ]);
+            }
         }
 
-        ($status) = $host->findnodes('status');
-        $status = $status->getAttribute('state');
+        if (scalar(@data) > 0) {
+            my $table = ResultTable->new(columns => [
+                {name => "Address", width => "0.3"},
+                {name => "Port", width => "0.2"},
+                {name => "Service", width => "0.2"},
+                {name => "Product", width => "0.3"},
+            ]);
 
-        $address = $hostname ? $address . " ($hostname)" : $address;
+            for (my $i = 0; $i < scalar(@data); $i++) {
+                my $row = [];
 
-        for my $port (@open_ports)
-        {
-            push(@data, [ $address, $port->[0], $port->[1], $port->[2] ]);
+                for (my $k = 0; $k < scalar(@{$data[$i]}); $k++) {
+                    $data[$i][$k] =~ s/</&lt;/g;
+                    $data[$i][$k] =~ s/>/&gt;/g;
+                    $data[$i][$k] =~ s/&/&amp;/g;
+
+                    push(@$row, $data[$i][$k]);
+                }
+
+                $table->add_row($row);
+            }
+
+            $self->_write_result($table->render());
+        } else {
+            $self->_write_result('No open ports.');
         }
+
+        File::Temp::cleanup();
     }
 
-    if (scalar(@data) > 0)
-    {
-        print OUTFILE '<gtta-table><columns><column width="0.3" name="Address"/><column width="0.2" name="Port"/><column width="0.2" name="Service"/><column width="0.3" name="Product"/></columns>';
-    
-        for (my $i = 0; $i < scalar(@data); $i++)
-        {
-            print OUTFILE '<row>';
-    
-            for (my $k = 0; $k < scalar(@{$data[$i]}); $k++)
-            {
-                $data[$i][$k] =~ s/</&lt;/g;
-                $data[$i][$k] =~ s/>/&gt;/g;
-                $data[$i][$k] =~ s/&/&amp;/g;
-    
-                print OUTFILE '<cell>';
-                print OUTFILE $data[$i][$k];
-                print OUTFILE '</cell>';
-            }
-    
-            print OUTFILE '</row>';
-        }
-    
-        print OUTFILE '</gtta-table>';
+    # Main function
+    method main($args) {
+        my ($ports, $skip_discovery, $verbose, $probe, $timing, $extract);
+
+        $ports = $self->_get_arg_scalar($args, 0, 0);
+        $skip_discovery = $self->_get_int($args, 1, 0);
+        $verbose = $self->_get_int($args, 2, 0);
+        $probe = $self->_get_int($args, 3, 0);
+        $timing = $self->_get_int($args, 4, 3);
+        $extract = $self->_get_int($args, 5, 0);
+
+        $self->_process($self->target, $ports, $skip_discovery, $verbose, $probe, $timing, $extract);
     }
-    else
-    {
-        print OUTFILE 'No open ports.';
+
+    # Test function
+    method test {
+        $self->_process("google.com", "80", 0, 0, 1, 3, 1);
     }
 }
-else
-{
-    print OUTFILE $output;
-}
 
-close(OUTFILE);
-
-File::Temp::cleanup();
-
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	#return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(NMAP_TCP_OS->new());

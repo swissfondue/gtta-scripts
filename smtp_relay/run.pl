@@ -1,77 +1,63 @@
-#!perl
-use Data::Dumper;
-use strict;
-use Net::SMTP;
+# SMTP Relay
+# --
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+use MooseX::Declare;
+use core::task qw(execute);
 
-my ( @target, $mail_from, $mail_to, @timeout, $smtp, ) = ( undef, 'aaa@mail.ru', 'bbb@mail.ru', 60, undef );
+# SMTP Relay task
+class SMTP_Relay extends Task {
+    use Net::SMTP;
 
-@target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-@timeout= &getinput( $ARGV[2] ) if ( $ARGV[2] );
-my @mbfrom = &getinput( $ARGV[3] ) if ( $ARGV[3] );
-my @mbto   = &getinput( $ARGV[4] ) if ( $ARGV[4] );
+    # Process
+    method _process(Str $target, Int $port, Int $timeout, Str $mail_from, Str $mail_to) {
+        my $smtp;
 
-open(OUTFILE, ">>$outfile");
+        if ($smtp = Net::SMTP->new($target, 'Debug' => 0, 'Timeout' => $timeout, 'Port' => $port)) {
+            my $msg = $smtp->message();
+            my @lines = split /\n/, $msg;
 
-$mail_from = $mbfrom[0];
-$mail_to   = $mbto[0];
+            $self->_write_result($smtp->code() . ' ' . $lines[0]);
+            shift @lines;
 
-my $srvr = $target[0];
+            for my $line (@lines) {
+                $self->_write_result($smtp->code() . '-' . $line);
+            }
 
-if ( $smtp = Net::SMTP->new( $srvr, 'Debug'  => 0, 'Timeout' => $timeout[0] ) ) {
-    my $msg = $smtp->message();
-    my @lines = split /\n/, $msg;
+            $self->_write_result("MAIL FROM:<$mail_from>\n");
+            my $ok = $smtp->mail($mail_from);
+            $self->_write_result($smtp->code() . ' ' . $smtp->message());
 
-    print OUTFILE $smtp->code() . ' ' . $lines[0] . "\n";
-    shift @lines;
+            if ($ok) {
+                $self->_write_result("RCPT TO:<$mail_to>\n");
+                $ok = $smtp->to($mail_to);
+                $self->_write_result($smtp->code() . ' ' . $smtp->message());
 
-    for my $line (@lines)
-    {
-        print OUTFILE $smtp->code() . '-' . $line . "\n";
-    }
-
-    print OUTFILE "MAIL FROM:<$mail_from>\n";
-    my $ok = $smtp->mail( $mail_from );
-    print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
-
-    if ($ok)
-    {
-        print OUTFILE "RCPT TO:<$mail_to>\n";
-        $ok = $smtp->to( $mail_to );
-        print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
-
-        if ($ok)
-        {
-            print OUTFILE "DATA";
-            $smtp->data( ".\r\n" );
-            print OUTFILE $smtp->code() . ' ' . $smtp->message() . "\n";
+                if ($ok) {
+                    $self->_write_result("DATA");
+                    $smtp->data(".\r\n");
+                    $self->_write_result($smtp->code() . ' ' . $smtp->message());
+                }
+            }
+        } else {
+            $self->_write_result("Error: server $target connection failed");
         }
     }
+    
+    # Main function
+    method main($args) {
+        my ($timeout, $mail_from, $mail_to);
 
-} else { print OUTFILE qq[Error: server $srvr connection failed\n] }
+        $timeout = $self->_get_int($args, 0, 60);
+        $mail_from = $self->_get_arg_scalar($args, 1, 'test1@gmail.com');
+        $mail_to = $self->_get_arg_scalar($args, 2, 'test2@gmail.com');
 
-close(OUTFILE);
+        $self->_process($self->target, $self->port || 25, $timeout, $mail_from, $mail_to);
+    }
 
-exit(0);
+    # Test function
+    method test {
+        $self->_process("smtp.gmail.com", 25, 60, 'test1@gmail.com', 'pewpew@hotmail.com');
+    }
+}
 
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	return @fo;# if ( scalar @fo > 1 );
-	#return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(SMTP_Relay->new());

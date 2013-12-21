@@ -7,29 +7,21 @@ use LWP::ConnCache;
 use HTTP::Response;
 use Digest::MD5;
 use encoding "utf-8";
-
 use strict;
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
-my $Host = &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-open(OUTFILE, ">>$outfile");
+my $Host = $ARGV[0];
 
 my $i;
-
 my @files = ();
 
-if (scalar(@ARGV) > 2)
-{
-    for ($i = 2; $i < scalar(@ARGV); $i++)
-    {
+if (scalar(@ARGV) > 1) {
+    for ($i = 1; $i < scalar(@ARGV); $i++) {
         push(@files, $ARGV[$i]);
     }
 }
 
-if (scalar(@files) == 0)
-{
-    print OUTFILE "No input files selected.";
+if (scalar(@files) == 0) {
+    print "No input files selected.";
     exit();
 }
 
@@ -42,7 +34,7 @@ $ua->agent("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.5) Gecko/20031027");
 
 
 if($Host =~ /http(s|):\/\//i){ #check host input
-	print OUTFILE "- No \"http:/\/\" please! just domain name or IP ADDR\n";
+	print "- No \"http:/\/\" please! just domain name or IP ADDR\n";
 	exit();
 }
 
@@ -51,7 +43,6 @@ my $resAnalIndex = $ua->get("http://$Host/");
 
 &FilesAndDirsGoodies();
 
-close(OUTFILE);
 exit(0);
 
 sub checkHostAvailibilty{
@@ -59,7 +50,7 @@ sub checkHostAvailibilty{
 	my $CheckHost2 = $ua->get("http://$Host");
 
 	if($CheckHost2->is_error and $CheckHost1->is_error){
-		print OUTFILE "Host: $Host maybe offline or unavailble!\n";
+		print "Host: $Host maybe offline or unavailble!\n";
 		exit();
 	}
 }
@@ -98,7 +89,7 @@ sub analyzeResponse{ # heres were all the smart is...
 		}
 	}
 	if(defined $ErrorStringsFound[0]){ # if the page contains multi error just put em into the same string
-		print OUTFILE "+ Item \"$checkURL\" Contains text(s): @ErrorStringsFound MAYBE a False Positive!\n";
+		print "+ Item \"$checkURL\" Contains text(s): @ErrorStringsFound MAYBE a False Positive!\n";
 	}
 
 	while(defined $ErrorStringsFound[0]){  pop @ErrorStringsFound;  } # saves the above if for the next go around
@@ -107,7 +98,7 @@ sub analyzeResponse{ # heres were all the smart is...
     my @PosibleLoginPageStrings = ('login','log-in','sign( |)in','logon',);
     foreach my $loginCheck (@PosibleLoginPageStrings){
         if($CheckResp =~ /<title>.*?$loginCheck/i){
-            print OUTFILE "+ Item \"$checkURL\" Contains text: \"$loginCheck\" in the title MAYBE a Login page\n";
+            print "+ Item \"$checkURL\" Contains text: \"$loginCheck\" in the title MAYBE a Login page\n";
         }
     }
 
@@ -131,7 +122,7 @@ sub analyzeResponse{ # heres were all the smart is...
 	if(length($respLength) > 999) { chop $respLength;chop $respLength; } else { goto skipLeng; }
 
 	if($IndexLength = $respLength and $CheckResp =~ /$indexContentType/i){ # the content-type makes for higher confindence
-		print OUTFILE "+ Item \"$checkURL\" is about the same length as root page / This is MAYBE a redirect\n";
+		print "+ Item \"$checkURL\" is about the same length as root page / This is MAYBE a redirect\n";
 	}
 	skipLeng:
 
@@ -143,33 +134,33 @@ sub analyzeResponse{ # heres were all the smart is...
 
 		#the page is empty?
 		if($analHString =~ /Content-Length: (0|1)$/i){
-			print OUTFILE "+ Item \"$checkURL\" contains header: \"$analHString\" MAYBE a False Positive or is empty!\n";
+			print "+ Item \"$checkURL\" contains header: \"$analHString\" MAYBE a False Positive or is empty!\n";
 		}
 
 		#auth page checking
 		if($analHString =~ /www-authenticate:/i){
-			print OUTFILE "+ Item \"$checkURL\" contains header: \"$analHString\" Hmmmm\n";
+			print "+ Item \"$checkURL\" contains header: \"$analHString\" Hmmmm\n";
 		}
 
 		#a hash?
 		if($analHString =~ /Content-MD5:/i){
-			print OUTFILE "+ Item \"$checkURL\" contains header: \"$analHString\" Hmmmm\n";
+			print "+ Item \"$checkURL\" contains header: \"$analHString\" Hmmmm\n";
 		}
 
 		#redircted me?
 		if($analHString =~ /refresh:/i){
-			print OUTFILE "+ Item \"$checkURL\" - looks like it redirects. header: \"$analHString\"\n";
+			print "+ Item \"$checkURL\" - looks like it redirects. header: \"$analHString\"\n";
 		}
 
 		if($analHString =~ /http\/1.1 30(1|2|7)/i){
-			print OUTFILE "+ Item \"$checkURL\" - looks like it redirects. header: \"$analHString\"\n";
+			print "+ Item \"$checkURL\" - looks like it redirects. header: \"$analHString\"\n";
 		}
 
 		if($analHString =~ /location:/i){
 			my @checkLocation = split(/:/,$analHString);
 			my $lactionEnd = $checkLocation[1];
 			unless($lactionEnd =~ /$checkURL/i){
-				print OUTFILE "+ Item \"$analHString\" does not match the requested page: \"$checkURL\" MAYBE a redirect?\n";
+				print "+ Item \"$analHString\" does not match the requested page: \"$checkURL\" MAYBE a redirect?\n";
 			}
 		}
 
@@ -189,16 +180,16 @@ sub nonSyntDatabaseScan{ # for DBs without the dir;msg format
 
 		my $checkDir = $ua->get("http://$Host/" . $DataFromDBNonSynt);
 		if($checkDir->is_success){
-			print OUTFILE "+ $scanMSGNonSynt: \"/$DataFromDBNonSynt\"\n";
+			print "+ $scanMSGNonSynt: \"/$DataFromDBNonSynt\"\n";
 			&analyzeResponse($checkDir->as_string() ,$DataFromDBNonSynt);
 		}
 		$checkDir = undef;
 }
 
 sub FilesAndDirsGoodies{ # databases provided by: raft team
-	print OUTFILE "**** running Interesting files and dirs scanner ****\n";
+	print "**** running Interesting files and dirs scanner ****\n";
 
-	print OUTFILE "+ interesting Files And Dirs takes awhile....\n";
+	print "+ interesting Files And Dirs takes awhile....\n";
 
 	foreach my $FilesAndDirsDB (@files){
 			open(FilesAndDirsDBFile, "+< $FilesAndDirsDB");
@@ -210,23 +201,3 @@ sub FilesAndDirsGoodies{ # databases provided by: raft team
 		close(FilesAndDirsDBFile);
 	}
 }
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ s/^(\S+)$/{ push @fo, $1; }/e; }
-
-	close( IN );
-
-	#return \@fo if ( scalar @fo > 1 );
-	return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};

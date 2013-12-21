@@ -1,71 +1,58 @@
-use LWP::UserAgent;
-use warnings;
-use Net::SSL (); 
+# WWW File Scanner
+# ---
 
-my @target	= &getinput( $ARGV[0] ) if ( $ARGV[0] );
-my $outfile = $ARGV[1];
-my @lines   = &getinput( $ARGV[2] ) if ( $ARGV[2] );
+use MooseX::Declare;
+use core::task qw(execute);
 
-open(OUTFILE, ">>$outfile");
+# WWW File Scanner
+class WWW_File_Scanner extends Task {
+    use constant TIMEOUT => 3600;
+    use LWP::UserAgent;
+    use Net::SSL ();
 
-my $host = $target[0];
-my $protocol = $target[1];
-my $port = $target[2];
+    # Process
+    method _process(Str $target, Str $protocol, Int $port, $lines) {
+        my $found = 0;
 
-if (!$protocol)
-{
-    $protocol = 'http';
+        foreach my $line (@$lines) {
+            my $request = new LWP::UserAgent;
+
+            $request->default_header(
+                "User-Agent" => "Mozilla/5.0 (Windows; U; Windows NT 5.2; de; rv:1.9.2.16) Gecko/20110319 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; DigExt) ( .NET CLR 3.5.30729))",
+                "accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language" => "de-de,de;q=0.8,en-us;q=0.5,en;q=0.3",
+                "Accept-Encoding" => "gzip,deflate",
+                "Accept-Charset" => "ISO-8859-1,utf-8;q=0.7,*;q=0.7",
+                "Keep-Alive" => "115",
+                "Connection" => "keep-alive",
+                "Referer" => "http://its.me.oliver"
+            );
+
+            my $output = $request->get("$protocol://$target:$port/$line/");
+            my $code = $output->code;
+            my $size = length ($output->content);
+
+            if ($code == 200) {
+                $self->_write_result("Possible File found here: $protocol://$target:$port/$line, size: $size. The response code was: " . $output->status_line);
+                $found = 1;
+            }
+        }
+
+        if (!$found) {
+            $self->_write_result("No URLs with files detected.");
+        }
+    }
+
+    # Main function
+    method main($args) {
+        my $lines = $self->_get_arg($args, 0);
+        $self->_process($self->target, $self->proto || "http", $self->port || 80, $lines);
+    }
+
+    # Test function
+    method test {
+        $self->_process("google.com", "http", 80, ["robots.txt", "index.html", "logon.php"]);
+    }
 }
 
-if (!$port)
-{
-    $port = 80;
-}
-
-foreach $line (@lines)
-{
-my $request = new LWP::UserAgent;
-$request->default_header(
-"User-Agent" => "Mozilla/5.0 (Windows; U; Windows NT 5.2; de; rv:1.9.2.16) Gecko/20110319 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; DigExt) ( .NET CLR 3.5.30729))", 
-"accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", 
-"Accept-Language" => "de-de,de;q=0.8,en-us;q=0.5,en;q=0.3", 
-"Accept-Encoding" => "gzip,deflate", 
-"Accept-Charset" => "ISO-8859-1,utf-8;q=0.7,*;q=0.7", 
-"Keep-Alive" => "115", 
-"Connection" => "keep-alive", 
-"Referer" => "http://its.me.oliver"
-);
-my $output = $request->get("$protocol://$host:$port/$line ");
-my $code = $output->code;
-my $size = length ($output->content);
-if ( $code == 200) 
-{
-print OUTFILE "Possible File found here: $protocol://$host:$port/$line  \t SIZE $size \t CODE:";
-print OUTFILE $output->status_line . "\n";    
-    
-}
-
-}
-
-close(OUTFILE);
-exit(0);
-
-sub getinput {
-
-  my $fi = shift;
-
-  if ( open( IN, '<:utf8', $fi ) ) {
-
-	my @fo;
-
-	while( <IN> ){ chomp; push @fo, $_; }
-
-	close( IN );
-
-	return @fo; # if ( scalar @fo > 1 );
-	# return $fo[0];
-
-  }
-  else { print q[Error: cannot open file ], $fi, "\n"; exit(0); }
-
-};
+execute(WWW_File_Scanner->new());
