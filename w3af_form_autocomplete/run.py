@@ -4,7 +4,7 @@ from re import match
 from core import Task, execute_task
 from w3af import W3AFScriptLauncher
 
-class FormAutocompleteTask(Task, W3AFScriptLauncher):
+class FormAutocompleteTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: formAutocomplete

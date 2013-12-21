@@ -20,16 +20,16 @@ class DNS_SPF(Task):
         if not self.host:
             raise NoHostName('No host name specified.')
 
-        errors     = []
+        errors = []
         spf_record = None
         txt_record = None
-        spf_valid  = False
+        spf_valid = False
 
         self._check_stop()
 
         try:
             # get all name servers
-            r          = Resolver()
+            r = Resolver()
             r.lifetime = self.DNS_TIMEOUT
 
             name_servers = r.query(self.host, 'NS')
@@ -168,5 +168,12 @@ class DNS_SPF(Task):
 
         else:
             self._write_result('No SPF records.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
 execute_task(DNS_SPF)

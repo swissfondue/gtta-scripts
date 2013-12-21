@@ -116,4 +116,12 @@ class Params_Craw(Task):
         if not self.produced_output:
             self._write_result('No variables found.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.host = "google.com"
+        self.main()
+
 execute_task(Params_Craw)

@@ -37,6 +37,11 @@ class CheckASPeers(Task):
         self._write_result(output.strip())
         self._write_result('\nUPSTREAM PEER(s) DETECTED: %s' % (len(output.strip().split('\n'))-1))
 
-
+    def test(self):
+        """
+        Test function
+        """
+        self.ip = "8.8.8.8"
+        self.main()
 
 execute_task(CheckASPeers)

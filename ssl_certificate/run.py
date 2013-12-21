@@ -39,4 +39,11 @@ class SSLCertificateInfoTask(Task, SSLyzeLauncher):
             'Algorithm: {alg}'
         ).format(**parser.parse(data.split('\n')))
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "www.google.com"
+        self.main()
+
 execute_task(SSLCertificateInfoTask)

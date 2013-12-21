@@ -59,4 +59,11 @@ class ASNInfoTask(core.Task):
         self._write_result('Company: %s' % ( company or 'N/A' ))
         self._write_result('Country: %s' % ( country or 'N/A' ))
 
+    def test(self):
+        """
+        Test function
+        """
+        self.ip = "8.8.8.8"
+        self.main()
+
 core.execute_task(ASNInfoTask)

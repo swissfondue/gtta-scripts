@@ -4,7 +4,7 @@ from re import match
 from core import Task, execute_task, ResultTable
 from w3af import W3AFScriptLauncher
 
-class FingerBingTask(Task, W3AFScriptLauncher):
+class FingerBingTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: fingerBing

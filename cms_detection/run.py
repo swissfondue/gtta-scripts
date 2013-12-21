@@ -23,4 +23,12 @@ class CMSDetectionTask(core.Task):
 
         self._write_result(cms)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.host = "google.com"
+        self.main()
+
 core.execute_task(CMSDetectionTask)

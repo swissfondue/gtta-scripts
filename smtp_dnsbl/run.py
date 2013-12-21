@@ -3,6 +3,7 @@
 from dns.resolver import Resolver
 from socket import gethostbyname
 from core import Task, execute_task
+from core.error import InvalidTarget
 
 class SMTP_DNSBL(Task):
     """
@@ -51,9 +52,9 @@ class SMTP_DNSBL(Task):
             self._check_stop()
 
             try:
-                domain = '%s.%s' % ( reversed_ip, blacklist )
+                domain = '%s.%s' % (reversed_ip, blacklist)
 
-                r          = Resolver()
+                r = Resolver()
                 r.lifetime = self.DNS_TIMEOUT
 
                 result = r.query(domain, 'A')
@@ -90,5 +91,12 @@ class SMTP_DNSBL(Task):
 
         if not self.produced_output:
             self._write_result('Server is not listed in any known blocklist.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "smtp.gmail.com"
+        self.main()
 
 execute_task(SMTP_DNSBL)

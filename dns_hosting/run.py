@@ -102,4 +102,11 @@ class DNS_Hosting(Task):
         if not self.produced_output:
             self._write_result('No result.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "microsoft.com"
+        self.main(["0"])
+
 execute_task(DNS_Hosting)

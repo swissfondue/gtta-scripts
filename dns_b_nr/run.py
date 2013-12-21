@@ -8,7 +8,7 @@ from socket import gethostbyname
 from core import Task, execute_task
 from core.error import NoHostName, InvalidTarget
 
-class DNS_A_NR(Task):
+class DNS_B_NR(Task):
     """
     Get DNS A records (non-recursive DNS request)
     """
@@ -86,4 +86,11 @@ class DNS_A_NR(Task):
 
         self._check_stop()
 
-execute_task(DNS_A_NR)
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "ns1.google.com"
+        self.main(["microsoft.com"])
+
+execute_task(DNS_B_NR)

@@ -16,4 +16,11 @@ class SMTP_StartTLS(Task, SMTPExtensionChecker):
         """
         super(SMTP_StartTLS, self).main()
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "smtp.gmail.com"
+        self.main()
+
 execute_task(SMTP_StartTLS)

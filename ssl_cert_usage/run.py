@@ -35,4 +35,11 @@ class SSLCertificateUsageTask(Task, SSLyzeLauncher):
 
         return "Key usage: %s" % ''.join(groups)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "www.google.com"
+        self.main()
+
 execute_task(SSLCertificateUsageTask)

@@ -56,4 +56,11 @@ class SMTP_Banner(Task):
         if not self.produced_output:
             self._write_result('No SMTP banner.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "smtp.gmail.com"
+        self.main()
+
 execute_task(SMTP_Banner)

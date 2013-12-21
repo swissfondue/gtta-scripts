@@ -4,7 +4,7 @@ from re import match
 from core import Task, execute_task
 from w3af import W3AFScriptLauncher
 
-class CodeDisclosureTask(Task, W3AFScriptLauncher):
+class CodeDisclosureTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: codeDisclosure

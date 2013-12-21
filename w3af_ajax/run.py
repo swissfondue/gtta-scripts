@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from re import match
-from core import Task, execute_task
+from core import execute_task
 from w3af import W3AFScriptLauncher
 
-class AjaxTask(Task, W3AFScriptLauncher):
+class AjaxTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: ajax

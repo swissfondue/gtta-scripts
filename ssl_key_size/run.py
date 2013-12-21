@@ -31,4 +31,11 @@ class KeySizeTask(Task, SSLyzeLauncher):
         size = re.search(r'Key Size: *(\d+)', data).groups()[0]
         return 'Key size: %s\n' % size
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "www.google.com"
+        self.main()
+
 execute_task(KeySizeTask)

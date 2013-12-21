@@ -20,9 +20,9 @@ class HTTP_DOS(Task):
 
     first_thread_completed = False
     lock = None
-    test_urls = []
+    _test_urls = []
 
-    def main(self, thread_number=[0], repeat_number=[1], url=[], test_urls=[], cookie=[], referer=[], *args):
+    def main(self, thread_number=(1,), repeat_number=(1,), url=None, test_urls=None, cookie=None, referer=None, *args):
         """
         Main function that starts threads_counter and waits for them to finish
         """
@@ -59,11 +59,11 @@ class HTTP_DOS(Task):
 
                 test_url = target + test_url
 
-                if test_url not in self.test_urls:
-                    self.test_urls.append(test_url)
+                if test_url not in self._test_urls:
+                    self._test_urls.append(test_url)
 
         else:
-            self.test_urls.append(target)
+            self._test_urls.append(target)
 
         if cookie and cookie[0]:
             headers['Cookie'] = cookie[0]
@@ -125,7 +125,7 @@ class HTTP_DOS(Task):
         """
         self._write_result('Testing URLs...')
 
-        for url in self.test_urls:
+        for url in self._test_urls:
             self._check_stop()
 
             request = Request(url, headers=headers)
@@ -171,5 +171,13 @@ class HTTP_DOS(Task):
 
         except ValueError:
             raise ValueError('Invalid value - %s: %s' % ( value_name, value[0] ))
+
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.host = "google.com"
+        self.main([2], [2], ["/"], ["/"], ["A=B"], ["http://www.google.com/"])
 
 execute_task(HTTP_DOS)

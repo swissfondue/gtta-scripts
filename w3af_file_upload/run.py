@@ -4,7 +4,7 @@ from re import match
 from core import Task, execute_task
 from w3af import W3AFScriptLauncher
 
-class FileUploadTask(Task, W3AFScriptLauncher):
+class FileUploadTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: fileUpload

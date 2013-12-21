@@ -8,6 +8,7 @@ import urllib
 import re
 from core import Task, execute_task
 
+
 class GoogleSearchAPI(object):
     """
     API Access Notice: https://developers.google.com/errors/
@@ -56,29 +57,44 @@ class GoogleSearchForEmails(GoogleSearchAPI):
     """
     def __init__(self,**kwargs):
         self._results = []
+
         def map_func(data):
             re_match = re_email.match(json.dumps(data))
+
             if re_match:
                 self._results.append(data)
+
         super(GoogleSearchForEmails,self).__init__(**kwargs)
         re_email = re.compile(r'(.+\@%s)' % self.query)
         map(map_func,self.results)
         self.results = self._results
 
+
 class GoogleSearchForEmailsTask(Task):
     """
     GTTA check to search for emails in Google results
     """
-    TIMEOUT=120
-    def main(self,*args,**kwargs):
+    TIMEOUT = 120
+
+    def main(self, *args, **kwargs):
+        """
+        Main function
+        """
         s = GoogleSearchForEmails(q=self.host)
+
         if len(s.results):
             self._write_result('FOUND %s:\n\n%s' % (
                 len(s.results),
-                json.dumps(s.results,sort_keys=True,indent=4)
+                json.dumps(s.results, sort_keys=True, indent=4)
             ))
         else:
             self._write_result('GOOGLE SHOWS NO EMAIL IN RESULTS FOR "@%s"' % self.host)
 
-execute_task(GoogleSearchForEmailsTask)
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
+execute_task(GoogleSearchForEmailsTask)

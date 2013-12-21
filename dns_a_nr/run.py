@@ -27,8 +27,6 @@ class DNS_A_NR(Task):
             except:
                 raise InvalidTarget('Host not found.')
 
-        domain = None
-
         if not host or not host[0]:
             raise NoHostName('No host name specified.')
 
@@ -85,5 +83,12 @@ class DNS_A_NR(Task):
             self._write_result('')
 
         self._check_stop()
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "ns1.google.com"
+        self.main(["microsoft.com"])
 
 execute_task(DNS_A_NR)

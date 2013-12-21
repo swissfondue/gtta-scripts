@@ -172,7 +172,7 @@ class Task(Thread):
 
     def _get_library_path(self, library):
         """
-        Get library path0['
+        Get library path
         """
         path = None
 
@@ -198,8 +198,8 @@ class Task(Thread):
         """
         try:
             if len(argv) == 2 and argv[1] == "--test":
-                self.produced_output = True
                 self.test()
+                self.produced_output = True
             else:
                 arguments = self._parse_input()
                 self.main(*arguments)

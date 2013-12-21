@@ -2,7 +2,7 @@
 
 import os
 import tempfile
-from core import call
+from core import Task, call
 
 SCRIPT_TEMPLATE = '''target
 set target {target}
@@ -35,7 +35,7 @@ def call_w3af(target, commands, timeout=15):
         return call.call(["python", _W3AF_CMD, "-s", tmpf.name])
 
 
-class W3AFScriptLauncher(object):
+class W3AFScriptLauncher(Task):
     """
     Abstract w3af-script launching mixin
     """
@@ -109,3 +109,11 @@ class W3AFScriptLauncher(object):
                 result.append(line)
 
             self._write_result(self._filter_result(result))
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.proto = "http"
+        self.main()

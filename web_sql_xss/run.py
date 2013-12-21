@@ -64,4 +64,11 @@ class Web_SQL_XSS(Task):
         if not self.produced_output:
             self._write_result('No result.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(Web_SQL_XSS)

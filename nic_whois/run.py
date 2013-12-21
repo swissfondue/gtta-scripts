@@ -109,4 +109,11 @@ class NIC_Whois(Task):
         if not self.produced_output:
             self._write_result('No info found.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(NIC_Whois)

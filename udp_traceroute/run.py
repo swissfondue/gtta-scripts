@@ -25,4 +25,11 @@ class TracerouteTask(Task):
             else:
                 self._write_result(output)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(TracerouteTask)

@@ -138,7 +138,7 @@ class DNS_SOA(Task):
 
         try:
             # get all name servers
-            r          = Resolver()
+            r = Resolver()
             r.lifetime = self.DNS_TIMEOUT
 
             name_servers = r.query(self.host, 'NS')
@@ -259,5 +259,12 @@ class DNS_SOA(Task):
 
         else:
             self._write_result('No SOA records.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
 execute_task(DNS_SOA)

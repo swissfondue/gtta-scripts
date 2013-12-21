@@ -3,7 +3,7 @@
 from core import Task, execute_task
 from w3af import W3AFScriptLauncher
 
-class HalberdTask(Task, W3AFScriptLauncher):
+class HalberdTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: halberd

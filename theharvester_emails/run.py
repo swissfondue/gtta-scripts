@@ -32,4 +32,11 @@ class TheHarvesterEmailsTask(Task):
         else:
             self._write_result('ERROR CALLING theHarvester script')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(TheHarvesterEmailsTask)

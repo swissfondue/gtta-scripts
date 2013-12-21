@@ -28,7 +28,7 @@ class DNS_A(Task):
 
         try:
             # get all name servers
-            r          = Resolver()
+            r = Resolver()
             r.lifetime = self.DNS_TIMEOUT
 
             name_servers = r.query(self.host, 'NS')
@@ -76,5 +76,12 @@ class DNS_A(Task):
 
         if len(results) == 0:
             self._write_result('No A records.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
 execute_task(DNS_A)

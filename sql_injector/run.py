@@ -29,4 +29,13 @@ class Sql_Injector(Task):
         else:
             self._write_result(sqlis)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.port = 80
+        self.host = "google.com"
+        self.main()
+
 execute_task(Sql_Injector)

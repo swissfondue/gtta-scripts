@@ -4,7 +4,7 @@ from re import match
 from core import Task, execute_task
 from w3af import W3AFScriptLauncher
 
-class FindCaptchasTask(Task, W3AFScriptLauncher):
+class FindCaptchasTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: findCaptchas

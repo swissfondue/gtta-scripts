@@ -72,4 +72,11 @@ class CallByIPTask(core.Task):
                         r'<.*?>', '', body[:self.BODY_FRAGMENT_SIZE])
                 )
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 core.execute_task(CallByIPTask)

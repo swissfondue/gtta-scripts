@@ -13,7 +13,7 @@ class SMTP_Filter(Task):
     """
     SMTP filter
     """
-    DEFAULT_FOLDER = [ os_path.join(os_path.dirname(__file__), 'files') ]
+    DEFAULT_FOLDER = [ os_path.join(os_path.dirname(__file__), 'files/Encrypted') ]
 
     def main(self, recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """
@@ -58,8 +58,8 @@ class SMTP_Filter(Task):
 
         for file in listdir(folder):
             message = MIMEMultipart()
-            message['From']    = sender
-            message['To']      = recipient
+            message['From'] = sender
+            message['To'] = recipient
             message['Subject'] = 'SMTP filter test: %s' % file
 
             message.attach(MIMEText('SMTP filter test.'))
@@ -102,5 +102,11 @@ class SMTP_Filter(Task):
 
         if not self.produced_output:
             self._write_result('No result.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.main(["test@gmail.com"], ["smtp.gmail.com"], ["johndoe.123@gmail.com"], ["123"], ["johndoe.123@gmail.com"])
 
 execute_task(SMTP_Filter)

@@ -43,4 +43,12 @@ class ExternalLinksTask(Task):
         except Exception as e:
             self._write_result('Error opening %s: %s' % ( target, str(e) ))
 
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.host = "google.com"
+        self.main()
+
 execute_task(ExternalLinksTask)

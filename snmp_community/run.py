@@ -48,4 +48,11 @@ class SNMP_Community(Task):
         except Exception as e:
             self._write_result(str(e))
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(SNMP_Community)

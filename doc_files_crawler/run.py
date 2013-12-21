@@ -44,4 +44,11 @@ class Doc_Craw(Task):
         if not self.produced_output:
             self._write_result('No documents found.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(Doc_Craw)

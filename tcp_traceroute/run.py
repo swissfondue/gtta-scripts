@@ -40,4 +40,12 @@ class TCP_Traceroute(Task):
         if not self.produced_output:
             self._write_result('No result.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.port = 80
+        self.host = "google.com"
+        self.main()
+
 execute_task(TCP_Traceroute)

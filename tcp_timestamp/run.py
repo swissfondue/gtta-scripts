@@ -62,4 +62,11 @@ class TCP_Timestamp(Task):
         for timestamp in timestamps:
             self._write_result('%i\t%s' % timestamp)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(TCP_Timestamp)

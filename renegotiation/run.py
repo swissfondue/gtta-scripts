@@ -35,4 +35,11 @@ class RenegotiationTask(Task, SSLyzeLauncher):
 
         return '\n'.join(result)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
+
 execute_task(RenegotiationTask)

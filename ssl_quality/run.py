@@ -43,4 +43,12 @@ class SSLQualityTask(Task):
 
             self._write_result("%s: %s" % (self._PROTOCOL_NAMES[protocol], result))
 
+    def test(self):
+        """
+        Test function
+        """
+        self.port = 443
+        self.host = "www.google.com"
+        self.main()
+
 execute_task(SSLQualityTask)

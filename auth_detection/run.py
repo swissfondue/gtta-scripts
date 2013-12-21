@@ -60,7 +60,6 @@ class Auth_Craw(Task):
 
         if self.host:
             target = self.proto + '://' + self.host + '/'
-
         else:
             target = self.proto + '://' + self.ip + '/'
 
@@ -69,8 +68,15 @@ class Auth_Craw(Task):
 
         for url in self.urls_set:
             self._write_result(url)
-
-        if not self.produced_output:
+        else:
             self._write_result('Login links not found.')
+
+    def test(self):
+        """
+        Test function
+        """
+        self.proto = "http"
+        self.host = "google.com"
+        self.main()
 
 execute_task(Auth_Craw)

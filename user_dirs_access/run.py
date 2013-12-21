@@ -37,4 +37,11 @@ class AccessUserDirsTask(Task):
 
         self._write_result(msg)
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "ftp.debian.org"
+        self.main(["alice"])
+
 execute_task(AccessUserDirsTask)

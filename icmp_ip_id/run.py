@@ -39,7 +39,7 @@ class ICMP_IP_ID(Task):
                 data = sr1(packet, timeout=self.ICMP_TIMEOUT)
 
                 if not data:
-                    raise Exception('host unreachable')
+                    raise Exception('Host unreachable')
 
                 ids.append(( i + 1, str(id), str(data.id) ))
 
@@ -52,5 +52,12 @@ class ICMP_IP_ID(Task):
 
         for id in ids:
             self._write_result('%i\t%s\t%s' % id)
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
 execute_task(ICMP_IP_ID)

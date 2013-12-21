@@ -4,7 +4,7 @@ from re import match, findall
 from core import Task, execute_task, ResultTable
 from w3af import W3AFScriptLauncher
 
-class BingSpiderTask(Task, W3AFScriptLauncher):
+class BingSpiderTask(W3AFScriptLauncher):
     """
     GTTA task:
         w3af: bing_spider

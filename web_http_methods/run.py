@@ -84,4 +84,13 @@ class Web_HTTP_Methods(Task):
         if not self.produced_output:
             self._write_result('No result.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.port = 80
+        self.proto = "http"
+        self.host = "google.com"
+        self.main()
+
 execute_task(Web_HTTP_Methods)

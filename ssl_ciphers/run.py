@@ -60,4 +60,11 @@ class SSLCiphersTask(Task, SSLyzeLauncher):
 
         return out_data
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "www.google.com"
+        self.main()
+
 execute_task(SSLCiphersTask)

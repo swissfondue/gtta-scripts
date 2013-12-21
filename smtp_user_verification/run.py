@@ -77,4 +77,11 @@ class SMTP_User_Verification(Task):
         if not self.produced_output:
             self._write_result('No result.')
 
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "smtp.gmail.com"
+        self.main(["john.doe@gmail.com"], ["source@gmail.com"], ["nonexistent-345678945678@gmail.com"])
+
 execute_task(SMTP_User_Verification)

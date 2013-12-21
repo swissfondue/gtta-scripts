@@ -10,14 +10,13 @@
  d@d.kiev.ua $Id: websearch_client_domains.py,v 1.2 2013/02/17 10:59:55 dee Exp $
 """
 
-import urllib2, re, time
+import urllib2
+import re
+import time
+from core import Task, execute_task
 
-try:
-    from core import Task, execute_task, call
-except ImportError:
-    print 'LOCAL DEBUG'
+PARSE_GOOGLE_PAGES = 10
 
-PARSE_GOOGLE_PAGES=10
 
 class WebSearch(object):
     """
@@ -47,26 +46,19 @@ class WebSearch(object):
         self.ND_query = self.query.split('.')[0]
         self._Namedroppers()
 
-
     def _fetch(self,URL):
         """
         @return: page content as string
         """
-        #print 'FETCHING:',URL
         data = self.opener.open(URL)
         data_content = data.read()
-        #print 'RESPONSE %s FETCHED %s bytes' % (
-        #        data.getcode(),
-        #        len(data_content)
-        #    )
+
         return data_content
-        return self.opener.open(URL).read()
 
     def _parse(self,data,regexp):
-        #data_striped = re.sub('<[^<]+?>', ' ', data)
         data_striped = data
         match = regexp.findall(data_striped)
-        #print '_parse: %s match(es)' % len(match)
+
         def process_match(data):
             if not data in self.results:
                 self.results.append(data)
@@ -85,11 +77,13 @@ class WebSearch(object):
             '&q=%s&sa=N&filter=0' % (
                 urllib2.quote(search_query),
             )
+
         data = self._fetch('http://www.google.com%s' % request_uri)
         regexp = re.compile(r'<h3.+?href="/url\?q=(.*?%s.*?)&' % self.query,re.I)
         self._parse(data,regexp)
+
         # follow next 10 pages (100 results in total)
-        for page in range(10,self.pages_depth*10,10):
+        for page in range(10, self.pages_depth * 10, 10):
             # make sure we're not too frequent, to avoid abuse detection
             time.sleep(5)
             request_uri = '/search?hl=en&lr=&ie=UTF-8' \
@@ -113,7 +107,6 @@ class WebSearch(object):
         map(filter_results,self.results)
         self.results = filtered_results
 
-
     def _Namedroppers(self):
         """
         http://www.namedroppers.com/cgi-bin/query?
@@ -121,13 +114,16 @@ class WebSearch(object):
         """
         request_uri = '/cgi-bin/query?keys=%s' % self.ND_query
         data = self._fetch('http://www.namedroppers.org%s' % request_uri)
+
         # now quickly and simply parse results for matching hostname:
         regexp_ND = re.compile(r'who\/(.+?)"',re.I)
         self._parse(data,regexp_ND)
+
         # now lets parse some following pages...
         regexp = re.compile(r'cgi-bin\/query\?p=(\d+?)&',re.I)
         match = regexp.findall(data)
         pages = []
+
         def process_page(data):
             if not data in pages:
                 pages.append(data)
@@ -137,36 +133,37 @@ class WebSearch(object):
                 )
                 data = self._fetch('http://www.namedroppers.org%s' % request_uri)
                 self._parse(data, regexp_ND)
+
         # parse pages
         map(process_page,match)
 
 
-
-
 class WebSearchClientDomains(Task):
-    TIMEOUT=120
+    """
+    Web search task
+    """
+    TIMEOUT = 120
+
     def main(self,*args,**kwargs):
-
-
-        s = WebSearch(q=self.host,
+        """
+        Main function
+        """
+        s = WebSearch(
+            q=self.host,
             query_prefix='allinurl',
             depth=PARSE_GOOGLE_PAGES
-            )
+        )
 
         def print_results(data):
             self._write_result(data)
-        map(print_results,s.results)
-        return
 
+        map(print_results,s.results)
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "google.com"
+        self.main()
 
 execute_task(WebSearchClientDomains)
-
-# LOCAL DEBUG:
-
-#s = WebSearch(q='netprotect.ch',
-#    query_prefix='allinurl',
-#    depth=PARSE_GOOGLE_PAGES
-#    )
-#
-#print s.results
-

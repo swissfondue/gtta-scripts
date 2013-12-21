@@ -21,9 +21,16 @@ class CheckSSHVersionTask(Task):
         s = socket.socket()
         port = self.port or 22
         self._write_result('Trying %s port %s' % (self.ip,port))
-        s.connect((self.ip,port))
+        s.connect((self.ip, port))
         output = s.recv(128)
         s.close()
         self._write_result(output)
+
+    def test(self):
+        """
+        Test function
+        """
+        self.host = "arc.org"
+        self.main()
 
 execute_task(CheckSSHVersionTask)
