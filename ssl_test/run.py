@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from core import Task, execute_task
+from core import execute_task
 from sslyze import SSLyzeLauncher
 
-class SSLQualityTask(Task, SSLyzeLauncher):
+class SSLQualityTask(SSLyzeLauncher):
     """
     SSL quality checker
     """
     TIMEOUT = 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(SSLQualityTask, self).main()
 
     def _get_commands(self):
         """

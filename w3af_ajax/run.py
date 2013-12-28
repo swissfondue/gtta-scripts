@@ -9,12 +9,6 @@ class AjaxTask(W3AFScriptLauncher):
     GTTA task:
         w3af: ajax
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(AjaxTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

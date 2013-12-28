@@ -3,9 +3,11 @@ package core::task;
 use Exporter;
 use MooseX::Declare;
 use threads;
+use threads::shared;
+use constant SANDBOX_IP => "192.168.66.66";
 
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(execute call_external);
+our @EXPORT_OK = qw(execute call_external SANDBOX_IP);
 
 # Base class for all tasks
 class Task {
@@ -14,6 +16,7 @@ class Task {
 
     use constant {
         TIMEOUT => 60,
+        TEST_TIMEOUT => 30,
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
         SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib"
@@ -25,6 +28,8 @@ class Task {
     has "proto" => (isa => "Str", is => "rw");
     has "port" => (isa => "Int", is => "rw");
     has "lang" => (isa => "Str", is => "rw");
+    has "test_mode" => (isa => "Int", is => "rw", default => 0);
+    has "error" => (isa => "Int", is => "rw", default => 0);
     has "_produced_output" => (isa => "Int", is => "rw", default => 0);
     has "_stop" => (isa => "Int", is => "rw", default => 0);
     has "_result" => (is => "rw");
@@ -41,9 +46,9 @@ class Task {
         $self->_produced_output(1);
 
         if ($self->_result) {
-            print {$self->_result} $str . "\n";
+            syswrite({$self->_result}, $str . "\n");
         } else {
-            print $str . "\n";
+            syswrite(STDOUT, $str . "\n");
         }
     }
 
@@ -215,18 +220,25 @@ class Task {
 
     # Run the task
     method run {
-        eval {
-            $SIG{"ALRM"} = sub {
-                die("Task has timed out.\n");
-            };
+        STDOUT->autoflush(1);
+        STDERR->autoflush(1);
 
-            if ($self->TIMEOUT > 0) {
-                alarm($self->TIMEOUT);
+        eval {
+            my $timeout;
+
+            if ($self->test_mode) {
+                $timeout = $self->TEST_TIMEOUT;
+            } else {
+                $timeout = $self->TIMEOUT;
             }
 
-            if (scalar(@ARGV) == 1 && $ARGV[0] eq "--test") {
+            if ($timeout > 0) {
+                alarm($timeout);
+            }
+
+            if ($self->test_mode) {
+                $self->test();
                 $self->_produced_output(1);
-                $self->test();                
             } else {
                 my @arguments = $self->_parse_input();           
                 $self->main(\@arguments);   
@@ -239,6 +251,8 @@ class Task {
             my $error = $@;
             $self->_write_result($error);
             $self->_produced_output(1);
+
+            $self->error(1);
         }
 
         unless ($self->_produced_output) {
@@ -249,10 +263,14 @@ class Task {
 
 # Executes task and controls its execution
 sub execute {    
-    my $obj = shift;
+    my $obj :shared = shared_clone(shift);
 
     if (!$obj || !$obj->isa("Task")) {
         die("Invalid task object.\n");
+    }
+
+    if (scalar(@ARGV) == 1 && $ARGV[0] eq "--test") {
+        $obj->test_mode(1);
     }
 
     my $thread = async {
@@ -260,7 +278,9 @@ sub execute {
     };
 
     $SIG{"ALRM"} = sub {
-        $thread->kill("ALRM");
+        $obj->_write_result("Task has timed out.");
+        my $group = getpgrp();
+        kill("TERM", -$group);
     };
 
     while (1) {
@@ -272,7 +292,12 @@ sub execute {
         }
 
         sleep(1);
-    }    
+    }
+
+    if ($obj->error) {
+        $obj->_write_result("Script completed with errors.\n");
+        exit(1);
+    }
 }
 
 # External program call

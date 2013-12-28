@@ -2,3 +2,6 @@ type: script
 name: dns_find_ns
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libnet-dns-perl

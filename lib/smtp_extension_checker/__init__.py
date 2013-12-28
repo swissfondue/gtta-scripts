@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import smtplib
+from core import Task
 
-class SMTPExtensionChecker(object):
+class SMTPExtensionChecker(Task):
     """
     Abstract SMTP extension checker mixin
     """

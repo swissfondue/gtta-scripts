@@ -2,3 +2,7 @@ type: script
 name: nikto
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libcrypt-ssleay-perl
+    - libnet-ssleay-perl

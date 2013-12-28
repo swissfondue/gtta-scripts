@@ -6,6 +6,7 @@ from HTMLParser import HTMLParser
 from core.crawler import LinkCrawler
 from core import Task, execute_task
 
+
 class FormsParser(HTMLParser):
     """
     Form parser
@@ -26,11 +27,15 @@ class FormsParser(HTMLParser):
 
         if tag == 'form':
             self.form_attributes = dict()
-            self.form_attributes['action'] = at['action']
+            self.form_attributes['action'] = None
             self.form_attributes['inputs'] = []
+
+            if "action" in at:
+                self.form_attributes["action"] = at["action"]
 
         if tag in ('input', 'select'):
             self.form_attributes['inputs'].append(at)
+
 
 class Params_Craw(Task):
     """
@@ -76,6 +81,10 @@ class Params_Craw(Task):
 
                 self.form_parser.feed(item.group(0))  # Parsing form action and inputs params with Form_Parser
                 form_attributes = self.form_parser.form_attributes
+
+                if not form_attributes["action"]:
+                    form_attributes["action"] = page["url"]
+
                 self._write_result('Form: ' + form_attributes['action'])
 
                 for input_params in form_attributes['inputs']:  # Iterating all inputs attributes

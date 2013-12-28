@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from re import match
-from core import Task, execute_task, ResultTable
+from core import execute_task, ResultTable
 from w3af import W3AFScriptLauncher
 
 class FingerGoogleTask(W3AFScriptLauncher):

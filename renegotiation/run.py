@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from core import Task, execute_task
+from core import execute_task
 from sslyze import SSLyzeLauncher
 
-class RenegotiationTask(Task, SSLyzeLauncher):
+class RenegotiationTask(SSLyzeLauncher):
     """
     Renegotiation checker
     """
     TIMEOUT = 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(RenegotiationTask, self).main()
 
     def _get_commands(self):
         """

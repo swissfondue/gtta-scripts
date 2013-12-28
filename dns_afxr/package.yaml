@@ -2,3 +2,6 @@ type: script
 name: dns_afxr
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libnet-dns-perl

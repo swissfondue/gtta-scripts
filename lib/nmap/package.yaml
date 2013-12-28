@@ -1,7 +1,7 @@
 type: library
-name: spf
+name: nmap
 version: 1.7
 system: true
 dependencies:
-  system:
-    - python-dnspython
+  deb:
+    - nmap_6.40-1_i386.deb

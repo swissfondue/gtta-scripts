@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from re import match
-from core import Task, execute_task
+from core import execute_task
 from w3af import W3AFScriptLauncher
 
 class FeedsTask(W3AFScriptLauncher):
@@ -9,12 +9,6 @@ class FeedsTask(W3AFScriptLauncher):
     GTTA task:
         w3af: feeds
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(FeedsTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

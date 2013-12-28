@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from re import match
-from core import Task, execute_task
+from core import execute_task
 from w3af import W3AFScriptLauncher
 
 class StrangeHTTPCodeTask(W3AFScriptLauncher):
@@ -9,12 +9,6 @@ class StrangeHTTPCodeTask(W3AFScriptLauncher):
     GTTA task:
         w3af: strangeHTTPCode
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(StrangeHTTPCodeTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

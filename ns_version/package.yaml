@@ -2,3 +2,7 @@ type: script
 name: ns_version
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libnet-dns-perl
+    - dnsutils

@@ -2,3 +2,6 @@ type: script
 name: joomla_scan
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libwww-perl

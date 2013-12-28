@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import re
-from core import Task, execute_task
+from core import execute_task
 from sslyze import SSLyzeLauncher
 
-class KeySizeTask(Task, SSLyzeLauncher):
+class KeySizeTask(SSLyzeLauncher):
     """
     Size of SSL certificate public key
     """
     TIMEOUT = 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(KeySizeTask, self).main()
 
     def _get_commands(self):
         """

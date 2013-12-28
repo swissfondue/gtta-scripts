@@ -2,7 +2,7 @@
 
 import os
 import re
-from core import call
+from core import call, Task
 
 
 _SSLYZE_CMD = os.path.join(os.path.dirname(__file__), "sslyze", "sslyze.py")
@@ -19,7 +19,7 @@ def call_sslyze(target, commands, timeout=15):
     return call.call(["python", _SSLYZE_CMD] + commands)
 
 
-class SSLyzeLauncher(object):
+class SSLyzeLauncher(Task):
     """
     Abstract sslyze launching mixin
     """

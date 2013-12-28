@@ -11,6 +11,7 @@ class DNS_Top_TLDs extends Task {
     use Net::DNS;
     use LWP::UserAgent;
     use HTTP::Request;
+    use core::task qw(call_external);
 
     # Process
     method _process(Str $target, Int $long) {
@@ -36,10 +37,7 @@ class DNS_Top_TLDs extends Task {
                 if ($query) {
                     foreach my $rr ($query->answer) {
                         next unless $rr->type eq 'A';
-
-                        open(READ, "whois $cur_domain |");
-                        my $whois = <READ>;
-                        close(READ);
+                        my $whois = call_external("whois $cur_domain");
 
                         if (
                             $whois =~ /Company:(?: +)?([^\n]+)\n/si ||

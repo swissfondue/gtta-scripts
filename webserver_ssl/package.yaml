@@ -2,3 +2,7 @@ type: script
 name: webserver_ssl
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libwww-perl
+    - libxml-simple-perl

@@ -2,3 +2,6 @@ type: script
 name: ssh_bruteforce
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libnet-ssh2-perl

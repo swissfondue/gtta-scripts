@@ -2,3 +2,7 @@ type: script
 name: icmp_ip_id
 version: 1.7
 system: true
+dependencies:
+  system:
+    - tcpdump
+    - python-scapy

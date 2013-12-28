@@ -2,3 +2,6 @@ type: script
 name: dns_reverse_lookup
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libnet-dns-perl

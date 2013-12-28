@@ -3,7 +3,7 @@
 from socket import gethostbyname
 from time import sleep
 from scapy.all import sr1, IP, TCP
-from core import Task, execute_task
+from core import Task, execute_task, SANDBOX_IP
 from core.error import InvalidTarget
 
 class TCP_Timestamp(Task):
@@ -32,7 +32,7 @@ class TCP_Timestamp(Task):
         for i in xrange(self.NUMBER_OF_PACKETS):
             self._check_stop()
 
-            packet = IP(dst=self.ip) / TCP(dport=self.port or self.DEFAULT_PORT, options=[( 'Timestamp', (1, 0) )])
+            packet = IP(dst=self.ip, src=SANDBOX_IP) / TCP(dport=self.port or self.DEFAULT_PORT, options=[('Timestamp', (1, 0))])
 
             try:
                 data = sr1(packet, timeout=self.TCP_TIMEOUT)

@@ -1,24 +1,29 @@
 # -*- coding: utf-8 -*-
 
 from threading import Thread, Event
-from sys import argv, exit
+from sys import argv, exit, stdout
+from os import killpg, getpgrp
 from os.path import isdir
+from signal import SIGTERM
 from socket import inet_aton
+from time import sleep
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
+
+SANDBOX_IP = "192.168.66.66"
 
 
 class ResultTable(object):
     """
     Result table class
     """
-    TAG_MAIN    = 'gtta-table'
-    TAG_ROW     = 'row'
-    TAG_CELL    = 'cell'
+    TAG_MAIN = 'gtta-table'
+    TAG_ROW = 'row'
+    TAG_CELL = 'cell'
     TAG_COLUMNS = 'columns'
-    TAG_COLUMN  = 'column'
+    TAG_COLUMN = 'column'
 
-    ATTR_NAME  = 'name'
+    ATTR_NAME = 'name'
     ATTR_WIDTH = 'width'
 
     def __init__(self, columns):
@@ -58,12 +63,13 @@ class Task(Thread):
     """
     Base class for all tasks
     """
-    TIMEOUT        = 0     # task timeout
-    DNS_TIMEOUT    = 10    # DNS request timeout
-    SOCKET_TIMEOUT = 2     # socket timeout
-    HTTP_TIMEOUT   = 30    # HTTP timeout
-    SMTP_TIMEOUT   = 10    # SMTP timeout
-    PARSE_FILES    = True  # read & parse all input files by default
+    TIMEOUT = 60        # task timeout
+    TEST_TIMEOUT = 30   # test task timeout
+    DNS_TIMEOUT = 10    # DNS request timeout
+    SOCKET_TIMEOUT = 2  # socket timeout
+    HTTP_TIMEOUT = 30   # HTTP timeout
+    SMTP_TIMEOUT = 10   # SMTP timeout
+    PARSE_FILES = True  # read & parse all input files by default
     SYSTEM_LIBRARY_PATH = "/opt/gtta/scripts/system/lib"
     USER_LIBRARY_PATH = "/opt/gtta/scripts/lib"
 
@@ -79,6 +85,8 @@ class Task(Thread):
         self.proto = None
         self.port = None
         self.lang = None
+        self.test_mode = False
+        self.error = False
         self._stop = Event()
         self._result = None
 
@@ -104,6 +112,7 @@ class Task(Thread):
 
         else:
             print str.encode('utf-8')
+            stdout.flush()
 
     def stop(self):
         """
@@ -134,10 +143,10 @@ class Task(Thread):
 
         try:
             inet_aton(self.target)
-            self.ip = selt.target
+            self.ip = self.target
 
         except:
-            self.host = selt.target
+            self.host = self.target
 
         self.proto = lines[1]
 
@@ -192,12 +201,18 @@ class Task(Thread):
         """
         raise Exception("Test not implemented.")
 
+    def main(self, *args):
+        """
+        Main function
+        """
+        raise Exception("Main function not implemented.")
+
     def run(self):
         """
         Run a task
         """
         try:
-            if len(argv) == 2 and argv[1] == "--test":
+            if self.test_mode:
                 self.test()
                 self.produced_output = True
             else:
@@ -214,6 +229,7 @@ class Task(Thread):
                 error_str += ': %s' % str(e)
 
             self._write_result(error_str)
+            self.error = True
 
 
 def execute_task(task_class):
@@ -222,13 +238,21 @@ def execute_task(task_class):
     """
     task = task_class()
 
+    if len(argv) == 2 and argv[1] == "--test":
+        task.test_mode = True
+
     try:
         task.start()
 
-        if task.TIMEOUT:
-            task.join(task.TIMEOUT)
+        if task.test_mode:
+            timeout = task.TEST_TIMEOUT
         else:
-            task.join()
+            timeout = task.TIMEOUT
+
+        if timeout == 0:
+            timeout = None
+
+        task.join(timeout)
 
         if task.isAlive():
             task.stop()
@@ -250,5 +274,19 @@ def execute_task(task_class):
             output += ': %s' % str(e)
 
         task._write_result(output)
+        task.error = True
+
+    # if background task is still alive, commit a suicide
+    if task.isAlive():
+        # sleep before flush
+        sleep(5)
+        stdout.flush()
+
+        group_id = getpgrp()
+        killpg(group_id, SIGTERM)
+
+    if task.error:
+        print "Task completed with errors."
+        exit(1)
 
     exit()

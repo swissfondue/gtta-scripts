@@ -2,20 +2,14 @@
 
 import re
 import datetime
-from core import Task, execute_task, parse
+from core import execute_task, parse
 from sslyze import SSLyzeLauncher
 
-class SSLValidityTask(Task, SSLyzeLauncher):
+class SSLValidityTask(SSLyzeLauncher):
     """
     SSL validity checker
     """
     TIMEOUT = 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(SSLValidityTask, self).main()
 
     def _get_commands(self):
         """

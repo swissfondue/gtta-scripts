@@ -2,3 +2,8 @@ type: script
 name: dns_top_tlds
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libwww-perl
+    - libnet-dns-perl
+    - whois

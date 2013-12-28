@@ -12,12 +12,11 @@ class Grep_URL extends Task {
     use URI::URL;
     use HTTP::Request;
 
-    has "ua" => (is => "rw");
     has "cnt" => (is => "rw", default => 0);
     has "done" => (is => "rw", default => sub {{}});
 
     # Grab the given URL
-    method _grab($base, $url) {
+    method _grab($ua, $base, $url) {
         my $parser = HTML::LinkExtor->new;
         my $path = $url->path;
         my $fixed_url = URI::URL->new($url->scheme . "://" . $url->netloc . $path);
@@ -30,7 +29,7 @@ class Grep_URL extends Task {
         }
 
         my $request	= HTTP::Request->new("GET" => $fixed_url);
-        my $response = $self->ua->request( $request );
+        my $response = $ua->request($request);
 
         unless ($response->is_error()) {
             my $contents = $response->content();
@@ -43,7 +42,7 @@ class Grep_URL extends Task {
                 my $url = $_;
 
                 if ($self->_is_child($base, $url)) {
-                    $self->_grab($base, $url);
+                    $self->_grab($ua, $base, $url);
                 }
             } @hrefs;
         }
@@ -58,13 +57,14 @@ class Grep_URL extends Task {
     # Process
     method _process(Str $target, Str $proto) {
         $self->cnt(1);
-        $self->ua(LWP::UserAgent->new);
-        $self->ua->timeout(55);
 
-        my $top = $self->ua->request(HTTP::Request->new("HEAD" => $proto . "://" . $target));
+        my $ua = LWP::UserAgent->new;
+        $ua->timeout(55);
+
+        my $top = $ua->request(HTTP::Request->new("HEAD" => $proto . "://" . $target));
         my $base = $top->base;
 
-        $self->_grab($base, URI::URL->new($top->request->url));
+        $self->_grab($ua, $base, URI::URL->new($top->request->url));
     }
 
     # Main function

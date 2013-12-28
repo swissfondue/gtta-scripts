@@ -3,7 +3,7 @@
 from socket import gethostbyname
 from scapy.all import sr1, IP, ICMP
 from random import randint
-from core import Task, execute_task
+from core import Task, execute_task, SANDBOX_IP
 
 class ICMP_IP_ID(Task):
     """
@@ -32,7 +32,7 @@ class ICMP_IP_ID(Task):
         for i in xrange(self.NUMBER_OF_PACKETS):
             self._check_stop()
 
-            packet = IP(dst=self.ip) / ICMP()
+            packet = IP(dst=self.ip, src=SANDBOX_IP) / ICMP()
             packet.id = id
 
             try:

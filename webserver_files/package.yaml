@@ -2,3 +2,6 @@ type: script
 name: webserver_files
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libwww-perl

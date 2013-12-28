@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from core import Task, execute_task, parse
+from core import execute_task, parse
 from sslyze import SSLyzeLauncher
 
-class SSLCertificateInfoTask(Task, SSLyzeLauncher):
+class SSLCertificateInfoTask(SSLyzeLauncher):
     """
     SSL Certificate information checker
     """
     TIMEOUT = 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(SSLCertificateInfoTask, self).main()
 
     def _get_commands(self):
         """

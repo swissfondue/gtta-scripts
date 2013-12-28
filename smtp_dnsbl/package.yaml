@@ -2,3 +2,6 @@ type: script
 name: smtp_dnsbl
 version: 1.7
 system: true
+dependencies:
+  system:
+    - python-dnspython

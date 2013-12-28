@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from re import match
-from core import Task, execute_task
+from core import execute_task
 from w3af import W3AFScriptLauncher
 
 class ZoneHTask(W3AFScriptLauncher):
@@ -9,12 +9,6 @@ class ZoneHTask(W3AFScriptLauncher):
     GTTA task:
         w3af: zone_h
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(ZoneHTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

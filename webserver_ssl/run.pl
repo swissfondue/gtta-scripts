@@ -45,6 +45,8 @@ class Webserver_SSL extends Task {
         my @cont = split(m/[\r\n]+/, $content);
         my ($fl, @tables, $cur);
 
+        $fl = 0;
+
         map {
             $cur = $_;
 

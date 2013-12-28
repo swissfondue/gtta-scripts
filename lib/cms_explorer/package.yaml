@@ -2,3 +2,7 @@ type: library
 name: cms_explorer
 version: 1.7
 system: true
+dependencies:
+  system:
+    - libcrypt-ssleay-perl
+    - libnet-ssleay-perl

@@ -9,12 +9,6 @@ class BingSpiderTask(W3AFScriptLauncher):
     GTTA task:
         w3af: bing_spider
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(BingSpiderTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

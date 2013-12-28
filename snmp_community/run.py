@@ -2,7 +2,7 @@
 
 from socket import gethostbyname
 from scapy.all import sr1, IP, UDP, SNMP, SNMPget, SNMPvarbind, ASN1_OID, ICMP
-from core import Task, execute_task
+from core import Task, execute_task, SANDBOX_IP
 from core.error import InvalidTarget
 
 class SNMP_Community(Task):
@@ -24,7 +24,7 @@ class SNMP_Community(Task):
             except Exception:
                 raise InvalidTarget('Host not found.')
 
-        packet = IP(dst=self.ip) / UDP(dport=self.SNMP_PORT, sport=self.SNMP_PORT) / SNMP(
+        packet = IP(dst=self.ip, src=SANDBOX_IP) / UDP(dport=self.SNMP_PORT, sport=self.SNMP_PORT) / SNMP(
             community = 'public',
             PDU = SNMPget(varbindlist=[ SNMPvarbind(oid=ASN1_OID(self.OID_SYSTEM_DESCRIPTION)) ])
         )

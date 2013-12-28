@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from core import Task, execute_task
+from core import execute_task
 from w3af import W3AFScriptLauncher
 
 class HalberdTask(W3AFScriptLauncher):
@@ -8,12 +8,6 @@ class HalberdTask(W3AFScriptLauncher):
     GTTA task:
         w3af: halberd
     """
-    def main(self, *args):
-        """
-        Main function
-        """
-        super(HalberdTask, self).main()
-
     def _get_commands(self):
         """
         Returns the list of w3af commands

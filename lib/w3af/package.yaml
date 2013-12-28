@@ -2,3 +2,13 @@ type: library
 name: w3af
 version: 1.7
 system: true
+dependencies:
+  system:
+    - tcpdump
+    - python-scapy
+    - python-soappy
+    - python-openssl
+    - python-svn
+  python:
+    - nltk
+    - pybloomfiltermmap==0.2.0

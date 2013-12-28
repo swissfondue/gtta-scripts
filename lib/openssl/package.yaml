@@ -1,0 +1,11 @@
+type: library
+name: nmap
+version: 1.7
+system: true
+dependencies:
+  deb:
+    - libssl1.0.0_1.0.1e-2.1_i386.deb
+    - libssl1.0.0-dbg_1.0.1e-2.1_i386.deb
+    - libssl-dev_1.0.1e-2.1_i386.deb
+    - libssl-doc_1.0.1e-2.1_i386.deb
+    - openssl_1.0.1e-2.1_i386.deb
