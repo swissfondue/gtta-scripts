@@ -3,6 +3,8 @@ name: nmap
 version: 1.7
 system: true
 dependencies:
+  system:
+    - zlib1g-dev
   deb:
     - libssl1.0.0_1.0.1e-2.1_i386.deb
     - libssl1.0.0-dbg_1.0.1e-2.1_i386.deb
