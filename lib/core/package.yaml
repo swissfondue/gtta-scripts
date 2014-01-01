@@ -2,14 +2,14 @@ type: library
 name: core
 version: 1.7
 system: true
-depdendencies:
+dependencies:
   system:
+    - gcc
     - python
-    - perl
-    - python-pip
     - python-dev
-    - libmoosex-declare-perl
-    - libxml-writer-perl
+    - python-pip
     - python-lxml
     - python-requests
-    - gcc
+    - perl
+    - libmoosex-declare-perl
+    - libxml-writer-perl
