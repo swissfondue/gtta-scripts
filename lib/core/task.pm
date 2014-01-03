@@ -32,7 +32,7 @@ class Task {
     has "error" => (isa => "Int", is => "rw", default => 0);
     has "_produced_output" => (isa => "Int", is => "rw", default => 0);
     has "_stop" => (isa => "Int", is => "rw", default => 0);
-    has "_result" => (is => "rw");
+    has "_result" => (is => "rw", default => 0);
 
     # Check if task is stopped
     method _check_stop {
@@ -46,7 +46,12 @@ class Task {
         $self->_produced_output(1);
 
         if ($self->_result) {
-            syswrite({$self->_result}, $str . "\n");
+            my $result_file;
+
+            open($result_file, ">>" . $self->_result) or die("Unable to open result file: " . $self->_result . ".\n");
+            $result_file->autoflush(1);
+            syswrite($result_file, $str . "\n");
+            close($result_file);
         } else {
             syswrite(STDOUT, $str . "\n");
         }
@@ -119,7 +124,8 @@ class Task {
 
         open($result_file, ">" . $ARGV[1]) or die("Unable to open result file: " . $ARGV[1] . ".\n");
         $result_file->autoflush(1);
-        $self->_result($result_file);
+        close($result_file);
+        $self->_result($ARGV[1]);
 
         # parse the remaining arguments
         for (my $i = 2; $i < scalar(@ARGV); $i++) {
