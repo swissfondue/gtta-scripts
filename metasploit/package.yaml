@@ -1,0 +1,7 @@
+type: script
+name: metasploit
+version: 1.7
+system: true
+dependencies:
+  deb:
+    - metasploit_4.8.2-1_i386.deb

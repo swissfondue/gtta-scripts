@@ -103,6 +103,9 @@ class Task(Thread):
         """
         Write result to result file or print it to output
         """
+        if not str:
+            return
+
         self.produced_output = True
 
         if self._result:
