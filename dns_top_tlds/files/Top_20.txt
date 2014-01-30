@@ -1,0 +1,10 @@
+de
+com
+eu
+net
+info
+org
+at
+ch
+nl
+co.uk

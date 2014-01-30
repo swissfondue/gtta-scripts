@@ -14,11 +14,21 @@ class DNS_Top_TLDs extends Task {
     use core::task qw(call_external);
 
     # Process
-    method _process(Str $target, Int $long) {
+    method _process(Str $target, $tld_list) {
         my ($dom, $my_tld) = split/\./, $target;
-        my $tld = "files/short_tld.txt";
-        $tld = "files/tlds.txt" if ($long);
-        my $tlds = $self->_read_file($tld);
+        my $tlds = [];
+
+        foreach my $tld_entry (@$tld_list) {
+            foreach my $tld (@$tld_entry) {
+                chomp $tld;
+                next unless $tld;
+
+                unless ($tld ~~ @$tlds) {
+                    push(@$tlds, $tld);
+                }
+            }
+        }
+
         my $res = Net::DNS::Resolver->new;
 
         undef $/;
@@ -96,13 +106,12 @@ class DNS_Top_TLDs extends Task {
 
     # Main function
     method main($args) {
-        my $long = $self->_get_int($args, 0, 0);
-        $self->_process($self->target, $long);
+        $self->_process($self->target, $args);
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 0);
+        $self->_process("google.com", [["net", "org", "info"]]);
     }
 }
 
