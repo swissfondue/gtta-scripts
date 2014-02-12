@@ -8,13 +8,13 @@ from core import call, Task
 _SSLYZE_CMD = os.path.join(os.path.dirname(__file__), "sslyze", "sslyze.py")
 
 
-def call_sslyze(target, commands, timeout=15):
+def call_sslyze(target, port, commands, timeout=15):
     """
     Calls sslyze, and returns the result
     Result: (success: boolean, data: unicode)
     """
     commands.insert(0, '--timeout=%s' % timeout)
-    commands.append(target)
+    commands.append("%s:%s" % (target, str(port)))
 
     return call.call(["python", _SSLYZE_CMD] + commands)
 
@@ -40,11 +40,12 @@ class SSLyzeLauncher(Task):
         Main function
         """
         target = self.host or self.ip
-
+        port = self.port or 443
         self._check_stop()
 
         called_ok, output = call_sslyze(
             target=target,
+            port=port,
             timeout=self.SOCKET_TIMEOUT,
             commands=self._get_commands()
         )

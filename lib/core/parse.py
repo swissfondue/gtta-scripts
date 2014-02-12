@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Simple parsers
-"""
+# coding: utf-8
 
 
 class LineByLineParser(object):
     """
     Simple line-by-line text parser.
     """
-
     def __init__(self):
         self._patterns = {}
 
@@ -22,10 +18,17 @@ class LineByLineParser(object):
         self._patterns[pattern] = (key, parser)
 
     def __setitem__(self, key, value):
+        """
+        Set parser item
+        @param key:
+        @param value:
+        @return:
+        """
         if isinstance(key, slice):
             key, parser = key.start, key.stop
         else:
             parser = lambda x: x
+
         self.register_pattern(key, value, parser)
 
     def parse(self, lines):
@@ -33,11 +36,14 @@ class LineByLineParser(object):
         Parse @lines and return dict with values
         """
         res = {}
+
         if self._patterns:
             for line in lines:
                 for pattern, (key, parser) in self._patterns.iteritems():
                     pos = line.find(pattern)
+
                     if pos >= 0:
                         res[key] = parser(line[pos + len(pattern):].strip())
                         continue
+
         return res
