@@ -1,0 +1,4 @@
+type: script
+name: telnet_banner
+version: 1.9
+system: true
