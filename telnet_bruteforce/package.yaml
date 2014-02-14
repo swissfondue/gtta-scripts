@@ -1,0 +1,4 @@
+type: script
+name: telnet_bruteforce
+version: 1.9
+system: true
