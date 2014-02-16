@@ -27,25 +27,31 @@ class DNS_NS extends Task {
 
     # Process
     method _process(Str $host, Int $timeout, Int $debug) {
-        my $res = Net::DNS::Resolver->new('debug' => $debug);
-        my $cnt = 1;
+        my $res = Net::DNS::Resolver->new("debug" => $debug);
 
         unless ($host =~ m/^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/) {
-            $self->_write_result("\n", $cnt++, ') Error: not valid domain name ', $host, "\n");
-            return;
+            die("Not a valid domain name: $host ");
         }
 
-        $host =~ s/^www\.//;
         $res->tcp_timeout($timeout);
 
-        my $query = $res->query($host, 'NS');
+        unless ($res->query($host, "A") || $res->query($host, "CNAME")) {
+            die("Host not found: $host");
+        }
 
-        if ($query) {
-            foreach my $rr (grep { $_->type eq 'NS' } $query->answer) {
-                $self->_write_result($rr->nsdname . ' (' . $self->_hostname($rr->nsdname) . ")\n");
-            }
-        } else {
-            $self->_write_result("\n" . $cnt++ . ') Error: no NS for domain ' . $host . ' (' . $res->errorstring . ")\n");
+        # remove third, fourth and higher level domain names
+        while ($host =~ tr/\.// > 1) {
+            $host =~ s/^[a-z\-0-9]+\.//;
+        }
+
+        my $query = $res->query($host, "NS");
+
+        unless ($query) {
+            die("No NS found for $host (" . $res->errorstring . ")");
+        }
+
+        foreach my $rr (grep { $_->type eq "NS" } $query->answer) {
+            $self->_write_result($rr->nsdname . " (" . $self->_hostname($rr->nsdname) . ")");
         }
     }
 
