@@ -17,77 +17,33 @@ class Subdomain_Bruteforce extends Task {
     has "nameservers" => (is => "rw");
     has "wildcard_dns" => (isa => "Str", is => "rw");
     has "domains" => (is => "rw");
-    has "known_ips" => (is => "rw");
     has "known_names" => (is => "rw");
 
     # Search host IP
     method search_host($search_item, $target) {
         my $res = Net::DNS::Resolver->new;
-        $res->tcp_timeout(3);
-        $res->nameservers(@{$self->nameservers});
+        $res->tcp_timeout(30);
+        #$res->nameservers(@{$self->nameservers});
         my $packet = $res->search($search_item);
 
         return unless ($packet);
 
         foreach my $answer ($packet->answer) {
             my @name = split (/\t/, $answer->string);
-            next unless ($name[3] eq 'A' || $name[3] eq 'PTR');
+            next unless ($name[3] eq "A" || $name[3] eq "PTR");
 
             chop $name[0];
             my $this_ip;
 
             if ($name[4] eq $self->wildcard_dns) {
-                $this_ip = $name[4];
-                $self->find_nearby($this_ip, $target) if !$self->known_ips->{$this_ip};
-                $self->known_ips->{$answer->address} = 1;
                 next;
             }
 
             $this_ip = $name[4];
-            $self->find_nearby($this_ip, $target) if !$self->known_ips->{$this_ip};
-            $self->known_ips->{$this_ip} = 1;
-
             next if ($self->known_names->{"$this_ip,$search_item"});
 
             $self->known_names->{"$this_ip,$search_item"} = 1;
             push(@{$self->domains}, shared_clone([$search_item, $this_ip]));
-        }
-    }
-
-    # Find nearby IPs
-    method find_nearby($ip, $target) {
-        my $lowest;
-        my $highest;
-        my @octet = split(/\x2E/, $ip);
-
-        $lowest = $octet[3] < 5 ? 0 : $octet[3] - 5;
-        $highest = $octet[3] > 255 - 5 ? 255 : $octet[3] + 5;
-
-        foreach my $class_c ($lowest..$highest) {
-            next if ($class_c eq $octet[3]);
-
-            $octet[3] = $class_c;
-            next if ($self->known_ips->{"$octet[0].$octet[1].$octet[2].$octet[3]"});
-
-            $self->known_ips->{"$octet[0].$octet[1].$octet[2].$octet[3]"} = 1;
-
-            my $res = Net::DNS::Resolver->new;
-            $res->tcp_timeout(3);
-            $res->nameservers(@{$self->nameservers});
-
-            next unless my $packet = $res->search("$octet[0].$octet[1].$octet[2].$octet[3]");
-
-            foreach my $answer ($packet->answer) {
-                next unless ($answer->type eq 'A' || $answer->type eq 'PTR');
-                
-                my @name = split (/\t/, $answer->string);
-                chop $name[$#name];
-                next if ($name[4] eq $self->wildcard_dns);
-                next if ($name[$#name] !~ /$target/);
-
-                $self->known_names->{"$octet[0].$octet[1].$octet[2].$octet[3]," . "$name[$#name]"} = 1;
-                $self->find_nearby("$octet[0].$octet[1].$octet[2].$octet[3]", $target);  # recurse
-            }
         }
     }
     
@@ -98,12 +54,11 @@ class Subdomain_Bruteforce extends Task {
         }
 
         $self->domains(shared_clone([]));
-        $self->known_ips(shared_clone({}));
         $self->known_names(shared_clone({}));
         $self->nameservers(shared_clone([]));
 
         my $res = Net::DNS::Resolver->new;
-        $res->tcp_timeout(3);
+        $res->tcp_timeout(30);
         my $query = $res->query($target, 'NS');
 
         if ($query) {
