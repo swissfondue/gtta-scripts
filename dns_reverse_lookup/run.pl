@@ -8,6 +8,7 @@ use core::task qw(execute);
 class DNS_Reverse_Lookup extends Task {
     use Net::DNS;
     use Net::IP;
+    use constant TIMEOUT => 3600;
 
     # Process
     method _process(Str $target) {
@@ -23,26 +24,26 @@ class DNS_Reverse_Lookup extends Task {
 
             do {
                 unless ($ip) {
-                    $self->_write_result('Invalid IP or range: ' . $t);
+                    $self->_write_result("Invalid IP or range: " . $t);
                     next;
                 }
 
                 my $IP = $ip->ip();
                 my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
-                my $query = $res->query($target_IP, 'PTR');
+                my $query = $res->query($target_IP, "PTR");
 
                 if ($query) {
                     my $found = 0;
 
                     foreach my $rr ($query->answer) {
                         next unless ($rr->type eq 'PTR');
-                        $self->_write_result($IP . "\t\t" . $rr->rdatastr .  "\n");
+                        $self->_write_result($IP . "\t\t" . $rr->rdatastr);
                         $found = 1;
                     }
 
-                    $self->_write_result($IP .  "\t\tN/A\n") unless ($found);
+                    $self->_write_result($IP .  "\t\tN/A") unless ($found);
                 } else {
-                    $self->_write_result($IP .  "\t\tN/A\n");
+                    $self->_write_result($IP .  "\t\tN/A");
                 }
             } while (++$ip);
         }
