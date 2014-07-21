@@ -3,6 +3,8 @@ name: icmp_ip_id
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - tcpdump
     - python-scapy

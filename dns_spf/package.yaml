@@ -3,5 +3,7 @@ name: dns_spf
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - python-dnspython

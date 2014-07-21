@@ -3,5 +3,7 @@ name: dns_reverse_lookup
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libnet-dns-perl

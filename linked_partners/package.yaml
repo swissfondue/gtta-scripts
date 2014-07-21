@@ -2,3 +2,6 @@ type: script
 name: linked_partners
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core

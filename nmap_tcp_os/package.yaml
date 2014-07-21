@@ -6,4 +6,5 @@ dependencies:
   system:
     - libxml-libxml-perl
   library:
+    - core
     - nmap

@@ -3,5 +3,7 @@ name: grep_url
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libwww-perl

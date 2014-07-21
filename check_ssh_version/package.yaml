@@ -2,3 +2,6 @@ type: script
 name: check_ssh_version
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core

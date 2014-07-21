@@ -3,6 +3,8 @@ name: dns_top_tlds
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libwww-perl
     - libnet-dns-perl

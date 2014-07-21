@@ -3,5 +3,7 @@ name: dns_find_ns
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libnet-dns-perl

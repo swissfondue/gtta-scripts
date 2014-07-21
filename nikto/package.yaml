@@ -3,6 +3,8 @@ name: nikto
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libcrypt-ssleay-perl
     - libnet-ssleay-perl

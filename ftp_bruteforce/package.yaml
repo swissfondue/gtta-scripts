@@ -2,3 +2,6 @@ type: script
 name: ftp_bruteforce
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core

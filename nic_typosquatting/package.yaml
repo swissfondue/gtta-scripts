@@ -3,5 +3,7 @@ name: nic_typosquatting
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   system:
     - libnet-dns-perl

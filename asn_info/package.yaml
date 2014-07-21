@@ -3,5 +3,7 @@ name: asn_info
 version: 1.7
 system: true
 dependencies:
+  library:
+    - core
   python:
     - pygeoip
