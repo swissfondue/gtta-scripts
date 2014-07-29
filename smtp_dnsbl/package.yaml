@@ -5,3 +5,5 @@ system: true
 dependencies:
   system:
     - python-dnspython
+  library:
+    - core

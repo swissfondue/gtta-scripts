@@ -2,3 +2,6 @@ type: script
 name: shell
 version: 1.10
 system: true
+dependencies:
+  library:
+    - core

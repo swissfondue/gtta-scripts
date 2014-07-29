@@ -6,3 +6,5 @@ dependencies:
   system:
     - libnet-dns-perl
     - dnsutils
+  library:
+    - core

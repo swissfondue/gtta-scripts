@@ -6,3 +6,5 @@ dependencies:
   system:
     - tcpdump
     - python-scapy
+  library:
+    - core
