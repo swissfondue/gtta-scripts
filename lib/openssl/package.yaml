@@ -1,5 +1,5 @@
 type: library
-name: nmap
+name: openssl
 version: 1.7
 system: true
 dependencies:
