@@ -2,3 +2,6 @@ type: script
 name: websearch_client_domains
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core

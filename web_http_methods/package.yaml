@@ -2,3 +2,6 @@ type: script
 name: web_http_methods
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core

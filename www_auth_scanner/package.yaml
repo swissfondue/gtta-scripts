@@ -6,3 +6,5 @@ dependencies:
   system:
     - libwww-perl
     - libcrypt-ssleay-perl
+  library:
+    - core

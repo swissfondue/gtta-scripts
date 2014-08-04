@@ -6,3 +6,5 @@ dependencies:
   system:
     - libwww-perl
     - libxml-simple-perl
+  library:
+    - core

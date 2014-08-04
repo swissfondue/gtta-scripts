@@ -3,6 +3,7 @@
 from httplib import HTTPConnection, HTTPSConnection, HTTPException
 from core import Task, execute_task
 
+
 class Web_HTTP_Methods(Task):
     """
     Web HTTP methods

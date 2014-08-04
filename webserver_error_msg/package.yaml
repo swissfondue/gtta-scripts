@@ -5,3 +5,5 @@ system: true
 dependencies:
   system:
     - libwww-perl
+  library:
+    - core

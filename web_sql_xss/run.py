@@ -3,6 +3,7 @@
 from vulndetector import detect
 from core import Task, execute_task
 
+
 class Web_SQL_XSS(Task):
     """
     Web SQL/XSS vulnerability scanner

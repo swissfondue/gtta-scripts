@@ -2,3 +2,7 @@ type: script
 name: ssl_cert_usage
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core
+    - sslyze

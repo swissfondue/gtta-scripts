@@ -2,3 +2,7 @@ type: script
 name: ssl_ciphers
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core
+    - sslyze

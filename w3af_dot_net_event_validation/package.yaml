@@ -2,3 +2,7 @@ type: script
 name: w3af_dot_net_event_validation
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core
+    - w3af

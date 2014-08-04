@@ -3,6 +3,7 @@
 from core import execute_task, parse
 from sslyze import SSLyzeLauncher
 
+
 class SSLCertificateInfoTask(SSLyzeLauncher):
     """
     SSL Certificate information checker

@@ -2,3 +2,7 @@ type: script
 name: web_sql_xss
 version: 1.7
 system: true
+dependencies:
+  library:
+    - core
+    - vulndetector

@@ -4,6 +4,7 @@ import re
 from core import execute_task
 from sslyze import SSLyzeLauncher
 
+
 class KeySizeTask(SSLyzeLauncher):
     """
     Size of SSL certificate public key
