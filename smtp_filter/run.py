@@ -71,7 +71,7 @@ class SMTP_Filter(Task):
             message.attach(part)
 
             try:
-                smtp = SMTP(target, 25, timeout=self.SMTP_TIMEOUT)
+                smtp = SMTP(target, self.port or 25, timeout=self.SMTP_TIMEOUT)
             except Exception:
                 self._write_result('Error connecting to SMTP server.')
                 return
