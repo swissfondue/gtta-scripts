@@ -1,7 +1,6 @@
 type: script
 name: subdomain_bruteforce
 version: 1.7
-system: true
 dependencies:
   system:
     - libnet-dns-perl

@@ -1,7 +1,6 @@
 type: script
 name: w3af_sitemap_reader
 version: 1.7
-system: true
 dependencies:
   library:
     - core

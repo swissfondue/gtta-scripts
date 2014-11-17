@@ -1,7 +1,6 @@
 type: script
 name: smtp_user_verification
 version: 1.7
-system: true
 dependencies:
   library:
     - core

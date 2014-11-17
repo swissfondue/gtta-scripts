@@ -1,7 +1,6 @@
 type: script
 name: nmap_tcp
 version: 1.7
-system: true
 dependencies:
   system:
     - libxml-libxml-perl

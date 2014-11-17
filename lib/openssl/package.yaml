@@ -1,7 +1,6 @@
 type: library
 name: openssl
 version: 1.7
-system: true
 dependencies:
   system:
     - zlib1g-dev

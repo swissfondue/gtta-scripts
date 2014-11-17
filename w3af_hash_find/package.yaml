@@ -1,7 +1,6 @@
 type: script
 name: w3af_hash_find
 version: 1.7
-system: true
 dependencies:
   library:
     - core

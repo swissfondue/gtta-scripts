@@ -1,7 +1,6 @@
 type: script
 name: snmp_community
 version: 1.7
-system: true
 dependencies:
   system:
     - tcpdump

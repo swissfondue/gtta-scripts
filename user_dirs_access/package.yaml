@@ -1,7 +1,6 @@
 type: script
 name: user_dirs_access
 version: 1.7
-system: true
 dependencies:
   library:
     - core

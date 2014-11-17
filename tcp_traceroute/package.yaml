@@ -1,7 +1,6 @@
 type: script
 name: tcp_traceroute
 version: 1.7
-system: true
 dependencies:
   system:
     - tcptraceroute

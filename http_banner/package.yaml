@@ -1,7 +1,6 @@
 type: script
 name: http_banner
 version: 1.7
-system: true
 dependencies:
   library:
     - core

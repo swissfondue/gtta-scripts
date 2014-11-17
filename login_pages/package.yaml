@@ -1,7 +1,6 @@
 type: script
 name: login_pages
 version: 1.7
-system: true
 dependencies:
   library:
     - core

@@ -1,7 +1,6 @@
 type: script
 name: urlscan
 version: 1.7
-system: true
 dependencies:
   system:
     - libwww-perl
