@@ -1,4 +1,3 @@
 type: library
 name: smtp_extension_checker
 version: 1.7
-system: true
