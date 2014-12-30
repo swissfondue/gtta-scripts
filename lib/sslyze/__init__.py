@@ -35,7 +35,7 @@ class SSLyzeLauncher(Task):
         """
         return data
 
-    def main(self):
+    def main(self, *args):
         """
         Main function
         """
