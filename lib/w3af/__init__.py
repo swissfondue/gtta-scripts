@@ -39,6 +39,9 @@ class W3AFScriptLauncher(Task):
     """
     Abstract w3af-script launching mixin
     """
+
+    TIMEOUT = 7 * 24 * 3600 # Week
+
     def _get_commands(self):
         """
         Returns the list of w3af commands
