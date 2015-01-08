@@ -41,7 +41,11 @@ class SSLValidityTask(SSLyzeLauncher):
         parser['Not Before:': as_datetime] = 'from'
         parser['Not After:': as_datetime] = 'to'
         parser['Certificate is Trusted'] = 'trusted'
-        data = parser.parse(data.split('\n'))
+
+        try:
+            data = parser.parse(data.split('\n'))
+        except ValueError:
+            return "Certificate is not valid."
 
         if 'trusted' in data and data['from'] <= datetime.datetime.now() <= data['to']:
             return 'Certificate is valid (expires %s)' % data['to']
