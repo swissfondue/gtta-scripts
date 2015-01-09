@@ -36,7 +36,7 @@ class DNS_AFXR extends Task {
             if (@zone) {
                 $self->_write_result(" - $_: found " . scalar(@zone) . " records, AXFR is enabled");
             } else {
-                $self->_write_result(" - $_: no response");
+                $self->_write_result(" - $_: AXFR disabled");
             }
         }
     }
