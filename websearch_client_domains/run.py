@@ -148,8 +148,10 @@ class WebSearchClientDomains(Task):
         """
         Main function
         """
+        host = '%s://%s' % (self.proto or 'http', self.host)
+
         s = WebSearch(
-            q=self.host,
+            q=host,
             query_prefix='allinurl',
             depth=PARSE_GOOGLE_PAGES
         )

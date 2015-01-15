@@ -21,8 +21,13 @@ class Web_SQL_XSS(Task):
         if not target:
             target = self.ip
 
+        target = '%s://%s' % (
+            self.proto or 'http',
+            self.host or self.ip
+        )
+
         if not target.startswith('http'):
-            target = 'http://%s/' % target
+            target = '%s://%s' % (self.proto or 'http', target)
 
         if not domains or not domains[0]:
             domain = None
