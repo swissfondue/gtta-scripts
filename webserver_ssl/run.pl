@@ -11,9 +11,10 @@ class Webserver_SSL extends Task {
     use XML::Simple;
 
     # Process
-    method _process(Str $target, Int $timeout) {
+    method _process(Str $target, Str $proto, Int $timeout) {
+        my $host = "$proto://$target";
         my $url = q[http://www.ssllabs.com/ssltest/analyze.html?d=___URL___&ignoreMismatch=on];
-        $url =~ s/___URL___/$target/;
+        $url =~ s/___URL___/$host/;
 
         my $sp = $/;
         undef $/;
@@ -33,7 +34,7 @@ class Webserver_SSL extends Task {
             ($content =~ m/Assessment failed/sm) ||
             ($content =~ m/Unable&#32;to&#32;connect/sm)
         ) {
-            $self->_write_result("Network error: SSL testing for $target cannot be completed for unknown reason");
+            $self->_write_result("Network error: SSL testing for $host cannot be completed for unknown reason");
             return;
         }
 
@@ -112,12 +113,12 @@ class Webserver_SSL extends Task {
     # Main function
     method main($args) {
         my $timeout = $self->_get_int($args, 0, 60);
-        $self->_process($self->target, $timeout);
+        $self->_process($self->target, $self->proto || "http", $timeout);
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 60);
+        $self->_process("google.com", "http", 60);
     }
 }
 

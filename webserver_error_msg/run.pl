@@ -10,18 +10,19 @@ class Webserver_Error extends Task {
     use core::task qw(call_external);
 
     # Process
-    method _process(Str $target) {
-        $self->_write_result(call_external("perl webserver_error_msg.pl $target"));
+    method _process(Str $target, Str $proto) {
+        my $url = "$proto://$target";
+        $self->_write_result(call_external("perl webserver_error_msg.pl $url"));
     }
 
     # Main function
     method main($args) {
-        $self->_process($self->target);
+        $self->_process($self->target, $self->proto || "http");
     }
 
     # Test function
     method test {
-        $self->_process("google.com");
+        $self->_process("google.com", "http");
     }
 }
 

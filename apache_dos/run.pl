@@ -28,13 +28,13 @@ class ApacheDos extends Task {
     }
 
     # Process host and range count
-    method _process(Str $host, Int $range_count) {
+    method _process(Str $host, Str $proto, Int $range_count) {
         my $warn_range_count = 5;
         my $ua = LWP::UserAgent->new;
         my $url;
 
         if ($host !~ /http/) {
-            $url = "http://" . $host;
+            $url = "$proto://$host";
         } else {
             $url = $host;
             $host =~ s{https?//}{};
@@ -71,12 +71,12 @@ class ApacheDos extends Task {
 
     # Main function
     method main($args) {
-        $self->_process($self->target, $self->_get_arg_scalar($args, 0, 10));
+        $self->_process($self->target, $self->proto, $self->_get_arg_scalar($args, 0, 10));
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 10);
+        $self->_process("google.com", "http", 10);
     }
 }
 

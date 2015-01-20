@@ -20,10 +20,12 @@ class Metasploit(Task):
         """
         Prepare resource
         """
+        target = '%s://%s' % (self.proto or 'http', self.target)
+
         resource = open(resource, "r").read().split("\n")
         resource = map(lambda x: x.replace('\r', ''), resource)
         resource = "\n".join(resource + ["run", "exit -y"])
-        resource = resource.replace("@target", self.target)
+        resource = resource.replace("@target", target)
 
         ctr = 0
 
