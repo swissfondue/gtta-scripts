@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # Nikto
 class Nikto extends Task {
-    use constant TIMEOUT => 3600;
     use core::task qw(call_external);
 
     # Process

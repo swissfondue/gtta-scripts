@@ -9,7 +9,6 @@ class SMTP_DNSBL(Task):
     """
     SMTP DNS blacklist check
     """
-    TIMEOUT = 5 * 60
     BLACKLISTS = (
         'truncate.gbudb.net',
         'sbl-xbl.spamhaus.org',

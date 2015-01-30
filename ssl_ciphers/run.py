@@ -7,7 +7,6 @@ class SSLCiphersTask(SSLyzeLauncher):
     """
     SSL ciphers checker
     """
-    TIMEOUT = 60
 
     def _get_commands(self):
         """

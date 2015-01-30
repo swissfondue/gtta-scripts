@@ -8,7 +8,6 @@ use core::task qw(execute);
 class DNS_Reverse_Lookup extends Task {
     use Net::DNS;
     use Net::IP;
-    use constant TIMEOUT => 3600;
 
     # Process
     method _process(Str $target) {

@@ -9,7 +9,6 @@ class SSLCertificateUsageTask(SSLyzeLauncher):
     """
     SSL certificate usage checker
     """
-    TIMEOUT = 60
 
     def _get_commands(self):
         """

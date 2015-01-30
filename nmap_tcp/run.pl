@@ -7,7 +7,6 @@ use core::resulttable;
 
 # NMAP TCP task
 class NMAP_TCP extends Task {
-    use constant TIMEOUT => 3600;
     use File::Spec;
     use File::Temp;
     use XML::LibXML;

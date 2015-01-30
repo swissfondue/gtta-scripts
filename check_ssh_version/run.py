@@ -8,7 +8,6 @@ class CheckSSHVersionTask(Task):
     """
     GTTA Check SSH version d@d.kiev.ua
     """
-    TIMEOUT = 60
 
     def main(self, *args):
         if not self.ip:

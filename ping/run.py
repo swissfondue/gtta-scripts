@@ -7,7 +7,6 @@ class PingTask(Task):
     """
     Ping task
     """
-    TIMEOUT = 240
 
     def _ping(self, target, packet):
         """

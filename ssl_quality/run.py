@@ -9,7 +9,6 @@ class SSLQualityTask(Task):
     """
     SSL quality checker
     """
-    TIMEOUT = 120
     TEST_TIMEOUT = 60
     PROTOCOL_TIMEOUT = 5
 

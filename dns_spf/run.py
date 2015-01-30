@@ -11,7 +11,6 @@ class DNS_SPF(Task):
     """
     Get DNS SPF records
     """
-    TIMEOUT = 60
 
     def main(self, *args):
         """

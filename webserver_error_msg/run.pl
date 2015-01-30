@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # Webserver error msg
 class Webserver_Error extends Task {
-    use constant TIMEOUT => 3600;
     use core::task qw(call_external);
 
     # Process

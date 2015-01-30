@@ -8,7 +8,6 @@ class TelnetBruteforce(Task):
     """
     Telnet banner
     """
-    TIMEOUT = 3600
     TEST_TIMEOUT = 120
     TELNET_TIMEOUT = 10
 

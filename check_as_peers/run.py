@@ -6,8 +6,6 @@ import socket
 from core import Task, execute_task
 
 class CheckASPeers(Task):
-    TIMEOUT = 60
-
     def main(self, *args):
         """
         GTTA check AS peers via cymru.com whois server

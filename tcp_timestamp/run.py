@@ -10,7 +10,6 @@ class TCP_Timestamp(Task):
     """
     TCP timestamp task
     """
-    TIMEOUT = 60
     TCP_TIMEOUT = 10
     NUMBER_OF_PACKETS = 3
     PACKET_DELAY = 1

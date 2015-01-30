@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # FTP bruteforce
 class FTP_Bruteforce extends Task {
-    use constant TIMEOUT => 3600;
     use Net::FTP;
 
     # Process

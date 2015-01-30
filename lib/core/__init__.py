@@ -63,7 +63,6 @@ class Task(Thread):
     """
     Base class for all tasks
     """
-    TIMEOUT = 60        # task timeout
     TEST_TIMEOUT = 30   # test task timeout
     DNS_TIMEOUT = 10    # DNS request timeout
     SOCKET_TIMEOUT = 2  # socket timeout
@@ -84,6 +83,7 @@ class Task(Thread):
         self.ip = None
         self.proto = None
         self.port = None
+        self.timeout = None
         self.lang = None
         self.test_mode = False
         self.error = False
@@ -166,6 +166,15 @@ class Task(Thread):
             raise InvalidTargetFile('Target file should contain language name on the 4th line.')
 
         self.lang = lines[3]
+
+        try:
+            if lines[4]:
+                self.timeout = int(lines[4])
+            else:
+                self.timeout = 60
+
+        except ValueError:
+            self.timeout = 60
 
         # open output file
         self._result = open(argv[2], 'w')
@@ -250,7 +259,7 @@ def execute_task(task_class):
         if task.test_mode:
             timeout = task.TEST_TIMEOUT
         else:
-            timeout = task.TIMEOUT
+            timeout = task.timeout
 
         if timeout == 0:
             timeout = None

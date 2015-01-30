@@ -9,7 +9,6 @@ class SNMP_Community(Task):
     """
     SNMP community string task
     """
-    TIMEOUT = 60
     SNMP_TIMEOUT = 10
     SNMP_PORT = 161
     OID_SYSTEM_DESCRIPTION = '1.3.6.1.2.1.1.1.0'

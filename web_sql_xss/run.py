@@ -8,7 +8,6 @@ class Web_SQL_XSS(Task):
     """
     Web SQL/XSS vulnerability scanner
     """
-    TIMEOUT           = 60 * 60 # 1 hour
     DEFAULT_PAGETYPE  = 'php'
     DEFAULT_URL_LIMIT = 100
 

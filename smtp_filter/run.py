@@ -14,7 +14,6 @@ class SMTP_Filter(Task):
     SMTP filter
     """
     DEFAULT_FOLDER = [ os_path.join(os_path.dirname(__file__), 'files/Encrypted') ]
-    TIMEOUT = 60 * 60 * 24 * 7
 
     def main(self, recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """

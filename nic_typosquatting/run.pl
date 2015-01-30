@@ -7,7 +7,6 @@ use core::resulttable;
 
 # Typosquatting task
 class Typosquatting extends Task {
-    use constant TIMEOUT => 3600;
     use Net::DNS;
 
     # generate typos

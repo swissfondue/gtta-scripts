@@ -6,10 +6,7 @@ use core::task qw(execute);
 
 # Webserver Files task
 class Webserver_Files extends Task {
-    use constant {
-        TIMEOUT => 3600,
-        PARSE_FILES => 0
-    };
+    use constant PARSE_FILES => 0;
 
     use core::task qw(call_external);
 

@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # Grep URL task
 class Grep_URL extends Task {
-    use constant TIMEOUT => 3600;
     use LWP::UserAgent;
     use HTML::LinkExtor;
     use URI::URL;
