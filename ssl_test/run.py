@@ -7,7 +7,6 @@ class SSLQualityTask(SSLyzeLauncher):
     """
     SSL quality checker
     """
-    TIMEOUT = 60
 
     def _get_commands(self):
         """

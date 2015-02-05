@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # WWW Dir Scanner
 class WWW_Dir_Scanner extends Task {
-    use constant TIMEOUT => 3600;
     use LWP::UserAgent;
     use Net::SSL ();
 

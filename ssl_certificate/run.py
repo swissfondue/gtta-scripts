@@ -8,7 +8,6 @@ class SSLCertificateInfoTask(SSLyzeLauncher):
     """
     SSL Certificate information checker
     """
-    TIMEOUT = 60
     TEST_TIMEOUT = 60
 
     def _get_commands(self):

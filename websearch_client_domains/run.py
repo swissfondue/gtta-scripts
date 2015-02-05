@@ -142,7 +142,6 @@ class WebSearchClientDomains(Task):
     """
     Web search task
     """
-    TIMEOUT = 120
 
     def main(self,*args,**kwargs):
         """

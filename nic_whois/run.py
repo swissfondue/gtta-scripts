@@ -16,7 +16,6 @@ class NIC_Whois(Task):
     """
     NIC whois task
     """
-    TIMEOUT = 60
     WHOIS_PORT = 43
     BUFFER_LENGTH = 8196
     SERVER_LIST = [
@@ -41,7 +40,7 @@ class NIC_Whois(Task):
 
             break
 
-        ret = select([ s ], [ s ], [], self.TIMEOUT)
+        ret = select([ s ], [ s ], [], self.timeout)
 
         if len(ret[1]) == 0 and len(ret[0]) == 0:
             s.close()

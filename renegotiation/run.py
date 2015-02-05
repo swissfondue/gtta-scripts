@@ -7,7 +7,6 @@ class RenegotiationTask(SSLyzeLauncher):
     """
     Renegotiation checker
     """
-    TIMEOUT = 60
 
     def _get_commands(self):
         """

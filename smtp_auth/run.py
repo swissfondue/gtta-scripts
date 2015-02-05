@@ -7,7 +7,6 @@ class SMTP_Auth(SMTPExtensionChecker):
     """
     Check SMTP AUTH extension
     """
-    TIMEOUT = 60
     EXTENSION = 'AUTH'
 
     def test(self):

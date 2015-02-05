@@ -10,7 +10,6 @@ class DNS_Hosting(Task):
     """
     Checks if there are other websites on the same server.
     """
-    TIMEOUT = 2 * 60
 
     def main(self, show_all=[], *args):
         """

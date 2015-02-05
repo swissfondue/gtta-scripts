@@ -7,7 +7,6 @@ class TheHarvesterEmailsTask(Task):
     """
     Get all emails from theHarvester script
     """
-    TIMEOUT = 60
 
     def main(self, *args, **kwargs):
         """

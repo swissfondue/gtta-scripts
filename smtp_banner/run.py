@@ -9,7 +9,6 @@ class SMTP_Banner(Task):
     """
     Return SMTP Banner
     """
-    TIMEOUT = 60
     MAX_LINES = 5
 
     def main(self, *args):

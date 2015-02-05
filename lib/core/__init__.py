@@ -63,7 +63,7 @@ class Task(Thread):
     """
     Base class for all tasks
     """
-    TIMEOUT = 60        # task timeout
+    DEFAULT_TIMEOUT = 60
     TEST_TIMEOUT = 30   # test task timeout
     DNS_TIMEOUT = 10    # DNS request timeout
     SOCKET_TIMEOUT = 2  # socket timeout
@@ -84,6 +84,7 @@ class Task(Thread):
         self.ip = None
         self.proto = None
         self.port = None
+        self.timeout = None
         self.lang = None
         self.test_mode = False
         self.error = False
@@ -136,8 +137,8 @@ class Task(Thread):
         lines = open(argv[1], 'r').read().split('\n')
         lines = map(lambda x: x.replace('\r', ''), lines)
 
-        if len(lines) < 4:
-            raise InvalidTargetFile('Target file should contain at least 4 lines.')
+        if len(lines) < 5:
+            raise InvalidTargetFile('Target file should contain at least 5 lines.')
 
         if not lines[0]:
             raise InvalidTargetFile('Target file should contain either host name or IP address of the target host on the 1st line.')
@@ -166,6 +167,15 @@ class Task(Thread):
             raise InvalidTargetFile('Target file should contain language name on the 4th line.')
 
         self.lang = lines[3]
+
+        try:
+            if len(lines[4]) > 0:
+                self.timeout = int(lines[4])
+            else:
+                self.timeout = self.DEFAULT_TIMEOUT
+
+        except ValueError:
+            self.timeout = self.DEFAULT_TIMEOUT
 
         # open output file
         self._result = open(argv[2], 'w')
@@ -250,7 +260,7 @@ def execute_task(task_class):
         if task.test_mode:
             timeout = task.TEST_TIMEOUT
         else:
-            timeout = task.TIMEOUT
+            timeout = task.timeout
 
         if timeout == 0:
             timeout = None

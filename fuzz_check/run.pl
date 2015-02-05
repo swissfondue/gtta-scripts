@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # Fuzz check
 class Fuzz_Check extends Task {
-    use constant TIMEOUT => 3600;
     use LWP::UserAgent;
     use HTTP::Request;
 

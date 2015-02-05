@@ -7,7 +7,6 @@ class SMTP_User_Verification(Task):
     """
     SMTP filter
     """
-    TIMEOUT = 60
 
     def main(self, vrfy_users=[], src=[], dst=[], *args):
         """

@@ -12,7 +12,6 @@ class DNS_B_NR(Task):
     """
     Get DNS A records (non-recursive DNS request)
     """
-    TIMEOUT = 60
     DNS_PORT = 53
 
     def main(self, host=[], *args):

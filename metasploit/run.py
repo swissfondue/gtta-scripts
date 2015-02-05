@@ -11,7 +11,6 @@ class Metasploit(Task):
     """
     Metasploit wrapper
     """
-    TIMEOUT = 3600 * 24 * 7 # Week
     TEST_TIMEOUT = 600
     WORKING_DIR = "/opt/metasploit"
     PARSE_FILES = False

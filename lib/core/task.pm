@@ -15,7 +15,7 @@ class Task {
     use Scalar::Util qw(looks_like_number);
 
     use constant {
-        TIMEOUT => 60,
+        DEFAULT_TIMEOUT => 60,
         TEST_TIMEOUT => 30,
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
@@ -27,6 +27,7 @@ class Task {
     has "ip" => (isa => "Str", is => "rw");
     has "proto" => (isa => "Str", is => "rw");
     has "port" => (isa => "Int", is => "rw");
+    has "timeout" => (isa => "Int", is => "rw");
     has "lang" => (isa => "Str", is => "rw");
     has "test_mode" => (isa => "Int", is => "rw", default => 0);
     has "error" => (isa => "Int", is => "rw", default => 0);
@@ -95,8 +96,8 @@ class Task {
 
         close($fp);
 
-        if (scalar(@lines) < 4) {
-            die("Target file should contain at least 4 lines.\n");
+        if (scalar(@lines) < 5) {
+            die("Target file should contain at least 5 lines.\n");
         }
 
         unless ($lines[0]) {
@@ -114,6 +115,12 @@ class Task {
         $self->proto($lines[1]);
         $self->port($lines[2] ? $lines[2] : 0);
         $self->lang($lines[3]);
+
+        if (length($lines[4]) > 0) {
+            $self->timeout($lines[4]);
+        } else {
+            $self->timeout($self->DEFAULT_TIMEOUT);
+        }
 
         unless ($self->lang) {
             die("Target file should contain language name on the 4th line.\n");
@@ -235,7 +242,7 @@ class Task {
             if ($self->test_mode) {
                 $timeout = $self->TEST_TIMEOUT;
             } else {
-                $timeout = $self->TIMEOUT;
+                $timeout = $self->timeout;
             }
 
             if ($timeout > 0) {

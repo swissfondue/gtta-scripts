@@ -11,7 +11,6 @@ class DNS_SOA(Task):
     """
     Get & validate DNS SOA records
     """
-    TIMEOUT = 60
     DAY    = 60 * 60 * 24
     HOUR   = 60 * 60
     MINUTE = 60

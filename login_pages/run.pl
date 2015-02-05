@@ -8,7 +8,6 @@ use core::task qw(execute);
 
 # Login pages
 class Login_Pages extends Task {
-    use constant TIMEOUT => 3600;
     use HTTP::Request;
     use LWP::UserAgent;
 

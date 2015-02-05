@@ -12,7 +12,6 @@ class ASNInfoTask(core.Task):
     """
     ASN Information task
     """
-    TIMEOUT = 60
 
     def main(self, *args):
         """

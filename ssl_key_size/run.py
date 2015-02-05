@@ -9,7 +9,6 @@ class KeySizeTask(SSLyzeLauncher):
     """
     Size of SSL certificate public key
     """
-    TIMEOUT = 60
 
     def _get_commands(self):
         """

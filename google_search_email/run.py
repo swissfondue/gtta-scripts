@@ -74,7 +74,6 @@ class GoogleSearchForEmailsTask(Task):
     """
     GTTA check to search for emails in Google results
     """
-    TIMEOUT = 120
 
     def main(self, *args, **kwargs):
         """

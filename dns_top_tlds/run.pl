@@ -7,7 +7,6 @@ use core::resulttable;
 
 # DNS top TLDs
 class DNS_Top_TLDs extends Task {
-    use constant TIMEOUT => 3600;
     use Net::DNS;
     use LWP::UserAgent;
     use HTTP::Request;

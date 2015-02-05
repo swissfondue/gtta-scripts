@@ -7,7 +7,6 @@ class SMTP_StartTLS(SMTPExtensionChecker):
     """
     Check SMTP STARTTLS extension
     """
-    TIMEOUT = 60
     EXTENSION = 'STARTTLS'
 
     def test(self):

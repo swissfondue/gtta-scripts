@@ -6,7 +6,6 @@ use core::task qw(execute);
 
 # Subdomain bruteforce task
 class Subdomain_Bruteforce extends Task {
-    use constant TIMEOUT => 172800;
     use constant TEST_TIMEOUT => 360;
     use Net::DNS;
     use Net::hostent;

@@ -9,7 +9,6 @@ class ICMP_IP_ID(Task):
     """
     ICMP IP ID task
     """
-    TIMEOUT = 60
     ICMP_TIMEOUT = 10
     NUMBER_OF_PACKETS = 3
     MAX_ID = 65535
