@@ -238,10 +238,12 @@ class Task {
 
         eval {
             my $timeout;
+            my @arguments;
 
             if ($self->test_mode) {
                 $timeout = $self->TEST_TIMEOUT;
             } else {
+                @arguments = $self->_parse_input();
                 $timeout = $self->timeout;
             }
 
@@ -253,9 +255,8 @@ class Task {
                 $self->test();
                 $self->_produced_output(1);
             } else {
-                my @arguments = $self->_parse_input();           
-                $self->main(\@arguments);   
-            }            
+                $self->main(\@arguments);
+            }
         };
 
         alarm(0);

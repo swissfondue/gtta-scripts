@@ -79,6 +79,7 @@ class Task(Thread):
         """
         super(Task, self).__init__()
 
+        self.arguments = None
         self.target = None
         self.host = None
         self.ip = None
@@ -124,11 +125,11 @@ class Task(Thread):
         """
         self._stop.set()
 
-    def _parse_input(self):
+    def parse_input(self):
         """
         Parses input arguments
         """
-        output_arguments = []
+        self.arguments = []
 
         if len(argv) < 3:
             raise NotEnoughArguments('At least 2 command line arguments should be specified.')
@@ -185,12 +186,10 @@ class Task(Thread):
             if self.PARSE_FILES:
                 lines = open(arg, 'r').read().split('\n')
                 lines = map(lambda x: x.replace('\r', ''), lines)
-                output_arguments.append(lines)
+                self.arguments.append(lines)
 
             else:
-                output_arguments.append(arg)
-
-        return output_arguments
+                self.arguments.append(arg)
 
     def _get_library_path(self, library):
         """
@@ -229,8 +228,7 @@ class Task(Thread):
                 self.test()
                 self.produced_output = True
             else:
-                arguments = self._parse_input()
-                self.main(*arguments)
+                self.main(self.arguments)
 
         except TaskTimeout:
             pass
@@ -255,6 +253,9 @@ def execute_task(task_class):
         task.test_mode = True
 
     try:
+        if not task.test_mode:
+            task.parse_input()
+
         task.start()
 
         if task.test_mode:
