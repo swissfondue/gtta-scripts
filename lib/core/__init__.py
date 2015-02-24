@@ -63,7 +63,7 @@ class Task(Thread):
     """
     Base class for all tasks
     """
-    DEFAULT_TIMEOUT = 60
+    DEFAULT_TIMEOUT = 60 * 60 * 24  # 1 Day
     TEST_TIMEOUT = 30   # test task timeout
     DNS_TIMEOUT = 10    # DNS request timeout
     SOCKET_TIMEOUT = 2  # socket timeout

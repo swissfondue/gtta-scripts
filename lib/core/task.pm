@@ -15,7 +15,7 @@ class Task {
     use Scalar::Util qw(looks_like_number);
 
     use constant {
-        DEFAULT_TIMEOUT => 60,
+        DEFAULT_TIMEOUT => 60 * 60 * 24, # 1 Day
         TEST_TIMEOUT => 30,
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
