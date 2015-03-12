@@ -22,7 +22,8 @@ class Task {
         SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib"
     };
 
-    has "targets" => (is => "rw", default => sub {{}});
+    has "targets" => (is => "rw", default => sub {[]});
+    has "target" => (isa => "Str", is => "rw");
     has "host" => (isa => "Str", is => "rw");
     has "ip" => (isa => "Str", is => "rw");
     has "proto" => (isa => "Str", is => "rw");
@@ -106,14 +107,8 @@ class Task {
 
         my @targets = split /,/, $lines[0];
 
-        $self->targets(@targets);
-
-        if (scalar @targets == 1) {
-            if ($targets[0] =~ /^\d+\.\d+\.\d+\.\d+$/) {
-                $self->ip($targets[0]);
-            } else {
-                $self->host($targets[0]);
-            }
+        for my $target (@targets) {
+            push ($self->targets, $target);
         }
 
         $self->proto($lines[1]);
@@ -259,7 +254,17 @@ class Task {
                 $self->test();
                 $self->_produced_output(1);
             } else {
-                $self->main(\@arguments);
+                for my $target (@{$self->targets}) {
+                    $self->target($target);
+
+                    if ($target =~ /^\d+\.\d+\.\d+\.\d+$/) {
+                        $self->ip($target);
+                    } else {
+                        $self->host($target);
+                    }
+
+                    $self->main(\@arguments);
+                }
             }
         };
 

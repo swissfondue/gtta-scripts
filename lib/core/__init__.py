@@ -81,6 +81,7 @@ class Task(Thread):
 
         self.arguments = None
         self.targets = None
+        self.target = None
         self.host = None
         self.ip = None
         self.proto = None
@@ -145,15 +146,6 @@ class Task(Thread):
             raise InvalidTargetFile('Target file should contain either host name or IP address of the target host on the 1st line.')
 
         self.targets = lines[0].split(',')
-
-        if len(self.targets) == 1:
-            try:
-                inet_aton(self.targets[0])
-                self.ip = self.targets[0]
-
-            except:
-                self.host = self.targets[0]
-
         self.proto = lines[1]
 
         try:
@@ -229,7 +221,17 @@ class Task(Thread):
                 self.test()
                 self.produced_output = True
             else:
-                self.main(self.arguments)
+                for target in self.targets:
+                    self.target = target
+                    
+                    try:
+                        inet_aton(target)
+                        self.ip = target
+
+                    except:
+                        self.host = target
+
+                    self.main(self.arguments)
 
         except TaskTimeout:
             pass
