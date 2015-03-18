@@ -35,7 +35,9 @@ class IG_Network_Ripe(Task):
         """
         form = raw.find('div', attrs={'id': 'form'})
         for tag in form.find('fieldset').findAll('div')[1].findAll('a'):
-            res.append(tag.text.replace('inetnum: ', ''))
+            text = tag.text.replace('inetnum: ', '')
+            res.append(text)
+            self._write_result(text)
 
     def main(self, *args):
         """
@@ -112,11 +114,6 @@ class IG_Network_Ripe(Task):
 
         if len(results) == 0:
             self._write_result('No RIPE records.')
-        else:
-            # begin by first page
-            results.reverse()
-            for res in results:
-                self._write_result(res)
 
     def test(self):
         """
