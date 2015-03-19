@@ -1,0 +1,9 @@
+type: script
+name: ig_network_arin
+version: 1.7
+dependencies:
+  library:
+    - core
+  system:
+    - requests
+    - beautifulsoup
