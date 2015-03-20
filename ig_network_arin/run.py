@@ -20,21 +20,16 @@ class IG_Network_Arin(Task):
         soup = BeautifulSoup(
             requests.get(
                 'http://whois.arin.net/rest/customer/%s' % customer,
-                headers={'User-Agent': 'Mozilla/5.0',
-                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
+                headers={'User-Agent': 'Mozilla/5.0'}
             ).content)
-        for th in soup.findAll('th', attrs={'colspan': '2'}):
-            if th.text == 'Network Resources':
-                next_str = th.parent.nextSibling.nextSibling.findAll('td')[1]
-                while True:
-                    text = next_str.text
-                    if not text in results:
-                        results.append(text)
-                        self._write_result(text)
-                    try:
-                        next_str = next_str.parent.nextSibling.nextSibling.findAll('td')[1]
-                    except:
-                        break
+        for tag in soup.findAll('netref'):
+            tag.attrMap = {}
+            for attr in tag.attrs:
+                tag.attrMap[attr[0]] = attr[1]
+            text = '%s - %s' % (tag.attrMap['startaddress'], tag.attrMap['endaddress'])
+            if not text in results:
+                results.append(text)
+                self._write_result(text)
 
     def main(self, *args):
         """
