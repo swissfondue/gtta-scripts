@@ -1,0 +1,9 @@
+type: script
+name: ig_domain_robtex
+version: 1.7
+dependencies:
+  library:
+    - core
+  system:
+    - python-requests
+    - python-beautifulsoup
