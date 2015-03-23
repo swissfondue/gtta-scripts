@@ -5,6 +5,5 @@ dependencies:
   library:
     - core
   system:
-    - requests
-    - socket
-    - beautifulsoup
+    - python-requests
+    - python-beautifulsoup
