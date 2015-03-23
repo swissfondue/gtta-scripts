@@ -29,12 +29,14 @@ class IG_Network_Arin(Task):
 
             text = '%s-%s' % (tag.attrMap['startaddress'], tag.attrMap['endaddress'])
 
-            self._write_result(text)
+            yield text
 
     def main(self, *args):
         """
         Main function
         """
+        results = []
+
         soup = BeautifulSoup(
             requests.post(
                 'http://whois.arin.net/ui/query.do',
@@ -52,7 +54,10 @@ class IG_Network_Arin(Task):
                 next_str = th.parent.nextSibling.nextSibling.findAll('a')[0]
 
                 while True:
-                    self._extract_networks_from_customer(next_str.text)
+                    for result in self._extract_networks_from_customer(next_str.text):
+                        if result not in results:
+                            results.append(result)
+                            self._write_result(result)
 
                     try:
                         next_str = next_str.parent.parent.nextSibling.nextSibling.findAll('a')[0]
@@ -64,9 +69,11 @@ class IG_Network_Arin(Task):
 
                 while True:
                     text = next_str.text
+                    result = text.replace(" ", "")
 
-                    text = text.replace(" ", "")
-                    self._write_result(text)
+                    if result not in results:
+                        results.append(result)
+                        self._write_result(result)
 
                     try:
                         next_str = next_str.parent.nextSibling.nextSibling.findAll('td')[1]

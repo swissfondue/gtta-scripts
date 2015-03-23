@@ -37,12 +37,14 @@ class IG_Network_Ripe(Task):
 
         for tag in form.find('fieldset').findAll('div')[1].findAll('a'):
             text = tag.text.replace('inetnum: ', '').replace(" ", "")
-            self._write_result(text)
+            yield text
 
     def main(self, *args):
         """
         Main function
         """
+        results = []
+
         advanced_form_data = {
             'home_search': 'home_search',
             'home_search:searchform_q:': '',
@@ -111,7 +113,11 @@ class IG_Network_Ripe(Task):
                 del page_form[page_link_name]
 
             page_form['javax.faces.ViewState'] = self._get_state(soup)
-            self._collect_data_from_page(soup)
+
+            for result in self._collect_data_from_page(soup):
+                if result not in results:
+                    results.append(result)
+                    self._write_result(result)
 
     def test(self):
         """

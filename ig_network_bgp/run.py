@@ -11,41 +11,55 @@ class IG_Network_BGP(Task):
     """
     target = ''
 
-    def _add_valid_result(self, text):
+    def _is_valid(self, text):
         """
         Filter by '.' (not AS and not IPv6)
         """
-        if '.' in text:
-            self._write_result(text)
+        return '.' in text
 
     def _search_by_keyword(self, raw):
         """
         Search by keyword
         """
         div = raw.find('div', attrs={'id': 'search'})
+        results = []
 
         for tag in div.findAll('a'):
-            self._add_valid_result(tag.text)
+            result = tag.text
+
+            if self._is_valid(result) and result not in results:
+                results.append(result)
+                self._write_result(result)
 
     def _search_by_ip(self, raw):
         """
         Search by ip
         """
         div = raw.find('div', attrs={'id': 'ipinfo'})
+        results = []
 
         for tag in div.findAll('td', attrs={'class': 'nowrap'}):
-            self._add_valid_result(tag.find('a').text)
+            result = tag.find('a').text
+
+            if self._is_valid(result) and result not in results:
+                results.append(result)
+                self._write_result(result)
 
     def _search_by_domain(self, raw):
         """
         Search by domain
         """
         div = raw.find('div', attrs={'id': 'dns'})
+        results = []
 
         for dnshead in div.findAll('div', attrs={'class': 'dnshead'}):
             if dnshead.text == 'A Records':
                 dnsdata = dnshead.nextSibling.nextSibling
-                self._add_valid_result(dnsdata.find('a').text)
+                result = dnsdata.find('a').text
+
+                if self._is_valid(result) and result not in results:
+                    results.append(result)
+                    self._write_result(result)
 
     def main(self, *args):
         """
