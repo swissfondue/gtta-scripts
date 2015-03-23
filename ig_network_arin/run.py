@@ -3,7 +3,6 @@
 import requests
 from BeautifulSoup import BeautifulSoup
 from core import Task, execute_task
-from core.error import InvalidTarget
 
 
 class IG_Network_Arin(Task):
@@ -12,9 +11,9 @@ class IG_Network_Arin(Task):
     """
     target = ''
 
-    def _extract_networks_from_customer(self, customer, results):
+    def _extract_networks_from_customer(self, customer):
         """
-        Extracting networks from customer
+        Extract networks from customer
         """
         soup = BeautifulSoup(
             requests.get(
@@ -30,18 +29,12 @@ class IG_Network_Arin(Task):
 
             text = '%s-%s' % (tag.attrMap['startaddress'], tag.attrMap['endaddress'])
 
-            if not text in results:
-                results.append(text)
-                self._write_result(text)
+            self._write_result(text)
 
     def main(self, *args):
         """
         Main function
         """
-        self._check_stop()
-
-        results = []
-
         soup = BeautifulSoup(
             requests.post(
                 'http://whois.arin.net/ui/query.do',
@@ -59,7 +52,7 @@ class IG_Network_Arin(Task):
                 next_str = th.parent.nextSibling.nextSibling.findAll('a')[0]
 
                 while True:
-                    self._extract_networks_from_customer(next_str.text, results)
+                    self._extract_networks_from_customer(next_str.text)
 
                     try:
                         next_str = next_str.parent.parent.nextSibling.nextSibling.findAll('a')[0]
@@ -72,17 +65,13 @@ class IG_Network_Arin(Task):
                 while True:
                     text = next_str.text
 
-                    if not text in results:
-                        text = text.replace(" ", "")
-                        results.append(text)
-                        self._write_result(text)
+                    text = text.replace(" ", "")
+                    self._write_result(text)
 
                     try:
                         next_str = next_str.parent.nextSibling.nextSibling.findAll('td')[1]
                     except:
                         break
-
-        self._check_stop()
 
     def test(self):
         """

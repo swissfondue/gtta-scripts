@@ -3,7 +3,6 @@
 import requests
 from BeautifulSoup import BeautifulSoup
 from core import Task, execute_task
-from core.error import InvalidTarget
 
 
 class IG_Network_Ripe(Task):
@@ -21,7 +20,8 @@ class IG_Network_Ripe(Task):
                 'https://apps.db.ripe.net/search/full-text.html',
                 headers={'User-Agent': 'Mozilla/5.0'},
                 data=data
-            ).content)
+            ).content
+        )
 
     def _get_state(self, raw):
         """
@@ -29,7 +29,7 @@ class IG_Network_Ripe(Task):
         """
         return raw.find('input', attrs={'name': 'javax.faces.ViewState', 'type': 'hidden'}).attrMap['value']
 
-    def _collect_data_from_page(self, raw, res):
+    def _collect_data_from_page(self, raw):
         """
         Collect data from page
         """
@@ -37,20 +37,12 @@ class IG_Network_Ripe(Task):
 
         for tag in form.find('fieldset').findAll('div')[1].findAll('a'):
             text = tag.text.replace('inetnum: ', '').replace(" ", "")
-            res.append(text)
             self._write_result(text)
 
     def main(self, *args):
         """
         Main function
         """
-        if not self.target:
-            raise InvalidTarget('No target specified.')
-
-        self._check_stop()
-
-        results = []
-
         advanced_form_data = {
             'home_search': 'home_search',
             'home_search:searchform_q:': '',
@@ -85,14 +77,14 @@ class IG_Network_Ripe(Task):
         page_form.update({'javax.faces.ViewState': self._get_state(soup)})
 
         # collect data from first page
-        self._collect_data_from_page(soup, results)
+        self._collect_data_from_page(soup)
 
         # go to last page
         soup = self._get_soup(session, page_form)
         page_form['javax.faces.ViewState'] = self._get_state(soup)
 
         # collect data from current page
-        self._collect_data_from_page(soup, results)
+        self._collect_data_from_page(soup)
 
         # collect data from prev pages
         current = int(soup.find('span', attrs={'id': 'current'}).text)
@@ -119,10 +111,7 @@ class IG_Network_Ripe(Task):
                 del page_form[page_link_name]
 
             page_form['javax.faces.ViewState'] = self._get_state(soup)
-            # collect data from previous page
-            self._collect_data_from_page(soup, results)
-
-        self._check_stop()
+            self._collect_data_from_page(soup)
 
     def test(self):
         """
