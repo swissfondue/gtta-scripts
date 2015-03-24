@@ -8,15 +8,18 @@ class IG_Domain_Craw(Task):
     """
     Search domains from page by url, using crawler.py
     """
-    urls_set = set()
+    domains = set()
 
     def collect_unique_urls(self, url):
         """
-        Using as callback function for crawler
+        Callback function for crawler
         """
         proto_domain = url.split('//')
         domain = proto_domain[1].split('/')[0]
-        self.urls_set.add(domain)
+
+        if domain not in self.domains:
+            self._write_result(domain)
+            self.domains.add(domain)
 
     def main(self, *args):
         """
@@ -29,13 +32,7 @@ class IG_Domain_Craw(Task):
         if not self.proto:
             self.proto = 'http'
 
-        target = self.proto + '://' + self.host + '/'
-
-        link_crawler.process(target)  # Starting recursive process of link crawling on target
-        self._check_stop()
-
-        for url in self.urls_set:
-            self._write_result(url)
+        link_crawler.process(self.proto + '://' + self.host + '/')
 
     def test(self):
         """
