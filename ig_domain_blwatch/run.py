@@ -15,13 +15,10 @@ class IG_Domain_BLWatch(Task):
         """
         results = []
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'}
+
         index_params = {
-            'backlinkurl': self.host,
+            'backlinkurl': "http://" + self.host,
             'submit': 'Check Backlinks'
-        }
-        live_params = {
-            'feed': '3660785',
-            '_': ''
         }
         ses = requests.Session()
         soup = BeautifulSoup(
@@ -35,14 +32,13 @@ class IG_Domain_BLWatch(Task):
         index_params.update({'salt': salt})
 
         req = ses.post(
-                'http://www.backlinkwatch.com/index.php#',
-                headers=headers,
-                params=index_params,
-                prefetch=True,
-                timeout=10000
-            )
-        soup = BeautifulSoup(req.content)
-        soup = BeautifulSoup(req.content)
+            'http://www.backlinkwatch.com/index.php',
+            headers=headers,
+            data=index_params,
+            timeout=10000
+        )
+
+        self._write_result(req.content)
 
 
     def test(self):
@@ -52,5 +48,4 @@ class IG_Domain_BLWatch(Task):
         self.host = "clariant.com"
         self.main()
 
-# execute_task(IG_Domain_BLWatch)
-IG_Domain_BLWatch().test()
+execute_task(IG_Domain_BLWatch)
