@@ -29,7 +29,7 @@ class IG_Email_Dogpile(Task):
         if self.ip:
             return
 
-        dogpiles = DogpileParser('"@%s"' % self.target).proccess()
+        dogpiles = DogpileParser('"@%s"' % self.target).process()
 
         for dog in dogpiles:
             try:
