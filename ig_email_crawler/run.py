@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+
 import re
 from BeautifulSoup import BeautifulSoup
 from core.crawler import LinkCrawler
 from core import Task, execute_task
 
 
-class IG_Email_Craw(Task):
+class IG_Email_Crawler(Task):
     """
     Search emails from page by url, using crawler.py
     """
@@ -26,13 +27,17 @@ class IG_Email_Craw(Task):
         """
         url, content = raw['url'], raw['content']
         soup = BeautifulSoup(content)
+
         for a in soup.findAll('a'):
             for attr in a.attrs:
                 if attr[0] == 'href':
                     emails = re.findall(r'[\w\.-]+@[\w\.-]+', attr[1])
+
                     if emails:
                         self.add_emails(emails)
+
                     break
+
         for text in filter(lambda x: '@' in x, soup.findAll(text=True)):
             emails = re.findall(r'[\w\.-]+@[\w\.-]+', text)
             self.add_emails(emails)
@@ -58,4 +63,4 @@ class IG_Email_Craw(Task):
         self.host = "www.clariant.com"
         self.main()
 
-execute_task(IG_Email_Craw)
+execute_task(IG_Email_Crawler)
