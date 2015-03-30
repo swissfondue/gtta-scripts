@@ -1,73 +1,105 @@
 # -*- coding: utf-8 -*-
+
 import requests
+from requests.exceptions import ConnectionError
 from core import Task, execute_task
+from core.error import NotEnoughArguments
 
 
 class IG_Domain_Spyonweb(Task):
     """
     Search records in Spyonweb
     """
+    def request(self, command, param, access_token):
+        """API request"""
+
+        try:
+            req = requests.get(
+                "https://api.spyonweb.com/v1/%s/%s?access_token=%s" % (command, param, access_token),
+                headers={"User-Agent": "Mozilla/5.0"}
+            )
+
+        except ConnectionError:
+            raise Exception("Spyonweb API connection error")
+
+        if req.json and req.json["status"] == "error":
+            raise Exception("Spyonweb API error: %s" % req.json["message"])
+
+        if req.json and req.json["status"] == "not_found":
+            return None
+
+        if not "result" in req.json:
+            return None
+
+        return req.json["result"]
 
     def main(self, access_token=[], *args):
         """
         Main function
         """
+        if not access_token:
+            raise NotEnoughArguments("Spyonweb access token is required.")
+
         results = []
-        access_token_0 = access_token[0]
-        headers = {'User-Agent': 'Mozilla/5.0'}
+        access_token = access_token[0]
 
         if self.ip:
-            req = requests.get(
-                'https://api.spyonweb.com/v1/ip/%s?access_token=%s' % (self.ip, access_token_0),
-                headers=headers)
-            if req.json['status'] == 'not_found':
+            result = self.request("ip", self.ip, access_token)
+
+            if not result:
                 return
-            for result in req.json['result']['ip'][self.ip]['items'].keys():
-                if result not in results:
-                    results.append(result)
-                    self._write_result(result)
+
+            for domain in result['ip'][self.ip]['items'].keys():
+                if domain not in results:
+                    results.append(domain)
+                    self._write_result(domain)
+
         else:
-            req = requests.get(
-                'https://api.spyonweb.com/v1/summary/%s?access_token=%s' % (self.target, access_token_0),
-                headers=headers)
+            result = self.request("summary", self.target, access_token)
 
-            if req.json['status'] == 'not_found':
+            if not result:
                 return
 
-            items = req.json['result']['summary'][self.target]['items']
+            items = result['summary'][self.target]['items']
             adsense_ids = items['adsense'] if 'adsense' in items.keys() else {}
             analytics_ids = items['analytics'] if 'analytics' in items.keys() else {}
             website_ips = items['ip'] if 'ip' in items.keys() else {}
 
             for key, val in adsense_ids.items():
                 if val > 1:
-                    req = requests.get(
-                        'https://api.spyonweb.com/v1/adsense/%s?access_token=%s' % (key, access_token_0),
-                        headers=headers)
-                    for result in req.json['result']['adsense'][key]['items'].keys():
-                        if result not in results:
-                            results.append(result)
-                            self._write_result(result)
+                    result = self.request("adsense", key, access_token)
+
+                    if not result:
+                        continue
+
+                    for domain in result['adsense'][key]['items'].keys():
+                        if domain not in results:
+                            results.append(domain)
+                            self._write_result(domain)
 
             for key, val in analytics_ids.items():
                 if val > 1:
-                    req = requests.get(
-                        'https://api.spyonweb.com/v1/analytics/%s?access_token=%s' % (key, access_token_0),
-                        headers=headers)
-                    for result in req.json['result']['analytics'][key]['items'].keys():
-                        if result not in results:
-                            results.append(result)
-                            self._write_result(result)
+                    result = self.request("analytics", key, access_token)
+
+                    if not result:
+                        continue
+
+                    for domain in result['analytics'][key]['items'].keys():
+                        if domain not in results:
+                            results.append(domain)
+                            self._write_result(domain)
 
             for key, val in website_ips.items():
                 if val > 1:
-                    req = requests.get(
-                        'https://api.spyonweb.com/v1/ip/%s?access_token=%s' % (key, access_token_0),
-                        headers=headers)
-                    for result in req.json['result']['ip'][key]['items'].keys():
-                        if result not in results:
-                            results.append(result)
-                            self._write_result(result)
+                    result = self.request("ip", key, access_token)
+
+                    if not result:
+                        continue
+
+                    for domain in result['ip'][key]['items'].keys():
+                        if domain not in results:
+                            results.append(domain)
+                            self._write_result(domain)
 
     def test(self):
         """
