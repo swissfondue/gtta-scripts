@@ -1,0 +1,7 @@
+type: library
+name: clusty
+version: 1.7
+dependencies:
+  system:
+    - python-requests
+    - python-beautifulsoup
