@@ -1,0 +1,11 @@
+type: script
+name: ig_email_hotbot
+version: 1.7
+dependencies:
+  library:
+    - core
+    - hotbot
+    - emailgrabber
+  system:
+    - python-requests
+    - python-beautifulsoup
