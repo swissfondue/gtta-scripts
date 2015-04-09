@@ -45,7 +45,7 @@ class CommonIGEmailParser(object):
     Abstract class for parsing of results of search
     """
     HOST = ''
-    req_sourse = requests.Session()
+    req_source = requests.Session()
     headers = {'User-Agent': 'Mozilla/5.0'}
     results = set()
 
@@ -66,15 +66,14 @@ class CommonIGEmailParser(object):
         :param use_post:
         :return:
         """
-        req_method = self.req_sourse.get
+        req_method = self.req_source.get
         if use_post:
-            req_method = self.req_sourse.post
+            req_method = self.req_source.post
         req = req_method(
             '%s%s' % (self.HOST, path),
             headers=self.headers,
             params=params,
-            data=data
-        )
+            data=data)
         return BeautifulSoup(req.content)
 
     def _extract_next_link(self, soup):
