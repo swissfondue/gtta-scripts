@@ -48,7 +48,7 @@ class IG_Domain_BLWatch(Task):
         """
         Test function
         """
-        self.host = "clariant.com"
+        self.host = "netprotect.ch"
         self.main()
 
 execute_task(IG_Domain_BLWatch)
