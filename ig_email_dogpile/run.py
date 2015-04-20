@@ -11,7 +11,8 @@ class IG_Email_Dogpile(Task):
     """
     Search emails in pages from Dogpile
     """
-    results = []
+    TEST_TIMEOUT = 600
+    results = set()
 
     def add_emails(self, emails):
         """
@@ -20,7 +21,7 @@ class IG_Email_Dogpile(Task):
         for email in emails:
             if email not in self.results:
                 self._write_result(email)
-                self.results.append(email)
+                self.results.add(email)
 
     def main(self, *args):
         """
@@ -29,11 +30,11 @@ class IG_Email_Dogpile(Task):
         if self.ip:
             return
 
-        dogpiles = DogpileParser('"@%s"' % self.target).process()
+        urls = DogpileParser('"@%s"' % self.target).process()
 
-        for dog in dogpiles:
+        for url in urls:
             try:
-                req = requests.get(dog, headers={'User-Agent': 'Mozilla/5.0'})
+                req = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
                 soup = BeautifulSoup(req.content)
             except:
                 continue
@@ -42,8 +43,10 @@ class IG_Email_Dogpile(Task):
                 for attr in a.attrs:
                     if attr[0] == 'href':
                         emails = re.findall(r'[\w\.-]+@[\w\.-]+', attr[1])
+
                         if emails:
                             self.add_emails(emails)
+
                         break
 
             for text in filter(lambda x: '@' in x, soup.findAll(text=True)):

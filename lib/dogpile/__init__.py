@@ -10,7 +10,7 @@ class DogpileParser(object):
     """
     HOST = 'http://www.dogpile.com'
     headers = {'User-Agent': 'Mozilla/5.0'}
-    results = []
+    results = set()
 
     def __init__(self, target):
         """
@@ -27,16 +27,20 @@ class DogpileParser(object):
         :return:
         """
         web_results = soup.find('div', attrs={'id': 'webResults'})
+
         if web_results:
             links = web_results.findAll('a', attrs={'class': 'resultDisplayUrl'})
+
             for result in links:
                 href = result.attrMap['href']
-                cute_left = href.split('ru=')[1]
-                cute_right = cute_left.split('&')[0]
-                url = urlparse.parse_qs("x=%s" % cute_right)
+                cut_left = href.split('ru=')[1]
+                cut_right = cut_left.split('&')[0]
+
+                url = urlparse.parse_qs("x=%s" % cut_right)
                 url = url["x"][0]
+
                 if not url in self.results:
-                    self.results.append(url)
+                    self.results.add(url)
 
     def process(self):
         """
@@ -51,11 +55,10 @@ class DogpileParser(object):
             'fcop': 'topnav',
             'fpid': soup.find('input', attrs={'name': 'fpid'}).attrMap['value'],
             'q': self.target,
-            'ql': ''}
+            'ql': ''
+        }
 
-        req = s.get(
-            self.HOST + '/search/web',
-            headers=self.headers, params=params)
+        req = s.get(self.HOST + '/search/web', headers=self.headers, params=params)
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
@@ -66,13 +69,13 @@ class DogpileParser(object):
         while link_to_next_page:
             tag = link_to_next_page.find('a')
             next_url = filter(lambda x: x[0] == 'href', tag.attrs)[0][1]
-            req = s.get(
-                self.HOST + next_url,
-                headers=self.headers)
-            soup = BeautifulSoup(req.content)
 
+            req = s.get(self.HOST + next_url, headers=self.headers)
+            soup = BeautifulSoup(req.content)
             self._collect_results_from_soup(soup)
+
             link_to_next_page = soup\
                 .find('div', attrs={'id': 'resultsPaginationBottom'})\
                 .find('li', attrs={'class': 'paginationNext'})
+
         return self.results
