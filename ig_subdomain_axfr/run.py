@@ -24,18 +24,22 @@ class IG_Subdomain_AXFR(Task):
         results = set()
 
         try:
-            answers = dns.resolver.query(self.host, 'NS')
+            answers = dns.resolver.query(self.host, "NS")
             nss = [str(rdata) for rdata in answers]
 
             for n in nss:
                 try:
                     z = dns.zone.from_xfr(dns.query.xfr(n, self.host))
+                    
                     for k in z.nodes.keys():
                         k = str(k)
-                        if k[0] not in ['@', '*']:
-                            results.add('.'.join([k, self.host]))
+                        
+                        if k[0] not in ["@", "*"]:
+                            results.add(".".join([k, self.host]))
+                            
                 except Exception, e:
                     continue
+                    
         except Exception, e:
             pass
 
