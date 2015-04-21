@@ -26,9 +26,9 @@ class ExaleadParser(object):
         :return:
         """
         tags = soup.findAll('a', attrs={'class': 'title'})
+
         for tag in tags:
-            self.results.update(
-                [filter(lambda x: x[0] == 'href', tag.attrs)[0][1]])
+            self.results.update([filter(lambda x: x[0] == 'href', tag.attrs)[0][1]])
 
     def process(self):
         """
@@ -36,21 +36,17 @@ class ExaleadParser(object):
         :return:
         """
         s = requests.Session()
-        req = s.get(
-            self.HOST + '/search/web/results/',
-            headers=self.headers,
-            params={'q': self.target})
 
+        req = s.get(self.HOST + '/search/web/results/', headers=self.headers, params={'q': self.target})
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
         tag_to_next = soup.find('a', attrs={'title': 'Go to the next page'})
-        while tag_to_next:
 
+        while tag_to_next:
             next_url = filter(lambda x: x[0] == 'href', tag_to_next.attrs)[0][1]
-            req = s.get(
-                self.HOST + next_url,
-                headers=self.headers)
+
+            req = s.get(self.HOST + next_url, headers=self.headers)
             soup = BeautifulSoup(req.content)
             self._collect_results_from_soup(soup)
 
