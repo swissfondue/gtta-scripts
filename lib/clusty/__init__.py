@@ -26,11 +26,12 @@ class ClustyParser(object):
         :return:
         """
         result_container = soup.find('div', attrs={'id': 'results-list-container'})
+
         if result_container:
             divs = result_container.findAll('div', attrs={'class': 'document-header'})
+
             for div in divs:
-                self.results.update(
-                    [filter(lambda x: x[0] == 'href', div.find('a').attrs)[0][1]])
+                self.results.update([filter(lambda x: x[0] == 'href', div.find('a').attrs)[0][1]])
 
     def process(self):
         """
@@ -43,22 +44,19 @@ class ClustyParser(object):
             'input-form': 'clusty-simple',
             'v:sources': 'webplus-ns-uf',
             'v:project': 'clusty-original',
-            'query': self.target}
-        req = s.get(
-            self.HOST + '/search',
-            headers=self.headers,
-            params=params)
+            'query': self.target
+        }
 
+        req = s.get(self.HOST + '/search', headers=self.headers, params=params)
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
         tag_to_next = soup.find('a', attrs={'class': 'listnext'})
-        while tag_to_next:
 
+        while tag_to_next:
             next_url = filter(lambda x: x[0] == 'href', tag_to_next.attrs)[0][1]
-            req = s.get(
-                self.HOST + next_url,
-                headers=self.headers)
+
+            req = s.get(self.HOST + next_url, headers=self.headers)
             soup = BeautifulSoup(req.content)
             self._collect_results_from_soup(soup)
 
