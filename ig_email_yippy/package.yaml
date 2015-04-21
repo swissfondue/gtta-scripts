@@ -1,10 +1,10 @@
 type: script
-name: ig_email_clusty
+name: ig_email_yippy
 version: 1.7
 dependencies:
   library:
     - core
-    - clusty
+    - yippy
     - emailgrabber
   system:
     - python-requests

@@ -3,11 +3,11 @@ import requests
 from BeautifulSoup import BeautifulSoup
 
 
-class ClustyParser(object):
+class YippyParser(object):
     """
-    Class for parsing of results of searching in Clusty.com
+    Class for parsing of results of search
     """
-    HOST = 'http://www.clusty.com'
+    HOST = 'http://new.yippy.com'
     headers = {'User-Agent': 'Mozilla/5.0'}
     results = set()
 
@@ -40,9 +40,8 @@ class ClustyParser(object):
         s = requests.Session()
 
         params = {
-            'input-form': 'clusty-simple',
-            'v:sources': 'webplus-ns-uf',
-            'v:project': 'clusty-original',
+            'tb': 'sitesearch-all',
+            'v:project': 'clusty-new',
             'query': self.target}
         req = s.get(
             self.HOST + '/search',
