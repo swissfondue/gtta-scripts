@@ -48,7 +48,10 @@ class DogpileParser(object):
         :return:
         """
         s = requests.Session()
-        first_visit = s.get(self.HOST, headers=self.headers)
+        try:
+            first_visit = s.get(self.HOST, headers=self.headers, timeout=10)
+        except requests.exceptions.Timeout:
+            return
         soup = BeautifulSoup(first_visit.content)
         params = {
             'fcoid': soup.find('input', attrs={'name': 'fcoid'}).attrMap['value'],
@@ -58,7 +61,10 @@ class DogpileParser(object):
             'ql': ''
         }
 
-        req = s.get(self.HOST + '/search/web', headers=self.headers, params=params)
+        try:
+            req = s.get(self.HOST + '/search/web', headers=self.headers, params=params, timeout=10)
+        except requests.exceptions.Timeout:
+            return
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
@@ -67,12 +73,17 @@ class DogpileParser(object):
             .find('li', attrs={'class': 'paginationNext'})
 
         while link_to_next_page:
-            tag = link_to_next_page.find('a')
-            next_url = filter(lambda x: x[0] == 'href', tag.attrs)[0][1]
 
-            req = s.get(self.HOST + next_url, headers=self.headers)
-            soup = BeautifulSoup(req.content)
-            self._collect_results_from_soup(soup)
+            try:
+                tag = link_to_next_page.find('a')
+                next_url = filter(lambda x: x[0] == 'href', tag.attrs)[0][1]
+                req = s.get(self.HOST + next_url, headers=self.headers, timeout=10)
+                soup = BeautifulSoup(req.content)
+                self._collect_results_from_soup(soup)
+            except requests.exceptions.Timeout:
+                break
+            except:
+                continue
 
             link_to_next_page = soup\
                 .find('div', attrs={'id': 'resultsPaginationBottom'})\
