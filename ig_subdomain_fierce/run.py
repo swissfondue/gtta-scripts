@@ -7,6 +7,7 @@ class IG_Subdomain_Fierce(Task):
     """
     Search records with fierce.pl
     """
+    TEST_TIMEOUT = 3600
 
     def main(self, *args):
         """
