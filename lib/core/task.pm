@@ -87,6 +87,8 @@ class Task {
         my @targets = ();
 
         for my $target (@{$self->targets}) {
+            $target =~ tr/ //ds;
+
             if (Net::CIDR::cidrvalidate($target)) {
                 my $n = NetAddr::IP->new($target);
 
@@ -99,6 +101,8 @@ class Task {
                 do {
                     push (@targets, $ip->ip());
                 } while (++$ip);
+            } else {
+                push (@targets, $target);
             }
         }
 
