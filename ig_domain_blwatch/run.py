@@ -14,7 +14,7 @@ class IG_Domain_BLWatch(Task):
         """
         Main function
         """
-        results = []
+        results = set()
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'}
         index_params = {
             'backlinkurl': "http://" + self.host,
@@ -39,10 +39,15 @@ class IG_Domain_BLWatch(Task):
 
         td_list = soup.findAll('td', attrs={'width': '200'})
         for td in td_list:
-            url = filter(lambda x: x[0] == 'href', td.find('a').attrs)[0][1]
-            if not url in results:
-                self._write_result(url)
-                results.append(url)
+            try:
+                url = filter(lambda x: x[0] == 'href', td.find('a').attrs)[0][1]
+                left_cut = url.split('//')[1]
+                domain = left_cut.split('/')[0]
+                results.add(domain)
+            except:
+                continue
+
+        map(lambda x: self._write_result(x), results)
 
     def test(self):
         """
