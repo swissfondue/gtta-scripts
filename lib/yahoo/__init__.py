@@ -17,6 +17,8 @@ class YahooParser(CommonIGEmailParser):
         """
         tags = soup.findAll('h3', attrs={'class': 'title'})
         for tag in tags:
+            if not tag.a:
+                continue
             url = tag.a.get('href')
             try:
                 left_split = url.split('/RU=')[1]
