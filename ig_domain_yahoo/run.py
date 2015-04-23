@@ -35,7 +35,7 @@ class IG_Domain_Yahoo(CommonIGEmailTask):
 
         if re.match(self.domain_re, self.target):
             domain = whois.whois(self.target)
-            self.results.update(self._collect_domains_by_target(domain.name))
+            self.results.update(self._collect_domains_by_target('"%s"' % domain.name))
             map(lambda x: self.results.update(self._collect_domains_by_target(x)), domain.emails)
             self.results.update(self._collect_domains_by_target(
                 self.target.replace('.' + self.target.split('.')[-1], '')))
