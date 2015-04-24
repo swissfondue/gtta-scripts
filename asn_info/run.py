@@ -4,6 +4,9 @@ import socket
 import os
 import core
 import pygeoip
+from Queue import Queue
+from socket import inet_aton
+from threading import Thread
 
 ASN_DB = os.path.join("files", "GeoIPASNum.dat")
 GIP_DB = os.path.join("files", "GeoIP.dat")
@@ -13,17 +16,12 @@ class ASNInfoTask(core.Task):
     ASN Information task
     """
 
+    MULTITHREADED = True
+
     def main(self, *args):
         """
         Main function
         """
-        if not self.ip:
-            try:
-                self.ip = socket.gethostbyname(self.host)
-            except Exception:
-                self._write_result('Host not found: %s' % self.host)
-                return
-
         def get_info(db, method_name, target):
             """
             Get ASN info
@@ -44,19 +42,60 @@ class ASNInfoTask(core.Task):
 
             return result
 
-        asnum = get_info(ASN_DB, 'org_by_name', self.ip)
-        company = None
-        
-        if asnum and asnum.find(' ') >= 0:
-            company = asnum[asnum.find(' ') + 1:]
-            asnum = asnum[:asnum.find(' ')]
+        def worker():
+            while True:
+                ip = None
+                host = None
 
-        country = get_info(GIP_DB, 'country_name_by_name', self.ip)
+                target = self.queue.get()
 
-        self._write_result('Host IP: %s' % self.ip)
-        self._write_result('AS Number: %s' % ( asnum or 'N/A' ))
-        self._write_result('Company: %s' % ( company or 'N/A' ))
-        self._write_result('Country: %s' % ( country or 'N/A' ))
+                try:
+                    inet_aton(target)
+                    ip = target
+
+                except:
+                    host = target
+
+                if not ip:
+                    try:
+                        ip = socket.gethostbyname(host)
+                    except Exception:
+                        self._write_result('Host not found: %s' % host)
+                        return
+
+                asnum = get_info(ASN_DB, 'org_by_name', ip)
+                company = None
+
+                if asnum and asnum.find(' ') >= 0:
+                    company = asnum[asnum.find(' ') + 1:]
+                    asnum = asnum[:asnum.find(' ')]
+
+                country = get_info(GIP_DB, 'country_name_by_name', ip)
+
+                # Use Lock for clear output
+                self.lock.acquire()
+
+                self._write_result('Host IP: %s' % ip)
+                self._write_result('AS Number: %s' % ( asnum or 'N/A' ))
+                self._write_result('Company: %s' % ( company or 'N/A' ))
+                self._write_result('Country: %s' % ( country or 'N/A' ))
+
+                self.lock.release()
+
+                self.queue.task_done()
+
+        # Targets queue
+        self.queue = Queue()
+
+        for i in range(self.THREADS_COUNT):
+            t = Thread(target=worker)
+            t.daemon = True
+            t.start()
+
+        for target in self.targets:
+            self.queue.put(target)
+
+        self.queue.join()
 
     def test(self):
         """

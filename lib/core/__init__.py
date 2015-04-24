@@ -9,6 +9,7 @@ from socket import inet_aton
 from time import sleep
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
+from threading import Lock
 
 SANDBOX_IP = "192.168.66.66"
 
@@ -72,6 +73,8 @@ class Task(Thread):
     PARSE_FILES = True  # read & parse all input files by default
     SYSTEM_LIBRARY_PATH = "/opt/gtta/scripts/system/lib"
     USER_LIBRARY_PATH = "/opt/gtta/scripts/lib"
+    MULTITHREADED = False
+    THREADS_COUNT = 10
 
     def __init__(self):
         """
@@ -92,6 +95,7 @@ class Task(Thread):
         self.error = False
         self._stop = Event()
         self._result = None
+        self.lock = Lock()
 
         self.produced_output = False
 
@@ -221,17 +225,20 @@ class Task(Thread):
                 self.test()
                 self.produced_output = True
             else:
-                for target in self.targets:
-                    self.target = target
-                    
-                    try:
-                        inet_aton(target)
-                        self.ip = target
-
-                    except:
-                        self.host = target
-
+                if (self.MULTITHREADED):
                     self.main(self.arguments)
+                else:
+                    for target in self.targets:
+                        self.target = target
+
+                        try:
+                            inet_aton(target)
+                            self.ip = target
+
+                        except:
+                            self.host = target
+
+                        self.main(self.arguments)
 
         except TaskTimeout:
             pass
