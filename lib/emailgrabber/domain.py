@@ -45,10 +45,12 @@ class CommonIGDomainToolsTask(Task):
         domain = whois.whois(self.target)
 
         # search by name
-        self._collect_domains_by_target('"%s"' % domain.name)
+        if hasattr(domain, 'name'):
+            self._collect_domains_by_target('"%s"' % domain.name)
 
         # search by emails
-        map(lambda x: self._collect_domains_by_target(x), domain.emails)
+        if hasattr(domain, 'emails'):
+            map(lambda x: self._collect_domains_by_target(x), domain.emails)
 
         # search by domain without TLD
         self._collect_domains_by_target(
