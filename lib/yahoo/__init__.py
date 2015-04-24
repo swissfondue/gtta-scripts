@@ -37,7 +37,7 @@ class YahooParser(CommonIGEmailParser):
         next_link = soup.find('a', attrs={'class': 'next'})
         return next_link
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from source
         :return:
