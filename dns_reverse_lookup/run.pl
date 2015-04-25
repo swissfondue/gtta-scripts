@@ -3,54 +3,77 @@
 
 use MooseX::Declare;
 use core::task qw(execute);
+use threads;
+use threads::shared;
 
 # DNS reverse lookup task
 class DNS_Reverse_Lookup extends Task {
     use Net::DNS;
     use Net::IP;
 
+    use constant MULTITHREADED => 1;
+
+    my @threads;
+    my $last_t : shared = 0;
+
     # Process
-    method _process(Str $target) {
-        my $res = Net::DNS::Resolver->new;
+    method _process() {
+        while (1) {
+            $self->_write_result(threads->tid());
 
-        my @ranges = split /\s+/, $target;
+            my $seq = $last_t++;
 
-        foreach my $t (@ranges) {
-            $t =~ s/^\s+//gi;
-            $t =~ s/\s+$//gi;
+            if ($seq >= @{$self->targets}) {
+                return;
+            }
 
-            my $ip = new Net::IP($t);
+            my $target = $self->targets->[$seq];
+            my $res = Net::DNS::Resolver->new;
+            my @ranges = split /\s+/, $target;
 
-            do {
-                unless ($ip) {
-                    $self->_write_result("Invalid IP or range: " . $t);
-                    next;
-                }
+            foreach my $t (@ranges) {
+                $t =~ s/^\s+//gi;
+                $t =~ s/\s+$//gi;
 
-                my $IP = $ip->ip();
-                my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
-                my $query = $res->query($target_IP, "PTR");
+                my $ip = new Net::IP($t);
 
-                if ($query) {
-                    my $found = 0;
-
-                    foreach my $rr ($query->answer) {
-                        next unless ($rr->type eq 'PTR');
-                        $self->_write_result($IP . "\t\t" . $rr->rdatastr);
-                        $found = 1;
+                do {
+                    unless ($ip) {
+                        $self->_write_result("Invalid IP or range: " . $t);
+                        next;
                     }
 
-                    $self->_write_result($IP .  "\t\tN/A") unless ($found);
-                } else {
-                    $self->_write_result($IP .  "\t\tN/A");
-                }
-            } while (++$ip);
+                    my $IP = $ip->ip();
+                    my $target_IP = join('.', reverse split(/\./, $IP)).'.in-addr.arpa';
+                    my $query = $res->query($target_IP, "PTR");
+
+                    if ($query) {
+                        my $found = 0;
+
+                        foreach my $rr ($query->answer) {
+                            next unless ($rr->type eq 'PTR');
+                            $self->_write_result($IP . "\t\t" . $rr->rdatastr);
+                            $found = 1;
+                        }
+
+                        $self->_write_result($IP .  "\t\tN/A") unless ($found);
+                    } else {
+                        $self->_write_result($IP .  "\t\tN/A");
+                    }
+                } while (++$ip);
+            }
         }
     }
 
     # Main function
     method main($args) {
-        $self->_process($self->target);
+        for my $t (1 .. $self->THREADS_COUNT) {
+            push @threads, threads->create(\$self->_process, $t);
+        }
+
+        for my $t (@threads) {
+            $t->join();
+        }
     }
 
     # Test function
