@@ -19,8 +19,6 @@ class DNS_Reverse_Lookup extends Task {
     # Process
     method _process() {
         while (1) {
-            $self->_write_result(threads->tid());
-
             my $seq = $last_t++;
 
             if ($seq >= @{$self->targets}) {
