@@ -2,13 +2,13 @@
 import requests
 from BeautifulSoup import BeautifulSoup
 from core import Task, execute_task
-from clusty import ClustyParser
+from yippy import YippyParser
 from emailgrabber import parse_soup
 
 
-class IG_Email_Clusty(Task):
+class IG_Email_Yippy(Task):
     """
-    Search emails in pages from Clusty
+    Search emails in pages
     """
     results = set()
 
@@ -19,7 +19,7 @@ class IG_Email_Clusty(Task):
         if self.ip:
             return
 
-        urls = ClustyParser('"@%s"' % self.target).process()
+        urls = YippyParser('"@%s"' % self.target).process()
 
         for url in urls:
             try:
@@ -38,4 +38,4 @@ class IG_Email_Clusty(Task):
         self.target = "clariant.com"
         self.main()
 
-execute_task(IG_Email_Clusty)
+execute_task(IG_Email_Yippy)
