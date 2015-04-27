@@ -44,9 +44,8 @@ class CommonIGEmailTask(Task):
 
             for email in parse_soup(soup):
                 if email not in self.results:
-                    self.results.add(email)
                     self._write_result(email)
-
+                    self.results.add(email)
 
 class CommonIGEmailParser(object):
     """
@@ -111,7 +110,7 @@ class CommonIGEmailParser(object):
 
 def parse_soup(soup):
     """
-    Method return collected from soup emails
+    Method return from soup collected emails
     :param soup:
     :return:
     """
