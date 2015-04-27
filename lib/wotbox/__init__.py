@@ -48,7 +48,7 @@ class WotboxParser(CommonIGEmailParser):
             'la': soup.find('input', attrs={'name': 'la'}),
             'gl': soup.find('input', attrs={'name': 'gl'}),
             'j': soup.find('input', attrs={'id': 'j1'}),
-            }
+        }
 
         # get soup with redirect and parse it
         path = '/search?'
