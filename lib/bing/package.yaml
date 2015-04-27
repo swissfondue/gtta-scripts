@@ -1,5 +1,5 @@
 type: library
-name: lexxe
+name: bing
 version: 1.7
 dependencies:
   library:

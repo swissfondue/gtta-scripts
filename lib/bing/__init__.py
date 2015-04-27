@@ -2,11 +2,11 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class LexxeParser(CommonIGEmailParser):
+class BingParser(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://www.lexxe.com/ct'
+    HOST = 'http://www.bing.com'
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,9 +14,9 @@ class LexxeParser(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('span', attrs={'class': 'resLink'})
+        tags = soup.findAll('div', attrs={'class': 'b_title'})
         for tag in tags:
-            self.results.add(tag.text)
+            self.results.add(tag.a.get('href'))
 
     def _extract_next_link(self, soup):
         """
@@ -24,27 +24,29 @@ class LexxeParser(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        next_link = None
-        paginator = soup.find('ul', attrs={'id': 'pageNav'})
-        if paginator:
-            current = filter(lambda x: not x.a, paginator.findAll('li'))[0]
-            next_link = current.nextSibling
+        next_link = soup.find('a', attrs={'class': 'sb_pagN'})
         return next_link
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from source
         :return:
         """
-        path = '?sstring=%s&src=hp' % self.target
+        path = '/search'
+        params = {
+            'q': self.target,
+            'go': 'Отправить',
+            'qs': 'bs',
+            'form': 'QBRE'
+        }
 
-        soup = self._get_soup(path=path)
+        soup = self._get_soup(path=path, params=params)
         self._collect_results_from_soup(soup)
 
         next_link = self._extract_next_link(soup)
 
         while next_link:
-            next_url = next_link.a.get('href')
+            next_url = next_link.get('href')
 
             soup = self._get_soup(path=next_url)
             self._collect_results_from_soup(soup)
