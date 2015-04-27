@@ -35,7 +35,6 @@ class BingParser(CommonIGEmailParser):
         path = '/search'
         params = {
             'q': self.target,
-            'go': 'Отправить',
             'qs': 'bs',
             'form': 'QBRE'
         }
