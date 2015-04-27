@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 from bing_api import BingAPIParser
-from emailgrabber import CommonIGEmailTask
+from emailgrabber.domain import CommonIGDomainToolsTask
 from core import execute_task
 
 
-class IG_Domain_BingAPI(CommonIGEmailTask):
+class IG_Domain_BingAPI(CommonIGDomainToolsTask):
     """
     Search emails in pages from source
     """
     parser = BingAPIParser
 
-    def _wrapped_target(self):
+    def _wrap_target(self, target):
         """
-        Wrapping target
+        Wrap target
         """
-        return "'@%s'" % self.target
+        return "'%s'" % target
 
     def test(self):
         """

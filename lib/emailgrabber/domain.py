@@ -21,6 +21,12 @@ class CommonIGDomainToolsTask(Task):
             r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' \
             r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b'
 
+    def _wrap_target(self, target):
+        """
+        Wrap target
+        """
+        return '%s' % target
+
     def _output_result(self):
         """
         Output result
@@ -43,7 +49,7 @@ class CommonIGDomainToolsTask(Task):
         else:
             query = 'ip:%s' % target
 
-        urls = self.parser(query).process(self.params)
+        urls = self.parser(self._wrap_target(query)).process(*self.params)
         map(lambda x: self.results.add(self._strip_url(x)), urls)
 
     def _search_by_ip(self):
