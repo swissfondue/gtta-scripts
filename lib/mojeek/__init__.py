@@ -42,8 +42,9 @@ class MojeekParser(object):
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
-        pagination_links = soup.find('div', attrs={'class': 'pagination'}).findAll('a')
-        next_link = filter(lambda x: x.text == 'Next', pagination_links)
+        pagination_links = soup.find('div', attrs={'class': 'pagination'})
+        pagination_hrefs = pagination_links.findAll('a') if pagination_links else []
+        next_link = filter(lambda x: x.text == 'Next', pagination_hrefs)
 
         while next_link:
             next_url = next_link[0].get('href')
@@ -54,12 +55,14 @@ class MojeekParser(object):
                 continue
 
             soup = BeautifulSoup(req.content)
-            pagination_links = soup.find('div', attrs={'class': 'pagination'}).findAll('a')
 
-            if not filter(lambda x: x.text == 'Prev', pagination_links):
+            pagination_links = soup.find('div', attrs={'class': 'pagination'})
+            pagination_hrefs = pagination_links.findAll('a') if pagination_links else []
+
+            if not filter(lambda x: x.text == 'Prev', pagination_hrefs):
                 break
 
             self._collect_results_from_soup(soup)
-            next_link = filter(lambda x: x.text == 'Next', pagination_links)
+            next_link = filter(lambda x: x.text == 'Next', pagination_hrefs)
 
         return self.results
