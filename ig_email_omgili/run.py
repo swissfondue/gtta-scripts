@@ -14,7 +14,7 @@ class IG_Email_Omgili(CommonIGEmailTask):
         """
         Test function
         """
-        self.target = "clariant.com"
+        self.target = "microsoft.com"
         self.main()
 
 execute_task(IG_Email_Omgili)
