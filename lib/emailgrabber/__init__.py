@@ -14,6 +14,12 @@ class CommonIGEmailTask(Task):
     headers = {'User-Agent': 'Mozilla/5.0'}
     TEST_TIMEOUT = 60 * 60
 
+    def _wrapped_target(self):
+        """
+        Wrapping target
+        """
+        return '"@%s"' % self.target
+
     def main(self, *args):
         """
         Main function
@@ -25,7 +31,7 @@ class CommonIGEmailTask(Task):
         if self.ip:
             return
 
-        urls = self.parser('"@%s"' % self.target).process()
+        urls = self.parser(self._wrapped_target()).process(*args)
 
         while urls:
             try:
