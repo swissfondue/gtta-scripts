@@ -4,7 +4,7 @@ import re
 
 def parse_soup(soup):
     """
-    Method return collected from soup emails
+    Method return from soup collected emails
     :param soup:
     :return:
     """
