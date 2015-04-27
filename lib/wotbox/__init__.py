@@ -40,11 +40,23 @@ class WotboxParser(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
+        # get form params
+        soup = self._get_soup()
 
-        path = '/search?la=ru&gl=RU&j=18632'
-        params = {'q': self.target}
+        params = {
+            'q': self.target,
+            'la': soup.find('input', attrs={'name': 'la'}),
+            'gl': soup.find('input', attrs={'name': 'gl'}),
+            'j': soup.find('input', attrs={'id': 'j1'}),
+            }
 
+        # get soup with redirect and parse it
+        path = '/search?'
         soup = self._get_soup(path=path, params=params)
+        string = soup.script.text.split('\n')[1]
+
+        # use it
+        soup = self._get_soup(path=string[7:-3])
         self._collect_results_from_soup(soup)
 
         next_link = self._extract_next_link(soup)
