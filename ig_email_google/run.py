@@ -14,7 +14,7 @@ class IG_Email_Google(CommonIGEmailTask):
         """
         Test function
         """
-        self.target = "teremok-finance.ru"
+        self.target = "clariant.com"
         self.main()
 
 execute_task(IG_Email_Google)

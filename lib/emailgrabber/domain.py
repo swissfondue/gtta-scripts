@@ -11,8 +11,8 @@ class CommonIGDomainToolsTask(Task):
     parser = None
     params = None
     results = set()
-    whois_path = 'http://whois.domaintools.com/'
-    domain_re = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
+    DOMAINTOOLS_WHOIS_URL = 'http://whois.domaintools.com/'
+    DOMAIN_RE = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
     TEST_TIMEOUT = 60 * 60
 
     def _collect_domains_by_target(self, target):
@@ -20,7 +20,7 @@ class CommonIGDomainToolsTask(Task):
         Collect domains
         """
         urls = self.parser('site:domaintools.com %s' % target).process(self.params)
-        map(lambda x: self.results.add(x.replace(self.whois_path, '')), urls)
+        map(lambda x: self.results.add(x.replace(self.DOMAINTOOLS_WHOIS_URL, '')), urls)
 
     def _search_by_ip(self):
         """
@@ -34,7 +34,7 @@ class CommonIGDomainToolsTask(Task):
         """
         self._collect_domains_by_target(self.target)
 
-        if re.match(self.domain_re, self.target):
+        if re.match(self.DOMAIN_RE, self.target):
             self._search_by_domain()
 
     def _search_by_domain(self):
@@ -57,15 +57,13 @@ class CommonIGDomainToolsTask(Task):
             pass
 
         # search by domain without TLD
-        self._collect_domains_by_target(
-            self.target.replace('.' + self.target.split('.')[-1], ''))
+        self._collect_domains_by_target(self.target.replace('.' + self.target.split('.')[-1], ''))
 
     def _output_result(self):
         """
         Output result
         """
-        self._write_result('\n'.join(
-            filter(lambda x: re.match(self.domain_re, x), self.results)))
+        self._write_result('\n'.join(filter(lambda x: re.match(self.DOMAIN_RE, x), self.results)))
 
     def main(self, *args):
         """
