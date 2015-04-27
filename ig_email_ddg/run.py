@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+from ddg import DDGParser
+from emailgrabber import CommonIGEmailTask
+from core import execute_task
+
+
+class IG_Email_DDG(CommonIGEmailTask):
+    """
+    Search emails in pages from source
+    """
+    parser = DDGParser
+
+    def test(self):
+        """
+        Test function
+        """
+        self.target = "clariant.com"
+        self.main()
+
+execute_task(IG_Email_DDG)
