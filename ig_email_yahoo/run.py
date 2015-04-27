@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from lexxe import LexxeParser
+from yahoo import YahooParser
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
 
-class IG_Email_Lexxe(CommonIGEmailTask):
+class IG_Email_Yahoo(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = LexxeParser
+    parser = YahooParser
 
     def test(self):
         """
@@ -17,4 +17,4 @@ class IG_Email_Lexxe(CommonIGEmailTask):
         self.target = "clariant.com"
         self.main()
 
-execute_task(IG_Email_Lexxe)
+execute_task(IG_Email_Yahoo)

@@ -14,6 +14,12 @@ class CommonIGEmailTask(Task):
     headers = {'User-Agent': 'Mozilla/5.0'}
     TEST_TIMEOUT = 60 * 60
 
+    def _wrapped_target(self):
+        """
+        Wrapping target
+        """
+        return '"@%s"' % self.target
+
     def main(self, *args):
         """
         Main function
@@ -25,7 +31,7 @@ class CommonIGEmailTask(Task):
         if self.ip:
             return
 
-        urls = self.parser('"@%s"' % self.target).process()
+        urls = self.parser(self._wrapped_target()).process(*args)
 
         while urls:
             try:
@@ -40,7 +46,6 @@ class CommonIGEmailTask(Task):
                 if email not in self.results:
                     self._write_result(email)
                     self.results.add(email)
-
 
 class CommonIGEmailParser(object):
     """
@@ -104,7 +109,7 @@ class CommonIGEmailParser(object):
 
 def parse_soup(soup):
     """
-    Method return collected from soup emails
+    Method return from soup collected emails
     :param soup:
     :return:
     """

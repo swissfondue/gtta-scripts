@@ -1,5 +1,5 @@
 type: library
-name: google
+name: lixam
 version: 1.7
 dependencies:
   library:

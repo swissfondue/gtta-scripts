@@ -1,8 +1,8 @@
 type: script
-name: ig_email_google
+name: ig_email_bing
 version: 1.7
 dependencies:
   library:
     - core
-    - google
+    - bing
     - emailgrabber

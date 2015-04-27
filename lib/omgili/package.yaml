@@ -1,5 +1,5 @@
 type: library
-name: google
+name: omgili
 version: 1.7
 dependencies:
   library:
