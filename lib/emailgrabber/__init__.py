@@ -41,9 +41,11 @@ class CommonIGEmailTask(Task):
                 soup = BeautifulSoup(req.content)
             except Exception as e:
                 continue
-            self.results.update(parse_soup(soup))
 
-        self._write_result('\n'.join(self.results))
+            for email in parse_soup(soup):
+                if email not in self.results:
+                    self.results.add(email)
+                    self._write_result(email)
 
 
 class CommonIGEmailParser(object):
