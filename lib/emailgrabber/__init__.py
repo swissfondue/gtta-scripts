@@ -99,7 +99,7 @@ class CommonIGEmailParser(object):
         """
         pass
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from "self.HOST"
         :return:
