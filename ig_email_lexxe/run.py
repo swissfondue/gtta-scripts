@@ -14,7 +14,7 @@ class IG_Email_Lexxe(CommonIGEmailTask):
         """
         Test function
         """
-        self.target = "clarinet.com"
+        self.target = "clariant.com"
         self.main()
 
 execute_task(IG_Email_Lexxe)

@@ -2,11 +2,11 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class LexxeParser(CommonIGEmailParser):
+class DDGParser(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://www.lexxe.com/ct'
+    HOST = 'https://duckduckgo.com/html/'
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,9 +14,9 @@ class LexxeParser(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('span', attrs={'class': 'resLink'})
+        tags = soup.findAll('a', attrs={'class': 'large'})
         for tag in tags:
-            self.results.add(tag.text)
+            self.results.add(tag.get('href'))
 
     def _extract_next_link(self, soup):
         """
@@ -24,31 +24,30 @@ class LexxeParser(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        next_link = None
-        paginator = soup.find('ul', attrs={'id': 'pageNav'})
-        if paginator:
-            current = filter(lambda x: not x.a, paginator.findAll('li'))[0]
-            next_link = current.nextSibling
-        return next_link
+        return soup.find('input', attrs={'value': 'Next'})
 
     def process(self):
         """
         Get results by target from source
         :return:
         """
-        path = '?sstring=%s&src=hp' % self.target
+        data = {
+            'q': self.target,
+            'kl': 'us-en',
+            'b': ''}
 
-        soup = self._get_soup(path=path)
+        soup = self._get_soup(data=data, use_post=True)
         self._collect_results_from_soup(soup)
 
         next_link = self._extract_next_link(soup)
+        del data['b']
 
         while next_link:
-            next_url = next_link.a.get('href')
+            for tag in next_link.parent.findAll('input', attrs={'type': 'hidden'}):
+                data[tag.get('name')] = tag.get('value')
+            soup = self._get_soup(data=data, use_post=True)
 
-            soup = self._get_soup(path=next_url)
             self._collect_results_from_soup(soup)
-
             next_link = self._extract_next_link(soup)
 
         return self.results
