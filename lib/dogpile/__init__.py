@@ -9,6 +9,7 @@ class DogpileParser(object):
     Class for parsing of results of searching in Dogpile.com
     """
     HOST = 'http://www.dogpile.com'
+    TIMEOUT = 10
     headers = {'User-Agent': 'Mozilla/5.0'}
     results = set()
 
@@ -49,7 +50,7 @@ class DogpileParser(object):
         """
         s = requests.Session()
         try:
-            first_visit = s.get(self.HOST, headers=self.headers, timeout=10)
+            first_visit = s.get(self.HOST, headers=self.headers, timeout=self.TIMEOUT)
         except requests.exceptions.Timeout:
             return
         soup = BeautifulSoup(first_visit.content)
@@ -62,9 +63,10 @@ class DogpileParser(object):
         }
 
         try:
-            req = s.get(self.HOST + '/search/web', headers=self.headers, params=params, timeout=10)
+            req = s.get(self.HOST + '/search/web', headers=self.headers, params=params, timeout=self.TIMEOUT)
         except requests.exceptions.Timeout:
             return
+
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
@@ -72,18 +74,25 @@ class DogpileParser(object):
             .find('div', attrs={'id': 'resultsPaginationBottom'})\
             .find('li', attrs={'class': 'paginationNext'})
 
-        while link_to_next_page:
+        retries = 0
 
+        while link_to_next_page:
             try:
                 tag = link_to_next_page.find('a')
                 next_url = filter(lambda x: x[0] == 'href', tag.attrs)[0][1]
-                req = s.get(self.HOST + next_url, headers=self.headers, timeout=10)
+                req = s.get(self.HOST + next_url, headers=self.headers, timeout=self.TIMEOUT)
                 soup = BeautifulSoup(req.content)
                 self._collect_results_from_soup(soup)
-            except requests.exceptions.Timeout:
-                break
+
             except:
+                retries += 1
+
+                if retries > 3:
+                    break
+
                 continue
+
+            retries = 0
 
             link_to_next_page = soup\
                 .find('div', attrs={'id': 'resultsPaginationBottom'})\
