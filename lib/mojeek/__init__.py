@@ -38,10 +38,7 @@ class MojeekParser(object):
         s = requests.Session()
         params = {'q': self.target}
 
-        req = s.get(
-            self.HOST + '/search',
-            headers=self.headers,
-            params=params)
+        req = s.get(self.HOST + '/search', headers=self.headers, params=params)
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
@@ -50,12 +47,12 @@ class MojeekParser(object):
 
         while next_link:
             next_url = next_link[0].get('href')
-            req = s.get(
-                self.HOST + next_url,
-                headers=self.headers)
+            req = s.get(self.HOST + next_url, headers=self.headers)
+
             if req.status_code != 200:
                 sleep(1)
                 continue
+
             soup = BeautifulSoup(req.content)
             pagination_links = soup.find('div', attrs={'class': 'pagination'}).findAll('a')
 
