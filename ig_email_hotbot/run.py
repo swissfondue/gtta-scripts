@@ -25,11 +25,15 @@ class IG_Email_Hotbot(Task):
         while urls:
             try:
                 req = requests.get(urls.pop(), headers={'User-Agent': 'Mozilla/5.0'})
+
                 if not 'text/html' in req.headers['content-type']:
                     continue
+
                 soup = BeautifulSoup(req.content)
+
             except:
                 continue
+
             self.results.update(parse_soup(soup))
 
         self._write_result('\n'.join(self.results))

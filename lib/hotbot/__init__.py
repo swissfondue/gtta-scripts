@@ -27,9 +27,9 @@ class HotbotParser(object):
         :return:
         """
         tags = soup.findAll('li', attrs={'class': 'result'})
+
         for tag in tags:
-            self.results.update(
-                [filter(lambda x: x[0] == 'href', tag.find('a').attrs)[0][1]])
+            self.results.update([filter(lambda x: x[0] == 'href', tag.find('a').attrs)[0][1]])
 
     def _extract_keyvol(self, soup):
         """
@@ -50,25 +50,21 @@ class HotbotParser(object):
         keyvol = self._extract_keyvol(soup.find('div', attrs={'class': 'hpSearchHolder'}))
         params = {
             'q': self.target,
-            'keyvol': keyvol}
+            'keyvol': keyvol
+        }
 
-        req = s.get(
-            self.HOST + '/search/web',
-            headers=self.headers,
-            params=params)
+        req = s.get(self.HOST + '/search/web', headers=self.headers, params=params)
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
         pn = 1
+
         while True:
             pn += 1
             params['keyvol'] = self._extract_keyvol(soup.find('header'))
             params['pn'] = '%s' % pn
 
-            req = s.get(
-                self.HOST + '/search/web',
-                headers=self.headers,
-                params=params)
+            req = s.get(self.HOST + '/search/web', headers=self.headers, params=params)
             soup = BeautifulSoup(req.content)
 
             if soup.find('a', attrs={'class': 'noResults'}):
