@@ -10,12 +10,15 @@ class IG_Domain_PubDB(Task):
     """
     Search records in PubDB
     """
+    TEST_TIMEOUT = 60 * 60
     URL = 'http://pub-db.com'
-    headers = {
+    HEADERS = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'}
+        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'
+    }
+
     pubs = set()
     uas = set()
 
@@ -23,14 +26,13 @@ class IG_Domain_PubDB(Task):
         """
         Get soup by path from PubDB
         """
-        return BeautifulSoup(
-            requests.get('%s%s' % (self.URL, path), headers=self.headers).content)
+        return BeautifulSoup(requests.get('%s%s' % (self.URL, path), headers=self.HEADERS).content)
 
     def _get_request_by_proto(self, proto):
         """
         Get request by proto and self.target
         """
-        return requests.get('%s://%s' % (proto, self.target), headers=self.headers)
+        return requests.get('%s://%s' % (proto, self.target), headers=self.HEADERS)
 
     def _exctract_pubs(self, content):
         """
@@ -56,7 +58,7 @@ class IG_Domain_PubDB(Task):
             req = self._get_request_by_proto('http')
             self.pubs.update(self._exctract_pubs(req.content))
             self.uas.update(self._exctract_uas(req.content))
-        except :
+        except:
             http_failed = True
 
         # check https
@@ -74,6 +76,7 @@ class IG_Domain_PubDB(Task):
         if self.ip:
             # from ip
             soup = self._get_soup_by_path('/reverse-ip/%s.html' % self.ip)
+
             if soup.find('title').text == '404 Not Found':
                 hrefs = []
             else:
@@ -86,39 +89,50 @@ class IG_Domain_PubDB(Task):
         # search by collected links
         for href in hrefs:
             sleep(1)
+
             try:
                 soup = self._get_soup_by_path('%s' % href)
             except:
                 continue
+
             if soup.find('title').text == '404 Not Found':
                 continue
+
             div = soup.find('div', attrs={'id': 'stat'})
+
             if not div:
                 continue
+
             self.pubs.update(self._exctract_pubs(div.text))
             self.uas.update(self._exctract_uas(div.text))
 
         # get domains by pubs
         for pub in self.pubs:
             sleep(1)
+
             try:
                 soup = self._get_soup_by_path('/adsense/%s.html' % pub)
             except:
                 continue
+
             for li in soup.findAll('li'):
                 domain = li.find('a').text
+
                 if not domain == self.target:
                     results.add(domain)
 
         # get domains by uas
         for ua in self.uas:
             sleep(1)
+
             try:
                 soup = self._get_soup_by_path('/google-analytics/%s.html' % ua)
             except:
                 continue
+
             for li in soup.findAll('li'):
                 domain = li.find('a').text
+
                 if not domain == self.target:
                     results.add(domain)
 
@@ -129,7 +143,7 @@ class IG_Domain_PubDB(Task):
         """
         Test function
         """
-        self.target = self.host = "homefeat.com"
+        self.target = self.host = "infofaq.com"
         self.main()
         self.target = self.ip = "104.27.167.105"
         self.main()
