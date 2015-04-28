@@ -41,11 +41,10 @@ class CommonIGEmailTask(Task):
                 soup = BeautifulSoup(req.content)
             except Exception as e:
                 continue
+            self.results.update(parse_soup(soup))
 
-            for email in parse_soup(soup):
-                if email not in self.results:
-                    self._write_result(email)
-                    self.results.add(email)
+        self._write_result('\n'.join(self.results))
+
 
 class CommonIGEmailParser(object):
     """
@@ -99,7 +98,7 @@ class CommonIGEmailParser(object):
         """
         pass
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from "self.HOST"
         :return:
@@ -109,7 +108,7 @@ class CommonIGEmailParser(object):
 
 def parse_soup(soup):
     """
-    Method return from soup collected emails
+    Method return collected from soup emails
     :param soup:
     :return:
     """
