@@ -4,6 +4,7 @@ version: 1.7
   library:
     - core
   system:
-    - python-whois
     - python-requests
     - python-beautifulsoup
+  python:
+    - python-whois

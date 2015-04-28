@@ -87,8 +87,7 @@ class CommonIGDomainToolsTask(Task):
             pass
 
         # search by domain without TLD
-        self._collect_domains_by_target(
-            self.target.replace('.' + self.target.split('.')[-1], ''))
+        self._collect_domains_by_target(self.target[:self.target.rindex(".")])
 
     def main(self, *args):
         """
