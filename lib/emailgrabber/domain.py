@@ -11,16 +11,16 @@ class CommonIGDomainToolsTask(Task):
     parser = None
     params = None
     results = set()
-    whois_path = 'http://whois.domaintools.com/'
-    domain_re = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
+    WHOIS_PATH = 'http://whois.domaintools.com/'
+    DOMAIN_RE = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
     TEST_TIMEOUT = 60 * 60
 
     def _collect_domains_by_target(self, target):
         """
         Collect domains
         """
-        urls = self.parser('site:domaintools.com %s' % target).process(self.params)
-        map(lambda x: self.results.add(x.replace(self.whois_path, '')), urls)
+        urls = self.parser('site:whois.domaintools.com %s' % target).process(self.params)
+        map(lambda x: self.results.add(x.replace(self.WHOIS_PATH, '')), urls)
 
     def _search_by_ip(self):
         """
@@ -34,7 +34,7 @@ class CommonIGDomainToolsTask(Task):
         """
         self._collect_domains_by_target(self.target)
 
-        if re.match(self.domain_re, self.target):
+        if re.match(self.DOMAIN_RE, self.target):
             self._search_by_domain()
 
     def _search_by_domain(self):
@@ -48,18 +48,21 @@ class CommonIGDomainToolsTask(Task):
         self._collect_domains_by_target('"%s"' % domain.name)
 
         # search by emails
-        map(lambda x: self._collect_domains_by_target(x), domain.emails)
+        unique_emails = set()
+
+        for email in domain.emails:
+            unique_emails.add(email.lower())
+
+        map(lambda x: self._collect_domains_by_target(x), unique_emails)
 
         # search by domain without TLD
-        self._collect_domains_by_target(
-            self.target.replace('.' + self.target.split('.')[-1], ''))
+        self._collect_domains_by_target(self.target[:self.target.rindex(".")])
 
     def _output_result(self):
         """
         Output result
         """
-        self._write_result('\n'.join(
-            filter(lambda x: re.match(self.domain_re, x), self.results)))
+        self._write_result('\n'.join(filter(lambda x: re.match(self.DOMAIN_RE, x), self.results)))
 
     def main(self, *args):
         """
