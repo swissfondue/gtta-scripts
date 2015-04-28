@@ -30,7 +30,7 @@ class GoogleParser(CommonIGEmailParser):
 
             self.results.add(rsplit)
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from source
         :return:

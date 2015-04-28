@@ -1,0 +1,8 @@
+type: script
+name: ig_email_google
+version: 1.7
+dependencies:
+  library:
+    - core
+    - google
+    - emailgrabber
