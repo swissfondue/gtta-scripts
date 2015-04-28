@@ -18,7 +18,13 @@ class IG_Subdomain_Fierce(Task):
 
         results = set()
 
-        proc = subprocess.Popen('perl fierce.pl -dns %s' % self.host, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(
+            'perl fierce.pl -dns %s' % self.host,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+
         res = proc.communicate()
 
         strings = filter(lambda x: len(x), res[0].split('\n'))
