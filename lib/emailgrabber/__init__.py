@@ -14,6 +14,12 @@ class CommonIGEmailTask(Task):
     headers = {'User-Agent': 'Mozilla/5.0'}
     TEST_TIMEOUT = 60 * 60
 
+    def _wrapped_target(self):
+        """
+        Wrapping target
+        """
+        return '"@%s"' % self.target
+
     def main(self, *args):
         """
         Main function
@@ -25,7 +31,7 @@ class CommonIGEmailTask(Task):
         if self.ip:
             return
 
-        urls = self.parser('"@%s"' % self.target).process()
+        urls = self.parser(self._wrapped_target()).process(*args)
 
         while urls:
             try:
@@ -35,17 +41,18 @@ class CommonIGEmailTask(Task):
                 soup = BeautifulSoup(req.content)
             except Exception as e:
                 continue
-            self.results.update(parse_soup(soup))
 
-        self._write_result('\n'.join(self.results))
-
+            for email in parse_soup(soup):
+                if email not in self.results:
+                    self._write_result(email)
+                    self.results.add(email)
 
 class CommonIGEmailParser(object):
     """
     Abstract class for parsing of results of search
     """
     HOST = ''
-    req_sourse = requests.Session()
+    req_source = requests.Session()
     headers = {'User-Agent': 'Mozilla/5.0'}
     results = set()
 
@@ -66,15 +73,14 @@ class CommonIGEmailParser(object):
         :param use_post:
         :return:
         """
-        req_method = self.req_sourse.get
+        req_method = self.req_source.get
         if use_post:
-            req_method = self.req_sourse.post
+            req_method = self.req_source.post
         req = req_method(
             '%s%s' % (self.HOST, path),
             headers=self.headers,
             params=params,
-            data=data
-        )
+            data=data)
         return BeautifulSoup(req.content)
 
     def _extract_next_link(self, soup):
@@ -103,7 +109,7 @@ class CommonIGEmailParser(object):
 
 def parse_soup(soup):
     """
-    Method return collected from soup emails
+    Method return from soup collected emails
     :param soup:
     :return:
     """

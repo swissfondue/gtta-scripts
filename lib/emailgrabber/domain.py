@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import whois
+import socket
 from core import Task
 
 
@@ -8,25 +9,54 @@ class CommonIGDomainToolsTask(Task):
     """
     Common abstract class for ig_domain tasks
     """
+    TEST_TIMEOUT = 60 * 60
     parser = None
     params = None
     results = set()
-    WHOIS_PATH = 'http://whois.domaintools.com/'
-    DOMAIN_RE = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
-    TEST_TIMEOUT = 60 * 60
+    whois_path = 'http://whois.domaintools.com/'
+    domain_re = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
+    ip_re = r'\b' \
+            r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' \
+            r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' \
+            r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' \
+            r'(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b'
 
-    def _collect_domains_by_target(self, target):
+    def _output_result(self):
+        """
+        Output result
+        """
+        self._write_result('\n'.join(
+            filter(lambda x: re.match(self.domain_re, x), self.results)))
+
+    def _strip_url(self, url):
+        """
+        Strip url
+        """
+        return url.replace(self.whois_path, '').split('//')[-1].split('/')[0]
+
+    def _collect_domains_by_target(self, target, is_ip=False):
         """
         Collect domains
         """
-        urls = self.parser('site:whois.domaintools.com %s' % target).process(self.params)
-        map(lambda x: self.results.add(x.replace(self.WHOIS_PATH, '')), urls)
+        if not is_ip:
+            query = 'site:domaintools.com %s' % target
+        else:
+            query = 'ip:%s' % target
+
+        urls = self.parser(query).process(self.params)
+        map(lambda x: self.results.add(self._strip_url(x)), urls)
 
     def _search_by_ip(self):
         """
-        Search by self.ip
+        Search by ip from self.target
         """
-        pass
+        if re.match(self.ip_re, self.target):
+            ip = self.target
+        elif re.match(self.domain_re, self.target):
+            ip = socket.gethostbyname(self.target)
+        else:
+            return
+        self._collect_domains_by_target(ip, is_ip=True)
 
     def _search_by_target(self):
         """
@@ -34,7 +64,7 @@ class CommonIGDomainToolsTask(Task):
         """
         self._collect_domains_by_target(self.target)
 
-        if re.match(self.DOMAIN_RE, self.target):
+        if re.match(self.domain_re, self.target):
             self._search_by_domain()
 
     def _search_by_domain(self):
@@ -45,24 +75,19 @@ class CommonIGDomainToolsTask(Task):
         domain = whois.whois(self.target)
 
         # search by name
-        self._collect_domains_by_target('"%s"' % domain.name)
+        try:
+            self._collect_domains_by_target('"%s"' % domain.name)
+        except Exception as e:
+            pass
 
         # search by emails
-        unique_emails = set()
-
-        for email in domain.emails:
-            unique_emails.add(email.lower())
-
-        map(lambda x: self._collect_domains_by_target(x), unique_emails)
+        try:
+            map(lambda x: self._collect_domains_by_target(x), domain.emails)
+        except Exception as e:
+            pass
 
         # search by domain without TLD
         self._collect_domains_by_target(self.target[:self.target.rindex(".")])
-
-    def _output_result(self):
-        """
-        Output result
-        """
-        self._write_result('\n'.join(filter(lambda x: re.match(self.DOMAIN_RE, x), self.results)))
 
     def main(self, *args):
         """
@@ -74,9 +99,10 @@ class CommonIGDomainToolsTask(Task):
 
         self.params = args
 
-        if self.ip:
-            self._search_by_ip()
-        else:
+        if not self.ip:
             self._search_by_target()
+
+        #  if "search by ip" not needs just redefine as "pass"
+        self._search_by_ip()
 
         self._output_result()
