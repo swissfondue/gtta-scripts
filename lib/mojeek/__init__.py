@@ -9,7 +9,14 @@ class MojeekParser(object):
     Class for parsing of results of search
     """
     HOST = 'https://www.mojeek.com'
-    headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'}
+    HEADERS = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'en-US,en;q=0.8,ru;q=0.6,de;q=0.4,fr;q=0.2',
+        'Cache-Control': 'max-age=0',
+        'Connection': 'keep-alive',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'
+    }
     results = set()
 
     def __init__(self, target):
@@ -38,7 +45,7 @@ class MojeekParser(object):
         s = requests.Session()
         params = {'q': self.target}
 
-        req = s.get(self.HOST + '/search', headers=self.headers, params=params)
+        req = s.get(self.HOST + '/search', headers=self.HEADERS, params=params)
         soup = BeautifulSoup(req.content)
         self._collect_results_from_soup(soup)
 
@@ -48,10 +55,10 @@ class MojeekParser(object):
 
         while next_link:
             next_url = next_link[0].get('href')
-            req = s.get(self.HOST + next_url, headers=self.headers)
+            req = s.get(self.HOST + next_url, headers=self.HEADERS)
 
             if req.status_code != 200:
-                sleep(1)
+                sleep(5)
                 continue
 
             soup = BeautifulSoup(req.content)
@@ -64,5 +71,7 @@ class MojeekParser(object):
 
             self._collect_results_from_soup(soup)
             next_link = filter(lambda x: x.text == 'Next', pagination_hrefs)
+
+            sleep(5)
 
         return self.results

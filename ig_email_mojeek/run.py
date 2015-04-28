@@ -11,7 +11,7 @@ class IG_Email_Mojeek(Task):
     Search emails in pages from source
     """
     results = set()
-    TEST_TIMEOUT = 60 * 60 * 3
+    TEST_TIMEOUT = 60 * 60
 
     def main(self, *args):
         """
@@ -34,9 +34,10 @@ class IG_Email_Mojeek(Task):
             except:
                 continue
 
-            self.results.update(parse_soup(soup))
-
-        self._write_result('\n'.join(self.results))
+            for email in parse_soup(soup):
+                if email not in self.results:
+                    self._write_result(email)
+                    self.results.add(email)
 
     def test(self):
         """
