@@ -58,7 +58,7 @@ class IG_Domain_PubDB(Task):
             req = self._get_request_by_proto('http')
             self.pubs.update(self._exctract_pubs(req.content))
             self.uas.update(self._exctract_uas(req.content))
-        except:
+        except Exception as e:
             http_failed = True
 
         # check https
@@ -66,7 +66,7 @@ class IG_Domain_PubDB(Task):
             req = self._get_request_by_proto('https')
             self.pubs.update(self._exctract_pubs(req.content))
             self.uas.update(self._exctract_uas(req.content))
-        except:
+        except Exception as e:
             if http_failed:
                 # bad target
                 return
@@ -74,14 +74,15 @@ class IG_Domain_PubDB(Task):
         # using PubDB collect domains for 'search by domain'
         # get links for PubDB
         if self.ip:
+            hrefs = []
             # from ip
-            soup = self._get_soup_by_path('/reverse-ip/%s.html' % self.ip)
-
-            if soup.find('title').text == '404 Not Found':
-                hrefs = []
-            else:
-                links = soup.find('table').findAll('a')
-                hrefs = [x.attrs[0][1] for x in links]
+            try:
+                soup = self._get_soup_by_path('/reverse-ip/%s.html' % self.ip)
+                if not soup.find('title').text == '404 Not Found':
+                    links = soup.find('table').findAll('a')
+                    hrefs = [x.attrs[0][1] for x in links]
+            except Exception as e:
+                pass
         else:
             # from host
             hrefs = ['/%s.html' % self.host]
