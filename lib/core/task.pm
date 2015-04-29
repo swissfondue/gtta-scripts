@@ -87,15 +87,14 @@ class Task {
         my @targets = ();
 
         for my $target (@{$self->targets}) {
-            $target =~ tr/ //ds;
-
             if (Net::CIDR::cidrvalidate($target)) {
                 my $n = NetAddr::IP->new($target);
 
                 for my $ip (@{$n->hostenumref}) {
                     push (@targets, $ip->addr);
                 }
-            } elsif ($target =~ /^\d+\.\d+\.\d+\.\d+\-\d+\.\d+\.\d+\.\d+$/) {
+            } elsif ($target =~ /^\d+\.\d+\.\d+\.\d+\s*\-\s*\d+\.\d+\.\d+\.\d+$/) {
+                $target =~ s/ //g;
                 my $ip = new Net::IP($target) || die;
 
                 do {

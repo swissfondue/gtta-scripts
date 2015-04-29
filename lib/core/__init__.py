@@ -127,18 +127,19 @@ class Task(Thread):
         targets = []
 
         for target in self.targets:
-            target = target.replace(" ", "")
-
             # IP network
             if re.match('^\d+\.\d+\.\d+\.\d+\/(3[0-2]|2[0-9]{1}|[01]?[0-9])$', target):
                 for ip in IPNetwork(target):
                     targets.append('%s' % ip)
+
             # IP range
-            elif re.match('^\d+\.\d+\.\d+\.\d+\-\d+\.\d+\.\d+\.\d+$', target):
+            elif re.match('^\d+\.\d+\.\d+\.\d+\s*\-\s*\d+\.\d+\.\d+\.\d+$', target):
+                target = target.replace(" ", "")
                 scope = target.split('-')
 
                 for ip in IPRange(scope[0], scope[1]):
                     targets.append('%s' % ip)
+
             else:
                 targets.append(target)
 
