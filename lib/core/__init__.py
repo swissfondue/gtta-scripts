@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 from threading import Thread, Event
 from sys import argv, exit, stdout
 from os import killpg, getpgrp
@@ -9,6 +10,7 @@ from socket import inet_aton
 from time import sleep
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
+from netaddr import IPNetwork, IPRange
 
 SANDBOX_IP = "192.168.66.66"
 
@@ -70,6 +72,7 @@ class Task(Thread):
     HTTP_TIMEOUT = 30   # HTTP timeout
     SMTP_TIMEOUT = 10   # SMTP timeout
     PARSE_FILES = True  # read & parse all input files by default
+    EXPAND_TARGETS = True  # expand ip networks and ip ranges
     SYSTEM_LIBRARY_PATH = "/opt/gtta/scripts/system/lib"
     USER_LIBRARY_PATH = "/opt/gtta/scripts/lib"
 
@@ -120,6 +123,28 @@ class Task(Thread):
             print str.encode('utf-8')
             stdout.flush()
 
+    def _expand_targets(self):
+        targets = []
+
+        for target in self.targets:
+            # IP network
+            if re.match('^\d+\.\d+\.\d+\.\d+\/(3[0-2]|2[0-9]{1}|[01]?[0-9])$', target):
+                for ip in IPNetwork(target):
+                    targets.append('%s' % ip)
+
+            # IP range
+            elif re.match('^\d+\.\d+\.\d+\.\d+\s*\-\s*\d+\.\d+\.\d+\.\d+$', target):
+                target = target.replace(" ", "")
+                scope = target.split('-')
+
+                for ip in IPRange(scope[0], scope[1]):
+                    targets.append('%s' % ip)
+
+            else:
+                targets.append(target)
+
+        self.targets = targets
+
     def stop(self):
         """
         Thread stop function
@@ -146,6 +171,10 @@ class Task(Thread):
             raise InvalidTargetFile('Target file should contain either host name or IP address of the target host on the 1st line.')
 
         self.targets = lines[0].split(',')
+
+        if self.EXPAND_TARGETS:
+            self._expand_targets()
+
         self.proto = lines[1]
 
         try:

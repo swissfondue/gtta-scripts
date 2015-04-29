@@ -12,6 +12,8 @@ class NMAP_TCP extends Task {
     use XML::LibXML;
     use core::task qw(call_external);
 
+    use constant EXPAND_TARGETS => 0;
+
     # Process
     method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {
         my @data;
