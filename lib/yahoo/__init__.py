@@ -17,6 +17,8 @@ class YahooParser(CommonIGEmailParser):
         """
         tags = soup.findAll('h3', attrs={'class': 'title'})
         for tag in tags:
+            if not tag.a:
+                continue
             url = tag.a.get('href')
             try:
                 left_split = url.split('/RU=')[1]
@@ -35,7 +37,7 @@ class YahooParser(CommonIGEmailParser):
         next_link = soup.find('a', attrs={'class': 'next'})
         return next_link
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from source
         :return:

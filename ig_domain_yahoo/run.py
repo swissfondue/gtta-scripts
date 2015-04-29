@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+from yahoo import YahooParser
+from emailgrabber.domain import CommonIGDomainToolsTask
+from core import execute_task
+
+
+class IG_Domain_Yahoo(CommonIGDomainToolsTask):
+    """
+    Search emails in pages from source
+    """
+    parser = YahooParser
+
+    def _search_by_ip(self):
+        """
+        Search by self.ip
+        """
+        pass
+
+    def test(self):
+        """
+        Test function
+        """
+        self.target = "clariant.com"
+        self.main()
+
+execute_task(IG_Domain_Yahoo)

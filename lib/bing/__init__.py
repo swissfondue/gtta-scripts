@@ -27,7 +27,7 @@ class BingParser(CommonIGEmailParser):
         next_link = soup.find('a', attrs={'class': 'sb_pagN'})
         return next_link
 
-    def process(self):
+    def process(self, *args):
         """
         Get results by target from source
         :return:

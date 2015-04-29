@@ -19,14 +19,14 @@ class BingAPIParser(CommonIGEmailParser):
         for tag in tags:
             self.results.add(tag.text)
 
-    def process(self, account_key):
+    def process(self, *args):
         """
         Get results by target from source
         :return:
         """
         params = {'Query': self.target}
 
-        keys = '%s:%s' % (account_key[0], account_key[0])
+        keys = '%s:%s' % (args[0][0], args[0][0])
         encoded = base64.b64encode(keys)
         self.headers.update({'Authorization': 'Basic %s' % encoded})
 
