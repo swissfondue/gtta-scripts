@@ -12,6 +12,31 @@ class IG_Subdomain_Bruteforce(Task):
     """
     TEST_TIMEOUT = 60 * 60
 
+    # generate symbols for generating of subdomains
+    symbols = string.lowercase + string.digits
+
+    def recursion(self, lvl, store):
+        """
+        Recursively generator for 'yield'ing combinations of self.sybmols
+        """
+        for char in self.symbols:
+            new_store = store + char
+
+            if lvl > 0:
+                for item in self.recursion(lvl - 1, new_store):
+                    yield item
+            else:
+                yield new_store
+
+    def mygen(self, min_l, max_l):
+        """
+        Subdomains generator. Using generator 'recursion'.
+        """
+        while min_l <= max_l:
+            for generator in self.recursion(min_l - 1, ''):
+                yield generator
+            min_l += 1
+
     def main(self, *args):
         """
         Main function
@@ -28,25 +53,7 @@ class IG_Subdomain_Bruteforce(Task):
         if self.host.startswith("www."):
             self.host = self.host[4:]
 
-        results = set()
-        subs = set()
-
-        # generate subs
-        symbols = string.lowercase + string.digits
-
-        # get combinations
-        while minimal_len <= maximal_len:
-            map(lambda x: subs.add(''.join(list(x))), itertools.combinations_with_replacement(symbols, minimal_len))
-            minimal_len += 1
-
-        # use permutations
-        permutations = set()
-        for item in subs:
-            map(lambda x: permutations.add(''.join(list(x))), itertools.permutations(item))
-
-        subs.update(permutations)
-
-        # search really subdomains
+        # collect NSs
         r = Resolver()
         r.lifetime = self.DNS_TIMEOUT
 
@@ -65,7 +72,10 @@ class IG_Subdomain_Bruteforce(Task):
         r.lifetime = self.DNS_TIMEOUT
         r.nameservers = ns_list
 
-        for sub in subs:
+        # search really subdomains
+        results = set()
+
+        for sub in self.mygen(minimal_len, maximal_len):
             domain = '%s.%s' % (sub, self.host)
 
             try:
