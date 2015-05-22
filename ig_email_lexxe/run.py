@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from lexxe import LexxeParser
+from lexxe import Lexxe
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Lexxe(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = LexxeParser
+    parser = Lexxe
 
     def test(self):
         """

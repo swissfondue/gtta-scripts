@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from hotbot import HotbotParser
+from hotbot import Hotbot
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Hotbot(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = HotbotParser
+    parser = Hotbot
 
     def test(self):
         """

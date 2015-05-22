@@ -21,7 +21,7 @@ class IG_Subdomain_AXFR(Task):
         if self.host.startswith("www."):
             self.host = self.host[4:]
 
-        results = set()
+        results = []
 
         try:
             answers = dns.resolver.query(self.host, "NS")
@@ -35,15 +35,15 @@ class IG_Subdomain_AXFR(Task):
                         k = str(k)
                         
                         if k[0] not in ["@", "*"]:
-                            results.add(".".join([k, self.host]))
-                            
+                            subdomain = ".".join([k, self.host])
+                            if subdomain not in results:
+                                self._write_result(subdomain)
+                                results.append(subdomain)
+
                 except Exception, e:
                     continue
-                    
         except Exception, e:
             pass
-
-        map(lambda x: self._write_result(x), results)
 
     def test(self):
         """

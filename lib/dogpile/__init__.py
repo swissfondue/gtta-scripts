@@ -4,7 +4,7 @@ import urlparse
 from BeautifulSoup import BeautifulSoup
 
 
-class DogpileParser(object):
+class Dogpile(object):
     """
     Class for parsing of results of searching in Dogpile.com
     """

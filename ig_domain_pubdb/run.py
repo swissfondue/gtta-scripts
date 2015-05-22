@@ -50,7 +50,7 @@ class IG_Domain_PubDB(Task):
         """
         Main function
         """
-        results = set()
+        results = []
         http_failed = False
 
         # check http
@@ -119,8 +119,9 @@ class IG_Domain_PubDB(Task):
             for li in soup.findAll('li'):
                 domain = li.find('a').text
 
-                if not domain == self.target:
-                    results.add(domain)
+                if not domain == self.target and domain not in results:
+                    results.append(domain)
+                    self._write_result(domain)
 
         # get domains by uas
         for ua in self.uas:
@@ -134,11 +135,9 @@ class IG_Domain_PubDB(Task):
             for li in soup.findAll('li'):
                 domain = li.find('a').text
 
-                if not domain == self.target:
-                    results.add(domain)
-
-        # output results
-        map(lambda x: self._write_result(x), results)
+                if not domain == self.target and domain not in results:
+                    results.append(domain)
+                    self._write_result(domain)
 
     def test(self):
         """

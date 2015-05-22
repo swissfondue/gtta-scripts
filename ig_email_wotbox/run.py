@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from wotbox import WotboxParser
+from wotbox import Wotbox
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Wotbox(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = WotboxParser
+    parser = Wotbox
 
     def test(self):
         """

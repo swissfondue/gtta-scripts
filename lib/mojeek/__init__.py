@@ -4,7 +4,7 @@ from time import sleep
 from BeautifulSoup import BeautifulSoup
 
 
-class MojeekParser(object):
+class Mojeek(object):
     """
     Class for parsing of results of search
     """

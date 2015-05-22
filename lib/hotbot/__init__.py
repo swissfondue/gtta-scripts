@@ -4,7 +4,7 @@ import requests
 from BeautifulSoup import BeautifulSoup
 
 
-class HotbotParser(object):
+class Hotbot(object):
     """
     Class for parsing of results of search
     """

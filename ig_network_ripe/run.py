@@ -10,6 +10,7 @@ class IG_Network_Ripe(Task):
     Get ripe inetnums
     """
     target = ''
+    results = []
 
     def _get_soup(self, session, data):
         """
@@ -20,8 +21,7 @@ class IG_Network_Ripe(Task):
                 'https://apps.db.ripe.net/search/full-text.html',
                 headers={'User-Agent': 'Mozilla/5.0'},
                 data=data
-            ).content
-        )
+            ).content)
 
     def _get_state(self, raw):
         """
@@ -37,13 +37,14 @@ class IG_Network_Ripe(Task):
 
         for tag in form.find('fieldset').findAll('div')[1].findAll('a'):
             text = tag.text.replace('inetnum: ', '').replace(" ", "")
-            yield text
+            if text not in self.results:
+                self.results.append(text)
+                self._write_result(text)
 
     def main(self, *args):
         """
         Main function
         """
-        results = []
 
         advanced_form_data = {
             'home_search': 'home_search',
@@ -114,10 +115,7 @@ class IG_Network_Ripe(Task):
 
             page_form['javax.faces.ViewState'] = self._get_state(soup)
 
-            for result in self._collect_data_from_page(soup):
-                if result not in results:
-                    results.append(result)
-                    self._write_result(result)
+            self._collect_data_from_page(soup)
 
     def test(self):
         """

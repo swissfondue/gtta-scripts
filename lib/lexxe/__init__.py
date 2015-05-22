@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class LexxeParser(CommonIGEmailParser):
+class Lexxe(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

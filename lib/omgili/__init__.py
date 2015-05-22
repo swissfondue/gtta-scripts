@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class OmgiliParser(CommonIGEmailParser):
+class Omgili(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

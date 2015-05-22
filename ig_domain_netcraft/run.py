@@ -29,8 +29,7 @@ class IG_Domain_Netcraft(Task):
         req = requests.get(
             url,
             headers=headers,
-            cookies=requests.utils.cookiejar_from_dict(cookies)
-        )
+            cookies=requests.utils.cookiejar_from_dict(cookies))
 
         soup = BeautifulSoup(req.content)
         table = soup.find('div', attrs={'id': 'content'}).find('table', attrs={'class': 'TBtable'})

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from omgili import OmgiliParser
+from omgili import Omgili
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Omgili(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = OmgiliParser
+    parser = Omgili
 
     def test(self):
         """

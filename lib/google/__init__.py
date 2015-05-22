@@ -3,7 +3,7 @@ from time import sleep
 from emailgrabber import CommonIGEmailParser
 
 
-class GoogleParser(CommonIGEmailParser):
+class Google(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

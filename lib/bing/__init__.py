@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class BingParser(CommonIGEmailParser):
+class Bing(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

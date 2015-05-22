@@ -26,8 +26,7 @@ class IG_Domain_BGP(Task):
             requests.get(
                 'http://bgp.he.net/ip/%s' % self.ip,
                 headers={'User-Agent': 'Mozilla/5.0'}
-            ).content
-        )
+            ).content)
 
         div = soup.find('div', attrs={'id': 'dns'})
 

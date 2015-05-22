@@ -3,7 +3,7 @@ import requests
 from BeautifulSoup import BeautifulSoup
 
 
-class ExaleadParser(object):
+class Exalead(object):
     """
     Class for parsing of results of search
     """

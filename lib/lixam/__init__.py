@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class LixamParser(CommonIGEmailParser):
+class Lixam(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

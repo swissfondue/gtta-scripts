@@ -70,8 +70,7 @@ class IG_Network_BGP(Task):
                 'http://bgp.he.net/search',
                 params={'search[search]': self.target, 'commit': 'Search'},
                 headers={'User-Agent': 'Mozilla/5.0'}
-            ).content
-        )
+            ).content)
 
         first_tabmenuli_id = soup.find('li', attrs={'class': 'tabmenuli'}).attrMap['id']
 

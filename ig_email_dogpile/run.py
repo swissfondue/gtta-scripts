@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from dogpile import DogpileParser
+from dogpile import Dogpile
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Dogpile(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = DogpileParser
+    parser = Dogpile
 
     def test(self):
         """

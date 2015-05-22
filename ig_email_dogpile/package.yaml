@@ -1,6 +1,6 @@
 type: script
 name: ig_email_dogpile
-version: 1.7
+version: 2.2
 dependencies:
   library:
     - core
