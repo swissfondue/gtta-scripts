@@ -9,9 +9,9 @@ class CommonIGEmailTask(Task):
     """
     Common abstract class for ig_email parsers
     """
-    results = set()
+    results = []
     parser = None
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    HEADERS = {'User-Agent': 'Mozilla/5.0'}
     TEST_TIMEOUT = 60 * 60
 
     def _wrapped_target(self):
@@ -35,15 +35,17 @@ class CommonIGEmailTask(Task):
 
         while urls:
             try:
-                req = requests.get(urls.pop(), headers=self.headers)
-                if not 'text/html' in req.headers['content-type']:
+                req = requests.get(urls.pop(), headers=self.HEADERS)
+                if 'text/html' not in req.headers['content-type']:
                     continue
                 soup = BeautifulSoup(req.content)
+                for email in parse_soup(soup):
+                    email = email.lower()
+                    if email not in self.results:
+                        self._write_result(email)
+                        self.results.append(email)
             except Exception as e:
                 continue
-            self.results.update(parse_soup(soup))
-
-        self._write_result('\n'.join(self.results))
 
 
 class CommonIGEmailParser(object):
@@ -113,15 +115,14 @@ def parse_soup(soup):
     :return:
     """
     emails = set()
-    pattern = re.compile(r'[\w\.-]+@[\w\.-]+')
+    pattern = re.compile(r'[\w\.-]+@([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}')
 
     # looking at links
     for a in soup.findAll('a'):
-        try:
-            href = filter(lambda x: x[0] == 'href', a.attrs)[0][1]
-            emails.update(pattern.findall(href))
-        except:
+        href = a.get('href')
+        if not href or 'mailto:' not in href:
             continue
+        emails.update(pattern.findall(href))
 
     # looking at text
     for text in filter(lambda x: '@' in x, soup.findAll(text=True)):

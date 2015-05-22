@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-import re
+from emailgrabber import parse_soup
 from BeautifulSoup import BeautifulSoup
 from core.crawler import LinkCrawler
 from core import Task, execute_task
@@ -10,16 +9,7 @@ class IG_Email_Crawler(Task):
     """
     Search emails from page by url, using crawler.py
     """
-    emails = set()
-
-    def add_emails(self, emails):
-        """
-        Add collected emails
-        """
-        for email in emails:
-            if email not in self.emails:
-                self._write_result(email)
-                self.emails.add(email)
+    emails = []
 
     def collect_unique_emails(self, raw):
         """
@@ -27,20 +17,11 @@ class IG_Email_Crawler(Task):
         """
         url, content = raw['url'], raw['content']
         soup = BeautifulSoup(content)
-
-        for a in soup.findAll('a'):
-            for attr in a.attrs:
-                if attr[0] == 'href':
-                    emails = re.findall(r'[\w\.-]+@[\w\.-]+', attr[1])
-
-                    if emails:
-                        self.add_emails(emails)
-
-                    break
-
-        for text in filter(lambda x: '@' in x, soup.findAll(text=True)):
-            emails = re.findall(r'[\w\.-]+@[\w\.-]+', text)
-            self.add_emails(emails)
+        for email in parse_soup(soup):
+            email = email.lower()
+            if email not in self.emails:
+                self._write_result(email)
+                self.emails.append(email)
 
     def main(self, *args):
         """

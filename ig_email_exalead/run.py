@@ -1,36 +1,14 @@
 # -*- coding: utf-8 -*-
-import requests
-from BeautifulSoup import BeautifulSoup
-from core import Task, execute_task
 from exalead import ExaleadParser
-from emailgrabber import parse_soup
+from core import execute_task
+from emailgrabber import CommonIGEmailTask
 
 
-class IG_Email_Exalead(Task):
+class IG_Email_Exalead(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    results = set()
-    TEST_TIMEOUT = 60 * 60
-
-    def main(self, *args):
-        """
-        Main function
-        """
-        if self.ip:
-            return
-
-        urls = ExaleadParser('"@%s"' % self.target).process()
-
-        while urls:
-            try:
-                req = requests.get(urls.pop(), headers={'User-Agent': 'Mozilla/5.0'})
-                soup = BeautifulSoup(req.content)
-            except:
-                continue
-            self.results.update(parse_soup(soup))
-
-        self._write_result('\n'.join(self.results))
+    parser = ExaleadParser
 
     def test(self):
         """
