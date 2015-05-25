@@ -44,7 +44,10 @@ class Lexxe(CommonIGEmailParser):
         next_link = self._extract_next_link(soup)
 
         while next_link:
-            next_url = next_link.a.get('href')
+            try:
+                next_url = next_link.a.get('href')
+            except:
+                break
 
             soup = self._get_soup(path=next_url)
             self._collect_results_from_soup(soup)

@@ -17,11 +17,14 @@ class WotboxParser(CommonIGEmailParser):
         """
         tags = soup.findAll('a', attrs={'rel': 'nofollow'})
         for tag in tags:
-            v = tag.get('onclick')[11:-3]
-            redirect_path = self.STATIC_PATH + ('&v=%s' % v)
-            redirect_script = self._get_soup(path=redirect_path)
-            string = redirect_script.script.text.split('\n')[1]
-            self.results.add(string[7:-3])
+            try:
+                v = tag.get('onclick')[11:-3]
+                redirect_path = self.STATIC_PATH + ('&v=%s' % v)
+                redirect_script = self._get_soup(path=redirect_path)
+                string = redirect_script.script.text.split('\n')[1]
+                self.results.add(string[7:-3])
+            except:
+                continue
 
     def _extract_next_link(self, soup):
         """

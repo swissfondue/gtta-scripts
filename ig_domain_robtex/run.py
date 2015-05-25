@@ -24,9 +24,14 @@ class IG_Domain_Robtex(Task):
         )
 
         div = soup.find('div', attrs={'id': 'datawhois'})
+        if not div:
+            return
 
         for tag in div.findAll('h2'):
-            result = tag.find('a').text
+            tag_a = tag.find('a')
+            if not tag_a:
+                continue
+            result = tag_a.text
 
             if result not in results:
                 results.append(result)

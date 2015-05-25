@@ -22,12 +22,7 @@ class IG_Network_Arin(Task):
             ).content)
 
         for tag in soup.findAll('netref'):
-            tag.attrMap = {}
-
-            for attr in tag.attrs:
-                tag.attrMap[attr[0]] = attr[1]
-
-            text = '%s-%s' % (tag.attrMap['startaddress'], tag.attrMap['endaddress'])
+            text = '%s-%s' % (tag.get('startaddress'), tag.get('endaddress'))
 
             yield text
 
@@ -51,7 +46,10 @@ class IG_Network_Arin(Task):
 
         for th in soup.findAll('th', attrs={'colspan': '2'}):
             if th.text == 'Customers':
-                next_str = th.parent.nextSibling.nextSibling.findAll('a')[0]
+                try:
+                    next_str = th.parent.nextSibling.nextSibling.findAll('a')[0]
+                except:
+                    continue
 
                 while True:
                     for result in self._extract_networks_from_customer(next_str.text):
@@ -65,7 +63,10 @@ class IG_Network_Arin(Task):
                         break
 
             elif th.text == 'Networks':
-                next_str = th.parent.nextSibling.nextSibling.findAll('td')[1]
+                try:
+                    next_str = th.parent.nextSibling.nextSibling.findAll('td')[1]
+                except:
+                    continue
 
                 while True:
                     text = next_str.text

@@ -16,7 +16,10 @@ class Lixam(CommonIGEmailParser):
         """
         tags = soup.findAll('div', attrs={'class': 'searchresultsblocks'})
         for tag in tags:
-            self.results.add(tag.a.get('href'))
+            try:
+                self.results.add(tag.a.get('href'))
+            except:
+                continue
 
     def process(self):
         """

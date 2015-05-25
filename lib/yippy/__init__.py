@@ -31,7 +31,10 @@ class YippyParser(object):
             divs = result_container.findAll('div', attrs={'class': 'document-header'})
 
             for div in divs:
-                self.results.update([filter(lambda x: x[0] == 'href', div.find('a').attrs)[0][1]])
+                try:
+                    self.results.add(div.find('a').get('href'))
+                except:
+                    continue
 
     def process(self):
         """
@@ -53,7 +56,7 @@ class YippyParser(object):
         tag_to_next = soup.find('a', attrs={'class': 'listnext'})
 
         while tag_to_next:
-            next_url = filter(lambda x: x[0] == 'href', tag_to_next.attrs)[0][1]
+            next_url = tag_to_next.get('href')
 
             req = s.get(self.HOST + next_url, headers=self.headers)
             soup = BeautifulSoup(req.content)

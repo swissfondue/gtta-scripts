@@ -30,6 +30,9 @@ class IG_Domain_BGP(Task):
 
         div = soup.find('div', attrs={'id': 'dns'})
 
+        if not div:
+            return
+
         for tag in div.findAll('a'):
             result = tag.text
 

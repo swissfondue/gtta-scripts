@@ -33,12 +33,15 @@ class Dogpile(object):
             links = web_results.findAll('a', attrs={'class': 'resultDisplayUrl'})
 
             for result in links:
-                href = result.attrMap['href']
-                cut_left = href.split('ru=')[1]
-                cut_right = cut_left.split('&')[0]
+                try:
+                    href = result.get('href')
+                    cut_left = href.split('ru=')[1]
+                    cut_right = cut_left.split('&')[0]
 
-                url = urlparse.parse_qs("x=%s" % cut_right)
-                url = url["x"][0]
+                    url = urlparse.parse_qs("x=%s" % cut_right)
+                    url = url["x"][0]
+                except:
+                    continue
 
                 if not url in self.results:
                     self.results.add(url)
@@ -94,8 +97,11 @@ class Dogpile(object):
 
             retries = 0
 
-            link_to_next_page = soup\
-                .find('div', attrs={'id': 'resultsPaginationBottom'})\
-                .find('li', attrs={'class': 'paginationNext'})
+            try:
+                link_to_next_page = soup\
+                    .find('div', attrs={'id': 'resultsPaginationBottom'})\
+                    .find('li', attrs={'class': 'paginationNext'})
+            except:
+                link_to_next_page = None
 
         return self.results

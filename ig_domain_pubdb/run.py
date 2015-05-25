@@ -117,7 +117,10 @@ class IG_Domain_PubDB(Task):
                 continue
 
             for li in soup.findAll('li'):
-                domain = li.find('a').text
+                tag_a = li.find('a')
+                if not tag_a:
+                    continue
+                domain = tag_a.text
 
                 if not domain == self.target and domain not in results:
                     results.append(domain)
@@ -133,7 +136,10 @@ class IG_Domain_PubDB(Task):
                 continue
 
             for li in soup.findAll('li'):
-                domain = li.find('a').text
+                tag_a = li.find('a')
+                if not tag_a:
+                    continue
+                domain = tag_a.text
 
                 if not domain == self.target and domain not in results:
                     results.append(domain)

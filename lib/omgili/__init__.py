@@ -16,7 +16,10 @@ class Omgili(CommonIGEmailParser):
         """
         tags = soup.findAll('article')
         for tag in tags:
-            self.results.add(tag.a.get('href'))
+            try:
+                self.results.add(tag.a.get('href'))
+            except:
+                continue
 
     def process(self):
         """

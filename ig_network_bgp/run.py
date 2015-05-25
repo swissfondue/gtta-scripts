@@ -23,13 +23,13 @@ class IG_Network_BGP(Task):
         """
         div = raw.find('div', attrs={'id': 'search'})
         results = []
+        if div:
+            for tag in div.findAll('a'):
+                result = tag.text
 
-        for tag in div.findAll('a'):
-            result = tag.text
-
-            if self._is_valid(result) and result not in results:
-                results.append(result)
-                self._write_result(result)
+                if self._is_valid(result) and result not in results:
+                    results.append(result)
+                    self._write_result(result)
 
     def _search_by_ip(self, raw):
         """
@@ -37,13 +37,16 @@ class IG_Network_BGP(Task):
         """
         div = raw.find('div', attrs={'id': 'ipinfo'})
         results = []
+        if div:
+            for tag in div.findAll('td', attrs={'class': 'nowrap'}):
+                try:
+                    result = tag.find('a').text
+                except:
+                    continue
 
-        for tag in div.findAll('td', attrs={'class': 'nowrap'}):
-            result = tag.find('a').text
-
-            if self._is_valid(result) and result not in results:
-                results.append(result)
-                self._write_result(result)
+                if self._is_valid(result) and result not in results:
+                    results.append(result)
+                    self._write_result(result)
 
     def _search_by_domain(self, raw):
         """
@@ -51,15 +54,18 @@ class IG_Network_BGP(Task):
         """
         div = raw.find('div', attrs={'id': 'dns'})
         results = []
+        if div:
+            for dnshead in div.findAll('div', attrs={'class': 'dnshead'}):
+                if dnshead.text == 'A Records':
+                    try:
+                        dnsdata = dnshead.nextSibling.nextSibling
+                        result = dnsdata.find('a').text
+                    except:
+                        continue
 
-        for dnshead in div.findAll('div', attrs={'class': 'dnshead'}):
-            if dnshead.text == 'A Records':
-                dnsdata = dnshead.nextSibling.nextSibling
-                result = dnsdata.find('a').text
-
-                if self._is_valid(result) and result not in results:
-                    results.append(result)
-                    self._write_result(result)
+                    if self._is_valid(result) and result not in results:
+                        results.append(result)
+                        self._write_result(result)
 
     def main(self, *args):
         """
@@ -72,7 +78,10 @@ class IG_Network_BGP(Task):
                 headers={'User-Agent': 'Mozilla/5.0'}
             ).content)
 
-        first_tabmenuli_id = soup.find('li', attrs={'class': 'tabmenuli'}).attrMap['id']
+        try:
+            first_tabmenuli_id = soup.find('li', attrs={'class': 'tabmenuli'}).get('id')
+        except:
+            return
 
         if first_tabmenuli_id == 'tab_search':
             self._search_by_keyword(soup)
@@ -80,8 +89,6 @@ class IG_Network_BGP(Task):
             self._search_by_ip(soup)
         elif first_tabmenuli_id == 'tab_dns':
             self._search_by_domain(soup)
-
-        self._check_stop()
 
     def test(self):
         """

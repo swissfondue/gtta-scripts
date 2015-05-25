@@ -29,7 +29,10 @@ class Hotbot(object):
         tags = soup.findAll('li', attrs={'class': 'result'})
 
         for tag in tags:
-            self.results.update([filter(lambda x: x[0] == 'href', tag.find('a').attrs)[0][1]])
+            try:
+                self.results.add(tag.find('a').get('href'))
+            except:
+                continue
 
     def _extract_keyvol(self, soup):
         """
@@ -37,8 +40,12 @@ class Hotbot(object):
         :param soup:
         :return:
         """
-        js = soup.find('script').text
-        return re.findall(r'[a-f0-9]{20}', js)[0]
+        try:
+            js = soup.find('script').text
+            result = re.findall(r'[a-f0-9]{20}', js)[0]
+        except:
+            result = None
+        return result
 
     def process(self):
         """
@@ -48,6 +55,8 @@ class Hotbot(object):
         s = requests.Session()
         soup = BeautifulSoup(s.get(self.HOST, headers=self.headers).content)
         keyvol = self._extract_keyvol(soup.find('div', attrs={'class': 'hpSearchHolder'}))
+        if not keyvol:
+            return self.results
         params = {
             'q': self.target,
             'keyvol': keyvol
@@ -62,6 +71,8 @@ class Hotbot(object):
         while True:
             pn += 1
             params['keyvol'] = self._extract_keyvol(soup.find('header'))
+            if not params['keyvol']:
+                break
             params['pn'] = '%s' % pn
 
             req = s.get(self.HOST + '/search/web', headers=self.headers, params=params)
