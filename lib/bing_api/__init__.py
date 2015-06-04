@@ -3,7 +3,7 @@ import base64
 from emailgrabber import CommonIGEmailParser
 
 
-class BingAPIParser(CommonIGEmailParser):
+class BingAPI(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

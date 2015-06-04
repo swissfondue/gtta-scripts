@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class WotboxParser(CommonIGEmailParser):
+class Wotbox(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

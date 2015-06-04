@@ -3,7 +3,7 @@ import requests
 from BeautifulSoup import BeautifulSoup
 
 
-class YippyParser(object):
+class Yippy(object):
     """
     Class for parsing of results of search
     """

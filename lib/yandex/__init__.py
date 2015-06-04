@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class YandexParser(CommonIGEmailParser):
+class Yandex(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
