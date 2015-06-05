@@ -1,0 +1,8 @@
+type: library
+name: yahoo_api
+version: 1.7
+dependencies:
+  library:
+    - emailgrabber
+  system:
+    - python-oauthlib
