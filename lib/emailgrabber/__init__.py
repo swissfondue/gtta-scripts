@@ -131,6 +131,6 @@ def parse_soup(soup):
     emails = [e.lower() for e in emails]
 
     # exclude trash
-    emails = filter(lambda x: x.split('.')[-1] not in ["gif", "jpg", "jpeg", "png"], emails)
+    emails = filter(lambda x: x[x.rindex('.') + 1:] not in ["gif", "jpg", "jpeg", "png"], emails)
 
     return emails
