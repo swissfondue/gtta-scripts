@@ -25,11 +25,10 @@ class YahooAPI(CommonIGEmailParser):
         :return:
         """
         oauth = OAuth1(args[0][0], client_secret=args[0][1])
-        params = {'q': self.target,
-                  'format': 'xml',
+        params = {'format': 'xml',
                   'count': '50'}
-
-        soup = self._get_soup(params=params, auth=oauth)
+        path = '?q=%s' % self.target.replace(' ', '%20').replace(':', '%3A')
+        soup = self._get_soup(path=path, params=params, auth=oauth)
         self._collect_results_from_soup(soup)
 
         skip = 0
