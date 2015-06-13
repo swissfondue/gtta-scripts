@@ -12,39 +12,35 @@ class IG_Subdomain_Bruteforce(Task):
     """
     TEST_TIMEOUT = 60 * 60
 
-    # generate symbols for generating of subdomains
-    symbols = string.lowercase + string.digits
+    def _generate_subdomains(self, level, current_value=""):
+        """Recursive subdomain generator"""
+        for char in string.lowercase + string.digits:
+            new_value = current_value + char
 
-    def recursion(self, lvl, store):
-        """
-        Recursively generator for 'yield'ing combinations of self.sybmols
-        """
-        for char in self.symbols:
-            new_store = store + char
-
-            if lvl > 0:
-                for item in self.recursion(lvl - 1, new_store):
+            if level > 0:
+                for item in self._generate_subdomains(level - 1, new_value):
                     yield item
+
             else:
-                yield new_store
+                yield new_value
 
-    def mygen(self, min_l, max_l):
-        """
-        Subdomains generator. Using generator 'recursion'.
-        """
-        while min_l <= max_l:
-            for generator in self.recursion(min_l - 1, ''):
-                yield generator
-            min_l += 1
+    def generate_subdomains(self, min_len, max_len):
+        """Subdomains generator"""
+        while min_len <= max_len:
+            for subdomain in self._generate_subdomains(min_len - 1):
+                yield subdomain
 
-    def main(self, *args):
+            min_len += 1
+
+    def main(self, min_len=(1,), max_len=(3,)):
         """
         Main function
         """
-        minimal_len = args[0][0]
-        maximal_len = args[1][0]
-        if minimal_len > maximal_len:
-            self._write_result('Incorrect min and max length.')
+        min_len = min_len[0]
+        max_len = max_len[0]
+
+        if min_len > max_len:
+            self._write_result("Min length should be less or equal to max length.")
             return
 
         if not self.host:
@@ -53,17 +49,17 @@ class IG_Subdomain_Bruteforce(Task):
         if self.host.startswith("www."):
             self.host = self.host[4:]
 
-        # collect NSs
+        # collect nameservers
         r = Resolver()
         r.lifetime = self.DNS_TIMEOUT
 
-        name_servers = r.query(self.host, 'NS')
+        name_servers = r.query(self.host, "NS")
         name_servers = map(lambda x: str(x), name_servers)
 
         ns_list = []
 
         for name_server in name_servers:
-            if name_server[-1] == '.':
+            if name_server[-1] == ".":
                 name_server = name_server[:-1]
 
             ns_list.append(gethostbyname(name_server))
@@ -72,30 +68,24 @@ class IG_Subdomain_Bruteforce(Task):
         r.lifetime = self.DNS_TIMEOUT
         r.nameservers = ns_list
 
-        # search really subdomains
         results = set()
 
-        for sub in self.mygen(minimal_len, maximal_len):
-            domain = '%s.%s' % (sub, self.host)
+        for sub in self.generate_subdomains(min_len, max_len):
+            domain = "%s.%s" % (sub, self.host)
 
-            try:
-                a_records = r.query(domain, 'A')
-                if a_records:
-                    if sub not in results:
-                        results.add(sub)
-                        self._write_result(sub)
-                    continue
-            except Exception as e:
-                pass
+            for record in ("A", "CNAME"):
+                try:
+                    records = r.query(domain, record)
 
-            try:
-                cname_records = r.query(domain, 'CNAME')
-                if cname_records:
-                    if sub not in results:
-                        results.add(sub)
-                        self._write_result(sub)
-            except Exception as e:
-                pass
+                    if records:
+                        if sub not in results:
+                            results.add(sub)
+                            self._write_result(domain)
+
+                        break
+
+                except Exception:
+                    pass
 
     def test(self):
         """
