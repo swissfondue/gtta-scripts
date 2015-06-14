@@ -1,0 +1,8 @@
+type: script
+name: ig_domain_yahoo_api
+version: 2.2
+dependencies:
+  library:
+    - core
+    - yahoo_api
+    - emailgrabber
