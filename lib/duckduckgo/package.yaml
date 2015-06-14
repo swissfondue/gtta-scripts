@@ -1,5 +1,5 @@
 type: library
-name: ddg
+name: duckduckgo
 version: 1.7
 dependencies:
   library:

@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class YandexParser(CommonIGEmailParser):
+class Yandex(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
@@ -16,7 +16,10 @@ class YandexParser(CommonIGEmailParser):
         """
         tags = soup.findAll('h2', attrs={'class': 'serp-item__title'})
         for tag in tags:
-            self.results.add(tag.a.get('href'))
+            try:
+                self.results.add(tag.a.get('href'))
+            except:
+                continue
 
     def _extract_next_link(self, soup):
         """

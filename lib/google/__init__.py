@@ -3,7 +3,7 @@ from time import sleep
 from emailgrabber import CommonIGEmailParser
 
 
-class GoogleParser(CommonIGEmailParser):
+class Google(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
@@ -20,13 +20,17 @@ class GoogleParser(CommonIGEmailParser):
         tags = soup.findAll('h3', attrs={'class': 'r'})
 
         for tag in tags:
-            url_raw = tag.a.get('href')
+            try:
+                url_raw = tag.a.get('href')
 
-            if not '/url?' in url_raw:
+                if not '/url?' in url_raw:
+                    continue
+
+                lsplit = url_raw.split('q=')[1]
+                rsplit = lsplit.split('&')[0]
+
+            except:
                 continue
-
-            lsplit = url_raw.split('q=')[1]
-            rsplit = lsplit.split('&')[0]
 
             self.results.add(rsplit)
 

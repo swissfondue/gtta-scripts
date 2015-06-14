@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from yandex import YandexParser
+from yandex import Yandex
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Yandex(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = YandexParser
+    parser = Yandex
 
     def test(self):
         """

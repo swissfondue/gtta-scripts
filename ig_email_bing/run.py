@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from bing import BingParser
+from bing import Bing
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Bing(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = BingParser
+    parser = Bing
 
     def test(self):
         """

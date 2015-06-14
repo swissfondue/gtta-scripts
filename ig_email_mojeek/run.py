@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mojeek import MojeekParser
+from mojeek import Mojeek
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Mojeek(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = MojeekParser
+    parser = Mojeek
 
     def test(self):
         """

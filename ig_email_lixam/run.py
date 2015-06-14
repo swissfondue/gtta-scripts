@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from lixam import LixamParser
+from lixam import Lixam
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Lixam(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = LixamParser
+    parser = Lixam
 
     def test(self):
         """

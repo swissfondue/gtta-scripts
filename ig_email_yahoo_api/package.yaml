@@ -1,8 +1,8 @@
 type: script
-name: ig_email_google
+name: ig_email_yahoo_api
 version: 2.2
 dependencies:
   library:
     - core
-    - google
+    - yahoo_api
     - emailgrabber

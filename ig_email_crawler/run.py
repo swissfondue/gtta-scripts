@@ -18,7 +18,6 @@ class IG_Email_Crawler(Task):
         url, content = raw['url'], raw['content']
         soup = BeautifulSoup(content)
         for email in parse_soup(soup):
-            email = email.lower()
             if email not in self.emails:
                 self._write_result(email)
                 self.emails.append(email)

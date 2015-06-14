@@ -3,7 +3,7 @@ import requests
 from BeautifulSoup import BeautifulSoup
 
 
-class ExaleadParser(object):
+class Exalead(object):
     """
     Class for parsing of results of search
     """
@@ -28,7 +28,7 @@ class ExaleadParser(object):
         tags = soup.findAll('a', attrs={'class': 'title'})
 
         for tag in tags:
-            self.results.update([filter(lambda x: x[0] == 'href', tag.attrs)[0][1]])
+            self.results.add(tag.get('href'))
 
     def process(self):
         """
@@ -44,7 +44,7 @@ class ExaleadParser(object):
         tag_to_next = soup.find('a', attrs={'title': 'Go to the next page'})
 
         while tag_to_next:
-            next_url = filter(lambda x: x[0] == 'href', tag_to_next.attrs)[0][1]
+            next_url = tag_to_next.get('href')
 
             req = s.get(self.HOST + next_url, headers=self.headers)
             soup = BeautifulSoup(req.content)

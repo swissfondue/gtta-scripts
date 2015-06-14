@@ -40,7 +40,6 @@ class CommonIGEmailTask(Task):
                     continue
                 soup = BeautifulSoup(req.content)
                 for email in parse_soup(soup):
-                    email = email.lower()
                     if email not in self.results:
                         self._write_result(email)
                         self.results.append(email)
@@ -65,23 +64,22 @@ class CommonIGEmailParser(object):
         """
         self.target = target
 
-    def _get_soup(self, path='', params={}, data={}, use_post=False):
+    def _get_soup(self, path='', use_post=False, **kwargs):
         """
         Request and souping
         :param path:
-        :param params:
-        :param data:
         :param use_post:
+        :param kwargs:
         :return:
         """
+
         req_method = self.req_source.get
         if use_post:
             req_method = self.req_source.post
         req = req_method(
             '%s%s' % (self.HOST, path),
             headers=self.headers,
-            params=params,
-            data=data)
+            **kwargs)
         return BeautifulSoup(req.content)
 
     def _extract_next_link(self, soup):
@@ -115,17 +113,24 @@ def parse_soup(soup):
     :return:
     """
     emails = set()
-    pattern = re.compile(r'[\w\.-]+@([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}')
+    pattern = re.compile(r'(\w+[\w\.-]*@(?:(?:\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(?:(?:[a-zA-Z0-9\-]+\.)+)(?:[a-zA-Z]{2,6})))')
 
     # looking at links
     for a in soup.findAll('a'):
         href = a.get('href')
         if not href or 'mailto:' not in href:
             continue
+
         emails.update(pattern.findall(href))
 
     # looking at text
     for text in filter(lambda x: '@' in x, soup.findAll(text=True)):
         emails.update(pattern.findall(text))
+
+    # do lowercase
+    emails = [e.lower() for e in emails]
+
+    # exclude trash
+    emails = filter(lambda x: x[x.rindex('.') + 1:] not in ["gif", "jpg", "jpeg", "png"], emails)
 
     return emails

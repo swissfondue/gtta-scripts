@@ -26,10 +26,12 @@ class IG_Domain_BGP(Task):
             requests.get(
                 'http://bgp.he.net/ip/%s' % self.ip,
                 headers={'User-Agent': 'Mozilla/5.0'}
-            ).content
-        )
+            ).content)
 
         div = soup.find('div', attrs={'id': 'dns'})
+
+        if not div:
+            return
 
         for tag in div.findAll('a'):
             result = tag.text

@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class DDGParser(CommonIGEmailParser):
+class DuckDuckGo(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

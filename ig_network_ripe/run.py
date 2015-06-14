@@ -10,6 +10,7 @@ class IG_Network_Ripe(Task):
     Get ripe inetnums
     """
     target = ''
+    results = []
 
     def _get_soup(self, session, data):
         """
@@ -20,30 +21,34 @@ class IG_Network_Ripe(Task):
                 'https://apps.db.ripe.net/search/full-text.html',
                 headers={'User-Agent': 'Mozilla/5.0'},
                 data=data
-            ).content
-        )
+            ).content)
 
     def _get_state(self, raw):
         """
         Get javax.faces.ViewState from html page
         """
-        return raw.find('input', attrs={'name': 'javax.faces.ViewState', 'type': 'hidden'}).attrMap['value']
+        tag = raw.find('input', attrs={'name': 'javax.faces.ViewState', 'type': 'hidden'})
+        return tag.get('value') if tag else None
 
     def _collect_data_from_page(self, raw):
         """
         Collect data from page
         """
-        form = raw.find('div', attrs={'id': 'form'})
-
-        for tag in form.find('fieldset').findAll('div')[1].findAll('a'):
+        try:
+            fieldset = raw.find('div', attrs={'id': 'form'}).find('fieldset')
+            a_tags = fieldset.findAll('div')[1].findAll('a')
+        except:
+            return
+        for tag in a_tags:
             text = tag.text.replace('inetnum: ', '').replace(" ", "")
-            yield text
+            if text not in self.results:
+                self.results.append(text)
+                self._write_result(text)
 
     def main(self, *args):
         """
         Main function
         """
-        results = []
 
         advanced_form_data = {
             'home_search': 'home_search',
@@ -89,7 +94,11 @@ class IG_Network_Ripe(Task):
         self._collect_data_from_page(soup)
 
         # collect data from prev pages
-        current = int(soup.find('span', attrs={'id': 'current'}).text)
+        try:
+            current = int(soup.find('span', attrs={'id': 'current'}).text)
+        except:
+            return
+
         del page_form['resultsView:paginationView:paginationForm:main:last:last']
 
         while current > 2:
@@ -97,14 +106,15 @@ class IG_Network_Ripe(Task):
 
             # find link to previous page in paginator
             paginator = soup.find('form', attrs={'id': 'resultsView:paginationView:paginationForm'})
+            if paginator:
 
-            for page_link in paginator.findAll('input', attrs={'type': 'submit'}):
-                page_link_val = page_link.attrMap['value']
+                for page_link in paginator.findAll('input', attrs={'type': 'submit'}):
+                    page_link_val = page_link.get('value')
 
-                if page_link_val == unicode(current):
-                    page_link_name = page_link.attrMap['name']
-                    page_form.update({page_link_name: page_link_val})
-                    break
+                    if page_link_val == unicode(current):
+                        page_link_name = page_link.get('name')
+                        page_form.update({page_link_name: page_link_val})
+                        break
 
             # get previous page of results
             soup = self._get_soup(session, page_form)
@@ -114,10 +124,7 @@ class IG_Network_Ripe(Task):
 
             page_form['javax.faces.ViewState'] = self._get_state(soup)
 
-            for result in self._collect_data_from_page(soup):
-                if result not in results:
-                    results.append(result)
-                    self._write_result(result)
+            self._collect_data_from_page(soup)
 
     def test(self):
         """

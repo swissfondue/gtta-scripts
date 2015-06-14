@@ -1,8 +1,8 @@
 type: script
-name: ig_email_ddg
-version: 1.7
+name: ig_email_duckduckgo
+version: 2.2
 dependencies:
   library:
     - core
-    - ddg
+    - duckduckgo
     - emailgrabber

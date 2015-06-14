@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from yahoo import YahooParser
+from yahoo import Yahoo
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Yahoo(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = YahooParser
+    parser = Yahoo
 
     def test(self):
         """

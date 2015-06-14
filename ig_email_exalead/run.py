@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from exalead import ExaleadParser
+from exalead import Exalead
 from core import execute_task
 from emailgrabber import CommonIGEmailTask
 
@@ -8,7 +8,7 @@ class IG_Email_Exalead(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = ExaleadParser
+    parser = Exalead
 
     def test(self):
         """

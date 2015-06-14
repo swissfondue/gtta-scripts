@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from yippy import YippyParser
+from yippy import Yippy
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
@@ -8,7 +8,7 @@ class IG_Email_Yippy(CommonIGEmailTask):
     """
     Search emails in pages
     """
-    parser = YippyParser
+    parser = Yippy
 
     def test(self):
         """

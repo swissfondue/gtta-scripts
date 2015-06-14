@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import base64
+from requests_oauthlib import OAuth1
 from emailgrabber import CommonIGEmailParser
 
 
-class BingAPI(CommonIGEmailParser):
+class YahooAPI(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'https://api.datamarket.azure.com/Bing/SearchWeb/Web'
+    HOST = 'https://yboss.yahooapis.com/ysearch/web'
 
     def _collect_results_from_soup(self, soup):
         """
@@ -15,7 +15,7 @@ class BingAPI(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('d:url')
+        tags = soup.findAll('clickurl')
         for tag in tags:
             self.results.add(tag.text)
 
@@ -24,25 +24,24 @@ class BingAPI(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        params = {'Query': self.target}
+        oauth = OAuth1(args[0][0], client_secret=args[0][1])
+        params = {'q': self.target,
+                  'format': 'xml',
+                  'count': '50'}
 
-        keys = '%s:%s' % (args[0][0], args[0][0])
-        encoded = base64.b64encode(keys)
-        self.headers.update({'Authorization': 'Basic %s' % encoded})
-
-        soup = self._get_soup(params=params)
+        soup = self._get_soup(params=params, auth=oauth)
         self._collect_results_from_soup(soup)
 
         skip = 0
 
         while True:
             skip += 50
-            params['$skip'] = skip
+            params['start'] = skip
 
-            soup = self._get_soup(params=params)
+            soup = self._get_soup(params=params, auth=oauth)
             self._collect_results_from_soup(soup)
 
-            if not soup.find('d:url'):
+            if not soup.find('clickurl'):
                 break
 
         return self.results

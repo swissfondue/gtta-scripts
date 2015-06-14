@@ -14,7 +14,7 @@ class IG_Domain_BLWatch(Task):
         """
         Main function
         """
-        results = set()
+        results = []
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'}
         index_params = {
             'backlinkurl': "http://" + self.host,
@@ -29,7 +29,11 @@ class IG_Domain_BLWatch(Task):
                 headers=headers,
             ).content)
 
-        salt = soup.find('input', attrs={'type': 'hidden', 'name': 'salt'}).attrMap['value']
+        salt = soup.find('input', attrs={'type': 'hidden', 'name': 'salt'}).get('value')
+
+        if not salt:
+            return
+
         index_params.update({'salt': salt})
 
         soup = BeautifulSoup(ses.post(
@@ -40,14 +44,14 @@ class IG_Domain_BLWatch(Task):
         td_list = soup.findAll('td', attrs={'width': '200'})
         for td in td_list:
             try:
-                url = filter(lambda x: x[0] == 'href', td.find('a').attrs)[0][1]
+                url = td.find('a').get('href')
                 left_cut = url.split('//')[1]
                 domain = left_cut.split('/')[0]
-                results.add(domain)
+                if domain not in results:
+                    results.append(domain)
+                    self._write_result(domain)
             except:
                 continue
-
-        map(lambda x: self._write_result(x), results)
 
     def test(self):
         """

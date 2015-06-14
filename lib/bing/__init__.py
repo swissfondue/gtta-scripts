@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class BingParser(CommonIGEmailParser):
+class Bing(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
@@ -16,6 +16,9 @@ class BingParser(CommonIGEmailParser):
         """
         tags = soup.findAll('div', attrs={'class': 'b_title'})
         for tag in tags:
+            a_tag = tag.a
+            if not a_tag:
+                continue
             self.results.add(tag.a.get('href'))
 
     def _extract_next_link(self, soup):

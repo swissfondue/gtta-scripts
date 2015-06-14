@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class LixamParser(CommonIGEmailParser):
+class Lixam(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
@@ -16,7 +16,10 @@ class LixamParser(CommonIGEmailParser):
         """
         tags = soup.findAll('div', attrs={'class': 'searchresultsblocks'})
         for tag in tags:
-            self.results.add(tag.a.get('href'))
+            try:
+                self.results.add(tag.a.get('href'))
+            except:
+                continue
 
     def process(self):
         """

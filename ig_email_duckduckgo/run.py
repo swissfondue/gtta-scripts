@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from ddg import DDGParser
+from duckduckgo import DuckDuckGo
 from emailgrabber import CommonIGEmailTask
 from core import execute_task
 
 
-class IG_Email_DDG(CommonIGEmailTask):
+class IG_Email_DuckDuckGo(CommonIGEmailTask):
     """
     Search emails in pages from source
     """
-    parser = DDGParser
+    parser = DuckDuckGo
 
     def test(self):
         """
@@ -17,4 +17,4 @@ class IG_Email_DDG(CommonIGEmailTask):
         self.target = "clariant.com"
         self.main()
 
-execute_task(IG_Email_DDG)
+execute_task(IG_Email_DuckDuckGo)

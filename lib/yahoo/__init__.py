@@ -3,7 +3,7 @@ from emailgrabber import CommonIGEmailParser
 import urlparse
 
 
-class YahooParser(CommonIGEmailParser):
+class Yahoo(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """

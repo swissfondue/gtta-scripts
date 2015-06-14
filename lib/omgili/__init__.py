@@ -2,7 +2,7 @@
 from emailgrabber import CommonIGEmailParser
 
 
-class OmgiliParser(CommonIGEmailParser):
+class Omgili(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
@@ -16,7 +16,10 @@ class OmgiliParser(CommonIGEmailParser):
         """
         tags = soup.findAll('article')
         for tag in tags:
-            self.results.add(tag.a.get('href'))
+            try:
+                self.results.add(tag.a.get('href'))
+            except:
+                continue
 
     def process(self):
         """

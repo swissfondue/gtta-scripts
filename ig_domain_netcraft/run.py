@@ -29,11 +29,13 @@ class IG_Domain_Netcraft(Task):
         req = requests.get(
             url,
             headers=headers,
-            cookies=requests.utils.cookiejar_from_dict(cookies)
-        )
+            cookies=requests.utils.cookiejar_from_dict(cookies))
 
         soup = BeautifulSoup(req.content)
-        table = soup.find('div', attrs={'id': 'content'}).find('table', attrs={'class': 'TBtable'})
+        try:
+            table = soup.find('div', attrs={'id': 'content'}).find('table', attrs={'class': 'TBtable'})
+        except:
+            return
 
         for tag in table.findAll('a', attrs={'rel': 'nofollow'}):
             result = tag.text
