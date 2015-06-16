@@ -143,6 +143,7 @@ class WebSearchClientDomains(Task):
     Web search task
     """
     MULTITHREADED = True
+    TEST_TARGETS = ["infoguard.ch", "clariant.com"]
 
     def main(self, *args, **kwargs):
         """Main function"""
@@ -158,7 +159,6 @@ class WebSearchClientDomains(Task):
 
     def test(self):
         """Test function"""
-        self.host = "google.com"
         self.main()
 
 execute_task(WebSearchClientDomains)

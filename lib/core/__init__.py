@@ -9,9 +9,11 @@ from socket import inet_aton
 from time import sleep
 from lxml import etree
 from error import NotEnoughArguments, TaskTimeout, NoDataReturned, InvalidTargetFile
-from threading import Lock
+from Queue import Queue
+from cStringIO import StringIO
 
 SANDBOX_IP = "192.168.66.66"
+target_queue = Queue()
 
 
 class ResultTable(object):
@@ -74,9 +76,10 @@ class Task(Thread):
     SYSTEM_LIBRARY_PATH = "/opt/gtta/scripts/system/lib"
     USER_LIBRARY_PATH = "/opt/gtta/scripts/lib"
     MULTITHREADED = False
-    THREADS_COUNT = 10
+    THREAD_COUNT = 10
+    TEST_TARGETS = ["google.com"]
 
-    def __init__(self):
+    def __init__(self, worker=False):
         """
         Constructor
         """
@@ -95,7 +98,7 @@ class Task(Thread):
         self.error = False
         self._stop = Event()
         self._result = None
-        self.lock = Lock()
+        self._worker = worker
 
         self.produced_output = False
 
@@ -216,29 +219,101 @@ class Task(Thread):
         """
         raise Exception("Main function not implemented.")
 
+    def _run_target(self, target):
+        """Run task for a single target"""
+        self.target = target
+
+        try:
+            inet_aton(target)
+            self.ip = target
+
+        except:
+            self.host = target
+
+        if self.test_mode:
+            self.test()
+            self.produced_output = True
+        else:
+            self.main(self.arguments)
+
+    def _run_singlethreaded(self):
+        """Run single-threaded task"""
+        map(self._run_target, self.targets)
+
+    def _run_multithreaded(self):
+        """Run multi-threaded task"""
+        global target_queue
+
+        for target in self.targets:
+            target_queue.put(target)
+
+        thread_count = min(self.THREAD_COUNT, len(self.targets))
+        thread_pool = []
+
+        for i in xrange(thread_count):
+            thread = type(self)(worker=True)
+            thread.arguments = self.arguments
+            thread.proto = self.proto
+            thread.lang = self.lang
+            thread.test_mode = self.test_mode
+            thread.start()
+
+            thread_pool.append(thread)
+
+        for thread in thread_pool:
+            thread.join(self.timeout)
+
+            if thread.isAlive():
+                thread.stop()
+
+            result = thread.worker_result()
+
+            if result.endswith("\n"):
+                result = result[:-1]
+
+            self._write_result(result)
+
+    def _run_worker(self):
+        """Worker thread main function"""
+        global target_queue
+
+        self._result = StringIO()
+
+        while True:
+            try:
+                task = target_queue.get(block=False)
+            except:
+                task = None
+
+            if not task:
+                break
+
+            self._run_target(task)
+
+    def worker_result(self):
+        """Get worker result"""
+        if type(self._result) == file:
+            return ""
+
+        return self._result.getvalue()
+
     def run(self):
         """
         Run a task
         """
         try:
+            # run worker for multithreaded
+            if self._worker:
+                self._run_worker()
+                return
+
             if self.test_mode:
-                self.test()
-                self.produced_output = True
+                self.targets = self.TEST_TARGETS
+
+            if self.MULTITHREADED:
+                self._run_multithreaded()
             else:
-                if (self.MULTITHREADED):
-                    self.main(self.arguments)
-                else:
-                    for target in self.targets:
-                        self.target = target
-
-                        try:
-                            inet_aton(target)
-                            self.ip = target
-
-                        except:
-                            self.host = target
-
-                        self.main(self.arguments)
+                self._run_singlethreaded()
 
         except TaskTimeout:
             pass

@@ -14,6 +14,7 @@ class ASNInfoTask(core.Task):
     ASN Information task
     """
     MULTITHREADED = True
+    TEST_TARGETS = ["8.8.8.8", "4.4.4.4"]
 
     def _get_info(self, db, method_name, target):
         """Get ASN info"""
@@ -60,7 +61,6 @@ class ASNInfoTask(core.Task):
         """
         Test function
         """
-        self.ip = "8.8.8.8"
         self.main()
 
 core.execute_task(ASNInfoTask)
