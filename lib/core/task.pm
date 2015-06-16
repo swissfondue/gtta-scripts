@@ -19,9 +19,7 @@ class Task {
         TEST_TIMEOUT => 30,
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
-        SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib",
-        MULTITHREADED => 0,
-        THREADS_COUNT => 10
+        SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib"
     };
 
     has "targets" => (is => "rw", default => sub {[]});
@@ -256,20 +254,16 @@ class Task {
                 $self->test();
                 $self->_produced_output(1);
             } else {
-                if ($self->MULTITHREADED) {
-                    $self->main(\@arguments);
-                } else {
-                    for my $target (@{$self->targets}) {
-                        $self->target($target);
+                for my $target (@{$self->targets}) {
+                    $self->target($target);
 
-                        if ($target =~ /^\d+\.\d+\.\d+\.\d+$/) {
-                            $self->ip($target);
-                        } else {
-                            $self->host($target);
-                        }
-
-                        $self->main(\@arguments);
+                    if ($target =~ /^\d+\.\d+\.\d+\.\d+$/) {
+                        $self->ip($target);
+                    } else {
+                        $self->host($target);
                     }
+
+                    $self->main(\@arguments);
                 }
             }
         };
