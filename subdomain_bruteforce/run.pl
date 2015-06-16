@@ -12,6 +12,7 @@ class Subdomain_Bruteforce extends Task {
     use Socket;
     use core::resulttable;
     use threads::shared;
+    use constant MULTITHREADED => 1;
 
     has "nameservers" => (is => "rw");
     has "wildcard_dns" => (isa => "Str", is => "rw");
@@ -22,7 +23,6 @@ class Subdomain_Bruteforce extends Task {
     method search_host($search_item, $target) {
         my $res = Net::DNS::Resolver->new;
         $res->tcp_timeout(30);
-        #$res->nameservers(@{$self->nameservers});
         my $packet = $res->search($search_item);
 
         return unless ($packet);

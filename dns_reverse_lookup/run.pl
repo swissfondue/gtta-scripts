@@ -8,6 +8,7 @@ use core::task qw(execute);
 class DNS_Reverse_Lookup extends Task {
     use Net::DNS;
     use Net::IP;
+    use constant MULTITHREADED => 1;
 
     # Process
     method _process(Str $target) {

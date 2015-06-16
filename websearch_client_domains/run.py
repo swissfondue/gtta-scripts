@@ -14,8 +14,6 @@ import urllib2
 import re
 import time
 from core import Task, execute_task
-from Queue import Queue
-from threading import Thread
 
 PARSE_GOOGLE_PAGES = 10
 
@@ -32,173 +30,134 @@ class WebSearch(object):
     @kwargs: depth
     @return: list in self.results
     """
+    def __init__(self,**kwargs):
+        self.query = kwargs['q'] or kwargs['query']
+        self.query_prefix = kwargs['query_prefix'] or None
+        self.pages_depth = kwargs['depth'] or 1
 
-    MULTITHREADED = True
+        self.results = []
+        self.opener = urllib2.build_opener()
+        self.opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        #self._Google()
+        
+        # Namedroppers expect hostname without TLD
+        # TODO: here we assuming that query is a hostname
+        # otherwise querystring will be cut after first appearing dot '.'
+        self.ND_query = self.query.split('.')[0]
+        self._Namedroppers()
 
-    def __init__(self, **kwargs):
-        self.main(self, **kwargs)
+    def _fetch(self,URL):
+        """
+        @return: page content as string
+        """
+        data = self.opener.open(URL)
+        data_content = data.read()
 
-    def main(self, **kwargs):
-        query = None
-        query_prefix = None
-        pages_depth = None
-        results = None
-        opener = None
-        ND_query = None
+        return data_content
 
-        def fetch(URL):
-            """
-            @return: page content as string
-            """
-            data = opener.open(URL)
-            data_content = data.read()
+    def _parse(self,data,regexp):
+        data_striped = data
+        match = regexp.findall(data_striped)
 
-            return data_content
+        def process_match(data):
+            if not data in self.results:
+                self.results.append(data)
+        map(process_match,match)
 
-        def parse(data,regexp):
-            data_striped = data
-            match = regexp.findall(data_striped)
+    def _Google(self):
+        """
+        fetch Google search pages
+        """
+        if self.query_prefix:
+            search_query = '%s:%s' % (self.query_prefix,self.query)
+        else:
+            search_query = self.query
 
-            def process_match(data):
-                if not data in results:
-                    results.append(data)
-            map(process_match,match)
+        request_uri = '/search?hl=en&lr=&ie=UTF-8' \
+            '&q=%s&sa=N&filter=0' % (
+                urllib2.quote(search_query),
+            )
 
-        def Google():
-            """
-            fetch Google search pages
-            """
-            if query_prefix:
-                search_query = '%s:%s' % (query_prefix, query)
-            else:
-                search_query = query
+        data = self._fetch('http://www.google.com%s' % request_uri)
+        regexp = re.compile(r'<h3.+?href="/url\?q=(.*?%s.*?)&' % self.query,re.I)
+        self._parse(data,regexp)
 
+        # follow next 10 pages (100 results in total)
+        for page in range(10, self.pages_depth * 10, 10):
+            # make sure we're not too frequent, to avoid abuse detection
+            time.sleep(5)
             request_uri = '/search?hl=en&lr=&ie=UTF-8' \
-                '&q=%s&sa=N&filter=0' % (
+                '&q=%s&sa=N&start=%s&filter=0' % (
                     urllib2.quote(search_query),
+                    page,
                 )
+            data = self._fetch('http://www.google.com%s' % request_uri)
+            self._parse(data,regexp)
+            
+        # refine results:
+        filtered_results = []
+        re_filter = re.compile(r'(.*%s.*)' % self.host,re.I)
 
-            data = fetch('http://www.google.com%s' % request_uri)
-            regexp = re.compile(r'<h3.+?href="/url\?q=(.*?%s.*?)&' % query,re.I)
-            parse(data,regexp)
+        def filter_results(data):
+            match = re_filter.search(data.replace('http://','').
+                replace('https://','').split('/')[0])
+            if match:
+                if not match.group(1) in filtered_results:
+                    filtered_results.append(match.group(1))
+        map(filter_results,self.results)
+        self.results = filtered_results
 
-            # follow next 10 pages (100 results in total)
-            for page in range(10, pages_depth * 10, 10):
-                # make sure we're not too frequent, to avoid abuse detection
-                time.sleep(5)
-                request_uri = '/search?hl=en&lr=&ie=UTF-8' \
-                    '&q=%s&sa=N&start=%s&filter=0' % (
-                        urllib2.quote(search_query),
-                        page,
-                    )
-                data = fetch('http://www.google.com%s' % request_uri)
-                parse(data,regexp)
+    def _Namedroppers(self):
+        """
+        http://www.namedroppers.com/cgi-bin/query?
+        http://www.namedroppers.org/cgi-bin/query?keys=netprotect
+        """
+        request_uri = '/cgi-bin/query?keys=%s' % self.ND_query
+        data = self._fetch('http://www.namedroppers.org%s' % request_uri)
 
-            # refine results:
-            filtered_results = []
-            re_filter = re.compile(r'(.*%s.*)' % query, re.I)
+        # now quickly and simply parse results for matching hostname:
+        regexp_ND = re.compile(r'who\/(.+?)"',re.I)
+        self._parse(data,regexp_ND)
 
-            def filter_results(data):
-                match = re_filter.search(data.replace('http://','').
-                    replace('https://','').split('/')[0])
-                if match:
-                    if not match.group(1) in filtered_results:
-                        filtered_results.append(match.group(1))
+        # now lets parse some following pages...
+        regexp = re.compile(r'cgi-bin\/query\?p=(\d+?)&',re.I)
+        match = regexp.findall(data)
+        pages = []
 
-            map(filter_results, results)
-            results = filtered_results
+        def process_page(data):
+            if not data in pages:
+                pages.append(data)
+                request_uri = '/cgi-bin/query?p=%s&k=%s' % (
+                    data,
+                    self.ND_query
+                )
+                data = self._fetch('http://www.namedroppers.org%s' % request_uri)
+                self._parse(data, regexp_ND)
 
-        def Namedroppers():
-            """
-            http://www.namedroppers.com/cgi-bin/query?
-            http://www.namedroppers.org/cgi-bin/query?keys=netprotect
-            """
-            request_uri = '/cgi-bin/query?keys=%s' % ND_query
-            data = fetch('http://www.namedroppers.org%s' % request_uri)
-
-            # now quickly and simply parse results for matching hostname:
-            regexp_ND = re.compile(r'who\/(.+?)"',re.I)
-            parse(data,regexp_ND)
-
-            # now lets parse some following pages...
-            regexp = re.compile(r'cgi-bin\/query\?p=(\d+?)&',re.I)
-            match = regexp.findall(data)
-            pages = []
-
-            def process_page(data):
-                if not data in pages:
-                    pages.append(data)
-                    request_uri = '/cgi-bin/query?p=%s&k=%s' % (
-                        data,
-                        ND_query
-                    )
-                    data = fetch('http://www.namedroppers.org%s' % request_uri)
-                    parse(data, regexp_ND)
-
-            # parse pages
-            map(process_page,match)
-
-        query = kwargs['q'] or kwargs['query']
-        query_prefix = kwargs['query_prefix'] or None
-        pages_depth = kwargs['depth'] or 1
-
-        results = []
-        opener = urllib2.build_opener()
-        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-
-        ND_query = query.split('.')[0]
-        Namedroppers()
+        # parse pages
+        map(process_page,match)
 
 
 class WebSearchClientDomains(Task):
     """
     Web search task
     """
+    MULTITHREADED = True
 
-    def main(self,*args,**kwargs):
-        """
-        Main function
-        """
-        def worker():
-            while True:
-                target = self.queue.get()
-                host = '%s://%s' % (self.proto or 'http', target)
-                self._write_result(host)
+    def main(self, *args, **kwargs):
+        """Main function"""
+        host = '%s://%s' % (self.proto or 'http', self.host)
 
-                s = WebSearch(
-                    q=host,
-                    query_prefix='allinurl',
-                    depth=PARSE_GOOGLE_PAGES
-                )
+        s = WebSearch(
+            q=host,
+            query_prefix='allinurl',
+            depth=PARSE_GOOGLE_PAGES
+        )
 
-                def print_results(data):
-                    self.lock.acquire()
-
-                    self._write_result(data)
-
-                    self.lock.release()
-
-                map(print_results,s.results)
-
-                self.queue.task_done()
-
-        # Targets queue
-        self.queue = Queue()
-
-        for _ in range(self.THREADS_COUNT):
-            t = Thread(target=worker)
-            t.daemon = True
-            t.start()
-
-        for target in self.targets:
-            self.queue.put(target)
-
-        self.queue.join()
+        map(self._write_result, s.results)
 
     def test(self):
-        """
-        Test function
-        """
+        """Test function"""
         self.host = "google.com"
         self.main()
 

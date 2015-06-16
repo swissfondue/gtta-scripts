@@ -11,6 +11,7 @@ class DNS_Top_TLDs extends Task {
     use LWP::UserAgent;
     use HTTP::Request;
     use core::task qw(call_external);
+    use constant MULTITHREADED => 1;
 
     # Process
     method _process(Str $target, $tld_list) {
