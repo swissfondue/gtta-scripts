@@ -131,8 +131,8 @@ class Subdomain_Bruteforce extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", 0);
+        $self->_process($self->target, 0);
     }
 }
 
-execute(Subdomain_Bruteforce->new());
+execute(Subdomain_Bruteforce->new);

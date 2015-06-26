@@ -11,6 +11,7 @@ class NMAP_UDP extends Task {
     use File::Temp;
     use XML::LibXML;
     use core::task qw(call_external);
+    use constant MULTITHREADED => 1;
 
     # Process
     method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {
@@ -142,8 +143,8 @@ class NMAP_UDP extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "80", 0, 0, 1, 3, 1);
+        $self->_process($self->target, "80", 0, 0, 1, 3, 1);
     }
 }
 
-execute(NMAP_UDP->new());
+execute(NMAP_UDP->new);

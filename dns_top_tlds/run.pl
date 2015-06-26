@@ -111,8 +111,8 @@ class DNS_Top_TLDs extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", [["net", "org", "info"]]);
+        $self->_process($self->target, [["net", "org", "info"]]);
     }
 }
 
-execute(DNS_Top_TLDs->new());
+execute(DNS_Top_TLDs->new);
