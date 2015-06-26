@@ -96,11 +96,11 @@ class Task(Thread):
         self.lang = None
         self.test_mode = False
         self.error = False
+        self.produced_output = False
         self._stop = Event()
         self._result = None
         self._worker = worker
 
-        self.produced_output = False
 
     def _check_stop(self):
         """

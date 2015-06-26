@@ -9,6 +9,7 @@ class DNS_Reverse_Lookup extends Task {
     use Net::DNS;
     use Net::IP;
     use constant MULTITHREADED => 1;
+    use constant TEST_TARGETS => ["8.8.8.8", "4.4.4.4"];
 
     # Process
     method _process(Str $target) {
@@ -56,8 +57,8 @@ class DNS_Reverse_Lookup extends Task {
 
     # Test function
     method test {
-        $self->_process("8.8.8.8");
+        $self->_process($self->target);
     }
 }
 
-execute(DNS_Reverse_Lookup->new());
+execute(DNS_Reverse_Lookup->new);
