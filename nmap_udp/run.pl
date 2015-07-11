@@ -11,7 +11,6 @@ class NMAP_UDP extends Task {
     use File::Temp;
     use XML::LibXML;
     use core::task qw(call_external);
-    use constant MULTITHREADED => 1;
 
     # Process
     method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {
