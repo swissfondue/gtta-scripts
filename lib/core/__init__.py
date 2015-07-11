@@ -244,8 +244,7 @@ class Task(Thread):
         """Run multi-threaded task"""
         global target_queue
 
-        for target in self.targets:
-            target_queue.put(target)
+        map(target_queue.put, self.targets)
 
         thread_count = min(self.THREAD_COUNT, len(self.targets))
         thread_pool = []

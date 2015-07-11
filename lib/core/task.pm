@@ -10,8 +10,6 @@ use constant SANDBOX_IP => "192.168.66.66";
 
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(execute call_external SANDBOX_IP);
-
-
 my $target_queue = Thread::Queue->new;
 
 # Base class for all tasks
@@ -19,7 +17,6 @@ class Task {
     use List::Util qw(min);
     use IO::String;
     use Scalar::Util qw(looks_like_number);
-    use bytes;
 
     use constant {
         DEFAULT_TIMEOUT => 60 * 60 * 24, # 1 Day
@@ -287,43 +284,36 @@ class Task {
 
     # run single-threaded task
     method _run_singlethreaded {
-        for my $item (@{$self->targets}) {
-            $self->_run_target($item);
-        }
+        map({$self->_run_target($_);} @{$self->targets});
     }
 
     # run multi-threaded task
     method _run_multithreaded {
-        for my $item (@{$self->targets}) {
-            $target_queue->enqueue($item);
-        }
+        map({$target_queue->enqueue($item);} @{$self->targets});
+
         my $thread_count = min($self->THREAD_COUNT, scalar @{$self->targets});
         my @thread_pool = ();
 
         push @thread_pool, threads->create(sub {
-                my $new_self = ref($self)->new("worker"=>1);
-                $new_self->arguments(@{$self->arguments});
-                $new_self->proto($self->proto || "");
-                $new_self->lang($self->lang || "");
-                $new_self->test_mode($self->test_mode);
-                $new_self->run();
-                $new_self->_result->seek(0,0);
-                while (my $line = $new_self->_result->getline()) {
-                    if ($line eq "\n") {
-                        next;
-                    }
-                    if ($line =~ /\n$/) {
-                        $line = substr $line, 0, (bytes::length($line) - 1);
-                        $self->_write_result($line);
-                    }
-                }
-                threads->exit(0);
-            }) for 1..$thread_count;
+            my $worker = ref($self)->new("worker" => 1);
+
+            $worker->arguments(@{$self->arguments});
+            $worker->proto($self->proto || "");
+            $worker->lang($self->lang || "");
+            $worker->test_mode($self->test_mode);
+            $worker->run();
+            $worker->_result->seek(0, 0);
+
+            $self->_write_result($worker->worker_result());
+
+            threads->exit(0);
+        }) for 1..$thread_count;
 
         foreach my $t (@thread_pool) {
             $t->join();
+
             if ($t->is_running()) {
-                $t->kill('SIGTERM');
+                $t->kill("SIGTERM");
             }
         }
     }
@@ -331,13 +321,27 @@ class Task {
     # Worker thread main function
     method _run_worker {
         $self->_result(IO::String->new);
+
         while (1) {
             my $task = $target_queue->dequeue_nb();
+
             unless ($task) {
                 last;
             }
+
             $self->_run_target($task);
         }
+    }
+
+    # Get worker result
+    method worker_result {
+        if (!$self->_result->isa("IO::String")) {
+            return "";
+        }
+
+        $self->_result->seek(0, 0);
+        local $/;
+        return <$self->_result>;
     }
 
     # Run the task
@@ -347,11 +351,13 @@ class Task {
                 $self->_run_worker();
                 return;
             }
+
             if ($self->test_mode) {
                 for my $t (@{$self->TEST_TARGETS}) {
                     push(@{$self->targets}, $t);
                 }
             }
+
             if ($self->MULTITHREADED) {
                 $self->_run_multithreaded();
             } else {
