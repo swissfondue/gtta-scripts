@@ -12,6 +12,7 @@ class DNS_Top_TLDs extends Task {
     use HTTP::Request;
     use core::task qw(call_external);
     use constant MULTITHREADED => 1;
+    use constant TEST_TARGETS => ["clariant.com", "microsoft.com"];
 
     # Process
     method _process(Str $target, $tld_list) {
