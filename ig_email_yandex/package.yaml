@@ -1,0 +1,8 @@
+type: script
+name: ig_email_yandex
+version: 2.2
+dependencies:
+  library:
+    - core
+    - yandex
+    - emailgrabber

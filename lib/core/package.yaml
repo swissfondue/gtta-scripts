@@ -12,3 +12,7 @@ dependencies:
     - perl
     - libmoosex-declare-perl
     - libxml-writer-perl
+    - libnetaddr-ip-perl
+    - libnet-ip-perl
+    - libnet-cidr-perl
+    - python-netaddr

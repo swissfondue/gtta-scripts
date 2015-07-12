@@ -1,0 +1,8 @@
+type: script
+name: ig_email_omgili
+version: 2.2
+dependencies:
+  library:
+    - core
+    - omgili
+    - emailgrabber

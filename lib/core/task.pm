@@ -5,7 +5,9 @@ use MooseX::Declare;
 use threads;
 use threads::shared;
 use Thread::Queue;
-
+use NetAddr::IP;
+use Net::IP;
+use Net::CIDR;
 use constant SANDBOX_IP => "192.168.66.66";
 
 our @ISA = qw(Exporter);
@@ -26,11 +28,12 @@ class Task {
         SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib",
         MULTITHREADED => 0,
         THREAD_COUNT => 10,
-        TEST_TARGETS => ["google.com"]
+        TEST_TARGETS => ["google.com"],
+        EXPAND_TARGETS => 1
     };
 
-    has "targets" => (is => "rw", default => sub {[]});
     has "arguments" => (is => "rw", default => sub {[]});
+    has "targets" => (isa => "ArrayRef", is => "rw", default => sub {[]});
     has "target" => (isa => "Str", is => "rw");
     has "host" => (isa => "Str", is => "rw");
     has "ip" => (isa => "Str", is => "rw");
@@ -97,14 +100,40 @@ class Task {
         return \@contents;
     }
 
+    # Expand ip networks and ranges
+    method _expand_targets {
+        my @targets = ();
+
+        for my $target (@{$self->targets}) {
+            if (Net::CIDR::cidrvalidate($target)) {
+                my $n = NetAddr::IP->new($target);
+
+                for my $ip (@{$n->hostenumref}) {
+                    push (@targets, $ip->addr);
+                }
+            } elsif ($target =~ /^\d+\.\d+\.\d+\.\d+\s*\-\s*\d+\.\d+\.\d+\.\d+$/) {
+                $target =~ s/ //g;
+                my $ip = new Net::IP($target) || die;
+
+                do {
+                    push (@targets, $ip->ip());
+                } while (++$ip);
+            } else {
+                push (@targets, $target);
+            }
+        }
+
+        @{$self->targets} = @targets;
+    }
+
     # Parse input arguments
     method _parse_input {
         if (scalar(@ARGV) < 2) {
             die("At least 2 command line arguments should be specified.\n");
-        }    
+        }
 
         # parse the first file with hostname or IP
-        my ($fp, @lines);        
+        my ($fp, @lines);
         open($fp, $ARGV[0]) or die("Unable to open target file: " . $ARGV[0] . ".\n");
 
         while (<$fp>) {
@@ -124,8 +153,10 @@ class Task {
 
         my @targets = split /,/, $lines[0];
 
-        for my $target (@targets) {
-            push (@{$self->targets}, $target);
+        @{$self->targets} = @targets;
+
+        if ($self->EXPAND_TARGETS) {
+            $self->_expand_targets();
         }
 
         $self->proto($lines[1]);
@@ -152,7 +183,7 @@ class Task {
 
         # parse the remaining arguments
         for (my $i = 2; $i < scalar(@ARGV); $i++) {
-            my $arg = $ARGV[$i];            
+            my $arg = $ARGV[$i];
 
             unless ($arg) {
                 next;
@@ -163,7 +194,7 @@ class Task {
                 next;
             }
 
-            my @file_lines = ();            
+            my @file_lines = ();
             open($fp, $arg) or die("Unable to open input file: $arg.\n");
 
             while (<$fp>) {
@@ -184,7 +215,7 @@ class Task {
             $path = $self->SYSTEM_LIBRARY_PATH . "/" . $library;
         } elsif (-d $self->USER_LIBRARY_PATH . "/" . $library) {
             $path = $self->USER_LIBRARY_PATH . "/" . $library;
-        } 
+        }
 
         return $path;
     }
@@ -380,7 +411,7 @@ class Task {
 }
 
 # Executes task and controls its execution
-sub execute {    
+sub execute {
     my $obj :shared = shared_clone(shift);
 
     if (!$obj || !$obj->isa("Task")) {

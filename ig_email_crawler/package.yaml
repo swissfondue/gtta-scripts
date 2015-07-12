@@ -1,0 +1,8 @@
+type: script
+name: ig_email_crawler
+version: 2.2
+dependencies:
+  library:
+    - core
+  system:
+    - python-beautifulsoup
