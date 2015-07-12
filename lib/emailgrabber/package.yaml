@@ -1,0 +1,10 @@
+type: library
+name: emailgrabber
+version: 1.7
+  library:
+    - core
+  system:
+    - python-requests
+    - python-beautifulsoup
+  python:
+    - python-whois

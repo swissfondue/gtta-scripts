@@ -1,0 +1,8 @@
+type: script
+name: ig_subdomain_bruteforce
+version: 2.2
+dependencies:
+  library:
+    - core
+  system:
+    - python-dnspython

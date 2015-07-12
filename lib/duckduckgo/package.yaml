@@ -1,0 +1,6 @@
+type: library
+name: duckduckgo
+version: 1.7
+dependencies:
+  library:
+    - emailgrabber

@@ -1,0 +1,8 @@
+type: script
+name: ig_domain_bing_api
+version: 2.2
+dependencies:
+  library:
+    - core
+    - bing_api
+    - emailgrabber

@@ -1,0 +1,6 @@
+type: library
+name: lixam
+version: 1.7
+dependencies:
+  library:
+    - emailgrabber
