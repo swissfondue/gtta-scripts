@@ -11,6 +11,8 @@ class DNS_Top_TLDs extends Task {
     use LWP::UserAgent;
     use HTTP::Request;
     use core::task qw(call_external);
+    use constant MULTITHREADED => 1;
+    use constant TEST_TARGETS => ["clariant.com", "microsoft.com"];
 
     # Process
     method _process(Str $target, $tld_list) {
@@ -110,8 +112,8 @@ class DNS_Top_TLDs extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", [["net", "org", "info"]]);
+        $self->_process($self->target, [["net", "org", "info"]]);
     }
 }
 
-execute(DNS_Top_TLDs->new());
+execute(DNS_Top_TLDs->new);

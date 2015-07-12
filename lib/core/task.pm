@@ -4,6 +4,7 @@ use Exporter;
 use MooseX::Declare;
 use threads;
 use threads::shared;
+use Thread::Queue;
 use NetAddr::IP;
 use Net::IP;
 use Net::CIDR;
@@ -11,10 +12,12 @@ use constant SANDBOX_IP => "192.168.66.66";
 
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(execute call_external SANDBOX_IP);
+my $target_queue = Thread::Queue->new;
 
 # Base class for all tasks
 class Task {
-    use IO::Handle;
+    use List::Util qw(min);
+    use IO::String;
     use Scalar::Util qw(looks_like_number);
 
     use constant {
@@ -23,9 +26,13 @@ class Task {
         PARSE_FILES => 1,
         USER_LIBRARY_PATH => "/opt/gtta/scripts/lib",
         SYSTEM_LIBRARY_PATH => "/opt/gtta/scripts/system/lib",
+        MULTITHREADED => 0,
+        THREAD_COUNT => 10,
+        TEST_TARGETS => ["google.com"],
         EXPAND_TARGETS => 1
     };
 
+    has "arguments" => (is => "rw", default => sub {[]});
     has "targets" => (isa => "ArrayRef", is => "rw", default => sub {[]});
     has "target" => (isa => "Str", is => "rw");
     has "host" => (isa => "Str", is => "rw");
@@ -39,6 +46,13 @@ class Task {
     has "_produced_output" => (isa => "Int", is => "rw", default => 0);
     has "_stop" => (isa => "Int", is => "rw", default => 0);
     has "_result" => (is => "rw", default => 0);
+    has "worker" => (isa => "Int", is => "rw", default => 0);
+    has "_worker" => (isa => "Int", is => "rw");
+
+    sub BUILD {
+        my $self = shift;
+        $self->_worker($self->worker);
+    }
 
     # Check if task is stopped
     method _check_stop {
@@ -52,12 +66,16 @@ class Task {
         $self->_produced_output(1);
 
         if ($self->_result) {
-            my $result_file;
+            if ($self->_result->isa("IO::String")){
+                syswrite($self->_result, $str . "\n");
+            } else {
+                my $result_file;
 
-            open($result_file, ">>" . $self->_result) or die("Unable to open result file: " . $self->_result . ".\n");
-            $result_file->autoflush(1);
-            syswrite($result_file, $str . "\n");
-            close($result_file);
+                open($result_file, ">>" . $self->_result) or die("Unable to open result file: " . $self->_result . ".\n");
+                $result_file->autoflush(1);
+                syswrite($result_file, $str . "\n");
+                close($result_file);
+            }
         } else {
             syswrite(STDOUT, $str . "\n");
         }
@@ -110,8 +128,6 @@ class Task {
 
     # Parse input arguments
     method _parse_input {
-        my @output_arguments;
-
         if (scalar(@ARGV) < 2) {
             die("At least 2 command line arguments should be specified.\n");
         }
@@ -174,7 +190,7 @@ class Task {
             }
 
             unless ($self->PARSE_FILES) {
-                push(@output_arguments, $arg);
+                push(@{$self->arguments}, $arg);
                 next;
             }
 
@@ -187,10 +203,8 @@ class Task {
             }
 
             close($fp);
-            push(@output_arguments, \@file_lines);
+            push(@{$self->arguments}, \@file_lines);
         }
-
-        return @output_arguments;
     }
 
     # Get library path
@@ -263,18 +277,19 @@ class Task {
     }
 
     # Run the task
-    method run {
+    method _run_target($target) {
         STDOUT->autoflush(1);
         STDERR->autoflush(1);
 
+        $self->target($target);
+
         eval {
             my $timeout;
-            my @arguments;
 
             if ($self->test_mode) {
                 $timeout = $self->TEST_TIMEOUT;
             } else {
-                @arguments = $self->_parse_input();
+                $self->_parse_input();
                 $timeout = $self->timeout;
             }
 
@@ -282,21 +297,100 @@ class Task {
                 alarm($timeout);
             }
 
+            if ($target =~ /^\d+\.\d+\.\d+\.\d+$/) {
+                $self->ip($target);
+            } else {
+                $self->host($target);
+            }
+
             if ($self->test_mode) {
                 $self->test();
                 $self->_produced_output(1);
             } else {
-                for my $target (@{$self->targets}) {
-                    $self->target($target);
+                $self->main(\@{$self->arguments});
+            }
+        };
+    }
 
-                    if ($target =~ /^\d+\.\d+\.\d+\.\d+$/) {
-                        $self->ip($target);
-                    } else {
-                        $self->host($target);
-                    }
+    # run single-threaded task
+    method _run_singlethreaded {
+        map({$self->_run_target($_);} @{$self->targets});
+    }
 
-                    $self->main(\@arguments);
-                }
+    # run multi-threaded task
+    method _run_multithreaded {
+        map({$target_queue->enqueue($_);} @{$self->targets});
+
+        my $thread_count = min($self->THREAD_COUNT, scalar @{$self->targets});
+        my @thread_pool = ();
+
+        push @thread_pool, threads->create(sub {
+            my $worker = ref($self)->new("worker" => 1);
+
+            $worker->arguments(@{$self->arguments});
+            $worker->proto($self->proto || "");
+            $worker->lang($self->lang || "");
+            $worker->test_mode($self->test_mode);
+            $worker->run();
+
+            if ($worker->_produced_output) {
+                $self->_write_result($worker->worker_result());
+            }
+
+            threads->exit(0);
+        }) for 1..$thread_count;
+
+        foreach my $t (@thread_pool) {
+            $t->join();
+
+            if ($t->is_running()) {
+                $t->kill("SIGTERM");
+            }
+        }
+    }
+
+    # Worker thread main function
+    method _run_worker {
+        $self->_result(IO::String->new);
+
+        while (1) {
+            my $task = $target_queue->dequeue_nb();
+
+            unless ($task) {
+                last;
+            }
+
+            $self->_run_target($task);
+        }
+    }
+
+    # Get worker result
+    method worker_result {
+        if (!$self->_result->isa("IO::String")) {
+            return "";
+        }
+
+        $self->_result->seek(0, 0);
+        local $/;
+        return $self->_result->getline();
+    }
+
+    # Run the task
+    method run {
+        eval {
+            if ($self->worker) {
+                $self->_run_worker();
+                return;
+            }
+
+            if ($self->test_mode) {
+                map {push(@{$self->targets}, $_);} @{$self->TEST_TARGETS};
+            }
+
+            if ($self->MULTITHREADED) {
+                $self->_run_multithreaded();
+            } else {
+                $self->_run_singlethreaded();
             }
         };
 
@@ -310,7 +404,7 @@ class Task {
             $self->error(1);
         }
 
-        unless ($self->_produced_output) {
+        if (!$self->_produced_output && !$self->worker) {
             $self->_write_result("No data returned.");
         }
     }

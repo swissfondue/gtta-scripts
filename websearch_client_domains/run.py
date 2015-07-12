@@ -142,11 +142,11 @@ class WebSearchClientDomains(Task):
     """
     Web search task
     """
+    MULTITHREADED = True
+    TEST_TARGETS = ["infoguard.ch", "clariant.com"]
 
-    def main(self,*args,**kwargs):
-        """
-        Main function
-        """
+    def main(self, *args, **kwargs):
+        """Main function"""
         host = '%s://%s' % (self.proto or 'http', self.host)
 
         s = WebSearch(
@@ -155,16 +155,10 @@ class WebSearchClientDomains(Task):
             depth=PARSE_GOOGLE_PAGES
         )
 
-        def print_results(data):
-            self._write_result(data)
-
-        map(print_results,s.results)
+        map(self._write_result, s.results)
 
     def test(self):
-        """
-        Test function
-        """
-        self.host = "google.com"
+        """Test function"""
         self.main()
 
 execute_task(WebSearchClientDomains)
