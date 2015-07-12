@@ -4,8 +4,8 @@
 use MooseX::Declare;
 use core::task qw(execute);
 
-# Subdomain bruteforce task
-class Subdomain_Bruteforce extends Task {
+# Subdomain dictionary task
+class Subdomain_Dict extends Task {
     use constant TEST_TIMEOUT => 360;
     use Net::DNS;
     use Net::hostent;
@@ -126,8 +126,7 @@ class Subdomain_Bruteforce extends Task {
 
     # Main function
     method main($args) {
-        my $big_file = $self->_get_int($args, 0, 0);
-        $self->_process($self->target, $big_file);
+        $self->_process($self->target, $self->_get_int($args, 0, 0));
     }
 
     # Test function
@@ -136,4 +135,4 @@ class Subdomain_Bruteforce extends Task {
     }
 }
 
-execute(Subdomain_Bruteforce->new);
+execute(Subdomain_Dict->new);
