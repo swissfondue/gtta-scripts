@@ -63,7 +63,6 @@ class Task {
         $self->_produced_output(1);
 
         if ($self->_result) {
-
             if ($self->_result->isa("IO::String")){
                 syswrite($self->_result, $str . "\n");
             } else {
@@ -289,7 +288,7 @@ class Task {
 
     # run multi-threaded task
     method _run_multithreaded {
-        map({$target_queue->enqueue($item);} @{$self->targets});
+        map({$target_queue->enqueue($_);} @{$self->targets});
 
         my $thread_count = min($self->THREAD_COUNT, scalar @{$self->targets});
         my @thread_pool = ();
@@ -302,9 +301,10 @@ class Task {
             $worker->lang($self->lang || "");
             $worker->test_mode($self->test_mode);
             $worker->run();
-            $worker->_result->seek(0, 0);
 
-            $self->_write_result($worker->worker_result());
+            if ($worker->_produced_output) {
+                $self->_write_result($worker->worker_result());
+            }
 
             threads->exit(0);
         }) for 1..$thread_count;
@@ -341,7 +341,7 @@ class Task {
 
         $self->_result->seek(0, 0);
         local $/;
-        return <$self->_result>;
+        return $self->_result->getline();
     }
 
     # Run the task
@@ -353,9 +353,7 @@ class Task {
             }
 
             if ($self->test_mode) {
-                for my $t (@{$self->TEST_TARGETS}) {
-                    push(@{$self->targets}, $t);
-                }
+                map {push(@{$self->targets}, $_);} @{$self->TEST_TARGETS};
             }
 
             if ($self->MULTITHREADED) {
@@ -375,7 +373,7 @@ class Task {
             $self->error(1);
         }
 
-        unless ($self->_produced_output) {
+        if (!$self->_produced_output && !$self->worker) {
             $self->_write_result("No data returned.");
         }
     }

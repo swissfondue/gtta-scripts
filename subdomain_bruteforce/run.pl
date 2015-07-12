@@ -13,6 +13,7 @@ class Subdomain_Bruteforce extends Task {
     use core::resulttable;
     use threads::shared;
     use constant MULTITHREADED => 1;
+    use constant TEST_TARGETS = ["clariant.com", "stellarbit.com"];
 
     has "nameservers" => (is => "rw");
     has "wildcard_dns" => (isa => "Str", is => "rw");
