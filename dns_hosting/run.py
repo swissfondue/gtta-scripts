@@ -67,6 +67,10 @@ class DNS_Hosting(Task):
             self._write_result('HTTP error: %s' % str(e))
             return
 
+        except ValueError, e:
+            self._write_result('Value Error: Invalid API key.')
+            return
+
         self._check_stop()
 
         if not self.produced_output:
