@@ -12,6 +12,8 @@ class NMAP_TCP extends Task {
     use XML::LibXML;
     use core::task qw(call_external);
 
+    use constant EXPAND_TARGETS => 0;
+
     # Process
     method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {
         my @data;
@@ -142,8 +144,8 @@ class NMAP_TCP extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "80", 0, 0, 1, 3, 1);
+        $self->_process($self->target, "80", 0, 0, 1, 3, 1);
     }
 }
 
-execute(NMAP_TCP->new());
+execute(NMAP_TCP->new);

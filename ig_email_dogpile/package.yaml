@@ -1,0 +1,10 @@
+type: script
+name: ig_email_dogpile
+version: 2.2
+dependencies:
+  library:
+    - core
+    - dogpile
+  system:
+    - python-requests
+    - python-beautifulsoup

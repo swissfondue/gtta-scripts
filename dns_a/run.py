@@ -10,6 +10,8 @@ class DNS_A(Task):
     """
     Get DNS A records
     """
+    MULTITHREADED = True
+    TEST_TARGETS = ["google.com", "bing.com", "microsoft.com"]
 
     def main(self, *args):
         """
@@ -80,7 +82,6 @@ class DNS_A(Task):
         """
         Test function
         """
-        self.host = "google.com"
         self.main()
 
 execute_task(DNS_A)

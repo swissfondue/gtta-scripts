@@ -4,14 +4,16 @@
 use MooseX::Declare;
 use core::task qw(execute);
 
-# Subdomain bruteforce task
-class Subdomain_Bruteforce extends Task {
+# Subdomain dictionary task
+class Subdomain_Dict extends Task {
     use constant TEST_TIMEOUT => 360;
     use Net::DNS;
     use Net::hostent;
     use Socket;
     use core::resulttable;
     use threads::shared;
+    use constant MULTITHREADED => 1;
+    use constant TEST_TARGETS => ["clariant.com", "stellarbit.com"];
 
     has "nameservers" => (is => "rw");
     has "wildcard_dns" => (isa => "Str", is => "rw");
@@ -22,7 +24,6 @@ class Subdomain_Bruteforce extends Task {
     method search_host($search_item, $target) {
         my $res = Net::DNS::Resolver->new;
         $res->tcp_timeout(30);
-        #$res->nameservers(@{$self->nameservers});
         my $packet = $res->search($search_item);
 
         return unless ($packet);
@@ -125,14 +126,13 @@ class Subdomain_Bruteforce extends Task {
 
     # Main function
     method main($args) {
-        my $big_file = $self->_get_int($args, 0, 0);
-        $self->_process($self->target, $big_file);
+        $self->_process($self->target, $self->_get_int($args, 0, 0));
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 0);
+        $self->_process($self->target, 0);
     }
 }
 
-execute(Subdomain_Bruteforce->new());
+execute(Subdomain_Dict->new);

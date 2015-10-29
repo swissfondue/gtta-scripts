@@ -1,0 +1,8 @@
+type: script
+name: ig_email_wotbox
+version: 2.2
+dependencies:
+  library:
+    - core
+    - wotbox
+    - emailgrabber
