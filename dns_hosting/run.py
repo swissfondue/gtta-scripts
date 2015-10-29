@@ -5,6 +5,7 @@ from urllib2 import urlopen, URLError, HTTPError, Request
 from core import Task, execute_task
 import json
 
+
 class DNS_Hosting(Task):
     """
     Checks if there are other websites on the same server.
@@ -13,7 +14,6 @@ class DNS_Hosting(Task):
         """
         Main function
         """
-
         target = self.host
 
         if not target:
@@ -81,6 +81,6 @@ class DNS_Hosting(Task):
         Test function
         """
         self.host = "microsoft.com"
-        self.main(["0"])
+        self.main(["ee61b8eb5e63aa95a63d15fa39d6e16e7ec15375"])
 
 execute_task(DNS_Hosting)
