@@ -2,16 +2,15 @@
 
 from urllib import urlencode
 from urllib2 import urlopen, URLError, HTTPError, Request
-from lxml import html
-from re import findall
 from core import Task, execute_task
+import json
+
 
 class DNS_Hosting(Task):
     """
     Checks if there are other websites on the same server.
     """
-
-    def main(self, show_all=[], *args):
+    def main(self, api_key=None, *args):
         """
         Main function
         """
@@ -20,68 +19,40 @@ class DNS_Hosting(Task):
         if not target:
             target = self.ip
 
-        if show_all and show_all[0].lower() in ( '1', 'true', 'yes', 'on', 'ok' ):
-            show_all = True
-        else:
-            show_all = False
-
-        domains = []
-        offset  = 0
-        first   = True
-        results = 0
-
         try:
-            while True:
-                self._check_stop()
+            if not api_key:
+                self._write_result("You must specify ViewDns Api Key.")
+                return
 
-                domain_count = 0
+            # Add parameter { "page" : 2 } if u want
+            # to get next 10000 domains and increase
+            # page if u need more then that
+            params = urlencode({
+                "host": target,
+                "output": "json",
+                "apikey": api_key
+            })
+            request = Request('http://pro.viewdns.info/reverseip?%s' % params)
+            request.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/11.10 Chromium/18.0.1025.142 Chrome/18.0.1025.142 Safari/535.19')
+            response = urlopen(request, timeout=self.HTTP_TIMEOUT)
 
-                request = Request('http://serversniff.net/hostonip.php')
-                request.add_data(urlencode({
-                    'domain'    : target,
-                    'fullcount' : 0,
-                    'offset'    : offset
-                }))
-                request.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/11.10 Chromium/18.0.1025.142 Chrome/18.0.1025.142 Safari/535.19')
+            response = response.read()
 
-                if first:
-                    request.add_header('Referer', 'http://serversniff.net/content.php?do=hostonip')
-                else:
-                    request.add_header('Referer', 'http://serversniff.net/hostonip.php')
+            response = json.loads(response)
+            response = response["response"]
 
-                response = urlopen(request, timeout=self.HTTP_TIMEOUT)
-                response = response.read()
+            if "error" in response:
+                self._write_result("Service error: %s" % response["error"])
+                return
 
-                if first:
-                    results = findall('We currently know (\d+)', response)
+            if "domains" not in response:
+                self._write_result('No host names found.')
+                return
 
-                    if results and len(results) > 0:
-                        results = int(results[0])
-                    else:
-                        results = 0
+            domains = []
 
-                    first = False
-
-                doc  = html.fromstring(response)
-                rows = doc.xpath('/html/div/table/tr')
-
-                for row in rows:
-                    domain = row.xpath('.//td[2]/b/text()')
-
-                    if domain and len(domain) == 1:
-                        domain = domain[0].strip()
-
-                        if domain not in domains:
-                            domains.append(domain)
-
-                        domain_count += 1
-
-                results -= domain_count
-
-                if results <= 0 or not show_all:
-                    break
-
-                offset += 100
+            for d in response["domains"]:
+                domains.append(d["name"])
 
             if len(domains) > 0:
                 self._write_result(u'\n'.join(domains))
@@ -96,6 +67,10 @@ class DNS_Hosting(Task):
             self._write_result('HTTP error: %s' % str(e))
             return
 
+        except ValueError, e:
+            self._write_result('Value Error: Invalid API key.')
+            return
+
         self._check_stop()
 
         if not self.produced_output:
@@ -106,6 +81,6 @@ class DNS_Hosting(Task):
         Test function
         """
         self.host = "microsoft.com"
-        self.main(["0"])
+        self.main(["ee61b8eb5e63aa95a63d15fa39d6e16e7ec15375"])
 
 execute_task(DNS_Hosting)
