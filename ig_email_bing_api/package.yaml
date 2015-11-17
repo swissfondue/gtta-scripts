@@ -6,3 +6,8 @@ dependencies:
     - core
     - bing_api
     - emailgrabber
+inputs:
+  - name: api_key
+    type: text
+    description: Bing API key
+    visible: false

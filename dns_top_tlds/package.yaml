@@ -8,3 +8,31 @@ dependencies:
     - libwww-perl
     - libnet-dns-perl
     - whois
+inputs:
+  - name: Africa
+    type: file
+    description: African domain zone list
+  - name: All
+    type: file
+    description: All domain zones
+  - name: Asia
+    type: file
+    description: Asian domain zone list
+  - name: Europe
+    type: file
+    description: European domain zone list
+  - name: Generic
+    type: file
+    description: Generic domain zone list
+  - name: New
+    type: file
+    description: New domain zone list
+  - name: Pacific
+    type: file
+    description: Pacific domain zone list
+  - name: Top_10
+    type: file
+    description: Top 10 domain zone list
+  - name: Top_20
+    type: file
+    description: Top 20 domain zone list

@@ -4,3 +4,8 @@ version: 1.7
 dependencies:
   library:
     - core
+inputs:
+  - name: users
+    type: textarea
+    description: User names
+    value: "alice\nbob"

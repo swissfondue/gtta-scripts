@@ -6,3 +6,8 @@ dependencies:
     - libwww-perl
   library:
     - core
+inputs:
+  - name: urls
+    type: textarea
+    description: URLs to scan
+    value: "admin\nadmin.php\nadmin.cfm"

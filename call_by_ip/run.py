@@ -5,6 +5,7 @@ from socket import gethostbyname
 import core
 import requests
 
+
 class CallByIPTask(core.Task):
     """
     Calling by IP task
@@ -37,7 +38,7 @@ class CallByIPTask(core.Task):
         if req:
             self._write_result('Status code: %s' % req.status_code)
 
-            if (req.status_code < 400 and req.headers['content-type'].startswith('text/')):
+            if req.status_code < 400 and req.headers['content-type'].startswith('text/'):
                 page = req.text
 
                 # extract title

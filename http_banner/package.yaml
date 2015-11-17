@@ -6,3 +6,8 @@ dependencies:
     - core
   system:
     - libwww-perl
+inputs:
+  - name: url
+    type: text
+    description: URL to check
+    value: "/"

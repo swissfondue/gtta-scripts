@@ -6,3 +6,7 @@ dependencies:
     - core
   deb:
     - metasploit_4.8.2-1_i386.deb
+inputs:
+  - name: script
+    type: textarea
+    description: Metasploit script

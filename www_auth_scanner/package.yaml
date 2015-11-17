@@ -7,3 +7,8 @@ dependencies:
     - libcrypt-ssleay-perl
   library:
     - core
+inputs:
+  - name: urls
+    type: textarea
+    description: URLs to scan
+    value: "auth\nadmin\nlogin"

@@ -4,3 +4,28 @@ version: 1.7
 dependencies:
   library:
     - core
+inputs:
+  - name: threads
+    type: text
+    description: Number of threads
+    value: 1
+  - name: requests
+    type: text
+    description: Number of requests per thread
+    value: 1
+  - name: url
+    type: text
+    description: URL to attack
+    value: "/"
+  - name: check_urls
+    type: textarea
+    description: URLs to check service availability, one per line
+    value: "/"
+  - name: cookie
+    type: text
+    description: Cookie string
+    value: 1
+  - name: referer
+    type: text
+    description: HTTP referer
+    value: 1

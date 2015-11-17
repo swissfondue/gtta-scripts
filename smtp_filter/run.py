@@ -13,7 +13,7 @@ class SMTP_Filter(Task):
     """
     SMTP filter
     """
-    DEFAULT_FOLDER = [ os_path.join(os_path.dirname(__file__), 'files/Encrypted') ]
+    DEFAULT_FOLDER = ["Encrypted"]
 
     def main(self, recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """
@@ -36,6 +36,8 @@ class SMTP_Filter(Task):
             folder = folder[0]
         else:
             folder = self.DEFAULT_FOLDER[0]
+
+        folder = os_path.join(os_path.dirname(__file__), "files", folder)
 
         if not login or not login[0]:
             raise NoAuth('No login specified.')

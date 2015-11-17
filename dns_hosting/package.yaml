@@ -4,3 +4,8 @@ version: 1.7
 dependencies:
   library:
     - core
+inputs:
+  - name: api_key
+    type: text
+    description: Viewdns.info API key
+    visible: false

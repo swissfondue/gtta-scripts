@@ -6,3 +6,16 @@ dependencies:
     - core
   system:
     - libnet-dns-perl
+inputs:
+  - name: timeout
+    type: text
+    description: TCP timeout
+    value: 120
+  - name: max_results
+    type: text
+    description: Maximum number of results
+    value: 100
+  - name: detect_ip
+    type: checkbox
+    description: Detect IPs
+    value: 1

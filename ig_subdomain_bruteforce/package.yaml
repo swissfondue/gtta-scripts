@@ -6,3 +6,12 @@ dependencies:
     - core
   system:
     - python-dnspython
+inputs:
+  - name: min_length
+    type: text
+    description: Minimum subdomain length
+    value: 1
+  - name: client_secret
+    type: text
+    description: Maximum subdomain length
+    value: 3

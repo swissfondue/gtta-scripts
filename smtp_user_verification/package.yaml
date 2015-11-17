@@ -4,3 +4,13 @@ version: 1.7
 dependencies:
   library:
     - core
+inputs:
+  - name: verify_users
+    type: textarea
+    description: Verify existing users, one per line
+  - name: email_from
+    type: text
+    description: Source email
+  - name: email_to
+    type: text
+    description: Destination email

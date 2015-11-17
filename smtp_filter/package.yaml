@@ -4,3 +4,23 @@ version: 1.7
 dependencies:
   library:
     - core
+inputs:
+  - name: recipient
+    type: text
+    description: Recipient email
+  - name: smtp_server
+    type: text
+    description: SMTP server address
+  - name: smtp_login
+    type: text
+    description: SMTP login
+  - name: smtp_password
+    type: text
+    description: SMTP password
+  - name: sender
+    type: text
+    description: Sender email
+  - name: folder
+    type: radio
+    description: "Folder to use for test"
+    value: "Encrypted\nLevel1\nLevel2\nLevel3\nMacroGeneralTest\nMacroInsideOut\nMixedLevels\nPDFExploits\nPDFJS\nProfanity\nTestVirusandTrojans\nOfficeExploits"

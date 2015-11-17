@@ -21,7 +21,9 @@ class IG_Domain_YahooAPI(CommonIGDomainToolsTask):
         Test function
         """
         self.target = "clariant.com"
-        self.main(['dj0yJmk9SnhqbG5CR3IyRFVXJmQ9WVdrOWMyMTRlVlEzTjJNbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD00Mw--',
-                   '0239d730f5c6bf89233a185f6c7794829ba7947a'])
+        self.main(
+            ['dj0yJmk9SnhqbG5CR3IyRFVXJmQ9WVdrOWMyMTRlVlEzTjJNbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD00Mw--'],
+            ['0239d730f5c6bf89233a185f6c7794829ba7947a']
+        )
 
 execute_task(IG_Domain_YahooAPI)

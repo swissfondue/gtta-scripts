@@ -66,7 +66,7 @@ class Task {
         $self->_produced_output(1);
 
         if ($self->_result) {
-            if ($self->_result->isa("IO::String")){
+            if (ref($self->_result) eq "IO::String"){
                 syswrite($self->_result, $str . "\n");
             } else {
                 my $result_file;
@@ -127,7 +127,7 @@ class Task {
     }
 
     # Parse input arguments
-    method _parse_input {
+    method parse_input {
         if (scalar(@ARGV) < 2) {
             die("At least 2 command line arguments should be specified.\n");
         }
@@ -194,7 +194,7 @@ class Task {
                 next;
             }
 
-            my @file_lines = ();
+            my @file_lines:shared = ();
             open($fp, $arg) or die("Unable to open input file: $arg.\n");
 
             while (<$fp>) {
@@ -289,7 +289,6 @@ class Task {
             if ($self->test_mode) {
                 $timeout = $self->TEST_TIMEOUT;
             } else {
-                $self->_parse_input();
                 $timeout = $self->timeout;
             }
 
@@ -327,10 +326,11 @@ class Task {
         push @thread_pool, threads->create(sub {
             my $worker = ref($self)->new("worker" => 1);
 
-            $worker->arguments(@{$self->arguments});
+            $worker->arguments($self->arguments);
             $worker->proto($self->proto || "");
             $worker->lang($self->lang || "");
             $worker->test_mode($self->test_mode);
+            $worker->timeout($self->timeout || $self->DEFAULT_TIMEOUT);
             $worker->run();
 
             if ($worker->_produced_output) {
@@ -366,7 +366,7 @@ class Task {
 
     # Get worker result
     method worker_result {
-        if (!$self->_result->isa("IO::String")) {
+        if (ref($self->_result) ne "IO::String") {
             return "";
         }
 
@@ -412,7 +412,7 @@ class Task {
 
 # Executes task and controls its execution
 sub execute {
-    my $obj :shared = shared_clone(shift);
+    my $obj:shared = shared_clone(shift);
 
     if (!$obj || !$obj->isa("Task")) {
         die("Invalid task object.\n");
@@ -423,6 +423,10 @@ sub execute {
     }
 
     my $thread = async {
+        if (!$obj->test_mode) {
+            $obj->parse_input();
+        }
+
         $obj->run();
     };
 

@@ -24,9 +24,8 @@ class YahooAPI(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        oauth = OAuth1(args[0][0], client_secret=args[0][1])
-        params = {'format': 'xml',
-                  'count': '50'}
+        oauth = OAuth1(args[0][0], client_secret=args[1][0])
+        params = {'format': 'xml', 'count': '50'}
         path = '?q=%s' % self.target.replace(' ', '%20').replace(':', '%3A')
         soup = self._get_soup(path=path, params=params, auth=oauth)
         self._collect_results_from_soup(soup)

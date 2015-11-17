@@ -6,3 +6,10 @@ dependencies:
     - libnet-ssh2-perl
   library:
     - core
+inputs:
+  - name: users
+    type: textarea
+    description: User list
+  - name: passwords
+    type: textarea
+    description: Password list

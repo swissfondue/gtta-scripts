@@ -31,7 +31,6 @@ class DNS_Top_TLDs extends Task {
         }
 
         my $res = Net::DNS::Resolver->new;
-
         undef $/;
 
         my $ua = LWP::UserAgent->new;
@@ -43,7 +42,11 @@ class DNS_Top_TLDs extends Task {
 
             unless ($cur eq $my_tld) {
                 my $cur_domain = $dom . '.' . $cur;
-                my $query = $res->search($cur_domain);
+                my $query;
+
+                eval {
+                    $query = $res->search($cur_domain);
+                };
 
                 if ($query) {
                     foreach my $rr ($query->answer) {
@@ -60,9 +63,9 @@ class DNS_Top_TLDs extends Task {
                             $whois = 'N/A';
                         }
 
+                        my $title = 'N/A';
                         my $request = HTTP::Request->new('GET' => 'http://' . $cur_domain);
                         my $response = $ua->request($request);
-                        my $title = 'N/A';
 
                         unless ($response->is_error()) {
                             my $content = $response->content();
@@ -71,6 +74,7 @@ class DNS_Top_TLDs extends Task {
                         }
 
                         push(@domains, [$cur_domain, $rr->address, $whois, $title]);
+
                         last;
                     }
                 }

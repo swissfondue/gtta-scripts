@@ -6,3 +6,8 @@ dependencies:
     - core
   system:
     - libwww-perl
+inputs:
+  - name: code
+    type: text
+    description: Type of code on web-server (asp, cfm, php)
+    value: php

@@ -7,3 +7,28 @@ dependencies:
   library:
     - core
     - nmap
+inputs:
+  - name: ports
+    type: text
+    description: Ports to scan
+    value: 80
+  - name: skip_discovery
+    type: checkbox
+    description: Skip discovery
+    value: 1
+  - name: verbose
+    type: checkbox
+    description: Verbose output
+    value: 1
+  - name: probe
+    type: checkbox
+    description: Probe host before scanning ports
+    value: 1
+  - name: timing
+    type: text
+    description: Timing configuration (1-5)
+    value: 3
+  - name: extract
+    type: checkbox
+    description: Extract results into a table
+    value: 1

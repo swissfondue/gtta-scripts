@@ -5,7 +5,10 @@ $Id: check_as_peers.py,v 1.6 2013/02/07 03:05:33 dee Exp $
 import socket
 from core import Task, execute_task
 
+
 class CheckASPeers(Task):
+    """Check AS peers"""
+
     def main(self, *args):
         """
         GTTA check AS peers via cymru.com whois server

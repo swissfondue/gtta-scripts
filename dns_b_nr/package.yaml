@@ -6,3 +6,8 @@ dependencies:
     - core
   system:
     - python-dnspython
+inputs:
+  - name: host
+    type: text
+    description: Hostname for DNS query
+    value: microsoft.com

@@ -6,3 +6,12 @@ dependencies:
     - core
     - yahoo_api
     - emailgrabber
+inputs:
+  - name: api_key
+    type: text
+    description: Yahoo API key
+    visible: false
+  - name: client_secret
+    type: text
+    description: Client secret key
+    visible: false

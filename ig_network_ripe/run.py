@@ -49,7 +49,6 @@ class IG_Network_Ripe(Task):
         """
         Main function
         """
-
         advanced_form_data = {
             'home_search': 'home_search',
             'home_search:searchform_q:': '',

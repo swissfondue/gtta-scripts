@@ -6,3 +6,7 @@ dependencies:
     - libnet-dns-perl
   library:
     - core
+inputs:
+  - name: big_file
+    type: checkbox
+    description: Use big file (5600+ entries)

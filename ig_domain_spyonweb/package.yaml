@@ -6,3 +6,8 @@ dependencies:
     - core
   system:
     - python-requests
+inputs:
+  - name: api_key
+    type: text
+    description: Spyonweb API key
+    visible: false

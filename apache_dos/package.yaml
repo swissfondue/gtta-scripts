@@ -6,3 +6,8 @@ dependencies:
     - core
   system:
     - libwww-perl
+inputs:
+  - name: range
+    type: text
+    description: Number of ranges to test
+    value: 10
