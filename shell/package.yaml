@@ -4,3 +4,7 @@ version: 1.10
 dependencies:
   library:
     - core
+inputs:
+  - name: command
+    type: text
+    description: "Command to run. Use @target to insert a target into command (ex: ping -c 3 @target)."
