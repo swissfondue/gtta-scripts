@@ -15,16 +15,15 @@ class Metasploit(Task):
     WORKING_DIR = "/opt/metasploit"
     PARSE_FILES = False
 
-    def _prepare_resource(self, resource, *args):
+    def _prepare_resource(self, resource, args):
         """
         Prepare resource
         """
-        target = '%s://%s' % (self.proto or 'http', self.target)
-
         resource = open(resource, "r").read().split("\n")
         resource = map(lambda x: x.replace('\r', ''), resource)
         resource = "\n".join(resource + ["run", "exit -y"])
-        resource = resource.replace("@target", target)
+        resource = resource.replace("@target", self.target)
+        resource = resource.replace("@proto", self.proto or "http")
 
         ctr = 0
 
@@ -55,7 +54,7 @@ class Metasploit(Task):
         out_file = NamedTemporaryFile(delete=False).name
 
         try:
-            resource_file = self._prepare_resource(args[0], args[1:])
+            resource_file = self._prepare_resource(args[0][0], args[1:])
 
             try:
                 output = Popen(
@@ -126,7 +125,7 @@ class Metasploit(Task):
         passwords.file.flush()
 
         try:
-            self.main(script.name, passwords.name)
+            self.main([script.name], [passwords.name])
         finally:
             try:
                 unlink(script.name)
