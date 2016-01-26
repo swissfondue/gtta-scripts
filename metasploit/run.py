@@ -54,7 +54,7 @@ class Metasploit(Task):
         out_file = NamedTemporaryFile(delete=False).name
 
         try:
-            resource_file = self._prepare_resource(args[0][0], args[1:])
+            resource_file = self._prepare_resource(args[0], args[1:])
 
             try:
                 output = Popen(
@@ -125,7 +125,7 @@ class Metasploit(Task):
         passwords.file.flush()
 
         try:
-            self.main([script.name], [passwords.name])
+            self.main(script.name, passwords.name)
         finally:
             try:
                 unlink(script.name)

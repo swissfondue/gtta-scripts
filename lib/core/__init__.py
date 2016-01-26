@@ -263,7 +263,7 @@ class Task(Thread):
             self.test()
             self.produced_output = True
         else:
-            self.main(self.arguments)
+            self.main(*self.arguments)
 
     def _run_singlethreaded(self):
         """Run single-threaded task"""
