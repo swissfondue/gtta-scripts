@@ -20,7 +20,7 @@ class DNS_Hosting(Task):
             target = self.ip
 
         try:
-            if not api_key:
+            if not api_key or not api_key[0]:
                 self._write_result("You must specify ViewDns Api Key.")
                 return
 
@@ -30,7 +30,7 @@ class DNS_Hosting(Task):
             params = urlencode({
                 "host": target,
                 "output": "json",
-                "apikey": api_key
+                "apikey": api_key[0]
             })
             request = Request('http://pro.viewdns.info/reverseip?%s' % params)
             request.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/11.10 Chromium/18.0.1025.142 Chrome/18.0.1025.142 Safari/535.19')
@@ -80,7 +80,7 @@ class DNS_Hosting(Task):
         """
         Test function
         """
-        self.host = "microsoft.com"
+        self.host = "bible-history.com"
         self.main(["ee61b8eb5e63aa95a63d15fa39d6e16e7ec15375"])
 
 execute_task(DNS_Hosting)
