@@ -8,7 +8,7 @@ class AccessUserDirsTask(Task):
     Check access to user directory
     """
 
-    def main(self, usernames, *args):
+    def main(self, usernames=("root",), *args):
         """
         Main function
         """
@@ -17,24 +17,26 @@ class AccessUserDirsTask(Task):
             self.host or self.ip
         )
 
-        username = (usernames + [''])[0] or 'root'
+        for username in usernames:
+            if not username:
+                continue
 
-        self._check_stop()
+            self._check_stop()
 
-        try:
-            res = urllib.urlopen("%s/~%s" % (target, username))
+            try:
+                res = urllib.urlopen("%s/~%s" % (target, username))
 
-            if res.code == 403:
-                msg = 'User "%s": user directory is accessible'
-            else:
-                msg = 'User "%s": user directory is NOT accessible'
+                if res.code == 403:
+                    msg = 'User "%s": user directory is accessible'
+                else:
+                    msg = 'User "%s": user directory is NOT accessible'
 
-            msg = msg % username
+                msg = msg % username
 
-        except IOError:
-            msg = "Connection error"
+            except IOError:
+                msg = "Connection error"
 
-        self._write_result(msg)
+            self._write_result(msg)
 
     def test(self):
         """
