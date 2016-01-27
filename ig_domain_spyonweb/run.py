@@ -37,8 +37,9 @@ class IG_Domain_Spyonweb(Task):
         """
         Main function
         """
-        if not access_token:
-            raise NotEnoughArguments("Spyonweb access token is required.")
+        if not access_token or not access_token[0]:
+            self._write_result("Spyonweb API key is required.")
+            return
 
         results = []
         access_token = access_token[0]

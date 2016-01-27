@@ -21,7 +21,7 @@ class DNS_Hosting(Task):
 
         try:
             if not api_key or not api_key[0]:
-                self._write_result("You must specify ViewDns Api Key.")
+                self._write_result("ViewDns API key is required.")
                 return
 
             # Add parameter { "page" : 2 } if u want

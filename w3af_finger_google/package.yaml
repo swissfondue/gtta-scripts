@@ -5,3 +5,12 @@ dependencies:
   library:
     - core
     - w3af
+inputs:
+  - name: result_limit
+    type: textarea
+    description: Result limit number
+    value: 300
+  - name: fast_search
+    type: checkbox
+    description: Use fast search
+    value: 1

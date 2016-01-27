@@ -11,7 +11,7 @@ inputs:
     type: text
     description: Minimum subdomain length
     value: 1
-  - name: client_secret
+  - name: max_length
     type: text
     description: Maximum subdomain length
     value: 3

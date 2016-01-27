@@ -5,3 +5,18 @@ dependencies:
   library:
     - core
     - vulndetector
+inputs:
+  - name: domains
+    type: textarea
+    description: List of domains to check
+  - name: page_type
+    type: radio
+    description: Programming language used on server
+    value: "php\nasp"
+  - name: cookie
+    type: text
+    description: Cookie string
+  - name: url_limit
+    type: text
+    description: Number of URLs to test
+    value: 100
