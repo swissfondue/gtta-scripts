@@ -36,11 +36,15 @@ class IG_Subdomain_Bruteforce(Task):
         """
         Main function
         """
-        min_len = min_len[0]
-        max_len = max_len[0]
+        try:
+            min_len = int(min_len[0])
+            max_len = int(max_len[0])
+        except TypeError:
+            self._write_result("Min and max length should be integer values.")
+            return
 
-        if min_len > max_len:
-            self._write_result("Min length should be less or equal to max length.")
+        if min_len > max_len or min_len <= 0:
+            self._write_result("Min length should be greater than 0 and less or equal to max length.")
             return
 
         if not self.host:
