@@ -152,8 +152,17 @@ class Task {
         }
 
         my @targets = split /,/, $lines[0];
+        my @filtered = ();
 
-        @{$self->targets} = @targets;
+        foreach my $target (@targets) {
+            $target =~ s/^\s+|\s+$//g;
+
+            if ($target) {
+                push(@filtered, $target);
+            }
+        }
+
+        @{$self->targets} = @filtered;
 
         if ($self->EXPAND_TARGETS) {
             $self->_expand_targets();

@@ -176,7 +176,14 @@ class Task(Thread):
         if not lines[0]:
             raise InvalidTargetFile('Target file should contain either host name or IP address of the target host on the 1st line.')
 
-        self.targets = lines[0].split(',')
+        targets = lines[0].split(",")
+        self.targets = []
+
+        for target in targets:
+            target = target.strip()
+
+            if target:
+                self.targets.append(target)
 
         if self.EXPAND_TARGETS:
             self._expand_targets()
