@@ -14,11 +14,6 @@ class Web_HTTP_Methods(Task):
         """
         Main function
         """
-        target = self.host
-
-        if not target:
-            target = self.ip
-
         self._check_stop()
 
         if not self.proto:
@@ -36,7 +31,7 @@ class Web_HTTP_Methods(Task):
             class_name = HTTPSConnection
 
         try:
-            conn = class_name(host=target, port=self.port, timeout=self.HTTP_TIMEOUT)
+            conn = class_name(host=self.target, port=self.port, timeout=self.HTTP_TIMEOUT)
             conn.request('OPTIONS', '/')
 
             response = conn.getresponse()
@@ -62,7 +57,7 @@ class Web_HTTP_Methods(Task):
                 for method in self.DANGEROUS_METHODS:
                     self._check_stop()
 
-                    conn = HTTPConnection(self.host, timeout=self.HTTP_TIMEOUT)
+                    conn = HTTPConnection(self.target, timeout=self.HTTP_TIMEOUT)
                     conn.request(method, '/')
 
                     response = conn.getresponse()

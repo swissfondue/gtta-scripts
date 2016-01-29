@@ -104,7 +104,6 @@ class Task(Thread):
         self._result = None
         self._worker = worker
 
-
     def _check_stop(self):
         """
         Check if thread should be stopped
