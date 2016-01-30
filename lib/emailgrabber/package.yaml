@@ -1,6 +1,7 @@
 type: library
 name: emailgrabber
 version: 1.7
+dependencies:
   library:
     - core
   system:
