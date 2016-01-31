@@ -36,6 +36,7 @@ class IG_Subdomain_AXFR(Task):
                         
                         if k[0] not in ["@", "*"]:
                             subdomain = ".".join([k, self.host])
+                            
                             if subdomain not in results:
                                 self._write_result(subdomain)
                                 results.append(subdomain)
@@ -49,8 +50,7 @@ class IG_Subdomain_AXFR(Task):
         """
         Test function
         """
-        # self.host = "livedoor.com"
-        self.host = "ettoday.net"
+        self.host = "livedoor.com"
         self.main()
 
 execute_task(IG_Subdomain_AXFR)
