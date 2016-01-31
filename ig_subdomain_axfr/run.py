@@ -36,7 +36,7 @@ class IG_Subdomain_AXFR(Task):
                         
                         if k[0] not in ["@", "*"]:
                             subdomain = ".".join([k, self.host])
-                            
+
                             if subdomain not in results:
                                 self._write_result(subdomain)
                                 results.append(subdomain)
