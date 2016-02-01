@@ -12,7 +12,7 @@ class Metasploit(Task):
     Metasploit wrapper
     """
     TEST_TIMEOUT = 600
-    WORKING_DIR = "/opt/metasploit"
+    WORKING_DIR = "/opt/metasploit-framework"
     PARSE_FILES = False
 
     def _prepare_resource(self, resource, args):
@@ -31,8 +31,7 @@ class Metasploit(Task):
             if not arg:
                 continue
 
-            value = arg[0]
-            resource = resource.replace("@arg%d" % ctr, value)
+            resource = resource.replace("@arg%d" % ctr, arg)
 
             ctr += 1
 
@@ -58,7 +57,7 @@ class Metasploit(Task):
 
             try:
                 output = Popen(
-                    "app/msfconsole -r%s -o%s -q" % (resource_file, out_file),
+                    "bin/msfconsole -r%s -o%s -q" % (resource_file, out_file),
                     stdout=PIPE,
                     stderr=STDOUT,
                     shell=True,
