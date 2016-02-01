@@ -13,6 +13,7 @@ class NMAP_UDP extends Task {
     use core::task qw(call_external);
 
     use constant EXPAND_TARGETS => 0;
+    use constant TEST_TARGETS => ["8.8.8.8"];
 
     # Process
     method _process(Str $host, Str $ports, Int $skip_discovery, Int $verbose, Int $probe, Int $timing, Int $extract) {

@@ -1,6 +1,0 @@
-type: library
-name: nmap
-version: 1.7
-dependencies:
-  deb:
-    - nmap_6.40-1_i386.deb

@@ -4,9 +4,9 @@ version: 1.7
 dependencies:
   system:
     - libxml-libxml-perl
+    - nmap
   library:
     - core
-    - nmap
 inputs:
   - name: ports
     type: text
