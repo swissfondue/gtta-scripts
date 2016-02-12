@@ -4,8 +4,8 @@ version: 1.7
 dependencies:
   library:
     - core
-  system:
-    - metasploit_4.11.9_amd64.deb
+  deb:
+    - metasploit-framework_4.11.9_amd64.deb
 inputs:
   - name: script
     type: textarea
