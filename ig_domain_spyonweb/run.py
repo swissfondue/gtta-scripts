@@ -22,16 +22,24 @@ class IG_Domain_Spyonweb(Task):
         except ConnectionError:
             raise Exception("Spyonweb API connection error")
 
-        if req.json and req.json["status"] == "error":
+        try:
+            json = req.json()
+        except:
+            json = None
+
+        if not json or not "status" in json:
+            return None
+
+        if json["status"] == "error":
             raise Exception("Spyonweb API error: %s" % req.json["message"])
 
-        if req.json and req.json["status"] == "not_found":
+        if json["status"] == "not_found":
             return None
 
-        if not "result" in req.json:
+        if not "result" in json:
             return None
 
-        return req.json["result"]
+        return json["result"]
 
     def main(self, access_token=[], *args):
         """
