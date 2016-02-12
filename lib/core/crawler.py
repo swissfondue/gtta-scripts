@@ -50,11 +50,10 @@ class LinkCrawler(object):
         cache = set()
 
         def populate(url):
-
-            resp = requests.get(
-                url,
-                headers={'User-agent': 'Mozilla/5.0'}
-            )
+            try:
+                resp = requests.get(url, headers={'User-agent': 'Mozilla/5.0'}, verify=False)
+            except Exception:
+                return
 
             # handle errors
             if resp.status_code >= 400:
