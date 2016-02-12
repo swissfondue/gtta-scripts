@@ -8,15 +8,21 @@ class IG_Domain_RR(Task):
     Search records
     """
     TEST_TIMEOUT = 3600
+    DEFAULT_WORDLIST = "fast"
 
-    def main(self, *args):
+    def main(self, word_list=(DEFAULT_WORDLIST,), *args):
         """
         Main function
         """
+        if word_list and word_list[0]:
+            word_list = word_list[0]
+        else:
+            word_list = self.DEFAULT_WORDLIST
+
         if self.ip:
             params = '-r %s' % self.ip
         else:
-            params = '-d %s -w word.list' % self.host
+            params = '-d %s -w files/%s.txt' % (self.host, word_list)
 
         results = set()
 
@@ -33,7 +39,7 @@ class IG_Domain_RR(Task):
         Test function
         """
         self.host = "clariant.com"
-        self.main()
+        self.main(["fast"])
         self.ip = "208.67.1.4"
         self.main()
 

@@ -39,12 +39,6 @@
 1-splines
 1-stable
 1-weight
-1/2-tail
-1/e
-1/f
-1/kn
-1/noise
-1/p
 10
 100
 100-point
@@ -93,7 +87,6 @@
 15-years
 150th
 15D
-15H/150E
 15th
 16
 16-fold
@@ -188,7 +181,6 @@
 1975
 1976
 1977
-1977;
 1978
 1979
 1980
@@ -218,7 +210,6 @@
 1998
 1999
 19th
-1;
 1A
 1A-B
 1B
@@ -276,7 +267,6 @@
 2-way
 20
 2000
-2000/access
 2001
 2002
 2003
@@ -308,7 +298,6 @@
 24-h
 24-hour
 245-T
-245-T/Dioxin
 24th
 25
 25-year
@@ -343,7 +332,6 @@
 2x2
 2xk
 3
-3*
 3-D
 3-MFA
 3-associate
@@ -361,16 +349,7 @@
 3-stage
 3-way
 3-year
-3.14
-3.141
-3.1415
-3.14159
-3.141592
-3/2-stable
-3/2th
-3/4;1989
 30
-30-31+
 305-day
 31
 31-bit
@@ -385,7 +364,6 @@
 34
 35
 36
-366-370;
 37
 38
 39
@@ -404,8 +382,6 @@
 4-designs
 4-parameter
 4-year
-4.2bsd
-4.3bsd
 40
 4077mash
 40th
@@ -425,17 +401,12 @@
 44444444
 44th
 45
-45 Minute Psychosis
-455;01
 46
 47
 48
 49
 49-ers
 49ers
-4;
-4CaST/2
-4CaSt/2
 4sa7ya
 5
 5--Inferential
@@ -444,7 +415,6 @@
 51
 52
 53
-53;5x3-1
 54
 55
 555
@@ -477,7 +447,6 @@
 67
 68
 69
-6;
 6C
 6ers
 6t
@@ -515,12 +484,9 @@
 78
 781C
 7822a
-78LitMaS18/3
-78Metron36/3
 78SankhyaB39
 78Ststcian
 79
-791T/36
 79BJMaStPs32
 79IEEESyst9
 79Ststcian28
@@ -573,11 +539,6 @@
 999999
 9999999
 99999999
-;lk
-;lk;lk
-;lkasd
-A'-level
-A's
 A-Circular
 A-K
 A-bomb
@@ -591,7 +552,6 @@ A-level
 A-optimal
 A-optimality
 A-unimodal
-A/D
 A58
 A8
 AAB
@@ -651,7 +611,6 @@ AID
 AIDA
 AIDS
 AIDS-related
-AIDS/HIV
 AIP
 ALDS
 ALGEMA
@@ -672,7 +631,6 @@ ALSCAL-derived
 ALSTAT
 ALSTAT-ALPLOT
 AM-GM
-AM/PM
 AMART-like
 AMARTS
 AMHTS
@@ -705,7 +663,6 @@ ANOVA-type
 ANOVAs
 ANOVR
 ANSD
-ANSI/ASQC
 ANUCLOUD
 AOQ
 AOQL
@@ -724,8 +681,6 @@ APL-Stat
 APL-computer
 APL-multivariate
 APL-system
-APL/360
-APL/FORTRAN
 APL2
 APL84
 APLECON
@@ -806,7 +761,6 @@ AS87
 AS99
 ASA
 ASA-NBER
-ASA/NSF/Census
 ASAP
 ASCII
 ASD
@@ -829,7 +783,6 @@ ATI
 ATSA
 ATSP
 AUTOBJ
-AUTOBJ/AUTOBOX
 AUTOBOX
 AUTOBOX-PLUS
 AUTOCAST
@@ -848,7 +801,6 @@ Abac
 Abandoning
 Abatement
 Abe
-Abe's cabe
 Abel-Dini
 Ability
 Abolic
@@ -861,8 +813,6 @@ Abstracts
 Abundance
 Abuses
 Abusus
-Acapulco gold
-Acapulco red
 Acari
 Accardi
 Accelerated
@@ -871,7 +821,6 @@ Acceleration
 Acceptable
 Acceptance
 Acceptance-rejection
-Acceptance/rejection
 Accepting
 Accessibility
 Accessing
@@ -894,7 +843,6 @@ Achievement
 Achievements
 Achieving
 Acid
-Acid head
 Ack
 Acock
 Acomparison
@@ -957,9 +905,6 @@ Affective
 Affinely
 Aflaw
 African
-African black
-African bush
-African woodbine
 Africanized
 After
 After-tax
@@ -994,7 +939,6 @@ Aggregation
 Agnesi
 Agonies
 Agreement
-Agreement/Categorical
 Agronomical
 Aguilar
 Ah-pen-yen
@@ -1006,7 +950,6 @@ Aiding
 Aids
 Aimies
 Aims
-Air blast
 Airhead
 Airlines
 Airplane
@@ -1033,13 +976,9 @@ Algorithmization
 Algorithms
 Alias-free
 Aliasing
-Alice B. Toklas
 Aligning
 Alignment
 Alignments
-All lit up
-All star
-All-American drug
 All-India
 All-bias
 All-pass
@@ -1089,7 +1028,6 @@ Amidone
 Amoeba
 Among-groups
 Amp
-Amp joint
 Amped-out
 Amping
 Amplitude-dependent
@@ -1128,10 +1066,6 @@ Andreas
 Andreevich
 Andrews-Pregibon
 Angel
-Angel Poke
-Angel dust
-Angel hair
-Angel mist
 Angie
 Angina
 Angiotensine
@@ -1142,8 +1076,6 @@ Anglos
 Angola
 Anil
 Animal
-Animal trank
-Animal tranquilizer
 Animals
 Animating
 Annales
@@ -1192,7 +1124,6 @@ Aphidiidae
 Aphidius
 Appalachian
 Appell
-Apple jacks
 Apples
 Applesoft
 Applicability
@@ -1244,7 +1175,6 @@ Arithmetical
 Arm-acquiring
 Armitage
 Armitage-Doll
-Aroma of men
 Arrangement
 Arrays
 Arrhythmia
@@ -1262,7 +1192,6 @@ Ascophyllum
 Ashes
 Ashford
 Asian
-Asian/Pacific
 Asking
 Asmussen
 Aspden
@@ -1306,7 +1235,6 @@ Atest
 Athos
 Atiyah-Singer
 Atoll
-Atom bomb
 Atomistic
 Atoms
 Atshitshi
@@ -1332,12 +1260,7 @@ Augustin
 Augustin-Louis
 Aukland
 Aumann
-Aunt Hazel
-Aunt Mary
-Aunt Nora
 Aunti
-Aunti Emma
-Aurora borealis
 Austen
 Australia-England
 Australian
@@ -1406,7 +1329,6 @@ B-statistic
 B-value
 B-valued
 B-variables
-B.J.'s
 B34S
 BAB
 BACI
@@ -1427,7 +1349,6 @@ BAYTAP
 BAZE
 BBC
 BBGKY
-BBN/CATALYST
 BC
 BCB
 BEAR1
@@ -1444,7 +1365,6 @@ BESTREG
 BETA
 BETA-expectation
 BFOS
-BFSK/FH
 BGRAPH
 BHNBUE
 BIAS
@@ -1530,14 +1450,9 @@ Babbage
 Babe
 Babies
 Baby
-Baby T
-Baby bhang
-Baby habit
 Babysit
 Baccarat-banque
 Bachelors
-Back door
-Back to back
 Back-to-back
 Backbreakers
 Backcalculation
@@ -1548,13 +1463,8 @@ Backup
 Backwards
 Bacteriological
 Bad
-Bad bundle
-Bad go
-Bad seed
 Baer
 Bag
-Bag bride
-Bag man
 Bagging
 Bahadur
 Bahadur-Ghosh-Kiefer
@@ -1600,7 +1510,6 @@ Banff
 Bang
 Bang-bang
 Bangladeshi
-Bank bandit pills
 Banque
 Banzhaf
 Bar
@@ -1636,8 +1545,6 @@ Bartoszynski
 Barycenter
 Basag
 Base
-Base crazies
-Base head
 Baseball
 Based
 Bash
@@ -1647,10 +1554,8 @@ Basins
 Bassler
 Basu
 Basuco
-Bathtub speed
 Batis
 Batt
-Battery acid
 Battese-Fuller
 Batu
 Bauer-Rutishauser
@@ -1659,7 +1564,6 @@ Baum
 Baumol
 Baxter-Spitzer
 Bayes
-Bayes'
 Bayes-Fisher
 Bayes-Hermite
 Bayes-P
@@ -1668,31 +1572,22 @@ Bayes-competing
 Bayes-like
 Bayes-risk
 Bayes-type
-Bayes/Neyman-Pearson
-Bayes/empirical
-Bayes/non-Bayes
 Bayesball
 Bayesian-adaptive
 Bayesian-entropy
-Bayesian/maximum-entropy
 Bayesianism
-Bayesianism;a
 Bayesianly
 Bayesians
 Bayestests
 Bazooka
 Bazulco
 Beale
-Beam me up Scottie
 Beamer
 Beans
 Beast
-Beat artist
-Beat vials
 Beating
 Beattie
 Beaufort
-Beautiful boulders
 Bebe
 Bechhofer
 Bechhofer-Kiefer-Sobel
@@ -1708,7 +1603,6 @@ Behaviorally
 Behavioristic
 Behaviour
 Behavioural
-Behind the scale
 Behrens
 Behrens-Fisher
 Beiging
@@ -1722,7 +1616,6 @@ Bellman-Harris
 Belousov-Zhabotinskii
 Belt
 Belushi
-Belyando spruce
 Belz
 Benard-Van
 Benard-van
@@ -1756,8 +1649,6 @@ Berkson
 Bermudian
 Bernice
 Bernie
-Bernie's flakes
-Bernie's gold dust
 Bernouilli
 Bernoulli-Gaussian
 Bernoulli-Laplace
@@ -1833,21 +1724,8 @@ Bienayme
 Bienayme-Galton-Watson
 Bierman-Hausman
 Bifurcations
-Big 8
-Big C
-Big D
-Big H
-Big Harry
-Big O
-Big bag
-Big bloke
-Big flake
-Big man
-Big rush
 Bihar
-Bill Blass
 Billiards
-Billie hoke
 Billingsley
 Billingsley-type
 Bills
@@ -1893,7 +1771,6 @@ Biothermal
 Biplot
 Biplots
 Biquadratic
-Birdie powder
 Birds
 Birget
 Birkhoff
@@ -1917,41 +1794,15 @@ Bispectra
 Bispectral
 Bispectral-based
 Bit-wise
-Bite one's lips
 Bitterlich
 Bivalent
 Bivar
 Biweight
 Biz
 Black
-Black Russian
-Black acid
-Black and white
-Black bart
-Black beauties
-Black birds
-Black bombers
-Black ganga
-Black gold
-Black gungi
-Black gunion
-Black hash
-Black mo
-Black mollies
-Black mote
-Black pearl
-Black pill
-Black rock
-Black star
-Black stuff
-Black sunshine
-Black tabs
-Black tar
-Black whack
 Black-Scholes
 Black-jack
 Black-white
-Black/white
 Blacks
 Blackshouldered
 Blaise
@@ -1960,15 +1811,11 @@ Blanket
 Blanks
 Blaschke
 Blast
-Blast a joint
-Blast a roach
-Blast a stick
 Blasted
 Blazing
 Blinding
 Blizzard
 Block
-Block busters
 Block-Savits
 Block-sequential
 Block-successive
@@ -1980,42 +1827,10 @@ Blom
 Blonde
 Blood-lead
 Blotter
-Blotter acid
-Blotter cube
 Blow
-Blow a fix
-Blow a stick
-Blow blue
-Blow coke
-Blow one's roof
-Blow smoke
-Blow up
 Blowcaine
-Blowing smoke
 Blowout
-Blud madman
 Blue
-Blue acid
-Blue angels
-Blue barrels
-Blue birds
-Blue boy
-Blue bullets
-Blue caps
-Blue chairs
-Blue cheers
-Blue de hue
-Blue devil
-Blue dolls
-Blue heaven
-Blue heavens
-Blue microdot
-Blue mist
-Blue moons
-Blue sage
-Blue sky blond
-Blue tips
-Blue vials
 Blum-Kiefer-Rosenblatt
 Blum-Rosenblatt
 Blums
@@ -2023,11 +1838,7 @@ Blunt
 Bo-bo
 Boat
 Bobo
-Bobo bush
 Bochner
-Body packer
-Body stuffer
-Bogart a joint
 Bogolyubov
 Boguslavsky
 Bohd
@@ -2035,7 +1846,6 @@ Bohman
 Bokaro
 Bolasterone
 Bolhev
-Bolivian marching powder
 Bollen
 Bolo
 Bolt
@@ -2045,11 +1855,9 @@ Boltzmann-type
 Bolyai
 Bolza
 Bomb
-Bomb squad
 Bomber
 Bombido
 Bombita
-Bombs away
 Bombyx
 Bondesson
 Bone
@@ -2076,10 +1884,8 @@ Boom
 Boomers
 Boorstyn
 Boost
-Boost and shoot
 Booster
 Boot
-Boot the gong
 Booted
 Boothe-MacKinnon
 Bootstrap-estimation
@@ -2108,7 +1914,6 @@ Boubou
 Boudon
 Boulder
 Boulya
-Bouncing powder
 Boundaries
 Boundary-value
 Bounded
@@ -2125,7 +1930,6 @@ Box-Cox-transformed
 Box-Draper
 Box-Jenkens
 Box-Jenkins
-Box-Jenkins/econometric
 Box-Meyer
 Box-Mueller
 Box-Muller
@@ -2148,7 +1952,6 @@ Bradstreet
 Bradu
 Braids
 Brailovsky
-Brain ticklers
 Brainstem
 Braithwaite
 Branch-and-Bound
@@ -2159,8 +1962,6 @@ Branching-diffusion
 Brand-store
 Brasilian
 Brassica
-Brazil;
-Break night
 Breakdowns
 Breakeven
 Breaking
@@ -2173,8 +1974,6 @@ Brewer
 Brewery
 Bribes
 Brick
-Brick gum
-Bridge up
 Bridgestone
 Bridging
 Brier
@@ -2194,11 +1993,6 @@ Brooks-Corey
 Bross
 Brothers
 Brown
-Brown bombers
-Brown crystal
-Brown dots
-Brown rhine
-Brown sugar
 Brown-Fereday
 Brown-Forsythe
 Brown-Mood
@@ -2213,7 +2007,6 @@ Brunel-Sucheston
 Brunn-Minkowski
 Brushing
 Brusselator
-Bubble gum
 Buck
 Buckalew
 Buckley-James
@@ -2232,12 +2025,9 @@ Buildings
 Bulgarian
 Bull
 Bullet
-Bullet bolt
-Bullia capital
 Bullion
 Bullyon
 Bumblebees
-Bummer trip
 Bump
 Bundesbank
 Bundle
@@ -2254,11 +2044,8 @@ Burkholder
 Burkina
 Burks
 Burman
-Burn one
-Burn the main line
 Burn-in
 Burned
-Burned out
 Burnese
 Burnham-Anderson
 Burnie
@@ -2269,29 +2056,18 @@ Buser
 Bush
 Bush-Mosteller
 Bushfire
-Businessman's LSD
-Businessman's special
-Businessman's trip
 Busted
 Busters
-Busy bee
 Busy-period
 Butler-Smirnov
-Butt naked
 Butter
-Butter flower
 Buttons
 Butu
 Buyer-behaviour
 Buying
 Buzz
-Buzz bomb
 Byar
 C
-C  joint
-C & M
-C+
-C++
 C-LAB
 C-M-J
 C-Wishart
@@ -2307,7 +2083,6 @@ C-property
 C-sequences
 C-type
 C-vM
-C/R
 C01
 C3
 CABFAC
@@ -2327,7 +2102,6 @@ CANCOR
 CANCORR
 CANDA
 CANDECOMP
-CANDECOMP/PARAFAC
 CANDELINC
 CANEST
 CANSIM
@@ -2354,7 +2128,6 @@ CAT
 CATANOVA
 CATDAP-01
 CATI
-CATI/CASI
 CATLIN
 CATMOD
 CAV
@@ -2399,9 +2172,6 @@ CHRONIC
 CILM
 CINDESE
 CIS
-CIS/ED
-CIS/ED:
-CIS/Ed
 CIS75ACV93
 CIS75DMV93
 CIS75NZV93
@@ -2471,7 +2241,6 @@ CLUPOT
 CLUSTAN
 CLUSTAR
 CLUSTAR-PC
-CLUSTAR/CLUSTID
 CLUSTER
 CLUSTERS
 CLUSTERT
@@ -2491,7 +2260,6 @@ COMPAIR
 COMPCOV
 COMPOSITE
 COMPSTAT
-COMPSTAT'84
 COMTRAP
 CONCOR
 CONF
@@ -2511,7 +2279,6 @@ CORFREE
 CORMS
 CORR
 CORREL
-CORRMAT/PROB
 CORSET
 CORSIM
 CORSPOND
@@ -2519,9 +2286,6 @@ COSAN
 COX
 CP
 CP-terminal
-CP/M-80
-CP/M-User
-CPDF/OPF
 CPI
 CPIR
 CPIT-Neyman
@@ -2531,7 +2295,6 @@ CPS
 CPS-IRS-SSA
 CPS-NLS
 CPSK
-CPSS/PC
 CPU
 CPUE
 CR
@@ -2559,7 +2322,6 @@ CT-absorption
 CTM
 CTMDP
 CTS
-CTSS/CUSUM
 CURT
 CUSP
 CUSUM
@@ -2580,11 +2342,8 @@ Caca
 Cacoullos
 Cacoullos-type
 Cactus
-Cactus buttons
-Cactus head
 Cad
 Cadillac
-Cadillac express
 Caerphilly
 Caeruleus
 Cagan
@@ -2602,17 +2361,12 @@ Calibrated
 Calibrating
 Calibration
 Calibration-based
-California cornflakes
-California sunshine
 Calinski
 Call-backs
 Callback
 Callbacks
 Calling
 Calosoma
-Cam red
-Cam trip
-Cambodian red
 Came
 Cameron-Feynman
 Cameron-Martin
@@ -2622,38 +2376,29 @@ Campbell-Stanley
 Camponotus
 Campus-wide
 Can
-Can/may
 Canada-United
-Canadian black
 Canadian-US
 Canadians
 Canadienne
 Canamo
 Canappa
 Cancellation
-Cancelled stick
 Candy
-Candy C
 Cannabinol
-Cannabis tea
 Canned
 Canner
 Cannings
 Canonical
-Canonical/redundancy
 Cantelli
 Cantor-type
 Cap
-Cap up
 Capabilities
 Capability
 Capacities
-Capital H
 Capitalizing
 Capon
 Caps
 Capture-recapture
-Capture/recapture
 Capturing
 Car-following
 Carabid
@@ -2677,9 +2422,7 @@ Carnap
 Carne
 Carnegie-Mellon
 Carnie
-Carpet patrol
 Carrie
-Carrie Nation
 Carrier
 Carriers
 Carry-over
@@ -2699,11 +2442,9 @@ Case-study
 Case-weighted
 Casella
 Cases
-Casper the ghost
 Casson
 Castelnuovo
 Cat
-Cat valium
 Catalan
 Cataloging
 Catch-effort
@@ -2737,7 +2478,6 @@ Cautions
 Cavalieri
 Caveats
 Caviar
-Cavite all star
 Cayley-Klein
 Cd
 Ce
@@ -2761,7 +2501,6 @@ Centuries
 Cepaea
 Cepstrum
 CertainTeed
-Certainly|
 Certification
 Certifying
 Cervical
@@ -2780,7 +2519,6 @@ Chaining
 Chains
 Chakrabarti
 Chalk
-Chalked up
 Chalking
 Challenger
 Challenges
@@ -2799,7 +2537,6 @@ Changepoint
 Changes
 Changing
 Channel
-Channel swimmer
 Channeling
 Chaotics
 Chapman-Kolmogorov
@@ -2813,7 +2550,6 @@ Characterizations
 Characterizing
 Charas
 Charge
-Charged up
 Charley
 Charlie
 Charlier
@@ -2823,8 +2559,6 @@ Chartography
 Charts
 Chase
 Chaser
-Chasing the dragon
-Chasing the tiger
 Chatfield
 Chatfield-Prothero
 Chatterji
@@ -2833,7 +2567,6 @@ Chaudhuri
 Chauvenet
 Chayes-Kruskal
 Chazan-Zakai-Ziv
-Cheap basing
 Chebychev
 Chebyshev
 Chebyshev--Some
@@ -2865,11 +2598,6 @@ Chi-plots
 Chi-square
 Chi-squared
 Chi-squared-type
-Chiba chiba
-Chicago black
-Chicago green
-Chicken powder
-Chicken scratch
 Chicle
 Chief
 Chieva
@@ -2877,14 +2605,7 @@ Childcare
 Childlessness
 Childspacing
 Chilton
-China White
-China cat
-China girl
-China town
 Chincin
-Chinese molasses
-Chinese red
-Chinese tobacco
 Chinubhai
 Chip
 Chipman
@@ -2898,8 +2619,6 @@ Chisquare
 Chlorella
 Chlorofluorocarbons
 Chocolate
-Chocolate chips
-Chocolate ecstasy
 Choice-based
 Choices
 Choleski
@@ -2921,8 +2640,6 @@ Chow-Robbins
 Chow-type
 Christiaan
 Christina
-Christmas rolls
-Christmas tree
 Chromatograms
 Chromatographic
 Chronic
@@ -2942,8 +2659,6 @@ Churus
 Cicadellidae
 Cid
 Ciesielski-Taylor
-Cigarette paper
-Cigarrode cristal
 Circadian
 Circles
 Circuit-switching
@@ -2971,7 +2686,6 @@ Classifications
 Classified
 Classifying
 Clavecin
-Clear up
 Clerical
 Clermont-Ferrand
 Clevenson
@@ -2991,7 +2705,6 @@ Clips
 Cliques
 Clisy
 Clo
-Clocking paper
 Clonal
 Clopper-Pearson
 Close-to-optimal
@@ -3001,10 +2714,8 @@ Closed-loop
 Closeness
 Closer
 Closest
-Closet baser
 Closing
 Cloud
-Cloud nine
 Cloud-cover
 Cloud-ensemble
 Cloward
@@ -3034,21 +2745,16 @@ Coalescing
 Coalitional
 Coalitions
 Coasting
-Coasts to coasts
 Coates-Diggle
 Coatings
 Cobb-Douglas
 Coca
-Cocaine blues
 Cochornis
 Cochran-Friedman
 Cochran-Orcutt
 Cochran-like
 Cochrane-Orcutt
 Cocktail
-Coco rocks
-Coco snow
-Cocoa puff
 Coconut
 Cod
 Codata
@@ -3069,13 +2775,10 @@ Coins
 Cointegrated
 Cointegration
 Coke
-Coke bar
 Cokriging
 Cola
-Cold turkey
 Coleoptera
 Coli
-Coliflor tostao
 Colin
 Collaboration
 Collaborative
@@ -3090,7 +2793,6 @@ Collinearity
 Collisional
 Colombian
 Color
-Colorado cocktail
 Colour
 Coloured
 Colouring
@@ -3098,13 +2800,11 @@ Colstrip
 Colton
 Columbian
 Columbo
-Columbus black
 Com
 Combinations
 Combinatorics
 Combined
 Combining
-Come home
 Comeback
 Coming
 CommACM
@@ -3208,7 +2908,6 @@ Concordance-discordance
 Concurrences
 Concurrency
 Condensed
-Condition)
 Conditional
 Conditionality
 Conditionalization
@@ -3287,8 +2986,6 @@ Consultancy
 Consulting
 Consumer
 Consumers
-Consumption;
-Contact lens
 Contacts
 Contaminated
 Contamination
@@ -3303,7 +3000,6 @@ Continuing
 Continuities
 Continuity-corrected
 Continuous-time
-Continuous/discrete
 Continuously
 Contour-based
 Contouring
@@ -3332,7 +3028,6 @@ Convexification
 Convexity
 Convolutions
 Cook
-Cook down
 Cooker
 Cookies
 Cooking
@@ -3354,20 +3049,16 @@ Copepoda
 Cophenetic
 Coping
 Copper
-Copping zones
 Copulae
 Cor
 Coral
 Coregonus
-Coriander seeds
-Cork the air
 Cornish-Bowden-Eisenthal
 Cornish-Fisher
 Cornish-Fisher-expansion
 Corporation
 Corput
 Corr
-Corr/Add
 CorrV37
 Corrado
 Corrected
@@ -3400,7 +3091,6 @@ Costly
 Costs
 Cotics
 Cotton
-Cotton brothers
 Couchiching
 Counseling
 Countable
@@ -3419,10 +3109,8 @@ County-level
 Coupled
 Coupling
 Couplings
-Courage pills
 Courant-Fischer
 Cournot
-Course note
 Court-imposed
 Courts
 Cov
@@ -3441,15 +3129,8 @@ Cox-Snell
 Cox-type
 Coxian
 Coxian-2
-Cozmo's
 Crabgrass
 Crack
-Crack attack
-Crack back
-Crack cooler
-Crack gallery
-Crack spot
-Cracker jacks
 Crackers
 Cracow
 Craftmen
@@ -3465,21 +3146,16 @@ Cramer-von-Mises-and-Kolmogorov-Smirnov-type
 Cramp-Modeigers
 Cranfield
 Crank
-Cranking up
 Crap
 Crash
 Crause
 Cray
-Crazy Eddie
-Crazy coke
-Crazy weed
 Creasy
 Creatine
 Creation
 Creative
 Credence
 Credibility
-Credit card
 Cressie
 Cressie-Read
 Crib
@@ -3507,7 +3183,6 @@ Cromp
 Cronbach
 Cronholm
 Crops
-Cross tops
 Cross-bispectrum
 Cross-classification
 Cross-classified
@@ -3531,22 +3206,16 @@ Crossed
 Crossing
 Crossings
 Crossroads
-Crown crap
 Crudely
 Crumbs
 Crump-Mode-Jagers
 Crump-mode
-Crunch & Munch
 Cruncher
 Crustal
 Cruz
-Crying weed
 Cryptics
 Crypto
 Crystal
-Crystal joint
-Crystal meth
-Crystal tea
 Csiszar
 Csoergo
 Csoergo-Revesz
@@ -3599,13 +3268,9 @@ Cyclones
 Cylindrical
 Cylindrically
 Cyprinus
-Cystal T
 Cystophora
 Czechoslovakian
 D
-D'Agostino
-D'Alembert
-D*I*S*K
 D-complete
 D-efficiency
 D-estimators
@@ -3615,10 +3280,6 @@ D-optimal
 D-optimality
 D-optimum
 D-policy
-D/G/K
-D/M/1
-D/M/n
-D/M/r
 D0
 D01
 DA
@@ -3626,7 +3287,6 @@ DA-valued
 DACL
 DACOSTA
 DAESR
-DAGM/OEAGM
 DAL
 DALL
 DAMOCLES
@@ -3645,7 +3305,6 @@ DATASTOR
 DATATRAN
 DBIBDs
 DBMS
-DBMS/COPY
 DC-optimization-problem
 DC1
 DCAA
@@ -3681,7 +3340,6 @@ DEXPERT--An
 DFFITS
 DFR
 DFR-mixture
-DFT/FFT
 DGP
 DHS
 DIA
@@ -3753,13 +3411,11 @@ Dalenius
 Daley-Kendall
 Dallying
 Daltonian
-Dama blanca
 Damarin
 Damned
 Damped
 Damping
 Dams
-Dance fever
 Dandekar
 Dangers
 Daniell-Kolmogorov
@@ -3796,7 +3452,6 @@ Day-specific
 Days
 DeGroot
 DeSarbo
-Dead on arrival
 Dead-ends
 Deadbeat
 Deadweight
@@ -3832,7 +3487,6 @@ Decomposability
 Decomposed
 Decomposing
 Decomposition-based
-Decomposition/coordination
 Decompositional
 Decompositions
 Deconfounding
@@ -3956,23 +3610,18 @@ Deterministic
 Deterrence
 Detrended
 Detrending
-Detroit pink
 Deuce
 Deutsch
 Deutsche
 Deux
 Developing
 Development
-Development/The
 Developmental
 Developments
 Deviance
 Deviating
 Deviation
 Deviations
-Devil's dandruff
-Devil's dick
-Devil's dust
 Devilsmoke
 Dew
 Dews
@@ -4003,7 +3652,6 @@ Dictionaries
 Didactical
 Diehl
 Dienes
-Diet pills
 Dieulefait
 Difference
 Difference-cum-ratio
@@ -4031,20 +3679,16 @@ Dilations
 Dillman
 Dimba
 Dime
-Dime bag
-Dime's worth
 Dimensional
 Dimensionality
 Dimensionally
 Dimensions
 Diminished
 Ding
-Dinkie dow
 Diogenes
 Dioxin
 Dip
 Dipper
-Dipping out
 Diptera
 Direct-sequence
 Directed
@@ -4059,8 +3703,6 @@ Dirichlet-multinomial
 Dirichlet-process
 Dirichlet-trinomial
 Dirt
-Dirt grass
-Dirty basing
 Disability
 Disaggregated
 Disaggregating
@@ -4071,7 +3713,6 @@ Discharge
 Disclose
 Disclosure
 Disclosure-limited
-Disco biscuits
 Disconnectedness
 Discontinuities
 Discontinuity
@@ -4087,7 +3728,6 @@ Discrete-event
 Discrete-finite
 Discrete-parameter
 Discrete-time
-Discrete/continuous
 Discretization
 Discretizations
 Discretizaton
@@ -4140,7 +3780,6 @@ Distributions
 Disturbances
 Disutility
 Ditch
-Ditch weed
 Divergence
 Divergences
 Divergencies
@@ -4153,9 +3792,6 @@ Divinity
 Divisia
 Divisions
 Djamba
-Do a joint
-Do a line
-Do it Jack
 Do-it-yourself
 Dobrushin
 Doctor
@@ -4166,7 +3802,6 @@ Doeblin
 Doehlert
 Does
 Dog
-Dog food
 Dogie
 Doing
 Dolby
@@ -4174,7 +3809,6 @@ Doleans-Dade
 Doleans-Foellmer
 Dollar
 Dollar-unit
-Dollar/Deutsche
 Dollars
 Dolls
 Domains
@@ -4188,9 +3822,6 @@ Dominated
 Dominating
 Domination
 Dominoes
-Don jem
-Dona Juana
-Dona Juanita
 Doney
 Dongchuan
 Donsker
@@ -4204,8 +3835,6 @@ Doogie
 Dooley
 Door-in-the-face
 Dope
-Dope fiend
-Dope smoke
 Dopium
 Doradilla
 Dorfman
@@ -4219,13 +3848,6 @@ Dotplot
 Dots
 Doub
 Doubilet
-Double bubble
-Double cross
-Double dome
-Double rock
-Double trouble
-Double ups
-Double yoke
 Double-injection
 Double-tailed
 Double-window
@@ -4234,20 +3856,14 @@ Doubling
 Doubling-up
 Doubly
 Dove
-Dover's powder
 Downcrossings
 Downer
 Downie
 Downsian
 Downton
-Draf weed
-Drag weed
-Draw up
 Draw-a-string
 Drawing
 Dream
-Dream gum
-Dream stick
 Dreamer
 Dreams
 Dreck
@@ -4256,11 +3872,9 @@ Drink
 Driver
 Dropper
 Dropping
-Drowsy high
 Drs
 Drugs
 Druskininkai
-Dry high
 Dual-polarized
 Dual-resource
 Dual3
@@ -4276,7 +3890,6 @@ Duels
 Dugue
 Duhem
 Duji
-Dummy dust
 Dunnett
 Duodenal
 Duplexes
@@ -4292,9 +3905,6 @@ Durbin-Watson
 Durog
 Duros
 Dust
-Dust joint
-Dust of angels
-Dusted parsley
 Dusting
 Dvoretzky
 Dvoretzky-Kiefer-Wolfowitz
@@ -4325,7 +3935,6 @@ E-optimal
 E-optimality
 E-test
 E4
-EADAS/ICUR
 EAP
 EAR1
 EARMA
@@ -4424,7 +4033,6 @@ EPPS
 EPQ
 EPS
 EQS
-EQS/PC
 EQUANT-PC
 EQUATE
 EQUORM
@@ -4442,7 +4050,6 @@ ESMR
 ESP
 ESPRIT
 ESRC
-ESRC/DTI
 ESS
 ESSs
 ESTES
@@ -4484,10 +4091,7 @@ Earth
 Earthquakes
 Easily
 Easily-stated
-Easing powder
 Easterlin
-Eastside player
-Easy score
 Easy-Link
 EasyPlot
 Eating
@@ -4536,7 +4140,6 @@ Effects
 Efficacies
 Efficiencies
 Efficiency
-Efficiency-/partially-efficiency-balanced
 Efficiency-balanced
 Efficiency-consistency
 Efficiently
@@ -4560,22 +4163,17 @@ Eigengroup
 Eigenstructure
 Eigenvalue-Eigenvector
 Eigenvalue-eigenvector
-Eigenvalue;
 Eigenvalues
 Eigenvectorial
 Eigenvectors
-Eight ball
 Eightball
 Eighth
-Ein*Sight
 Einarsson-code
 Einfuhrung
 Eisenhart
 Eisenstein
 Ejgielies
 Ekman
-El diablito
-El diablo
 El-Ramly
 Elaborating
 Elaboration
@@ -4584,7 +4182,6 @@ Elasticities
 Elasticity
 Elat
 Election
-Electric Kool Aid
 Electricite
 Electricity
 Electropherogram
@@ -4594,7 +4191,6 @@ Elemental
 Elementos
 Elements
 Elephant
-Elephant tranquilizer
 Elevation
 Elfving
 Elias
@@ -4609,11 +4205,9 @@ Elteren
 Elucidating
 Elzinga
 Emacs
-Embalming fluid
 Embeddings
 Embodied
 Emergency
-Emergency gun
 Emerging
 Emilia
 Emilia-Romagna
@@ -4867,7 +4461,6 @@ Experts
 Explained
 Explaining
 Explanations
-Explanations/index
 Explicative
 Explicativity
 Explicitly
@@ -4875,7 +4468,6 @@ Exploiting
 Exploration-geochemical
 Explorations
 Exploratory-graphical
-Explorers club
 Exploring
 Exploring-graphical
 Exponential-type
@@ -4915,7 +4507,6 @@ Extreme-value
 Extremes
 Extremum-searching
 Eyam
-Eye opener
 Eyeballing
 Eyraud
 Eyraud-Gumbel-Morgenstern
@@ -4952,7 +4543,6 @@ F-variable
 F-variables
 F-variates
 F4-hypothesis
-F4t;
 FA
 FAC1
 FACAIC
@@ -4971,7 +4561,6 @@ FASB
 FAST
 FASTA
 FASTAT
-FCFS/LCFS-P
 FDMA
 FDSM
 FEXACT
@@ -4979,7 +4568,6 @@ FEXPAC
 FFT
 FGGE
 FGP
-FHA/HUD
 FHMP
 FILTER
 FILTEX
@@ -4997,7 +4585,6 @@ FLS
 FLS-QR
 FLXFL
 FLeXible
-FM-7/8
 FMEA
 FMS
 FOCA
@@ -5015,7 +4602,6 @@ FPE
 FRAMEWORK
 FRB
 FRG
-FRG/A
 FRONTIT
 FRS
 FSH
@@ -5030,7 +4616,6 @@ FUNCORR
 FUNOP
 FUNOR-FUNOM
 FUZZY
-FWS/MANAGE
 FX
 FXG
 FXY
@@ -5061,20 +4646,17 @@ Failure-rate
 Failures
 Fair-Jaffee
 Fairness
-Fake STP
 Falen
 Faleschini
 Falk
 Fall
 Fallacies
-Fallbrook redhair
 Fallibility
 Falsificationism
 Familiarity
 Families
 Family-size
 Famotidine
-Famous dimes
 Fanconi
 Fantasia
 Fantasyland
@@ -5095,7 +4677,6 @@ Fast-Fourier
 Fastat
 Faster
 Faster-than-Nyquist
-Fat bags
 Fatou
 Fatty
 Faulkenberry
@@ -5117,7 +4698,6 @@ Fechner
 Fecundity
 Federalist
 Federally-owned
-Feed bag
 Feedforward
 Feedforward-feedback
 Feelings
@@ -5142,7 +4722,6 @@ Fernow
 Ferrara
 Ferraro
 Ferrers
-Ferry dust
 Fertility
 Feulgen-DNA
 Fewer
@@ -5156,7 +4735,6 @@ Fields
 Fieller
 Fieller-Creasy
 Fiend
-Fifteen cents
 Fifty-one
 Fighting
 Fiji
@@ -5175,7 +4753,6 @@ Finders
 Finding
 Findings
 Findler
-Fine stuff
 Fine-tuning
 Finem
 Finetti
@@ -5196,9 +4773,7 @@ Finney
 Fiorentino
 Fir
 Fire
-Fire it up
 Firearms
-First line
 First-digit
 First-fit
 First-hitting
@@ -5206,7 +4781,6 @@ First-order
 First-passage
 First-passage-time
 Fischhoff
-Fish scales
 Fishbein
 Fishburn
 Fisher
@@ -5223,17 +4797,12 @@ Fisher-Yates
 Fisher-consistent
 Fisher-type
 Fisher-von
-Fisher/Pearson
-Fisher/minimum-variance
 Fisherian
 Fisheries
 Fishing
 Fitch-Margoliash
 Fitcon
 Fitting
-Five C note
-Five cent bag
-Five dollar bag
 Five-number
 Fives
 Fix
@@ -5255,14 +4824,10 @@ Fizzies
 Flag
 Flake
 Flakes
-Flame cooking
 Flamethrowers
 Flash
-Flat blues
-Flat chunks
 Flawed
 Flaws
-Flea powder
 Flegrean
 Fleming-Viot
 Flexibility
@@ -5272,9 +4837,7 @@ Fligner
 Fligner-Wolfe-trend
 Flipping
 Floating
-Florida snow
 Flower
-Flower tops
 Flowgraph
 Flows
 Fluctuating
@@ -5283,7 +4846,6 @@ Fluctuations
 Fluorescence
 Fluoridation
 Fluorocarbons
-Fly Mexican airlines
 Flying
 Fock
 Focused
@@ -5298,12 +4860,8 @@ Follies
 Follow-up
 Followback
 Following
-Following that cloud
 Followup
 Fonseca
-Foo foo stuff
-Foo-foo dust
-Foolish powder
 Footballs
 For-hire
 Forced
@@ -5344,7 +4902,6 @@ Fortran8x
 Fortranfor
 Fortunati
 Forty-one
-Forward/backward
 Forwards
 Foulkes-Davis
 Foundational
@@ -5382,8 +4939,6 @@ Freeman-Halton
 Freeman-Tukey
 Freeze
 Freidlin-Wentzell
-French blue
-French fries
 FrenchSTMA
 Frender
 Frequence
@@ -5403,14 +4958,10 @@ Friedman-type
 Friend
 Fries
 Frios
-Frisco special
-Frisco speedball
-Friskie powder
 Frobenius-Perron
 Frontiers
 Frutex
 Fry
-Fry daddy
 Fu
 Fubini
 Fubini-type
@@ -5424,7 +4975,6 @@ Full-time
 Full-versus
 Fuller
 Fully-sequential
-Fuma D'Angola
 Funadmental
 Functional
 Functionally
@@ -5465,21 +5015,6 @@ G-rock
 G-shot
 G-spectral
 G-stable
-G.B.
-G/G/1
-G/G/c
-G/G/infinity
-G/G/m
-G/G/s
-G/GI/m
-G/IFR/1
-G/M/1
-G/M/1/0
-G/M/2
-G/M/m
-G/M/m/N
-G/O/G-system
-G1/G/C
 G2SLS
 G3D
 GAD
@@ -5490,7 +5025,6 @@ GANOVA
 GARCH
 GARCH-intervention
 GARCH11
-GASP-PL/I
 GATE
 GAUR
 GAUSS
@@ -5500,7 +5034,6 @@ GBRD
 GCM
 GCSE
 GCV
-GCV/GML
 GCVPACK
 GD
 GD-PBIBD
@@ -5553,37 +5086,6 @@ GGDMLE
 GH4qEAq
 GHB
 GI
-GI/G
-GI/G/1
-GI/G/1/0
-GI/G/1/N
-GI/G/K
-GI/G/S
-GI/G/c
-GI/G/k
-GI/G/l
-GI/G/m
-GI/G/q
-GI/G/r/n-r
-GI/G/s
-GI/G1
-GI/G1/1
-GI/GI/1
-GI/GI/1/0-queueing
-GI/GI/1/K
-GI/GI/k
-GI/GI/m
-GI/M/1
-GI/M/1/s/s
-GI/M/2
-GI/M/C
-GI/M/N
-GI/M/c
-GI/M/n/n
-GI/M/s
-GI/Mn/1/K
-GI/PH/1
-GI/PH/c
 GICC
 GIFI
 GIM
@@ -5636,9 +5138,6 @@ GPSS
 GPSS-FORTRAN
 GPSS-Fortran
 GPSS-like
-GPSS/H
-GPSS/PC
-GPSS/SAS
 GPST
 GR-Z
 GRADAP
@@ -5679,7 +5178,6 @@ Galambos
 Galerkin
 Galileo
 Gallbladder
-Galloping horse
 Galois-field
 Galton
 Galton-Pearson
@@ -5697,7 +5195,6 @@ Games-Howell
 Gamete
 Gamma-admissibility
 Gamma-minimax
-Gamma=0
 Gammaization
 Gamot
 Gandin
@@ -5706,7 +5203,6 @@ Gange
 Gangoli-McKean
 Gangolli
 Gangster
-Gangster pills
 Gani
 Gani-type
 Ganja
@@ -5714,20 +5210,16 @@ Gank
 Gapping
 Gaps
 Garbage
-Garbage heads
-Garbage rock
 Garki
 Gart
 Garwood
 Gash
 Gasper
-Gasper stick
 Gastwirth
 Gated
 Gatekeeping
 Gathering
 Gato
-Gauge butt
 Gauging
 Gauss-Christoffel
 Gauss-Galerkin
@@ -5769,7 +5261,6 @@ Geek
 Geeta
 Geeze
 Geezer
-Geezin a bit of dee gee
 Geffroy
 Gegenbauer
 Gehan
@@ -5823,7 +5314,6 @@ Geometrical
 Geometrizing
 Geometry
 Georg
-George smack
 Georges
 Georgia-Alabama
 Georgian
@@ -5839,14 +5329,6 @@ Germain
 Gerts-Pert
 Gesellschaft
 Gestational
-Get a gage up
-Get a gift
-Get down
-Get high
-Get lifted
-Get off
-Get the wind
-Get through
 Getoor
 Getting
 Ghana
@@ -5855,12 +5337,9 @@ Gheorghe
 Ghiselli
 Ghosh
 Ghost
-Ghost busting
 Gibbsian
-Gick monster
 Giere
 Gift-of-the-sun
-Giggle smoke
 Gikhman
 Gil-Pelaez-Rosen
 Gilbarg
@@ -5881,18 +5360,14 @@ Girshick
 Gittelsohn
 Gittins
 Giulio
-Give wings
 Givens
 Giving
-Gl/G/1
 Glacines
-Glad stuff
 Glading
 Gladishev
 Gladyshev
 Glahn
 Glass
-Glass gun
 Glasshouse
 Glauber
 Glejser
@@ -5910,34 +5385,21 @@ Gluecksspirale
 Gluey
 Glynn
 Gnedenko
-Go into a sewer
-Go loco
-Go on a sleigh ride
 Go-Moku
 Go-fast
 Goals
-God's drug
-God's flesh
-God's medicine
 God-Koheleth
 Godambe
 Goedel
 Going
 Golay
 Gold
-Gold dust
-Gold star
 Goldberg-Theil
 Goldberger
 Goldberger-Theil
-Golden Dragon
-Golden girl
-Golden leaf
 Goldfeld
 Goldfeld-Quandt
 Goldie
-Golf ball
-Golf balls
 Gollob
 Golpe
 Goma
@@ -5951,12 +5413,6 @@ Gong
 Gonorrhea
 Goob
 Good
-Good H
-Good and plenty
-Good butt
-Good giggles
-Good go
-Good lick
 Goodfellas
 Goodman-Kruskal
 Goodness
@@ -5964,24 +5420,17 @@ Goodness-criteria
 Goodness-of-fit
 Goodness-of-link
 Goods
-Goof butt
 Goofball
 Goofers
 Goofspiel
-Goofy's
 Goon
-Goon dust
 Goondess-of-fit
 Goovaerts
 Gopher
 Gordin
 Gordon-Newell
 Goric
-Gorilla biscuits
-Gorilla pills
-Gorilla tab
 Gosset
-Got it going on
 Gothenberg
 Gothenburg
 Gottman
@@ -6008,11 +5457,9 @@ Gran
 Grandiflorum
 Granger
 Granger-causality
-Granger/Ramanathan
 Grants
 Granularity
 Granulocyte
-Grape parfait
 Graph-theoretic
 Graphic-aided
 Graphica
@@ -6024,7 +5471,6 @@ Graphmu
 Graphs
 Graphwork
 Grass
-Grass brownies
 Grassia
 Grata
 Graunt
@@ -6037,21 +5483,9 @@ Graying
 Graz
 Grazing
 Grease
-Great bear
-Great tobacco
 Greatest
 Greco-Latin
 Green
-Green double domes
-Green dragons
-Green frog
-Green goddess
-Green gold
-Green goods
-Green leaves
-Green single domes
-Green tea
-Green wedge
 Green-Ampt
 Greens
 Greeter
@@ -6060,7 +5494,6 @@ Grenander
 Grenville
 Greta
 Gretzky
-Grey shields
 Griddy-Gibbs
 Griefo
 Grier
@@ -6081,7 +5514,6 @@ Gross-error
 Gross-flow
 Grossversuch
 Grothendieck
-Ground control
 Ground-Water
 Ground-hypotheses
 Groundwater
@@ -6126,7 +5558,6 @@ Gusein-Zade
 Gutenberg-Richter
 Gutengerg-Richter
 Gutter
-Gutter junkie
 Guttman
 Guttman-Kaiser
 Gwilym
@@ -6134,8 +5565,6 @@ Gy
 Gyires
 Gyve
 H
-H & C
-H Caps
 H-4
 H-T
 H-coverable
@@ -6170,12 +5599,10 @@ HINOKI
 HIPLEX-1
 HIS
 HIV
-HIV)
 HIV-1
 HIV-infected
 HIV-latency
 HIV-positive
-HIV/AIDS
 HIVOR
 HJ-BIPLOT
 HL-A
@@ -6184,7 +5611,6 @@ HLA-A
 HLA-associated
 HLA-disease
 HLA-linked
-HLA/disease
 HMM
 HMO
 HMX
@@ -6238,12 +5664,6 @@ Hald
 Haldane
 Haldane-Smith
 Half
-Half G
-Half a football field
-Half load
-Half moon
-Half piece
-Half track
 Half-a-C
 Half-balanced
 Half-normal
@@ -6254,7 +5674,6 @@ Halocarbons
 Halperin
 Hamaker
 Hambleton
-Hamburger helper
 Hamer
 Hamilton-Jacobi-Bellman
 Hamiltonian
@@ -6264,7 +5683,6 @@ Hammersley-Clifford
 Hammerstein
 Hamming
 Hand-to-hand
-Hand-to-hand man
 Handa
 Handcrafting
 Handling
@@ -6280,16 +5698,8 @@ Hansmann
 Hanson-Russo
 Hanyak
 Happiness
-Happy cigarette
-Happy dust
-Happy powder
-Happy trails
 Harald
 Harbour
-Hard candy
-Hard line
-Hard rock
-Hard stuff
 Hard-soft
 Hard-to-enumerate
 Hardening
@@ -6301,7 +5711,6 @@ Harman-Fukuda-method
 Harmonizability
 Harmonizable
 Harrell-Davis
-Harris-Sevast'yanov
 Harris-Spitzer
 Harris-recurrent
 Harrison-Shepp
@@ -6331,15 +5740,11 @@ Hauser
 Hausman
 Hausman-test
 Haut
-Have a dust
-Haven dust
-Hawaiian sunshine
 Hawaiin
 Hawk
 Hawkes
 Hawtrey
 Hay
-Hay butt
 Hayashi
 Hayman
 Hayne
@@ -6350,7 +5755,6 @@ Haze
 Hazel
 Hazelwood
 He-man
-Head drugs
 Headland-bay
 Headlights
 Heads
@@ -6359,10 +5763,6 @@ Hearing
 Heart-on
 Hearts
 Heathens
-Heaven and Hell
-Heaven dust
-Heavenly blue
-Heaviside`s
 Heavy-tailed
 Heavy-traffic
 Heavy-usage
@@ -6374,7 +5774,6 @@ Hedging
 Hedonic
 Hedysarum
 Heeled
-Hefte/Statistical
 Heidelberger
 Heikes
 Heilig
@@ -6386,7 +5785,6 @@ Helicoverpa
 Heligman
 Heligman-Pollard
 Heliothis
-Hell dust
 Hellenistic
 Hellinger
 Hellinger-Kakutani
@@ -6409,19 +5807,16 @@ Hendrik
 Henpicking
 Henrik
 Henry
-Henry VIII
 Henshaw
 Hensley
 Her
 Herb
-Herb and Al
 Herba
 Herfindahl
 Herfindahl-Hirschman
 Heritability
 Herms
 Hero
-Hero of the underworld
 Heroina
 Herone
 Hertzian
@@ -6484,7 +5879,6 @@ Hills
 Him
 Hinkley
 Hintikka
-Hippie crack
 Hiropon
 Hirsutism
 Hispanics
@@ -6496,16 +5890,10 @@ Historiometric
 Histospline
 Histosplines
 Hit
-Hit the hay
-Hit the main line
-Hit the needle
-Hit the pit
-Hitch up the reindeers
 Hite
 Hits
 Hitter
 Hitting
-Hitting up
 Hitting-time
 Hoadley
 Hoang
@@ -6554,8 +5942,6 @@ Homophily
 Homoptera
 Homozygosity
 Honey
-Honey blunts
-Honey oil
 Honeymoon
 Hong-yen
 Honour
@@ -6569,22 +5955,13 @@ Hop
 Hopf
 Hopfield
 Hoplostethus
-Hopped up
 Hordeum
 Horn
 Horning
 Horse
-Horse heads
-Horse tracks
-Horse tranquilizer
 Horses
 Horvitz
 Horvitz-Thompson
-Hot dope
-Hot heroin
-Hot ice
-Hot load
-Hot stick
 Hot-deck-imputation-procedures
 Hotcakes
 Hotelling
@@ -6596,13 +5973,10 @@ Hougaard
 Hourly
 Hours
 Housatonic
-House fee
-House piece
 Householder
 Households
 Housing
 Houthakker-Taylor
-How do you like me now?
 Howland
 Hows
 Hp-1
@@ -6612,8 +5986,6 @@ Hsu-Robbins
 Hu
 Hu-Meyer
 Huang
-Hubba pigeon
-Hubba, I am back
 Hubbas
 Huber-Dutter
 Huber-Strassen
@@ -6658,7 +6030,6 @@ Hygienical
 Hymenoptera
 Hynes
 Hype
-Hype stick
 HyperQuest
 Hyperamarts
 Hypercard
@@ -6679,7 +6050,6 @@ Hypothesis-testing
 Hypothesized
 Hysteretic
 Hz
-I am back
 I--Bivariate
 I--Theory
 I-Divergence
@@ -6693,9 +6063,7 @@ I-measure
 I-projection
 I-projections
 I-splines
-I/O
 I1
-I;
 IACP
 IAS
 IAS-SYSTEM
@@ -6704,7 +6072,6 @@ IBM-MVS
 IBM-PC
 IBM-PC-compatible
 IBM-compatible
-IBM/APL
 IBNR
 IBNR-claims
 IBNYR
@@ -6718,7 +6085,6 @@ ICOMP
 ICOSCO-I
 ICOTS
 ICU
-ID/MS
 ID3
 IDA
 IDDM
@@ -6732,7 +6098,6 @@ IEA
 IEEE-USSR
 IET
 IF-valued
-IFAC/IFIP
 IFDAS
 IFNS
 IFORS
@@ -6747,8 +6112,6 @@ IG
 II
 II--Examples
 II--Implementation
-II/III
-II/first
 II0
 II5
 IIB
@@ -6805,7 +6168,6 @@ INSIGHT
 INSTAT
 INT
 INTELREG
-INTERNIST-1/QMR
 INTERORD
 INTERSCAL
 INTRACLS
@@ -6817,7 +6179,6 @@ IPF
 IPFPHC
 IPM
 IPPS
-IPSC/2
 IRA
 IRCA
 IRIS
@@ -6858,8 +6219,6 @@ IX
 Ibragimov
 Ibragimov-Iosifescu
 Ice
-Ice cream habit
-Ice cube
 Icing
 Ideas
 Idendification
@@ -6868,7 +6227,6 @@ Identification
 Identified
 Identifying
 Identities
-Idiot pills
 Ifram
 IgA
 Iglehart
@@ -6884,7 +6242,6 @@ Ikeda-Midzuno-Sen
 Ikeda-Nakao-Yamato
 Ikeda-Sen
 Ikede-Sen
-Il'ich
 Ildar
 Ill-conditioned
 Ill-conditioning
@@ -6935,9 +6292,7 @@ In-sample
 In-service
 Inadmissibility
 Inbetweens
-Inborn/outborn
 Inbreeding
-Inca message
 Incentives
 Inching
 Incidence
@@ -6963,8 +6318,6 @@ Indeterminism
 Indexation
 Indexes
 Indexing
-Indian boy
-Indian hay
 Indians
 Indica
 Indications
@@ -6979,7 +6332,6 @@ Individually
 Individuals
 Indo
 Indonesian
-Indonesian bud
 Indscal
 Induced
 Inducing
@@ -7001,7 +6353,6 @@ Infinite-lag
 Infinitely
 Inflated
 Inflation
-Inflation;
 Inflection
 Influence-based
 Influence-enhanced
@@ -7042,7 +6393,6 @@ Insights
 Inspection
 Instability
 Instances
-Instant zen
 Institutes
 Institutional
 Institutionalization
@@ -7083,13 +6433,11 @@ Inter-regional
 Inter-relationships
 Inter-study
 Inter-urban
-Inter/intra
 Interacting
 Interaction
 Interactional
 Interactions
 Interactive
-Interactive/user-friendly
 Interactively
 Interagency
 Interannual
@@ -7132,7 +6480,6 @@ Interparticle
 Interpenetrating
 Interpercentile
 Interpersonal
-Interplanetary mission
 Interplay
 Interpoint
 Interpolability
@@ -7202,7 +6549,6 @@ Investigations
 Investigative
 Investing
 Investment
-Investment;
 Investments
 Invexity
 Invited
@@ -7319,7 +6665,6 @@ Jain
 Jalencia
 Jales
 Jam
-Jam cecil
 Jamaican
 James-Stein
 Jane
@@ -7332,34 +6677,24 @@ Jaroslav
 Jauncey
 Javier
 Jay
-Jay smoke
 Jaynes
 Jeddah
-Jee gee
-Jefferson airplane
 Jeffreys
 Jelinek
 Jelinski
 Jelinski-Moranda
 Jellies
 Jelly
-Jelly baby
-Jelly bean
-Jelly beans
 Jencks
 Jenner
 Jensen-type
 Jerzy
 Jesness
 Jet
-Jet fuel
 Jewry
 Jews
-Jim Jones
 Jirina
 Jive
-Jive doo jee
-Jive stick
 Job-exits
 Job-match
 Jobs
@@ -7375,9 +6710,6 @@ Joint
 Joint-space
 Jointly
 Jojee
-Jolly bean
-Jolly green
-Jolly pop
 Jolly-Seber
 Jolt
 Jonckheere
@@ -7389,19 +6721,10 @@ Jorgenson-Stephenson
 Joslin
 Journalism
 Journals
-Joy flakes
-Joy juice
-Joy plant
-Joy pop
-Joy popping
-Joy powder
-Joy smoke
-Joy stick
 Joyner-Boore
 Jozsef
 Ju
 Ju-ju
-Juan Valdez
 Juanita
 Judged
 Judgement
@@ -7415,7 +6738,6 @@ Juggle
 Juggler
 Jugs
 Juice
-Juice joint
 Jukes-Cantor
 Jukes-Holmquist
 Jum
@@ -7479,7 +6801,6 @@ KBYU-Utah
 KEY-STAT
 KEYFINDER
 KG
-KGB (killer green bud)
 KJ
 KL
 KLEM
@@ -7540,7 +6861,6 @@ Kantorovich-type
 Kanzanji
 Kaplan-Meier
 Kaplan-Meir
-Kaposi's
 Kappa-Genes
 Kappa-type
 Kaps
@@ -7571,7 +6891,6 @@ Kempthorne
 Kendall-tau
 Kennard
 Kenrick
-Kentucky blue
 Kernel-based
 Kernel-transformed
 Kernels
@@ -7581,7 +6900,6 @@ Kesten
 Kesten-Spitzer
 Kesten-type
 Ketzel
-Kevlar/epoxy
 Keybatch
 Keyfitz
 Khasanovich
@@ -7592,10 +6910,7 @@ Khincin-Kullback-Leibler
 Khintchine
 Khosrovshahi
 Kiaer
-Kibbles & Bits
 Kick
-Kick stick
-Kiddie dope
 Kidney-survival
 Kiefer
 Kiefer-Weiss
@@ -7603,8 +6918,6 @@ Kiefer-Wolfowitz
 Kiff
 Killed
 Killer
-Killer weed (1960s)
-Killer weed (1980s)
 Killing
 Kilo
 Kilter
@@ -7613,9 +6926,6 @@ Kinase
 Kind
 Kineticcs
 Kinetics
-King Kong pills
-King ivory
-King's habit
 Kingman
 Kinkar
 Kinship
@@ -7655,7 +6965,6 @@ Koerts
 Kogan
 Kokomo
 Kolb
-Koller joints
 Kolmogoroff
 Kolmogorov
 Kolmogorov-Aronszajn
@@ -7689,7 +6998,6 @@ Koroesy
 Korovkin
 Kose
 Kostitzin
-Kotel'nikov-Shannon
 Kotelnikov-Shennon
 Kotz
 Kotzig
@@ -7719,7 +7027,6 @@ Kruskal-Wallis
 Krylov
 Kryptonite
 Krystal
-Krystal joint
 Kth
 Kubota
 Kuder-Richardson
@@ -7742,8 +7049,6 @@ Kusu
 Kuznets
 Kyburg
 L
-L'Homme
-L'Hospital
 L-
 L-R
 L-Z
@@ -7770,10 +7075,6 @@ L-sufficiency
 L-superadditive
 L-system
 L-valued
-L.A.
-L.A. glass
-L.A. ice
-L.L.
 L1
 LABSTAT
 LACIE
@@ -7798,7 +7099,6 @@ LC50
 LCA
 LCFS
 LCFS-P
-LCFS/P
 LCR
 LCS-spaces
 LCTVS
@@ -7878,7 +7178,6 @@ LOWESS
 LOg
 LP
 LP-based
-LP/PROTRAN
 LPA
 LPC
 LPI
@@ -7896,7 +7195,6 @@ LRC
 LRD
 LRPM2
 LRPM3
-LRPM4/PDM
 LRT
 LRU
 LRX
@@ -7927,7 +7225,6 @@ Labitzke
 Labor
 Laboratories
 Labouchere
-Labour;
 Labovitz
 Labs
 Lace
@@ -7939,8 +7236,6 @@ Ladder
 Ladies
 Ladislaus
 Lady
-Lady caine
-Lady snow
 Ladysmith
 Laffer
 Lagged
@@ -7954,7 +7249,6 @@ Lahiri
 Lai
 Lai-Robbins-Wei
 Lakatos
-Lakbay diva
 Lakes
 Lambert-Adolphe
 Lambeth
@@ -7989,9 +7283,7 @@ Large-sample
 Large-scale
 Largest
 Larimer
-Las mujercitas
 Laser
-Lason sa daga
 Laspeyres
 Latent-structure
 Latent-variable
@@ -8001,10 +7293,6 @@ Lattice-ordered
 Lattice-theoretic
 Lattice-valued
 Lattices
-Laugh and scratch
-Laughing gas
-Laughing grass
-Laughing weed
 Lavallee
 Lawler
 Lawless
@@ -8013,7 +7301,6 @@ Lawlike
 Lawlor
 Laws
 Lawyers
-Lay back
 Lay-out
 Laying
 Layoffs
@@ -8026,8 +7313,6 @@ Leadbetter
 Leadership
 Leading
 Leaf
-Leaky bolla
-Leaky leak
 Leamer
 Leapers
 Leaping
@@ -8047,8 +7332,6 @@ Lectures
 Lee-Maddala-Trost
 Lefort
 Left-continuous
-Legal speed
-Legal/policy
 Legislation
 Leguminosae
 Lehmacher
@@ -8069,7 +7352,6 @@ Leiner
 Leipnik
 Lemmas
 Lemmer
-Lemon 714
 Lemonade
 Lempel-Ziv
 Length-biased
@@ -8085,7 +7367,6 @@ Leptokurtic
 Lerche
 Lerner
 Lessons
-Lethal weapon
 Leti
 Letter
 Letters
@@ -8118,13 +7399,11 @@ Liang
 Liapounoff
 Liapunov
 Liars
-Lib (Librium)
 Liber
 Liberian
 Liberman
 Licensing
 Lid
-Lid proppers
 Liddell
 Lidstone
 Lie-Trotter
@@ -8142,7 +7421,6 @@ Lifetime-citation
 Lifetimes
 Lifschitz
 Lifting
-Light stuff
 Lightning
 Likelihood
 Likelihood-based
@@ -8153,7 +7431,6 @@ Likert
 Likert-type
 Lilliefors
 Lima
-Lime acid
 Limitations
 Limited
 Limited-channel
@@ -8189,7 +7466,6 @@ Linear-nonparametric
 Linear-plateau
 Linear-quadratic
 Linear-trend-free
-Linear/nonlinear
 Linearity
 Linearization
 Linearized
@@ -8217,27 +7493,21 @@ Lipids
 Lipschitz-continuity
 Lipschitz-continuous
 Lipschitzian
-Lipton Tea
 Liquefied
 Liska
 Lisman
 Lisp-Stat
 Lissack
 List-assisted
-Lit up
 Literatur
 Litigation
 Litter
 Litterman
-Little bomb
-Little ones
-Little smoke
 Littlewood
 Littlewood-Paley
 Littlewood-Paley-Stein
 Littlewood-Verrall
 Liu
-Live ones
 Liver
 Living
 Ljapunov
@@ -8261,12 +7531,10 @@ Location-adaptive
 Location-and-scale
 Location-scale
 Location-shifts
-Location/scale
 Locational
 Locations
 Loch
 Lochs
-Locker room
 Locks
 Locoweed
 Lod
@@ -8332,19 +7600,11 @@ Lotus-FORMAN
 Loused
 Lovasz
 Love
-Love affair
-Love boat
-Love drug
-Love pearls
-Love pills
-Love trip
-Love weed
 Lovelies
 Lovely
 Low-dimensional
 Low-dose-rate
 Low-order
-Low-probability/high-consequence
 Low-sensitivity
 Lowering
 Lp
@@ -8355,9 +7615,7 @@ Lubage
 Lubin
 Luce
 Lucien
-Lucy in the sky with diamonds
 Ludes
-Luding out
 Luds
 Ludvig
 Luenberger
@@ -8383,8 +7641,6 @@ Lygus
 Lymantriidae
 Lymnaea
 M
-M&M
-M++
 M-
 M-P
 M-Skorohod
@@ -8426,57 +7682,7 @@ M-test
 M-tests
 M-type
 M-user
-M.J.
-M.O.
-M.S.
-M.U.
-M/D/1
-M/D/n
-M/D/r
-M/G
-M/G/1
-M/G/1-FIFO
-M/G/1-type
-M/G/1//N
-M/G/1/1
-M/G/1/K
-M/G/1/N
-M/G/1/n
-M/G/2
-M/G/C
-M/G/C/
-M/G/N
-M/G/c
-M/G/k
-M/G/l
-M/G/m
-M/G/n
-M/G/r
-M/G/s
-M/G/s/s
-M/GI/1
-M/GI/n
-M/GI/s
-M/M/
-M/M/1
-M/M/1/N
-M/M/2
-M/M/2/2
-M/M/M/N
-M/M/N
-M/M/S
-M/M/c
-M/M/m
-M/M/m/m
-M/M/n
-M/M/r
-M/M/s
-M/M1
-M/Ma
-M/PH/c
-M/SM/1
 M2
-M;G
 MA
 MA-processes
 MA1
@@ -8494,7 +7700,6 @@ MANCOVA
 MANOCOVA
 MANOVA
 MANOVA-model
-MANOVA/MANCOVA
 MANTES
 MAP
 MAPCLUS
@@ -8515,7 +7720,6 @@ MASS
 MASTER
 MATCHER
 MATFIT
-MATH/PC-LIBRARY
 MATMODEL
 MATPAR
 MATRIX
@@ -8644,7 +7848,6 @@ MMSE
 MN-LS
 MOCAFICO
 MODBIN
-MODELEASY/FEDEASY
 MODLI
 MODMULT
 MODOP
@@ -8690,7 +7893,6 @@ MS-DOS
 MS-Dos
 MS-optimal
 MS-optimality
-MS/PC-DOS
 MSA
 MSAE
 MSE
@@ -8708,7 +7910,6 @@ MSP
 MSPLIT
 MSUSTAT
 MSY
-MSblocks/MSerror
 MTBF
 MTBF-confidence
 MTMM
@@ -8746,7 +7947,6 @@ MVUE
 MWINDOW
 MYCIN
 MYSTAT
-MYSTAT/SYSTAT
 Maalox
 MacLaurin
 MacMahon
@@ -8756,7 +7956,6 @@ MacSAIF
 MacSpin
 Maccacaro
 Macdonald
-Machine/process
 Machinery
 Machines
 Mack-Wolfe
@@ -8773,7 +7972,6 @@ Macroeconomic
 Macros
 Macroscale
 Macrosteles
-Mad dog
 Madang
 Maddex
 Madhava
@@ -8781,9 +7979,6 @@ Madman
 Madow
 Magdalinos
 Magic
-Magic dust
-Magic mushroom
-Magic smoke
 Magnitudes
 Magnitudinal
 Mahalanobis
@@ -8794,7 +7989,6 @@ Maharishi
 Maher
 Mahony
 Mailing
-Main line
 Main-effect
 Mainframe
 Mainliner
@@ -8807,7 +8001,6 @@ Majoriting
 Majority
 Majorization
 Makarov
-Make up
 Makeham
 Makeham-Gompertz
 Makers
@@ -8828,18 +8021,15 @@ Mallows-type
 Malthus
 Malthusian
 Maltz-McCleary
-Mama coca
 Mammitzsch
 Management
 Manager
 Managers
 Managing
-Mandala/cosine
 Mandated
 Mandel
 Mandelbrot
 Mandl
-Manhattan silver
 Manifestations
 Manifolds
 Manipulating
@@ -8918,19 +8108,12 @@ Marschak
 Marshall-Edgeworth-Bowley
 Marshall-Olkin
 Marshallian
-Marshmallow reds
 Martin-Dynkin
 Martingale-based
 Martingale-like
 Martingales
 Maruyama
 Mary
-Mary Ann
-Mary Jane
-Mary Jonas
-Mary Warner
-Mary Weaver
-Mary and Johnny
 Masani
 Maserati
 Maskin
@@ -8975,7 +8158,6 @@ Matsakow
 Matschinski
 Matsui
 Matusita
-Maui wauie
 Mauldin
 Maurey-Pisier
 Mauro
@@ -9007,7 +8189,6 @@ May-December
 Mayfield
 Mayhew
 Mayo
-Mbit/s
 McAleer
 McArthur
 McAuley
@@ -9030,7 +8211,6 @@ McNemar
 McQuitty
 McShane
 MeV
-Mean green
 Mean-field
 Mean-lower
 Mean-max
@@ -9080,7 +8260,6 @@ Meixner
 Melamed
 Mellin
 Mellin-Barnes
-Mellow yellow
 Melodies
 Membership
 Memoirs
@@ -9133,8 +8312,6 @@ Metatickles
 Meteorological
 Meterorological
 Meth
-Meth head
-Meth monster
 Methatriol
 Method-of-moments
 Methodologic
@@ -9149,15 +8326,8 @@ Metrika
 Metron
 Metropolis-type
 Mexicali-Imperial
-Mexican brown
-Mexican horse
-Mexican mud
-Mexican mushroom
-Mexican red
-Mexican reds
 Mexican-Americans
 Mexican-owned
-Mexico;
 Meyer-Zheng
 Mezc
 Mg
@@ -9165,8 +8335,6 @@ Micha
 Michaelis-Menten
 Michaelis-Menton
 Michio
-Mickey Finn
-Mickey's
 Micko
 MicrOsiris
 Micro-NISAN
@@ -9202,16 +8370,12 @@ Microstatistics
 Microstructology
 Microtine
 Mid-mean
-Midnight oil
 Midranges
 Midspread
 Midzuno
 Midzuno-Sen
 Mielke
 Miettinen
-Mighty Joe Young
-Mighty Quinn
-Mighty mezz
 Migration
 Mihoc
 Mikhailovich
@@ -9225,9 +8389,7 @@ Milliken
 Milliken-Akdeniz
 Milliken-Graybill
 Min-max
-Min/max
 Minc
-Mind detergent
 Mineo
 Mingjiang
 Mini-Mycin
@@ -9265,8 +8427,6 @@ Minkowski
 Minority
 Minres
 Minster
-Mint leaf
-Mint weed
 Minute-accumulating
 Mira
 Miracles
@@ -9274,7 +8434,6 @@ Mirandola
 Miridae
 Mirror-image
 Misclassification
-Misclassified/occupied
 Misconceptions
 Misere
 Mises
@@ -9290,9 +8449,7 @@ Mismatch
 Mismatched
 Misreporting
 Miss
-Miss Emma
 Missed
-Missile basing
 Missing
 Missing-cell
 Missing-data
@@ -9304,7 +8461,6 @@ Misspecified
 Mist
 Mistakes
 Mistaking
-Mister blue
 Misunderstanding
 Misuse
 Misused
@@ -9314,7 +8470,6 @@ Mitscherlich
 Mittag-Leffler
 Mittal
 Mitterrand
-Mix'n'match
 Mixed
 Mixed-cylindrically
 Mixed-effects
@@ -9325,8 +8480,6 @@ Mixed-up
 Mixing
 Mixtures
 Miyazawa
-Mn/G/1/K
-Mn/Mn/1
 Mnemonics
 Mod
 Mod-ANOVA
@@ -9377,14 +8530,11 @@ Moment-based
 Moment-preserving
 Moment-ratio
 Moments
-Monetary/asset
 Money-demand
 Monge-Kantorovich
 Monin-Obukhov
 Monitoring
 Monkey
-Monkey dust
-Monkey tranquilizer
 Monoclonal
 Monograph
 Monographs
@@ -9415,7 +8565,6 @@ Moota
 Mooters
 Mootie
 Mootos
-Mor a grifa
 Moranda
 Morbidity
 More
@@ -9428,7 +8577,6 @@ Moricz
 Morimoto
 Morishima
 Morisita
-Morning wake-up
 Morone
 Moroney
 Morotgara
@@ -9436,8 +8584,6 @@ Morphological
 Morphologically
 Morphometric
 Morphometrics
-Morphometrics;
-Mortal combat
 Mortality
 Mortality-air
 Mortara
@@ -9454,27 +8600,20 @@ Mosteller
 Mota
 Motahar
 Mother
-Mother's little helper
 Mothers
 Motivating
 Motivation
 Motivations
 Motoo
 Mounds
-Mouth worker
 Movement
 Mover
 Mover-Stayer
-Movie star drug
 Moving
 Moving-average
 Moving-observer
 Moving-weighted-average
-Mow the grass
 Moyal
-Mt/D/1
-Mt/Gt/I
-Mt/Mt/1
 Mud
 Muentz-Szasz
 Muffins
@@ -9639,8 +8778,6 @@ Multiway
 Multiyear
 Mundlak
 Murari
-Murder 8
-Murder one
 Murdock
 Murthy
 Musa
@@ -9666,7 +8803,6 @@ Myslivec
 Mysore
 Myths
 Mytilus
-M|G|1|infinity
 N-11
 N-Hida
 N-K
@@ -9698,7 +8834,6 @@ N-stage
 N-step
 N-trees
 N-way
-N/G/1
 N01-distributed
 N11
 NAA
@@ -9707,8 +8842,6 @@ NAG
 NAIVE2
 NAMS
 NAPM
-NAS/NRC
-NASA/Johnson
 NASS
 NASSLOG
 NASSREG
@@ -9716,7 +8849,6 @@ NASSTIM
 NASSVAR
 NBAFR
 NBD
-NBS/Stylus/Computer
 NBU
 NBUC
 NBUE
@@ -9724,7 +8856,6 @@ NBUFR
 NCB
 NCES
 NCHS
-NCHS/CDC
 NCS
 NCSD
 NCSS
@@ -9735,8 +8866,6 @@ NEAR2
 NEBALL
 NEC
 NEC-APC
-NEC/PC-9800
-NEC/PC-9801
 NECC
 NELS88
 NEMS
@@ -9778,7 +8907,6 @@ NN-pattern
 NNC
 NNHS
 NNS
-NNS/NFMS
 NO
 NOD
 NOHARM
@@ -9807,7 +8935,6 @@ NPSTATA
 NRLS
 NRR
 NSAID-induced
-NSF/Census
 NSHP
 NSS
 NSW
@@ -9817,7 +8944,6 @@ NU
 NUCLARR
 NULL
 NUMBER
-NUN;statistical
 NURE
 NWA
 NWAFR
@@ -9916,9 +9042,6 @@ Neurotransmitter
 Neutrality
 Neveu
 Nevzorov
-New Jack Swing
-New acid
-New magic
 Newcomb
 Newer
 Newman-Keuls
@@ -9939,11 +9062,7 @@ Neyman-Pearson-Wald
 Neyman-Scott
 Neyman-type
 Ngau
-Nice and easy
 Nicewander
-Nickel bag
-Nickel deck
-Nickel note
 Nickelonians
 Nicolai
 Nicolasde
@@ -10194,10 +9313,6 @@ North-East
 North-Norwegian
 Norton-Simon
 Nose
-Nose candy
-Nose drops
-Nose powder
-Nose stuff
 Nosing
 Not-so-linear
 Not-so-surprising
@@ -10214,9 +9329,6 @@ Nucleation
 Nugget
 Nuggets
 Number
-Number 3
-Number 4
-Number 8
 Numbers
 NumerTaxo383
 Numeracy
@@ -10229,16 +9341,12 @@ Nursing
 Nutritional
 Nymegen
 O
-O'Brien-Dyck
 O-BLUE
 O-D
 O-U
 O-ring
 O-statistic
 O-statistics
-O.J.
-O.P.
-O.P.P.
 OA
 OASDI
 OATS
@@ -10247,7 +9355,6 @@ OC
 OC-function
 OCDE
 OCMAP
-OCMAP/PC
 OCR
 OCS
 OCTA
@@ -10273,7 +9380,6 @@ OPCS
 OPSEG
 OQD
 OR
-OR/MS
 ORACLE
 ORACLS
 ORAGWA
@@ -10281,8 +9387,6 @@ ORDMET
 ORSIM2
 OS-positive
 OS-processes
-OS/2
-OS/2--Compact
 OSAR
 OSCAR
 OSIRIS
@@ -10351,7 +9455,6 @@ Oils
 Oja
 Okabe
 Okun
-Old Steve
 Oldham
 Oligothetic
 Oliveira
@@ -10362,20 +9465,12 @@ Olmstead
 Olmstead-Tukey
 Olog
 Olympics
-On a mission
-On a trip
-On ice
-On the bricks
-On the nod
 On-invariant
 On-line
 On-semi-Markov-analogue
 On-site
 Onchocerca
 Oncorhynchus
-One and one
-One box tissue
-One way
 One-armed
 One-block-at-a-time
 One-dimensional
@@ -10430,7 +9525,6 @@ Opportunistic
 Opportunities
 Opportunity-based
 Optical
-Optical illusions
 Optimal-partitioning
 Optimality
 Optimally
@@ -10443,12 +9537,6 @@ Optional
 Optionally
 Options
 Opuntia
-Orange barrels
-Orange crystal
-Orange cubes
-Orange haze
-Orange micro
-Orange wedges
 Oranges
 Orcutt
 Order-based
@@ -10543,14 +9631,9 @@ Oviposition
 Owen
 Ownership
 Owsley
-Owsley's acid
 Oz
 Ozone
 P
-P(ConditionPositive)
-P(NegativeNot
-P(PositiveCondition)
-P*-condition
 P-DIST
 P-P
 P-STAT
@@ -10570,10 +9653,8 @@ P-technique
 P-value
 P-values
 P-wave
-P.R. (Panama Red)
 P173-176
 P439-446
-P=080
 PA
 PACE
 PACER
@@ -10610,16 +9691,11 @@ PC-BILOG
 PC-FIML
 PC-GIVE
 PC-ISP
-PC-ISP/DGS+
 PC-LAN
 PC-MCA
 PC-MDS
 PC-SIZE
 PC-based
-PC/AT
-PC/SAS
-PC/XT
-PC/XT/AT
 PCA
 PCB
 PCBRAP
@@ -10638,7 +9714,6 @@ PCs
 PD-cycles
 PDE
 PDE-control
-PDE/PROTRAN
 PDEs
 PDF
 PDP-11
@@ -10663,12 +9738,6 @@ PGF
 PH
 PH-distribution
 PH-renewal
-PH/G/1
-PH/M/S/K
-PH/M/c
-PH/PH/1
-PH/PH/1/K
-PH/PH/c
 PHAKIN
 PHANTOM
 PHGLM
@@ -10685,8 +9754,6 @@ PITMAN
 PITSSA
 PKRD
 PL
-PL/1
-PL/I
 PLA-3
 PLANUNG
 PLE
@@ -10702,7 +9769,6 @@ PM-spaces
 PMC
 PMP
 PMS
-PMX/StarMAIL
 PN-modulated
 POISSON
 POLYANOVA
@@ -10772,7 +9838,6 @@ PSYCHOSTATS
 PSystmSc
 PTC
 PUTSPEK
-PV***
 PV06
 PV07
 PV08
@@ -10790,11 +9855,9 @@ PVA
 PX
 PXM
 PY
-P^k
 Paasche-Laspeyres
 Pabna
 Pack
-Pack of rocks
 Packages
 Packaging
 Packet-switching
@@ -10811,7 +9874,6 @@ Paired
 Pairs
 Pairwise-balanced
 Pakalolo
-Pakistani black
 Palasti
 Paleocene
 Paley-type
@@ -10819,11 +9881,7 @@ Palgrave
 Palm-Kchinchin
 Palm-Khinchin
 Palmer
-Panama cut
-Panama gold
-Panama red
 Panatella
-Panckes and syrup
 Pandalus
 Pane
 Panels
@@ -10839,18 +9897,12 @@ Pao-Zhuan
 Paolo
 Papadakis
 Papangelou
-Paper acid
-Paper bag
-Paper blunts
-Paper boy
 Papers
 Parabolin
 Parachute
 Paradigms
 Paradise
-Paradise white
 Paradoxes
-Parafac/Candecomp
 Paralithodes
 Parallelism
 Parallelization
@@ -10865,13 +9917,11 @@ Parameterized
 Parameterizing
 Parameters
 Parametric
-Parametric/nonparametric
 Parametrization
 Parametrizations
 Parasitism
 Parcor
 Parent-offspring
-Parent/offspring
 Paretian
 Pareto-Koopmans
 Pareto-distribution
@@ -10948,20 +9998,15 @@ Payphone
 Paz
 Pb
 Peace
-Peace pill
-Peace tablets
-Peace weed
 Peaches
 Peak-insensitive
 Peakedness
 Peaks
 Peano
 Peanut
-Peanut butter
 Pearl
 Pearl-Reed
 Pearls
-Pearly gates
 Pearson-Tukey
 Pearson-type
 Pearsonian
@@ -10971,7 +10016,6 @@ Peco
 Peculiarity
 Pedagogical
 Peddlar
-Pee Wee
 Peeling
 Peep
 Peery
@@ -10981,7 +10025,6 @@ Peizer
 Pellets
 Peloponnese
 Peltzer
-Pen yan
 Penaeus
 Penalization
 Penalized
@@ -10990,8 +10033,6 @@ Pentagamma
 Pentamean
 Pentatomidae
 People-readable
-Pep pills
-Pepsi habit
 Peptostreptococcus
 Perakhora
 Perceived
@@ -11001,8 +10042,6 @@ Perceptions
 Perceptual-learning
 Percolation
 Pereira
-Perfect High
-Performance/reliability
 Performances
 Performing
 Perico
@@ -11042,10 +10081,7 @@ Perturbational
 Perturbations
 Perturbed
 Peruvian
-Peruvian flake
-Peruvian lady
 Peter
-Peter Pan
 Peters
 Petersen-Lincoln
 Peth
@@ -11084,7 +10120,6 @@ Phi-max
 PhiG
 Phila
 Philatelic
-Philipian/Watsonian
 Philipp
 Philippines
 Philistines
@@ -11119,7 +10154,6 @@ Piedras
 Piegorsch
 Pierpaolo
 Pietra
-Pig Killer
 Pijk
 Piles
 Pillai
@@ -11128,19 +10162,9 @@ Pillai-Nanda
 Pillai-tests
 Pilling
 Pimp
-Pimp your pipe
 Pin
-Pin gon
-Pin yen
 Pinedo
 Ping-in-wing
-Pink Panther
-Pink blotters
-Pink hearts
-Pink ladies
-Pink robots
-Pink wedge
-Pink witches
 Pinkham
 Pinsker
 Pinski
@@ -11164,7 +10188,6 @@ Pivot-depth
 Pixies
 Pizzetti
 Pkg
-Pl/I
 Placement
 Places
 Placing
@@ -11189,7 +10212,6 @@ Plotting
 Pluralistic
 PoPs
 Pochhammer
-Pocket rocket
 Pocket-calculator
 Pocock
 Pod
@@ -11242,7 +10264,6 @@ Policy-comparing
 Policymaking
 Polishing
 Political
-Political/military
 Politics
 Pollaczek
 Pollaczek-Khinchin
@@ -11251,9 +10272,6 @@ Polling
 Polls
 Polluter
 Polvo
-Polvo blanco
-Polvo de angel
-Polvo de estrellas
 Poly-Lundberg
 Poly-t
 Polya
@@ -11284,12 +10302,10 @@ Pool-adjacent-violators
 Pool-the-maximum-violators
 Pooled
 Pooling
-Poor man's pot
 Poor-quality
 Pop
 Popper
 Popper-Carnap
-Popper/Miller
 Poppers
 Poppy
 Population
@@ -11331,21 +10347,16 @@ Postcensal
 Poststratification
 Pot
 Potato
-Potato chips
 Potency
 Potentials
-Potten bush
 Potthoff
 Potthoff-Whittinghill
 Powder
-Powder diamonds
-Power puller
 Power-Law
 Power-heteroscedasticity
 Power-law
 Power-one
 Power-transformation
-Power/sample
 PowerPack
 Poweroids
 Pox
@@ -11353,7 +10364,6 @@ Poznan
 Pr
 PrX
 PrY
-Pra'x
 Prabhakar
 Practically
 Practicals
@@ -11426,7 +10436,6 @@ Premetric
 Prenomination
 Prentice-Wilcoxon
 Prepaid
-Preparation;
 Preparations
 Prepared
 Preparing
@@ -11488,7 +10497,6 @@ Probability
 Probability-based-matching
 Probability-of-coverage
 Probability-weighted
-Probability;decision;statistics
 Probabilty
 Probable
 Probably
@@ -11504,7 +10512,6 @@ Proceeding
 Proceedings
 Processes
 Processing
-Processing/GIS
 Processor-sharing
 Prochorov
 Proctrustes
@@ -11519,7 +10526,6 @@ Product-specific
 Product-type
 Production
 Production-inventory
-Production;
 Productive
 Products
 Profiles
@@ -11622,12 +10628,10 @@ Psychophysical
 Psychophysics
 Pth
 Ptolomy
-Public/Catholic
 Publications
 Published
 Publisher
 Publishing
-Puff the dragon
 Puffer
 Puffy
 Puget
@@ -11638,20 +10642,12 @@ Punjab
 Puntanen
 Purchasing
 Pure
-Pure love
 Purely
 Puri
 Purifying
 Purple
-Purple barrels
-Purple flats
-Purple haze
-Purple hearts
-Purple ozoline
-Purple rain
 Purposes
 Push
-Push shorts
 Pusher
 Pushing
 Putting
@@ -11675,7 +10671,6 @@ Q-sort
 Q-statistic
 Q-value
 QA
-QA/QC
 QALY
 QAP
 QBD
@@ -11686,8 +10681,6 @@ QL
 QMMP
 QMODEL
 QMP
-QMP/ASP
-QMP/USP
 QNET
 QNumQ
 QOL
@@ -11722,7 +10715,6 @@ Qualification
 Qualifications
 Qualifying
 Quality-of-life
-Quality/value
 Qualms
 Quan
 Quandt
@@ -11739,9 +10731,6 @@ Quantization
 Quantizing
 Quantum-mechanical
 Quarter
-Quarter bag
-Quarter moon
-Quarter piece
 Quarterly
 Quartiles
 Quartimax
@@ -11804,7 +10793,6 @@ Quasioptimal
 Quasireversibility
 Quasisymmetric
 Quaternions
-Queen Ann's lace
 Queening
 Queensland
 Quelques
@@ -11850,7 +10838,6 @@ R-theory
 R-transient
 R-type
 R-way
-R/S
 RA
 RA-estimates
 RADAR
@@ -11957,14 +10944,11 @@ RRT
 RS
 RS-MCB
 RS-information
-RS/Explore
-RS/explore
 RSGRAPH
 RSM
 RSMCB
 RSS
 RST
-RStApp25/3
 RTI
 RUMMAGE
 RUNT
@@ -11972,10 +10956,7 @@ RUSSEL
 RV
 RV-coefficient
 RWRE
-R_i
 Race-of-interviewer
-Race/ethnic
-Racehorse charlie
 Races
 Rademacher
 Radhakrishna
@@ -12001,13 +10982,11 @@ Rai
 Raibman
 Raiffa
 Raikov
-Railroad weed
 Railroads
 Rain-rate
 Rainbows
 Raindrops
 Rainfall-runoff
-Rainy day woman
 Rajchman
 Rajkundlia
 Raking
@@ -12077,7 +11056,6 @@ Rasch-model-based
 Rasch-representable
 Rasch-type
 Raspberry
-Rasta weed
 Ratcliff
 Rate-distortion
 Rated
@@ -12123,7 +11101,6 @@ Readers
 Readiness
 Reading
 Readings
-Ready rock
 Real-time
 Realistic
 Realistically
@@ -12188,15 +11165,6 @@ Recursive
 Recursively
 Recycle
 Red
-Red and blue
-Red bullets
-Red caps
-Red chicken
-Red cross
-Red devil
-Red dirt
-Red eagle
-Red phosphorus
 Redescending
 Redesign
 Redesigning
@@ -12258,10 +11226,8 @@ Regression-type
 Regressions
 Regressograms
 Regressor
-Regular P
 Regularities
 Regularity
-Regularity/singularity
 Regularization
 Regularized
 Regularly
@@ -12269,7 +11235,6 @@ Regulated
 Regulation
 Reichenbach
 Reiersoel
-Reindeer dust
 Reinforced
 Reinforcement
 Reinforcing
@@ -12469,7 +11434,6 @@ Rican
 Ricatti
 Riccati
 Ricci
-Riding the wave
 Ridit
 Rieman
 Riemanian
@@ -12484,7 +11448,6 @@ Riesz-Raikov
 Rife
 Rig
 Right-continuous
-Righteous bush
 Rights
 Rigoni-Stern
 Rina
@@ -12508,8 +11471,6 @@ Rizvi
 Rkpack
 RndmPoisnP
 Roach
-Roach clip
-Road dope
 Robbins-Mnro
 Robbins-Monro
 Robbins-Monro-procedures
@@ -12518,27 +11479,17 @@ Robotization
 Robotized
 Robots
 Robust-resistant
-Robust/nonparametric
 Robustification
 Robustified
 Robustifying
 Robustized
 Robustness
 Roca
-Rock attack
-Rock house
-Rock star
-Rock(s)
-Rocket caps
-Rocket fuel
 Rockets
 Rockette
-Rocks of hell
-Rocky III
 Rodolfo
 Rodrigues
 Rohde
-Roid rage
 Rolle
 Roller
 Rollers
@@ -12557,7 +11508,6 @@ Rope
 Roper
 Rosa
 Rosado
-Rose marie
 Rosedith
 Rosenblatt
 Roses
@@ -12590,7 +11540,6 @@ Rows
 Rox
 Roxanne
 Roy-Tiku
-Royal blues
 Royall
 Roychoudhury
 Roz
@@ -12612,9 +11561,7 @@ Runs
 Rupert
 Rural-urban
 Rush
-Rush snappers
 Russian
-Russian sickles
 Russo-Seymour-Welsh
 Rutemiller
 Ryans
@@ -12670,7 +11617,6 @@ SAGE
 SALS
 SAM
 SAMOS
-SAMP/AID
 SAMPEX
 SAMPSON
 SANOVA
@@ -12680,15 +11626,6 @@ SARIMA
 SAS
 SAS-75
 SAS-based
-SAS/AF
-SAS/ETS
-SAS/FSP
-SAS/GRAPH
-SAS/IML
-SAS/OR
-SAS/QC
-SAS/SMF
-SAS/STAT
 SAS79
 SASE
 SASGLM
@@ -12754,8 +11691,6 @@ SHRINKR
 SI-metric
 SIAD
 SIBYL
-SIBYL/RUNNER
-SIBYL/TFS
 SIC
 SICHAID
 SICLA
@@ -12777,7 +11712,6 @@ SIMD
 SIMDAT
 SIMEST
 SIMFAK
-SIMPL/1
 SIMPLEX-V
 SIMPLISMA
 SIMRRT
@@ -12793,7 +11727,6 @@ SIPP-based
 SIPPER
 SIPS
 SIR
-SIR/DBMS
 SIRIS
 SIROMATH
 SIRT
@@ -12829,7 +11762,6 @@ SMRs
 SMSAcity-suburb
 SMaHngry
 SNA
-SNA/SDLC
 SNAPS
 SNAPSHOT
 SNARKA
@@ -12855,7 +11787,6 @@ SPC
 SPC-systems
 SPCTL
 SPDEs
-SPEAKEASY/FEDEASY
 SPEARMAN
 SPECT
 SPECTRA
@@ -12868,15 +11799,12 @@ SPIDA
 SPIRIT
 SPLIFs
 SPMS
-SPP/G/1
 SPR
 SPRT
 SPRTs
 SPSS
 SPSS-X
 SPSS-compatible
-SPSS/PC
-SPSS/PC+
 SPSS9
 SPSSX
 SPectrum
@@ -12885,7 +11813,6 @@ SQL
 SR
 SR-51
 SRC
-SRC/CPS
 SRGD
 SRI
 SRS
@@ -12895,13 +11822,11 @@ SS-5
 SSA
 SSA-I
 SSB
-SSC;
 SSD
 SSI
 SSOR
 SSR
 SSRC
-SSRC/RSS
 SSU
 ST
 STAMP
@@ -12914,12 +11839,8 @@ STARS
 STASY-100
 STAT
 STAT-PACKETS
-STAT/PC-LIBRARY
-STAT/PC-library
-STAT/PROTRAN
 STAT80
 STATA
-STATA/Graphics
 STATAL
 STATAN
 STATCALC
@@ -12933,7 +11854,6 @@ STATISTICIAN
 STATISTIX
 STATLAB
 STATLIB
-STATMATE/PLUS
 STATOOLS
 STATPAC
 STATPAK
@@ -12977,7 +11897,6 @@ SURVCALC
 SURVCOMP
 SURVFIT
 SURVO
-SURVO/71
 SURVPAK
 SURVREG
 SURVTAB
@@ -12995,7 +11914,6 @@ SYN-TAX
 SYSPAD
 SYSREG
 SYSTAT
-SYSTAT/SYGRAPH
 SYSTEM
 Saambou
 Saaty
@@ -13004,7 +11922,6 @@ Sack
 Sackett
 Sacks-Ylvisaker
 Sacrament
-Sacre mushroom
 Saddle-points
 Saddlepath
 Saddlepoint
@@ -13024,10 +11941,7 @@ Sakamoto-Craig
 Sales
 Salim
 Salmi
-Salmonella/Ames
-Salmonella/microsome
 Salt
-Salt and pepper
 Salticidae
 Salvaging
 Salvelinus
@@ -13057,14 +11971,11 @@ Sandwich
 Sangamon
 Sanghvi
 Sanov
-Santa Marta
 Sardinia
 Sargan
 Sarris
 Sasfras
-Satan's secret
 Satch
-Satch cotton
 Satisficing
 Satisfying
 Sativa
@@ -13188,7 +12099,6 @@ Selected
 Selecting
 Selection
 Selection-mutation
-Selection-of-the-best/complete
 Selections
 Selective
 Selectivity
@@ -13229,7 +12139,6 @@ Self-starting
 Self-stated
 Self-tuning
 Self-validating
-Self/proxy
 Selfdecomposable
 Selfsimilar
 Selling
@@ -13312,7 +12221,6 @@ Seriation
 SeriesA
 Sernyl
 Seroprevalence
-Serpico 21
 Serra
 Serrin
 Server
@@ -13330,7 +12238,6 @@ Settlement
 Settlements
 Settling
 Setwise
-Sevast'yanov
 Sevastyanov
 Seventies
 Sevenup
@@ -13373,7 +12280,6 @@ Sharpness
 Sharps
 She
 Shedler
-Sheet rocking
 Sheets
 Sheffer
 Sheltering
@@ -13408,9 +12314,7 @@ Shiu-Fisher-Weil
 Shmeck
 Shocks
 Shoot
-Shoot the breeze
 Shooting
-Shooting gallery
 Shorack
 Short-dated
 Short-run
@@ -13418,7 +12322,6 @@ Short-term
 Shortest
 Shorth
 Shot
-Shot down
 Shot-noise
 Shoulders
 Shovelton
@@ -13436,7 +12339,6 @@ Sibuya
 Sichel
 Sickness
 Sidak-type
-Sidak/Slepian
 Siddi
 Siddiqui
 Siegel-Tukey
@@ -13454,7 +12356,6 @@ Sigmoids
 Sign-preserving
 Sign-sign
 Signal-to-noise
-Signal/noise
 Signals
 Signed
 Signed-rank
@@ -13464,7 +12365,6 @@ Signum
 Silence
 Silent-noisy
 Silhouettes
-Silly Putty
 Silting
 Silurian
 Silvey
@@ -13477,7 +12377,6 @@ Similarity
 Simon-Blalock
 Simonsiella
 Simonton
-Simple Simon
 Simple-English
 Simpler
 Simplest
@@ -13520,7 +12419,6 @@ Single-tape
 Single-threshold
 Single-variable
 Single-year
-Single/multiple
 Singpurwalla
 Singular-value
 Singularities
@@ -13557,7 +12455,6 @@ Skewness
 Skibinsky
 Skid
 Skied
-Skin popping
 Skip-lot
 Skipping
 Skitovic-Darmois
@@ -13578,7 +12475,6 @@ Slepian-Gordon
 Slepian-Wolf
 Sliced
 Slicing
-Slick superspeed
 Sliding
 Sliding-spans
 Slime
@@ -13607,10 +12503,8 @@ Smirnov-type
 Smith-Bain
 Smith-Waterman
 Smoke
-Smoke Canada
 Smoke-out
 Smoking
-Smoking gun
 Smoluchowski
 Smoluchowski-Kramers
 Smoothed
@@ -13627,13 +12521,7 @@ Snop
 Snort
 Snorts
 Snot
-Snot balls
 Snow
-Snow bird
-Snow pallets
-Snow seals
-Snow soke
-Snow white
 Snowball
 Snowcones
 Snowfalls
@@ -13647,7 +12535,6 @@ SocA
 Socialist
 Societatis
 Societies
-Society high
 Socio
 Socio-Economic
 Socio-demographic
@@ -13660,7 +12547,6 @@ Soda
 Softballs
 Softening
 Softstat
-Software/Hardware
 Soils
 Sojourns
 Sokal
@@ -13689,10 +12575,6 @@ Souza
 Soviet-Japanese
 Sowey
 Sowing
-Space base
-Space cadet
-Space dust
-Space ship
 Space-efficient
 Space-fixed
 Space-time
@@ -13701,15 +12583,12 @@ Spacing
 Spacings
 Spanning
 Spans
-Spark it up
-Sparkle plenty
 Sparklers
 Sparkling
 Sparre
 Sparre-Andersen
 Spatial-economic
 Spatial-temporal
-Spatial/Spectral
 Spatially
 Spatiotemporal
 Speaker
@@ -13721,8 +12600,6 @@ Spearman-Karber
 Spearman-Thomson
 Spearman-like
 Spearman-type
-Special "K"
-Special la coke
 Specialized
 Specialty
 Specific-optimal
@@ -13743,9 +12620,6 @@ Spectrum-oriented
 Speculation
 Speculations
 Speed
-Speed boat
-Speed for lovers
-Speed freak
 Speedball
 Speeds
 Speiser
@@ -13755,7 +12629,6 @@ Spence
 Spherical
 Spherically
 Sphericity
-Spider blue
 Spiderplots
 Spiders
 Spike
@@ -13784,8 +12657,6 @@ Spreadsheets
 Sprent
 Sprung
 Spuriosity
-Square mackerel
-Square time Bob
 Squares
 Squirrel
 Sr
@@ -13812,13 +12683,11 @@ Stalnaker
 Stamps
 Stand-volume
 Standardization
-Standardization;
 Standardized
 Standardizing
 Standards
 Stanine
 Star
-Star-spangled powder
 Stardust
 Starlike
 Starmer
@@ -13827,7 +12696,6 @@ Starshaped
 Starter-Adder
 Starting
 Stash
-Stash areas
 Stat
 StatChoice
 StatLab
@@ -13855,13 +12723,11 @@ Statistica
 Statistical
 Statistical-dynamical
 Statistical-fuzzy
-Statistical/mathematical
 Statistically
 Statisticians
 Statistics
 Statistics--Future
 Statistics-aided
-Statistics/data
 StatisticsA
 Statistiek
 Statistik
@@ -13888,14 +12754,12 @@ Stein-like
 Stein-rule
 Stein-ruled
 Stein-type
-Stein/Rubinstein
 Steinhaus
 Steklov
 Stem
 Stem-and-leaf
 Stems
 Stenger
-Step on
 Step-down
 Step-size
 Step-wise
@@ -13916,7 +12780,6 @@ Stigler
 Stillbirths
 Stimulating
 Stimulus-response
-Stink weed
 Stjernswaerd
 Stochastic-differential-equation
 Stochastic-dynamic
@@ -13960,7 +12823,6 @@ Stratonovitch
 Straw
 Strawberries
 Strawberry
-Strawberry fields
 Strawman
 Streaking
 Streamflow
@@ -13986,7 +12848,6 @@ Structured
 Structures
 Structuring
 Strum-Liouville
-Strung out
 Stuart-Maxwell
 Student-Newman-Keuls
 Student-generated
@@ -14074,10 +12935,6 @@ Suessmilch
 Sufficiency
 Sufficientconditions
 Sugar
-Sugar block
-Sugar cubes
-Sugar lumps
-Sugar weed
 Sugeno
 Suggestions
 Suitability
@@ -14089,7 +12946,6 @@ Sum-symmetric
 Summability
 Summaries
 Summarization
-Summarization;
 Summarized
 Summarizing
 Summated
@@ -14104,13 +12960,6 @@ Sunshine
 Sunwapta
 Sup-entropy
 Super
-Super C
-Super Grass
-Super acid
-Super ice
-Super joint
-Super kools
-Super weed
 Super-Bayesian
 Super-Brownian
 Super-mean-valued
@@ -14157,7 +13006,6 @@ Surprising
 Surveillance
 Survey--Redesign
 Survey-Household
-Survey/National
 Surveying
 Surveys
 Survivorship
@@ -14169,15 +13017,9 @@ Sverdrup
 Swain-Fu
 Swamy
 Swarudu
-Swedish;
-Swedish;English
 Swedishpanel
 Sweeping
-Sweet Jesus
-Sweet Lucy
-Sweet stuff
 Sweets
-Swell up
 Swets
 Switch-back
 Switched
@@ -14191,7 +13033,6 @@ Symmetries
 Symmetrization
 Symmetrized
 Symmetrizing
-Symmetry;
 Symons
 Symptoms
 Synchronies
@@ -14204,13 +13045,11 @@ Syntetical
 Synthesising
 Synthesized
 Synthesizing
-Synthetic THT
 Synthetic-fuel
 Synthetometrics
 Systat
 System-based
 System-theoretic
-System/K
 Systematically
 Systematizing
 Systems
@@ -14218,7 +13057,6 @@ Systolic
 Szego
 Szroeter
 T
-T*
 T-
 T-G
 T-buzz
@@ -14235,7 +13073,6 @@ T-squared
 T-statistics
 T-test
 T-variable
-T.N.T.
 T2SLS
 T4
 TAB
@@ -14343,7 +13180,6 @@ Taguchi-based
 Taguchi-type
 Taha
 Tai
-Tail lights
 Tail-area
 Tail-behavior
 Tailor-made
@@ -14356,7 +13192,6 @@ Takaishi
 Takane
 Takesaki
 Taking
-Taking a cruise
 Takkouri
 Talalay
 Tales
@@ -14368,7 +13203,6 @@ Tamil
 Taming
 Tampere
 Taneja
-Tango & Cash
 Tanil
 Tanner
 Tar
@@ -14395,7 +13229,6 @@ Tchebycheff
 Tchebycheff-Hermite
 TeX
 Tea
-Tea party
 Teacher
 Teachers
 Teaching
@@ -14445,7 +13278,6 @@ Testimating
 Testimator
 Testing
 Testing-domain
-Testing/assessing
 Tests
 Tetrachoric
 Tetrad
@@ -14453,17 +13285,10 @@ Tetranomial
 Tetranychidae
 Teugels
 Tex-mex
-Texas pot
-Texas tea
 Textbooks
 Texts
-Thai sticks
 Thalassaemia
 Tharparkar
-The C
-The beast
-The devil
-The witch
 Theil
 Theil-Tornqvist
 Theil-estimator
@@ -14483,7 +13308,6 @@ Thinking
 Thinning
 Thinnings
 Third-order
-Thirst monsters
 Thirteen
 Thirty-Fifth
 Thoman-Bain
@@ -14524,7 +13348,6 @@ Tiago
 Tiao
 Tiao-Guttman
 Tic
-Tic tac
 Ticket
 Tideman
 Tidskrift
@@ -14586,7 +13409,6 @@ Tissue
 Titch
 Titrimetric
 Tl
-Tn/cell
 Tobin
 Tobit
 Tobit-approach
@@ -14595,9 +13417,7 @@ Toda
 Todorovic
 Toeplitz
 Toeplitz-plus-Hankel
-Toilet water
 Toke
-Toke up
 Tokushima
 Tolerance
 Tolerance-distribution-free
@@ -14613,8 +13433,6 @@ Toolpack
 Tools
 Toot
 Tooties
-Tootsie roll
-Top gun
 Top-down
 Topi
 Topics
@@ -14623,19 +13441,15 @@ Topologically
 Topologies
 Tops
 Torch
-Torch cooking
-Torch up
 Torere
 Tornqvist
 Torpedo
 Tortrat
 Tortricidae
-Toss up
 Tossing
 Total-factor-productivity
 Total-score
 Totally
-Totally spent
 Toucher
 Touching
 Tougher
@@ -14660,7 +13474,6 @@ Tradeoffs
 Trading
 Trading-day
 Traditional
-Tragic magic
 Trailing
 Trails
 Training
@@ -14697,7 +13510,6 @@ Transvaal
 Transvariation
 Trap
 Trapping
-Travel agent
 Traveling
 Travelling
 Trays
@@ -14744,7 +13556,6 @@ Tropical
 Trotter
 Trotter-Kato
 Troubleshooting
-Truck drivers
 Trumbo
 Truncated
 Truncation
@@ -14753,7 +13564,6 @@ Trygve
 Tsao
 Tschuprow
 Tsetlin
-Tsirelon's
 Tucker-Lewis
 Tufte
 Tuie
@@ -14772,7 +13582,6 @@ Turbulence
 Turf
 Turkey
 Turnabout
-Turned on
 Turner
 Turning
 Tusnady-constructions
@@ -14780,7 +13589,6 @@ Tutti-frutti
 Tuy
 Tuy-type
 Tversky
-Tweak mission
 Tweaker
 Tweaking
 Tweek
@@ -14797,7 +13605,6 @@ Twinning
 Twins
 Twist
 Twistum
-Two for nine
 Two-Bayesian
 Two-SPRT
 Two-armed
@@ -14902,7 +13709,6 @@ UNISTAT
 UNIVARIATE
 UNIX
 UNIX-based
-UNIX/STAT
 UNPU-character
 UNSCRAMBLER
 UPC
@@ -14919,7 +13725,6 @@ UTRANS
 UV
 UVKRIG
 UX-stable
-Uca;a
 Udny
 Uhlenbeck-Ornstein
 Ukr
@@ -14952,7 +13757,6 @@ Uncertainties
 Uncertainty
 Unclassed
 Uncle
-Uncle Milty
 Unconditional
 Unconstrained
 Uncontrolled
@@ -15007,7 +13811,6 @@ Univ
 Universality
 Universally
 University
-University/industry/government
 Univocal
 Unkie
 Unknown
@@ -15038,7 +13841,6 @@ Unusual
 Unweighted
 Unweighted-means
 Uolevi
-Up against the stem
 Upcrossings
 Updates
 Updating
@@ -15047,7 +13849,6 @@ Upgrading
 Upper-sufficiency
 Uppers
 Uppies
-Ups and downs
 Upwards
 Urban-rural
 Urbanization
@@ -15082,7 +13883,6 @@ V-decomposable
 V-mask
 V-sojourn
 V-statistics
-V/UV/S
 V23A
 VA9
 VACOR
@@ -15095,7 +13895,6 @@ VARSTB
 VAT
 VAX
 VAX-11
-VAX/VMS
 VAXes
 VB9
 VCG
@@ -15116,7 +13915,6 @@ VIII
 VISUALS
 VLSI
 VM
-VM/CMS
 VMDP-program
 VMT
 VNTR
@@ -15232,7 +14030,6 @@ Vinograd
 Vinograde
 Violation
 Violations
-Viper's weed
 Visibility
 Visman
 Visualising
@@ -15247,7 +14044,6 @@ Vitt
 Vladimirovich
 Vnk
 Vocational
-Vodka acid
 Vol
 Vol1
 Vol3
@@ -15313,7 +14109,6 @@ WSD
 WUBA-WUBA
 Wac
 Wack
-Wacky weed
 Wadati-Benioff
 Waddel
 Wadley
@@ -15322,7 +14117,6 @@ Wagr
 Wahrscheinlichkeits-Theorie
 Waiting
 Waiting-time
-Wake ups
 Wakeby
 Waksberg-Mitofsky
 Wald
@@ -15368,11 +14162,9 @@ Wearing
 Wechsler
 Wechsler-De
 Wedderburn
-Wedding bells
 Weddle
 Wedge
 Weed
-Weed tea
 Weekday-weekend
 Weibull
 Weibull-Gnedenko
@@ -15383,7 +14175,6 @@ Weibull-distributed
 Weibull-exponent
 Weibull-exponential
 Weibull-type
-Weibull;
 Weibullian
 Weichselberger
 Weighing
@@ -15426,26 +14217,6 @@ Wherry
 Whippets
 Whipping
 White
-White Owsley's
-White ball
-White boy
-White cloud
-White cross
-White dust
-White ghost
-White girl
-White horizon
-White horse
-White junk
-White lady
-White lightning
-White mosquito
-White nurse
-White powder
-White stuff
-White sugar
-White tornado
-White-haired lady
 White-noise
 Whitehouse
 Whiteout
@@ -15455,7 +14226,6 @@ Whittaker-Henderson
 Whittaker-type
 Whittemore
 Whitworth
-Whiz bang
 Whole-life
 Whole-plant
 Whole-plot
@@ -15485,7 +14255,6 @@ Wilcoxon-Mann
 Wilcoxon-Mann-Whitney
 Wilcoxon-Mann-Whitney-test
 Wilcoxon-type
-Wild cat
 Wilder
 Wilheim
 Wilk
@@ -15504,8 +14273,6 @@ Winckler-Gauss
 Winckler-von
 Winding
 Windings
-Window glass
-Window pane
 Windows
 Wines
 Wings
@@ -15513,17 +14280,14 @@ Winkler
 Winkler-in
 Winning
 Winsorization
-Winsorization.
 Winsorized
 Winsorizing
 Winstrol
-Winstrol V
 Wise-approximation
 Wishart
 Wishart-ness
 Wishartness
 Witch
-Witch hazel
 Within-PSU
 Within-farm
 Within-groups
@@ -15534,7 +14298,6 @@ Within-trial
 Witwatersrand
 Wives
 Wnm
-Wobble weed
 Woburn
 Wold-Cramer
 Wolf
@@ -15544,21 +14307,17 @@ Wolgograd
 Wollenberg
 Wollie
 Wolverton-Wagner
-Wonder star
 Wong-Zakai
 Woodroofe
 Woolah
 Woolas
-Woolf-Haldane/Mantel-Haenszel
 Woolhouse
 Woolies
-Wooly blunts
 Work-in-progress
 Work-modulated
 Worked
 Workers
 Working
-Working half
 Works
 Workstations
 Worm
@@ -15567,7 +14326,6 @@ Worst-case
 Wrapped
 Wrapped-up
 Wrapping
-Wrecking crew
 Wright-Fisher
 Wright-Fisher-Kimura
 Wrightsman
@@ -15579,16 +14337,12 @@ Wulsten
 Wuxi
 Wythoff
 X
-X'AX
-X'X
-X++X
 X-11
 X-11-ARIMA
 X-12-ARIMA
 X-1980
 X-BAR
 X-MP-4
-X-MP/48
 X-STAT
 X-Y
 X-bar
@@ -15606,11 +14360,9 @@ X-ray
 X-raying
 X-rays
 X-spline
-X/Y
 X1-X
 X11
 X11-ARIMA
-X;
 XB
 XCANON
 XGobi
@@ -15656,9 +14408,6 @@ XXXVII
 XXXVIII
 XY
 XYZ
-X_2
-X_2+
-X_k
 Xanthan
 Xgobi
 Xp
@@ -15668,8 +14417,6 @@ Xylocopa
 Y-axis
 Y-shaped
 Y-type
-Y/X
-Y=T
 YASL
 YB
 YREG
@@ -15695,18 +14442,7 @@ Yea-saying
 Yeh
 Yeh-Wiener
 Yellow
-Yellow bam
-Yellow bullets
-Yellow dimples
-Yellow fever
-Yellow jackets
-Yellow submarine
-Yellow sunshine
-Yen Shee Suey
-Yen pop
-Yen sleep
 Yerba
-Yerba mala
 Yes
 Yesca
 Yesco
@@ -15737,7 +14473,6 @@ Yuri
 Yuriskii
 Yx
 Z
-Z*
 Z-
 Z-Poisson
 Z-procedure
@@ -15756,7 +14491,6 @@ ZDF
 ZPA
 ZQ-systems
 Zabczyk
-Zacatecas purple
 Zacks
 Zadeh
 Zakai
@@ -15781,7 +14515,6 @@ Zero-range
 Zero-sum
 Zeros
 Zierikzee
-Zig Zag man
 Zimbabwe
 Zip
 Zipf
@@ -15793,7 +14526,6 @@ Zo-se
 Zol
 Zolotarev
 Zombie
-Zombie weed
 Zonal
 Zonation
 Zooie
@@ -15808,14 +14540,10 @@ Zwer
 Zwet
 Zygmund
 Zyskind-Martin
-[sometimes
-^t
-_0
 a
 a-prior
 a-priori
 aX
-a_i
 aa
 aaa
 aaaa
@@ -16058,7 +14786,6 @@ absr
 abstract
 abstract-alphabet
 abstract-suffix
-abstract/concrete
 abstracted
 abstracting
 abstraction
@@ -16247,7 +14974,6 @@ achuara
 achumawi
 achung
 aci
-acid/base
 acidification
 acidity
 acids
@@ -16290,6 +15016,7 @@ acquired
 acquiring
 acquisitions
 acr
+acr-nema
 acra
 acreages
 acrididae
@@ -16630,6 +15357,7 @@ afars
 afatime
 afawa
 afb
+afbackup
 afbf
 afe
 afem
@@ -16671,6 +15399,7 @@ afk
 afkabiye
 afkareti
 aflatoxin
+afmbackup
 afn
 afo
 afore
@@ -16678,6 +15407,7 @@ aforementioned
 aforit
 aforo
 afour
+afpovertcp
 afr
 afresh
 africaines
@@ -16690,6 +15420,16 @@ afrike
 afroasiatic
 afroseminole
 afs
+afs3-bos
+afs3-callback
+afs3-errors
+afs3-fileserver
+afs3-kaserver
+afs3-prserver
+afs3-rmtsys
+afs3-update
+afs3-vlserver
+afs3-volser
 afsar
 afshar
 afshari
@@ -16783,7 +15523,6 @@ age-stratified
 age-structured
 age-wealth
 age-year
-age/sex
 aged
 aged-nonaged
 ageer
@@ -16813,7 +15552,6 @@ aggregating
 aggregation
 aggregation-disaggregation
 aggregation-theoretic
-aggregation/disaggregation
 aggregations
 aggregative
 aggregometry
@@ -17297,7 +16035,6 @@ alas
 alasai
 alaskacanada
 alaskan
-alaskan malamute
 alaskluet
 alat
 alataghwa
@@ -17601,6 +16338,7 @@ amanatun
 amanavil
 amanaye
 amanda
+amandaidx
 amanfro
 amangbetu
 amani
@@ -17722,6 +16460,7 @@ amia
 amiangba
 amiangbwa
 amicorum
+amidxtape
 amiespicard
 amikoana
 amina
@@ -17843,7 +16582,6 @@ anakola
 anal
 analgesia
 analog
-analog/persistence
 analogical
 analogies
 analogs
@@ -17857,10 +16595,6 @@ analysis
 analysis-V
 analysis-of-covariance
 analysis-of-variance
-analysis/causal
-analysis/synthesis
-analysis;
-analysis;principles
 analysisA
 analysisAn
 analysisComments
@@ -17921,7 +16655,6 @@ ancillarity
 ancillary
 ancux
 and
-and/or
 andagarinya
 andahuaylas
 andajes
@@ -18170,7 +16903,6 @@ ansusspeaking
 answer
 answer-correcting
 answer-until-correct
-answer/busy
 answered
 answering
 answers
@@ -18278,8 +17010,6 @@ anw
 anwain
 anx
 any
-any/J
-any/N
 anyah
 anyama
 anyan
@@ -18475,7 +17205,6 @@ appreciative
 apprised
 approach
 approach--Statistics
-approach/constraint
 approaches
 approaching
 appropriate
@@ -18665,7 +17394,6 @@ area
 area-average
 area-threshold
 area-true
-area/list
 areal
 areal-fraction
 areally
@@ -18835,7 +17563,6 @@ artharekhesang
 arthropod
 arthropods
 article
-article;
 articles
 articulation
 articulations
@@ -18887,7 +17614,6 @@ aryon
 arz
 arzeu
 as
-as]
 asa
 asaah
 asadabad
@@ -19103,7 +17829,6 @@ assuming
 assumption
 assumptions
 assur
-assurance/quality
 assured
 assuring
 assurini
@@ -19159,9 +17884,12 @@ asynchronously
 asynoptic
 asz
 at
-at&t
 at-a-station
+at-echo
 at-home
+at-nbp
+at-rtmp
+at-zis
 ata
 atacama
 atacamen
@@ -19357,7 +18085,6 @@ attracted
 attracting
 attraction
 attractive
-attractive/repulsive
 attractiveness
 attractor
 attractors
@@ -19478,6 +18205,7 @@ austrian
 austroasiatic
 austronesian
 aut
+auth
 authenreith
 author
 authored
@@ -19538,7 +18266,6 @@ autoregressive-moving
 autoregressive-moving-average
 autoregressive-parameter
 autoregressive-type
-autoregressive/moving
 autoreproducing
 autosomal
 autosome
@@ -19568,7 +18295,6 @@ avadhi
 avadi
 availabilities
 availability
-availability/reliability
 available
 avam
 avand
@@ -19809,7 +18535,6 @@ azumeina
 azumu
 azz
 b
-b'y
 b-ball
 b-values
 bY
@@ -19943,6 +18668,9 @@ backwards-stepping
 baco
 bacteriophage
 bacuisso
+bacula-dir
+bacula-fd
+bacula-sd
 bad
 bada
 badag
@@ -21410,7 +20138,6 @@ bedload
 bedoanas
 bedouin
 bedouins
-bedsocs;
 bedu
 beduanda
 beef-cattle
@@ -21932,6 +20659,8 @@ bgm
 bgn
 bgo
 bgp
+bgpd
+bgpsim
 bgq
 bgr
 bgs
@@ -22180,7 +20909,6 @@ bicriterion
 bicubic
 bicw
 bid-ask
-bid/ask
 bida
 bidabida
 bidabuh
@@ -22218,6 +20946,7 @@ biete
 biexponential
 bif
 bifang
+biff
 bifida
 bifrequency
 bifurcating
@@ -22413,6 +21142,7 @@ binjhia
 binjhwar
 binjhwari
 binji
+binkp
 binli
 binna
 binned
@@ -22459,7 +21189,6 @@ bioanalytical
 bioassay
 bioassays
 bioavailability
-bioavailability/bioequivalence
 biocenoses
 biochemical
 biochemistry
@@ -22545,7 +21274,6 @@ biratak
 biratnagar
 birbhum
 bird-banding
-bird/habitat
 birds
 birdsville
 birgid
@@ -22644,7 +21372,6 @@ bitb
 bitburg
 bitch
 bitchin
-bitchin'
 bitching
 bitchy
 biti
@@ -22738,9 +21465,7 @@ bla
 blaan
 blablanga
 black
-black moat
 black-white
-black/white
 blackbirds
 blackboot
 blackfoot
@@ -22819,7 +21544,6 @@ blocking
 blockmodel
 blockmodels
 blocks
-blocks;
 blocksIII
 blocksize
 blockwise
@@ -22834,8 +21558,6 @@ bloundo
 blouno
 blount
 blow
-blow a shot
-blow the vein
 blow-up
 blowfly
 blowjob
@@ -23261,7 +21983,6 @@ bontokkankanay
 bonum
 bonus
 bonus-malus
-bonus/malus
 bonzai
 bonzo
 boobe
@@ -23288,6 +22009,8 @@ booran
 boosted
 boosters
 boostraps
+bootpc
+bootps
 bootstrap
 bootstrap-confidence
 bootstraps
@@ -23566,15 +22289,19 @@ bozo
 bp
 bpa
 bpb
+bpcd
 bpd
+bpdbm
 bpg
 bph
 bpi
+bpjava-msvc
 bpk
 bpm
 bpo
 bpp
 bpr
+bprd
 bpt
 bpu
 bpv
@@ -23726,7 +22453,6 @@ brijia
 briju
 brilliant
 bring
-bring up
 bringen
 brings
 brinken
@@ -23771,7 +22497,6 @@ bronchodilators
 brong
 bronga
 brongahafo
-brood bitch
 brookes
 brooks
 broome
@@ -24560,14 +23285,12 @@ bzy
 bzyb
 bzz
 c
-c++
 c-column
 c-decomposable
 c-decomposition
 c-defect
 c-lines
 c-means
-c-means/ISODATA
 c-optimal
 c-sample
 c-shells
@@ -24867,10 +23590,10 @@ canela
 cangapeba
 cangin
 canichana
-canine parvovirus
 canipaan
 canis
 cankered
+canna
 cannanore
 canned
 cannibalism
@@ -24925,7 +23648,6 @@ capture-mark-recapture
 capture-recapture
 capture-removal
 capture-resight
-capture/recapture
 captured
 capturing
 capul
@@ -24949,7 +23671,6 @@ caravare
 carbamazepine
 carbo
 carbon-13
-carbon-13/proton
 carbon-14
 carbonates
 carburator
@@ -25132,7 +23853,6 @@ catch-at-age
 catch-at-length
 catch-effort
 catch-per-unit-effort
-catch/effort
 catchability
 catcher
 catches
@@ -25439,7 +24159,9 @@ cfalkens
 cfc
 cfcb
 cfd
+cfengine
 cfg
+cfinger
 cfr
 cg
 cga
@@ -25597,7 +24319,6 @@ changement
 changepoint
 changers
 changes
-changes/differences
 changethis
 changing
 changjiang
@@ -25642,7 +24363,6 @@ characterisation
 characterisations
 characterised
 characteristics
-characteristics;Jurimetrics
 characteristicsbasis
 characterization
 characterizations
@@ -25660,6 +24380,7 @@ chardonnay
 charge
 charge-coupled-device-detected
 charged
+chargen
 chargers
 charges
 charging
@@ -25816,7 +24537,6 @@ cherkes
 chero
 cherrapunji
 cherre
-chesaspeake bay retriever
 chessboard
 chessie
 chessu
@@ -25843,7 +24563,6 @@ chi-bar-squared
 chi-distribution
 chi-square
 chi-squared
-chi-squared/df
 chi-squaredness
 chi-squareds
 chi-squares
@@ -25878,7 +24597,6 @@ chichonyi
 chichwabo
 chickasaw
 chickens
-chickpea/safflower
 chico
 chicomucelo
 chicomuceltec
@@ -26139,7 +24857,6 @@ choibalsan
 choice
 choice-based
 choice-situations
-choice;
 choices
 choimi
 choisalmst
@@ -26225,16 +24942,11 @@ christine
 christmas
 christos
 chromatograms
-chromatograph/mass
 chromatographic
 chromatographic-mass
 chromatographic-ultraviolet
-chromatographic/mass
-chromatographic/spectral
 chromatographically
 chromatography-pattern
-chromatography/Fourier
-chromatography;
 chromosomal
 chromosomes
 chronical
@@ -26555,6 +25267,7 @@ clau
 clause
 clauses
 clc
+clc-build-daemon
 cld
 cle
 cleaear
@@ -26567,6 +25280,7 @@ cleaning
 cleanroom
 cleanup
 clear
+clearcase
 cleared
 clearest
 clearing
@@ -26588,7 +25302,6 @@ clients
 cliff
 cliffs
 climacteric
-climate/crop
 climates
 climatological
 climatologies
@@ -26701,6 +25414,8 @@ cmb
 cmd
 cmf
 cmi
+cmip-agent
+cmip-man
 cmk
 cml
 cmml
@@ -26823,7 +25538,10 @@ cocos
 cocuy
 cocycle
 cocycles
+codaauth2
 codas
+codasrv
+codasrv-se
 codazzi
 coddington
 code
@@ -26868,7 +25586,6 @@ cognates
 cogniagui
 cognition-based
 cognitive-inductive
-cognitive/laboratory
 cognitively
 cognitively-based
 cognized
@@ -26886,7 +25603,6 @@ coherency
 coherent
 coherently
 cohort-change
-cohort;
 cohorts
 coi
 coicoya
@@ -26941,7 +25657,6 @@ collect
 collected
 collecting
 collection
-collection/breakup
 collections
 collective
 collectively
@@ -27087,7 +25802,6 @@ communicated
 communicates
 communicating
 communication
-communication/computer
 communications
 communicatively
 communicators
@@ -27277,7 +25991,6 @@ computer-intensive
 computer-interactive
 computer-oriented
 computer-simulated
-computer/communications
 computerese
 computerization
 computerized
@@ -27422,7 +26135,6 @@ confucianist
 confused
 confuses
 confusing
-confusing/composite
 confusum
 cong
 congeneric
@@ -27629,7 +26341,6 @@ continuous-state
 continuous-state-space
 continuous-time
 continuous-valued
-continuous/discrete
 continuously
 continuously-divisible
 contortions
@@ -27698,7 +26409,6 @@ converges
 converging
 conversation
 conversational
-conversational/interactive
 converse
 conversely
 converses
@@ -27776,7 +26486,6 @@ coquille
 cor
 cora
 corachol
-coral/starfish
 corank
 corantyne
 cord
@@ -27830,9 +26539,7 @@ correlation-oriented
 correlation-theoretical
 correlation-trend
 correlation-type
-correlation/prediction
 correlational
-correlational/causal
 correlations
 correlationsA
 correlative
@@ -27889,7 +26596,6 @@ cost-quantity
 cost-risk
 cost-value
 cost-volume-profit
-cost/benefit
 costing
 costly
 costs
@@ -28156,7 +26862,6 @@ croker
 crop
 crop-rotation
 crop-yield
-crop/weather
 cropland
 cropping
 crops
@@ -28190,12 +26895,10 @@ cross-national
 cross-over
 cross-population
 cross-price
-cross-price/demand
 cross-product
 cross-products
 cross-ratio
 cross-section
-cross-section/time-series
 cross-sectional
 cross-sectional-censored
 cross-sectionally
@@ -28274,8 +26977,10 @@ csi
 csk
 csl
 csm
+csnet-ns
 cso
 csr
+csync2
 ct
 cta
 ctc
@@ -28516,6 +27221,7 @@ cv
 cvc
 cvcc
 cvccc
+cvspserver
 cvt
 cvtbd
 cvtbf
@@ -28584,7 +27290,6 @@ cyber
 cyberpunk
 cyclamate
 cycle
-cycle/course
 cycled
 cycles
 cyclic
@@ -28629,8 +27334,6 @@ czc
 cze
 czechomoravian
 d
-d'Analyse
-d'equilibrage
 d-Wiener
 d-a
 d-bar
@@ -28646,7 +27349,6 @@ d-separation
 d-space
 d-squared
 d-step
-d=0
 dBASE
 dBMAN
 dBase
@@ -28656,6 +27358,7 @@ daagi
 daai
 daalen
 daang
+daap
 daari
 daarod
 daasanech
@@ -29033,10 +27736,6 @@ data-sets
 data-smoothers
 data-smoothing
 data-splitting
-data/analysis
-data/distributions
-data;
-data;2
 dataA
 dataCorr
 dataI
@@ -29044,7 +27743,6 @@ dataSome
 databank
 databanks
 database
-database/query
 databases
 datadian
 datagnon
@@ -29052,6 +27750,7 @@ datagram
 datagrams
 datalayouts
 datamation
+datametrics
 datascope
 dataset
 datasets
@@ -29135,6 +27834,7 @@ dayeh
 dayi
 dayoh
 days
+daytime
 daz
 daza
 dazza
@@ -29183,7 +27883,6 @@ deactivation
 dead
 dead-end
 dead-head
-dead/moribund
 deadahead
 deadhead
 deadhed
@@ -29262,18 +27961,15 @@ decision-directed
 decision-feedback
 decision-makers
 decision-making
-decision-making;
 decision-oriented
 decision-problems
 decision-support
 decision-theoretic
 decision-theory
-decision;
 decisionmakers
 decisionmaking
 decisions
 decisions2nd
-decisions;
 decisionsItalian
 decisionsSecond
 decisionsSpanish
@@ -29296,7 +27992,6 @@ decoding
 decomposability
 decomposed
 decomposing
-decomposition;
 decompositional
 decompositions
 decompsition
@@ -29311,7 +28006,6 @@ decreased
 decreases
 decreasing
 decreasingly
-decrement/competing
 decrementation
 decremented
 decrements
@@ -29751,7 +28445,6 @@ design-independent
 design-power
 design-procedure
 design-unbiased
-design/analysis
 designCorr
 designated
 designation
@@ -29803,7 +28496,6 @@ detectable
 detected
 detecting
 detection
-detection/estimation
 detective
 detectors
 detects
@@ -29820,10 +28512,8 @@ determine
 determined
 determines
 determining
-determining/optimizing
 determinism
 deterministic
-deterministic/probabilistic
 deterministics
 deterrence
 deti
@@ -29850,7 +28540,6 @@ developer
 developers
 developing
 development
-development/firm
 developmentVol
 developmental
 developments
@@ -29863,7 +28552,6 @@ deviating
 deviation
 deviation--Revisited
 deviation-type
-deviation/standard
 deviations
 device
 device-level
@@ -29983,7 +28671,6 @@ diagenesis
 diagnosability
 diagnosing
 diagnostic
-diagnostic/patient
 diagnosticity
 diagnostics
 diagonal
@@ -30302,6 +28989,7 @@ diquiyo
 dir
 dirasha
 dirayta
+dircproxy
 direct
 direct-iterative
 directed
@@ -30365,6 +29053,7 @@ disaster
 disasters
 disastrous
 disattenuated
+discard
 discbrakes
 discern
 discerned
@@ -30418,7 +29107,6 @@ discrete-state
 discrete-state-space
 discrete-time
 discrete-valued
-discrete/continuous
 discretely
 discretisation
 discretised
@@ -30458,7 +29146,6 @@ disequilibrium
 disfavor
 disgrace
 disguises
-dish faced
 dishonest
 disinfection
 disinfestation
@@ -30551,6 +29238,7 @@ distance-velocity
 distance-weighted
 distances
 distantly
+distcc
 distempter
 distillation
 distinct
@@ -30566,6 +29254,7 @@ distinguishable
 distinguished
 distinguishes
 distinguishing
+distmp3
 distorted
 distorting
 distortion-rate
@@ -30590,7 +29279,6 @@ distribution-functions
 distribution-independent
 distribution-mixture
 distribution-valued
-distribution;
 distributionCorr
 distributional
 distributionas
@@ -30598,8 +29286,6 @@ distributionfunction
 distributionof
 distributions
 distributions-regression
-distributions;
-distributions;Confidence
 distributivity
 distributors
 district-level
@@ -30828,7 +29514,6 @@ dob
 doba
 dobase
 dobel
-doberman pinscher
 dobi
 dobie
 dobkin
@@ -31193,7 +29878,6 @@ dpp
 dpw
 dq
 dr
-dr.demento
 dra
 draa
 drabitou
@@ -31253,7 +29937,6 @@ drm
 drn
 dro
 droia
-drop dead
 drop-off
 drop-out
 drop-outs
@@ -31273,7 +29956,6 @@ drubea
 druffel
 drug-induced
 drug-receptor
-drug-receptor/drug-interaction
 drug-use
 drugs
 drukai
@@ -31792,7 +30474,6 @@ eclecticism
 eco-system
 ecologic
 ecological
-ecology;
 ecometric
 ecometrics
 econometirc
@@ -31802,13 +30483,11 @@ economic
 economic-demographic
 economic-social
 economic-statistical
-economic/social
 economical
 economically
 economics
 economies
 economists
-economists/statisticians
 economized
 economy
 economy-induced
@@ -31825,7 +30504,6 @@ ecwa
 ecxecuted
 eczema
 ed
-ed;
 edangabo
 edawapi
 eddies
@@ -31921,16 +30599,12 @@ efe
 effect
 effect-size
 effect-wise
-effect;
 effecting
 effective
 effectively
 effectiveness
 effectivity
 effects
-effects/longitudinal
-effects/measurement
-effects;
 efficacies
 efficacity
 efficacy
@@ -32116,6 +30790,7 @@ ekiyira
 ekiziba
 ekkehard
 eklenjuy
+eklogin
 ekm
 eko
 ekoi
@@ -32432,6 +31107,8 @@ enables
 enabling
 enawene
 enb
+enbd-cstatd
+enbd-sstatd
 encabellado
 encapsulated
 encapsulates
@@ -32443,7 +31120,6 @@ enclosed
 enclosing
 encoded
 encoder-decoder
-encoder/decoder
 encoders
 encodes
 encoding
@@ -32455,7 +31131,6 @@ encountering
 encounters
 encourage
 encouraged
-encouraged.
 encouragement
 encroachment
 encyclopedia
@@ -32538,9 +31213,7 @@ enggipilu
 engine
 engineer
 engineering
-engineering/econometric
 engineers
-engineers/physical
 engines
 england
 englewood
@@ -32643,7 +31316,6 @@ entropy-like
 entropy-maximising
 entropy-power
 entry
-entry/editing
 entrybox
 enumerate
 enumerated
@@ -32667,7 +31339,6 @@ environment
 environment-behavior
 environmentSTMA
 environmental
-environmental/ecological
 environmentally
 environments
 environmetrics
@@ -32705,7 +31376,6 @@ epi
 epidemics
 epidemiologic
 epidemiological
-epidemiological/survivorship
 epidemiologists
 epidemiology--A
 epie
@@ -32746,7 +31416,6 @@ equal-interval
 equal-mean
 equal-sized
 equal-weight
-equal/unequal
 equaled
 equalities
 equality
@@ -32764,7 +31433,6 @@ equateur
 equating
 equation
 equations
-equations;Multiplicative
 equatoria
 equi-coordinate
 equi-correlated
@@ -32796,7 +31464,6 @@ equireplicate
 equireplicated
 equivalence
 equivalence-singularity
-equivalence/contiguity
 equivalences
 equivalencing
 equivalency
@@ -32906,7 +31573,6 @@ errors-in-latent-variable
 errors-in-the-variables
 errors-in-variable
 errors-in-variables
-errors;distribution
 errs
 ersari
 erse
@@ -33030,15 +31696,12 @@ estimating
 estimation
 estimation--Eastern
 estimation-theoretic
-estimation/detection
-estimation/time
 estimations
 estimative
 estimaton
 estimator
 estimator-sequences
 estimators
-estimators;
 estimatorsII
 estmate
 estonian
@@ -33054,10 +31717,8 @@ esumbu
 et
 etah
 etaoin
-etaoin shrdlu
 etaoinshrdlu
 etc
-etc.
 etcetera
 etelena
 ethernet
@@ -33177,7 +31838,6 @@ event-node
 event-related
 event-time
 events
-events/time
 eventually
 ever
 ever-smoking
@@ -33347,14 +32007,12 @@ expectancy
 expectancy-value
 expectation-maximisation
 expectation-maximization
-expectation/disillusion
 expectational
 expectations
 expected
 expected-net-gain
 expected-time
 expectedvalue
-expected|
 expectiles
 expects
 expediency
@@ -33363,7 +32021,6 @@ expended
 expenditure
 expenditures
 expense
-expense/expenditure
 expenses
 expensive
 experience
@@ -33549,7 +32206,6 @@ ezo
 ezopong
 ezzikwo
 f
-f'/f
 f-dissimilarity
 f-divergence
 f-divergencies
@@ -33705,7 +32361,6 @@ fallacious
 fallam
 fallibility
 falling
-fallowing/planting
 falls
 falor
 false
@@ -33812,6 +32467,7 @@ father-son
 fathers
 fatigue-life
 fatness
+fatserv
 fatu
 fatuleu
 fatunda
@@ -33936,7 +32592,6 @@ fed
 fed-batch
 fedare
 federal-state-local
-federal/state
 federally
 federation
 federe
@@ -33978,7 +32633,6 @@ felup
 felupe
 fem
 female-headed
-female/male
 females
 feminization
 fender
@@ -34088,6 +32742,7 @@ ficsh
 fidata
 fidc
 fidead
+fido
 fidouble
 fie
 fiefl
@@ -34182,7 +32837,6 @@ filomeno
 filong
 filotei
 filter-cleaners
-filter/linear
 filtered
 filtering
 filtering-product
@@ -34221,6 +32875,7 @@ fineness
 finever
 fing
 finge
+finger
 fingerprinting
 fingerprints
 fingers
@@ -34345,7 +33000,6 @@ fissures
 fisuspended
 fit
 fit-test
-fit;
 fita
 fitask
 fitext
@@ -34512,7 +33166,6 @@ fluctuating
 fluctuation
 fluctuation-dissipation
 fluctuations
-fluctuations;
 fluctutaions
 fluently
 fluidized
@@ -34604,6 +33257,7 @@ fongondeng
 foni
 fonnu
 font
+font-service
 fontbbox
 fontem
 fontfamily
@@ -34701,7 +33355,6 @@ forhigh-reliability
 foris
 fork
 fork-join
-fork/join
 forkedtounge
 forlarge
 form
@@ -34730,7 +33383,6 @@ formeulehre
 forming
 formosan
 forms
-forms/design
 formula-based
 formula-hypothesis
 formulas
@@ -34925,7 +33577,6 @@ frequency-magnitude
 frequency-shift
 frequency-wavenumber
 frequency-weighted
-frequency/Bayes
 frequent
 frequentist
 frequentistic
@@ -34980,6 +33631,7 @@ fronts
 froshmeat
 frost
 froukou
+frox
 frr
 frs
 frt
@@ -34996,9 +33648,15 @@ fs
 fsasya
 fse
 fsl
+fsp
 ft
+ftb
 ftn
 ftour
+ftp
+ftp-data
+ftps
+ftps-data
 fu
 fua
 fuan
@@ -35175,7 +33833,6 @@ fwai
 fwb
 fwe
 fx
-fx+y
 fy
 fyam
 fyer
@@ -35414,7 +34071,6 @@ gambir
 gamblai
 gamble-over-posterior-distributions
 gambler
-gambler's
 gambles
 gambling
 gambo
@@ -35616,7 +34272,6 @@ gated
 gates
 gathaka
 gather
-gather/scatter
 gathered
 gatherers
 gathering
@@ -35811,6 +34466,7 @@ gdi
 gdj
 gdl
 gdn
+gdomap
 gdr
 gdu
 gdw
@@ -35905,7 +34561,6 @@ gene-counting
 gene-environment
 gene-for-gene
 gene-frequency
-gene/haplotype
 genealogical
 genealogies
 geneina
@@ -36007,7 +34662,6 @@ geomagnetic
 geomathematics
 geometric
 geometric-optical
-geometric/probabilistic
 geometrical
 geometrically
 geometrics
@@ -36087,16 +34741,11 @@ gesto
 gestual
 gestuelle
 get
-get fucked
-get laid
-get lost
-get stuffed
 getaq
 getfucked
 geti
 getlaid
 getlost
-getlost!
 getlucky
 getmata
 geto
@@ -36139,6 +34788,7 @@ ggn
 ggo
 ggr
 ggu
+ggz
 gh
 gha
 ghaangala
@@ -36346,6 +34996,7 @@ gisika
 gisira
 gissi
 gisu
+git
 gitano
 gitata
 gitksan
@@ -36497,16 +35148,12 @@ gnuemacs
 gnui
 gnulahaghe
 gnus
+gnutella-rtr
+gnutella-svc
 gnw
 gnx
 gnz
 go
-go away
-go away!
-go fuck yourself
-go jump in a lake
-go to hell
-go/no-go
 goahead
 goahibo
 goahiva
@@ -36523,7 +35170,6 @@ goari
 goaribari
 goats
 goaway
-goaway!
 goba
 gobabingo
 gobasi
@@ -36595,7 +35241,6 @@ golbert
 golda
 goldea
 golden
-golden retriever
 goldi
 goldiya
 goldsmiths
@@ -36671,6 +35316,7 @@ goondile
 goonight
 gooniyandi
 gope
+gopher
 goq
 gor
 gorabomahouji
@@ -36719,7 +35365,6 @@ gospels
 gostraight
 got
 goto
-goto hell
 gotohell
 gotomi
 gotos
@@ -36804,6 +35449,7 @@ gpil
 gpm
 gpmg
 gpn
+gpsd
 gpss
 gpst
 gptb
@@ -36918,7 +35564,6 @@ grd
 gre
 greasyspoon
 great
-great dane
 greater
 greatest
 greatly
@@ -36927,7 +35572,6 @@ grebo
 grec
 greeks
 green
-green stuff
 greenbay
 greenbug
 greenfeld
@@ -37034,7 +35678,6 @@ growth-curve
 growth-free
 growth-optimal
 growth-subculture
-growth/deterioration
 grp
 grq
 grr
@@ -37762,7 +36405,6 @@ halls
 halmahera
 halmaherageelvink
 halmaherawest
-halo'-model
 halogenated
 halt
 halted
@@ -37976,7 +36618,6 @@ hassani
 hassaniya
 hasten
 hat
-hat trick
 hatam
 hatangkayey
 hatay
@@ -38085,8 +36726,6 @@ hd
 hdw
 hdy
 he
-he'sdead
-he'sdeadjim
 hea
 head
 head-of-the-line
@@ -38156,7 +36795,6 @@ heibankadugli
 heibantalodi
 height
 height-diameter
-height/weight
 heights
 heii
 heikom
@@ -38472,7 +37110,6 @@ historically
 histories
 history
 history-dependent
-history/theory
 histospline
 histosplines
 hit
@@ -38514,6 +37151,7 @@ hke
 hkh
 hknong
 hko
+hkp
 hkun
 hkw
 hkwinhpang
@@ -38537,6 +37175,7 @@ hma
 hmanggona
 hmar
 hml
+hmmp-ind
 hmong
 hmonono
 hmr
@@ -38575,7 +37214,6 @@ hockchew
 hockey
 hocks
 hocus
-hocus pocus
 hocus-pocus
 hocuspocus
 hod
@@ -38652,7 +37290,6 @@ holyshit
 homa
 hombo
 home
-home-buying/rebuying
 home-range
 homegeneous
 homeless
@@ -38664,7 +37301,6 @@ homes
 homicides
 homing
 hominoid
-homo/bisexual
 homogeneities
 homogeneity-optimizing
 homogeneously
@@ -38777,8 +37413,9 @@ host
 host-pathogen
 host-vector
 hostility
+hostmon
+hostnames
 hot
-hot shot
 hot-deck
 hot-standby
 hotanyutian
@@ -38819,7 +37456,6 @@ hovd
 hovongan
 hovukoilo
 how
-how;
 howard
 howbig
 however
@@ -38877,6 +37513,8 @@ htin
 htiselwang
 hto
 hts
+http
+https
 hu
 hua
 huacapishtea
@@ -39080,7 +37718,6 @@ hv
 hva
 hvn
 hw
-hw/sw
 hwa
 hwana
 hwane
@@ -39138,6 +37775,7 @@ hyepa
 hyil
 hyilhawul
 hyl
+hylafax
 hym-apoidea
 hymenoptera
 hyo
@@ -39215,8 +37853,6 @@ hypothetical
 hypothetico-deductivism
 hz
 i
-i'mok
-i'mokay
 i-dimensional
 i-j
 i-variate
@@ -39245,6 +37881,7 @@ iauarete
 iauga
 iauiaula
 iaw
+iax
 iazgulem
 ib
 iba
@@ -39355,6 +37992,7 @@ ichitaabwa
 ichiwanda
 ichun
 icing
+icpv2
 icuatai
 id
 idaaca
@@ -39391,7 +38029,6 @@ identically
 identifiability
 identifiable
 identification
-identification;
 identifications
 identified
 identifier
@@ -39743,6 +38380,9 @@ imakua
 imami
 iman
 imandi
+imap2
+imap3
+imaps
 imasi
 imatong
 imb
@@ -39888,6 +38528,7 @@ imputed
 imputeddata
 imputing
 imroin
+imsp
 imudji
 imurud
 imurut
@@ -40157,7 +38798,6 @@ inefficiently
 ineligible
 ineme
 inequalities
-inequalities;
 inequality
 inequality-constrained
 inequities
@@ -40187,7 +38827,6 @@ infecundable
 infecundity
 infer
 inference-statistical
-inference;
 inferences
 inferencing
 inferior
@@ -40251,7 +38890,6 @@ information-matrix
 information-processing
 information-theoretic
 information-theoretical
-informationC/R
 informational
 informationally
 informations
@@ -40283,6 +38921,7 @@ ingod
 ingrained
 ingredients
 ingres
+ingreslock
 ingrian
 ingul
 ingulu
@@ -40302,7 +38941,6 @@ inherently
 inherited
 inhibited
 inhibiting
-inhibition/promotion
 inhibitors
 inhomogeneities
 inhomogeneously
@@ -40325,7 +38963,6 @@ initially
 initiated
 initiating
 initiation
-initiation/promotion
 initiatives
 initiator
 inj
@@ -40356,7 +38993,6 @@ inner-product
 innovation
 innovations
 innovations-based
-innovations/observations
 innovative
 innovators
 innovatory
@@ -40377,7 +39013,6 @@ input-output-tables
 input-parameter
 input-restricted
 input-single
-input/output
 inputSTMA
 inputing
 inputs
@@ -40492,7 +39127,6 @@ integral
 integral-sum
 integral-type
 integral-valued
-integral;
 integrals
 integrands
 integrated
@@ -40769,7 +39403,6 @@ intervening
 intervention
 interventions
 interview
-interview/examination
 interviewed
 interviewer
 interviewer-interviewee
@@ -40823,6 +39456,7 @@ intraindividual
 intrajudge
 intralaboratory
 intrametropolitan
+intranet
 intranode
 intraocular
 intrapair
@@ -40973,13 +39607,17 @@ ipixuna
 ipk
 ipm
 ipoh
+ipp
 ippolito
+iprop
 ips
 ipsative
 ipsatizing
 ipunu
 ipuricoto
 ipurina
+ipv6
+ipx
 iq
 iqu
 iquique
@@ -41006,6 +39644,9 @@ irava
 iraya
 irbil
 irbore
+irc
+ircd
+ircs
 irect
 iregwe
 irelandtolai
@@ -41070,6 +39711,7 @@ isabela
 isabi
 isachanure
 isajoke
+isakmp
 isal
 isala
 isam
@@ -41089,6 +39731,7 @@ ischen
 iscobaquebu
 isconahua
 isd
+isdnlog
 ise
 isebanganen
 isebe
@@ -41136,6 +39779,7 @@ isira
 isirania
 isirawa
 isiro
+isisd
 isiswazi
 isixhosa
 isizulu
@@ -41156,6 +39800,7 @@ isnag
 isnay
 isneg
 iso
+iso-tsap
 isocenio
 isochron
 isocratic
@@ -41223,9 +39868,6 @@ isuwu
 isuxa
 isx
 it
-it'sajoke
-it'sok
-it'sokay
 ita
 itabuna
 itaem
@@ -42003,7 +40645,6 @@ jjs
 jju
 jk
 jkj
-jkl;
 jkr
 jku
 jl
@@ -42227,7 +40868,6 @@ jumla
 jumleli
 jummai
 jump
-jump in a lake
 jump-diffusion
 jump-driven
 jump-like
@@ -42377,11 +41017,6 @@ k-variance
 k-wise
 k-within-m-out-of-n
 k1
-k=012
-k=2
-k=3
-k=4
-k=5
 kPa
 kXY
 ka
@@ -42883,6 +41518,7 @@ kaman
 kamana
 kamanap
 kamanawa
+kamanda
 kamane
 kamang
 kamanga
@@ -43670,6 +42306,7 @@ kayumerah
 kayung
 kayupulau
 kaz
+kazaa
 kazak
 kazakh
 kazakhi
@@ -44003,6 +42640,8 @@ kerang
 kerawara
 kerayan
 kerberos
+kerberos-adm
+kerberos4
 kerdau
 kere
 kerebe
@@ -44040,6 +42679,7 @@ kermanji
 kermanshah
 kermanshahan
 kermanshahi
+kermit
 kernel
 kernel-based
 kernel-density
@@ -45022,6 +43662,7 @@ kln
 klo
 klobouki
 klocek
+klogin
 klor
 kloss
 kloto
@@ -45074,6 +43715,7 @@ knb
 knc
 knd
 kne
+knetd
 knew
 knf
 kng
@@ -45756,6 +44398,7 @@ kpanzon
 kpara
 kparla
 kpashan
+kpasswd
 kpata
 kpati
 kpb
@@ -45784,6 +44427,7 @@ kplebo
 kpm
 kpn
 kpo
+kpop
 kporo
 kposo
 kpotopo
@@ -45847,6 +44491,7 @@ krau
 krauss
 kravet
 krb
+krbupdate
 krc
 krd
 kre
@@ -45935,6 +44580,7 @@ ksekova
 ksf
 ksg
 ksh
+kshell
 ksi
 ksj
 ksk
@@ -46831,6 +45477,7 @@ l
 l-tuple
 l0
 l053
+l2f
 l2th
 l32
 l908-l984
@@ -46884,7 +45531,6 @@ laboriously
 labour-force
 labourd
 labourdin
-labrador retriever
 labs
 labu
 labuan
@@ -47232,7 +45878,6 @@ language
 language-as-fixed-effect
 language-controlled
 languages
-languages)
 languda
 langue
 languedoc
@@ -47474,7 +46119,6 @@ lawoi
 lawra
 lawrence
 laws
-laws;
 lawta
 lawyers
 lay-out
@@ -47491,7 +46135,6 @@ layiping
 layolo
 layout
 layouts
-layouts;
 laytonville
 layu
 laz
@@ -47538,6 +46181,8 @@ lcq
 lcs
 ld
 ldamtsai
+ldap
+ldaps
 ldb
 ldclose
 ldd
@@ -47967,7 +46612,6 @@ lgu
 lgz
 lh
 lhasa
-lhasa apsos
 lhm
 lhn
 lhoba
@@ -48010,7 +46654,6 @@ libbo
 libbung
 libc
 libenge
-liberal/conservative
 liberalism
 liberally
 liberation
@@ -48072,7 +46715,6 @@ life-test
 life-testing
 life-tests
 life-time
-life/variable
 lifecycle
 lifelength
 lifelengths
@@ -48246,7 +46888,6 @@ line-processes
 line-segment
 line-source
 line-transect
-line;
 lineages
 linear
 linear-by-linear
@@ -48266,8 +46907,6 @@ linear-quadratic
 linear-quadratic-Gaussian
 linear-regression
 linear-structure
-linear/non-linear
-linear/quadratic/Gaussian
 linearity
 linearizable
 linearization
@@ -48334,6 +46973,7 @@ linpak
 lint
 lintang
 linte
+linuxconf
 linxia
 linxiang
 linyali
@@ -48590,6 +47230,7 @@ lobr
 lobsters
 lobu
 loc
+loc-srv
 local
 local-area
 local-influence
@@ -48615,8 +47256,6 @@ location-alternatives
 location-invariant
 location-scale
 location-test
-location/dispersion
-location/scale
 locational
 locations
 locator
@@ -48644,7 +47283,6 @@ lofa
 loffa
 lofuchai
 log
-log*
 log-Laplace
 log-Rayleigh
 log-Weibull
@@ -48677,6 +47315,7 @@ log-odds-ratio
 log-optimum
 log-rank
 log-series
+log-server
 log-spline
 log-transformed
 log-zero-Poisson
@@ -49026,6 +47665,7 @@ lotuho
 lotuka
 lotuko
 lotuni
+lotusnote
 lotuxo
 loucheux
 louden
@@ -49511,7 +48151,6 @@ m-th
 m-triangular
 m-valued
 m-wheel
-m=1
 mRNA
 ma
 maa
@@ -49901,6 +48540,7 @@ mailed
 mailing
 mailings
 mailout
+mailq
 mailroom
 mailu
 mailuan
@@ -50457,6 +49097,7 @@ mandeali
 mandeghughusu
 mandekan
 mandelaut
+mandelspawn
 mander
 mandera
 mandharsche
@@ -50887,7 +49528,6 @@ marginally
 marginals
 marginalsFrench
 margins
-margins;
 margos
 margosatubig
 margoschaula
@@ -51202,7 +49842,6 @@ matawari
 matbat
 match
 match-box
-match;
 matchability
 matchbox
 matchc
@@ -51227,7 +49866,6 @@ matepi
 material
 materially
 materials
-materials/energy
 mates
 math
 math-cs
@@ -51372,7 +50010,6 @@ max
 max-stable
 max-test
 max-type
-max/median
 maxakali
 maxi-min
 maxie
@@ -51398,9 +50035,7 @@ maximum-likelihood
 maximum-likelihood-estimates
 maximum-likelihood-estimator
 maximum-likelihood-method
-maximum-likelihood/minimum-discrepancy
 maximum-parsimony
-maximum/minimum
 maximumCorr
 maximums
 maximus
@@ -51776,6 +50411,7 @@ mdk
 mdl
 mdm
 mdn
+mdns
 mdo
 mdp
 mdq
@@ -51819,8 +50455,6 @@ mean-value
 mean-values
 mean-variance
 mean-wind
-mean/arithmetic
-mean/standard
 meaning
 meaningful
 meaningless
@@ -51845,8 +50479,6 @@ measurement-error
 measurement-statistics
 measurements
 measures
-measures/randomized
-measures;
 measuring
 meatcleaver
 meatwagon
@@ -52342,7 +50974,6 @@ methli
 method
 method-III
 method-of-moments
-method;
 methodCorr
 methodUse
 methodical
@@ -52351,7 +50982,6 @@ methodologies
 methodologists
 methodology
 methods
-methods/comparisons/research
 methodsSTMA
 methodsStudent
 methotrexate
@@ -52608,6 +51238,7 @@ microscopic
 microsecond
 microseconds
 microsimulation
+microsoft-ds
 microsphere
 microspheres
 microstat
@@ -52888,7 +51519,6 @@ minorants
 minoration
 minorities
 minority
-minority/white
 minorization
 minors
 minres
@@ -53243,6 +51873,7 @@ mmala
 mmani
 mmb
 mmc
+mmcc
 mmcroeconomic
 mmd
 mme
@@ -53398,7 +52029,6 @@ model-reproducibility
 model-robust
 model-robustness
 model-selection
-model;maximum
 modelBernoulli
 modelWith
 modele
@@ -53415,8 +52045,6 @@ models--A
 models--An
 models--Theory
 models--especially
-models/statistical
-models;
 modelsA
 modelsAn
 modelsJapanese
@@ -53899,7 +52527,6 @@ mortalities
 mortality
 mortality-fertility
 mortality-risk
-mortality;
 mortem
 mortlock
 mortlockese
@@ -54050,7 +52677,6 @@ moved
 movement
 movements
 mover-stayer
-mover/stayer
 movers
 moves
 moveto
@@ -54182,8 +52808,6 @@ mqx
 mqy
 mqz
 mr
-mr.
-mr.roger
 mra
 mrabri
 mran
@@ -54215,6 +52839,7 @@ mrq
 mrr
 mrs
 mrt
+mrtd
 mru
 mrung
 mrv
@@ -54224,6 +52849,8 @@ mrx
 mry
 mrz
 ms
+ms-sql-m
+ms-sql-s
 msa
 msb
 msc
@@ -54240,6 +52867,7 @@ msk
 msl
 msm
 msn
+msnp
 mso
 msowe
 msp
@@ -54254,7 +52882,6 @@ msx
 msy
 msz
 mt
-mt.xinu
 mta
 mtb
 mtc
@@ -54501,7 +53128,6 @@ multi-mode
 multi-national
 multi-nested
 multi-normal
-multi-object/multi-attribute
 multi-objective
 multi-output
 multi-parameter
@@ -54589,7 +53215,6 @@ multicointegration
 multicollinear
 multicollinearities
 multicollinearity
-multicollinearity|
 multicommodity
 multicompartment
 multicompartmental
@@ -55115,7 +53740,6 @@ muz
 muzaffarabad
 muzok
 muzuk
-mu|tivariate
 mv
 mva
 mvae
@@ -55293,6 +53917,7 @@ myriad
 mys
 myself
 mysore
+mysql
 mysteries
 mystical
 mysticetus
@@ -55385,11 +54010,6 @@ n-unit
 n-variate
 n-vector
 n-way
-n/M/GI/1
-n/M/M/r
-n/N
-n=19
-nD/D/1
 na
 naa
 naahai
@@ -55631,6 +54251,7 @@ namely
 namen
 namena
 names
+nameserver
 namfau
 nami
 namia
@@ -55809,7 +54430,6 @@ natagaimas
 natakan
 natakani
 natality
-natality/fetal
 natanzi
 nataoran
 natchaba
@@ -56106,6 +54726,7 @@ ndrilo
 ndroku
 nds
 ndt
+ndtp
 ndu
 nduga
 ndughore
@@ -56144,7 +54765,6 @@ ndzundza
 ndzungle
 ndzungli
 ne
-ne'er
 nea
 neabo
 neal
@@ -56345,6 +54965,7 @@ nerigo
 nerka
 nerwa
 nespelem
+nessus
 nesta
 nested
 nested-error
@@ -56354,16 +54975,21 @@ nestlings
 nestorian
 nests
 net
+netbios-dgm
+netbios-ns
+netbios-ssn
 nete
 nethanar
 netlinks
+netnews
 nets
+netstat
+netwall
 network
 network-effects
 network-flow
 networked
 networks
-networks;
 neua
 neuarama
 neucatelais
@@ -56437,6 +55063,7 @@ next-event
 next-nearest-neighbor
 next-of-kin
 nextentry
+nextstep
 ney
 neya
 neyo
@@ -56446,6 +55073,7 @@ nfa
 nfachara
 nfl
 nfr
+nfs
 nfu
 nfua
 nfumte
@@ -56973,6 +55601,7 @@ ninigo
 niningo
 nino
 ninong
+ninstall
 ninther
 ninzam
 ninzamrukuba
@@ -57234,6 +55863,8 @@ nno
 nnp
 nnq
 nnt
+nntp
+nntps
 nnu
 nnx
 nnz
@@ -57265,6 +55896,7 @@ nocaman
 nochistla
 nochixtla
 nochixtlan
+noclog
 nocoman
 nocoulidie
 nocte
@@ -57454,7 +56086,6 @@ non-equiprobable
 non-equireplicate
 non-equispaced
 non-equivalence
-non-equivalence;
 non-equivalent
 non-ergodic
 non-ergodicity
@@ -58030,8 +56661,6 @@ normal-gamma
 normal-like
 normal-logistic
 normal-theory
-normal/Laplace
-normal/independent
 normalised
 normalising
 normalistribution
@@ -58156,6 +56785,8 @@ np-control
 npg
 nph
 npl
+npmp-gui
+npmp-local
 npo
 npongue
 npongwe
@@ -58165,6 +56796,7 @@ nput
 nq
 nqg
 nqm
+nqs
 nr
 nra
 nrb
@@ -58184,6 +56816,7 @@ nruanghmei
 nry
 nrz
 ns
+ns-
 nsa
 nsadop
 nsakara
@@ -58191,6 +56824,7 @@ nsanta
 nsare
 nsari
 nsaw
+nsca
 nse
 nsei
 nsele
@@ -58223,6 +56857,7 @@ nsx
 nt
 nta
 ntaapum
+ntalk
 ntamante
 ntaperi
 ntau
@@ -58452,9 +57087,9 @@ nusawilih
 nushagak
 nusu
 nuswotar
+nut
 nutka
 nutrients
-nutrients/eutrophication
 nutritional
 nuts
 nutzu
@@ -58800,7 +57435,6 @@ observed-based
 observer
 observer-agreement
 observer-estimators
-observer/method
 observers
 observing
 obsolescence
@@ -58862,7 +57496,6 @@ occurrance
 occurred
 occurrence
 occurrence-exposure
-occurrence/exposure
 occurrences
 occurs
 ocean-drift
@@ -59062,7 +57695,6 @@ oibu
 oicha
 oil-price
 oil-well
-oil/gas
 oilfields
 oils
 oirat
@@ -59281,12 +57913,14 @@ omf
 omg
 omgom
 omie
+omirr
 omissions
 omitted
 omkoi
 oml
 omnidirectional
 omnimetrics
+omniorb
 omnipotence
 omniscience
 omo
@@ -59306,7 +57940,6 @@ omyene
 on
 on-going
 on-line
-on-line=off-line
 on-road
 on-site
 on-the-job
@@ -59318,7 +57951,6 @@ onb
 once
 once-over-harvest
 onchocerciasis
-onchocerciasis-`infected
 oncogenicity
 oncological
 ondo
@@ -59384,7 +58016,6 @@ one-way-ANOVA
 one-way-analysis
 one-year-ago
 one-year-ahead
-one-year/five-year
 onea
 oneata
 oneb
@@ -59467,7 +58098,6 @@ open
 open-ended
 open-loop
 open-pollinated
-open/closed
 openbar
 opendoor
 opened
@@ -59476,6 +58106,7 @@ openness
 opens
 opensaysme
 opensesame
+openvpn
 operand
 operandi
 operands
@@ -59799,6 +58430,9 @@ oso
 osokom
 osopong
 ososo
+ospf6d
+ospfapi
+ospfd
 osr
 oss
 ossete
@@ -59843,7 +58477,6 @@ othercolumns
 othercolumnwidth
 others
 otherwise
-otherwise;
 otitis
 otivolma
 otivolta
@@ -60022,7 +58655,6 @@ ovande
 ovando
 ovarian
 over
-over-/under-determined
 over-all
 over-fitting
 over-forecasting
@@ -60216,7 +58848,6 @@ p1-15
 p1-60
 p1-9
 p1-p
-p1-p/n
 p10-15
 p10-29
 p100
@@ -60229,7 +58860,6 @@ p1003-04
 p1004-1012
 p1008
 p1009
-p1009;
 p101-102
 p101-103
 p101-105
@@ -60264,12 +58894,10 @@ p1033-1036
 p1035
 p1039
 p1039-1041
-p1039;
 p104
 p104-106
 p104-108
 p104-111
-p1041-1063;
 p1044-1050
 p105
 p1050
@@ -60339,7 +58967,6 @@ p1143-43
 p1149
 p115
 p115-117
-p115-119;
 p1151
 p1155
 p116
@@ -60377,7 +59004,6 @@ p12-34
 p12-39
 p120
 p120-123
-p1203;
 p1204-1208
 p1207
 p121
@@ -60386,7 +59012,6 @@ p121-129
 p121-131
 p121-150
 p1217
-p1217-1242;
 p1219
 p122-123
 p1221-1222
@@ -60414,7 +59039,6 @@ p1249
 p1249-50
 p125
 p125-126
-p125-127;
 p125-128
 p125-130
 p125-144
@@ -60424,7 +59048,6 @@ p1252
 p1255-1268
 p126
 p1267
-p1268-1270;
 p127
 p127-133
 p127-140
@@ -60432,17 +59055,14 @@ p1274-1285
 p1277-8
 p128
 p128-142
-p128-29;
 p128-33
 p129
 p129-130
-p129-130;Rep
 p129-132
 p129-133
 p129-150
 p129-157
 p1291
-p1295-1350;
 p1299
 p13-15
 p13-28
@@ -60457,11 +59077,8 @@ p1302-1304
 p1303
 p1304-1306
 p1307-1308
-p1309-1322;
 p131
 p131-132
-p131-134;
-p131-141;
 p131-162
 p131-2
 p1311
@@ -60480,7 +59097,6 @@ p1331-1332
 p134-136
 p1342-1343
 p1347
-p1347;
 p135
 p135-136
 p135-140
@@ -60488,7 +59104,6 @@ p135-148
 p136
 p136-136
 p137-138
-p137-140;Corr
 p137-145
 p137-149
 p138
@@ -60503,7 +59118,6 @@ p139-160
 p139-181
 p1394
 p1399
-p14-22;
 p140
 p1401
 p1402
@@ -60513,7 +59127,6 @@ p141
 p141-142
 p141-149
 p141-158
-p141-186;
 p1414-1416
 p1416-1417
 p1417
@@ -60573,7 +59186,6 @@ p155-158
 p155-162
 p155-176
 p1551
-p1559-1561;
 p156
 p156-169
 p157-158
@@ -60583,7 +59195,6 @@ p158-162
 p158-164
 p158-168
 p1588
-p16-19;
 p16-22
 p16-23
 p16-28
@@ -60595,7 +59206,6 @@ p160-248
 p1601-02
 p1609
 p161
-p161-164;
 p161-165
 p161-166
 p161-169
@@ -60656,7 +59266,6 @@ p179-181
 p179-183
 p179-185
 p179-201
-p1795;
 p18
 p18-19
 p18-26
@@ -60671,7 +59280,6 @@ p183-190
 p183-5
 p184-185
 p1843-1874
-p184;
 p185
 p185-186
 p185-187
@@ -60695,7 +59303,6 @@ p189-90
 p19
 p19-28
 p19-32
-p19-32;
 p19-40
 p190
 p190-191
@@ -60732,7 +59339,6 @@ p196-197
 p196-203
 p196-207
 p196-7
-p196;
 p197
 p197-199
 p197-202
@@ -60800,7 +59406,6 @@ p211-228
 p2121-2124
 p213-214
 p213-216
-p213-216;
 p214
 p214-215
 p214-225
@@ -60817,7 +59422,6 @@ p219
 p219-222
 p219-254
 p219-255
-p219;
 p22-23
 p22-26
 p22-33
@@ -60827,7 +59431,6 @@ p220
 p220-234
 p2208
 p221-223
-p221-223;
 p222
 p222-242
 p223
@@ -60933,7 +59536,6 @@ p251-265
 p253
 p253-254
 p253-257
-p253-259;
 p253-260
 p253-262
 p253-268
@@ -60951,20 +59553,17 @@ p256-263
 p257-258
 p257-259
 p257-289
-p2573;
 p258
 p258-263
 p258-271
 p258-59
 p258-9
 p2587-2603
-p258;
 p259
 p259-260
 p259-270
 p259-60
 p26-27
-p26-29;
 p26-30
 p26-43
 p26-67
@@ -60979,16 +59578,12 @@ p263
 p263-264
 p263-272
 p264
-p264;
 p265
 p265-270
 p2656
-p265;
 p266-269
-p266-281;
 p266-373
 p267
-p267-268;
 p267-271
 p267-276
 p268
@@ -61014,7 +59609,6 @@ p271-288
 p271-300
 p271-309
 p272
-p272;
 p273
 p273-274
 p273-292
@@ -61045,7 +59639,6 @@ p279-282
 p279-81
 p2793
 p28-30
-p28-31;
 p28-41
 p28-56
 p280-283
@@ -61074,15 +59667,12 @@ p286-300
 p287-289
 p287-291
 p287-295
-p287;
 p288
 p288-289
 p289
 p289-296
 p289-347
-p289;
 p29-33
-p29-33;
 p29-34
 p29-35
 p29-37
@@ -61124,7 +59714,6 @@ p30-35
 p30-37
 p30-41
 p30-44
-p30-44;
 p300
 p300-301
 p300-306
@@ -61181,7 +59770,6 @@ p315
 p315-320
 p315-358
 p315-7
-p315;
 p316-317
 p316-329
 p316-335
@@ -61202,7 +59790,6 @@ p321
 p321-321
 p321-333
 p321-339
-p321-349;
 p323
 p323-324
 p323-325
@@ -61225,14 +59812,12 @@ p328-329
 p328-342
 p328-346
 p329
-p329-350;
 p329-360
 p33-35
 p33-36
 p33-38
 p33-40
 p33-68
-p33-73;
 p330-331
 p330-338
 p331-335
@@ -61257,7 +59842,6 @@ p339-346
 p339-350
 p339-364
 p339-377
-p339;
 p34-36
 p340-342
 p340-360
@@ -61266,7 +59850,6 @@ p341-342
 p341-42
 p342
 p3427-8
-p342;
 p343-348
 p3430-3433
 p3439-3456
@@ -61300,13 +59883,11 @@ p355-365
 p355-366
 p356
 p357
-p357-357;
 p358
 p359
 p359-61
 p36
 p36-37
-p36-45;
 p36-55
 p360
 p360-370
@@ -61394,7 +59975,6 @@ p393-416
 p394
 p395
 p395-399
-p395-405;
 p396
 p396-412
 p397
@@ -61411,7 +59991,6 @@ p4005-4009
 p401
 p401-4
 p401-404
-p401-424;
 p402
 p403
 p403-4
@@ -61425,7 +60004,6 @@ p404-430
 p405
 p405-409
 p406-413
-p406-419;
 p407
 p407-418
 p408
@@ -61442,7 +60020,6 @@ p411
 p411-416
 p412
 p412-416
-p412;
 p413
 p413-415
 p413-418
@@ -61453,7 +60030,6 @@ p417
 p417-418
 p417-425
 p417-427
-p417-427;
 p418-422
 p418-431
 p419
@@ -61504,7 +60080,6 @@ p44
 p44-45
 p44-46
 p44-49
-p44-49;
 p44-50
 p44-63
 p441
@@ -61530,7 +60105,6 @@ p448-454
 p448-471
 p449-452
 p449-466
-p45-52;
 p45-84
 p451
 p451-474
@@ -61550,7 +60124,6 @@ p46-52
 p460-465
 p463-473
 p463-480
-p463;
 p464-473
 p464-477
 p465-466
@@ -61565,7 +60138,6 @@ p469-470
 p469-477
 p469-487
 p47
-p47-50;
 p47-52
 p470
 p470-471
@@ -61598,14 +60170,12 @@ p482-487
 p483-491
 p483-498
 p483-500
-p483;
 p484-489
 p484-491
 p484-499
 p485
 p485-487
 p485-489
-p4859-60;
 p486-499
 p486-501
 p486-586
@@ -61617,10 +60187,8 @@ p49-52
 p49-60
 p49-62
 p49-72
-p490;
 p491
 p491-494
-p491-494;
 p491-502
 p492
 p493
@@ -61630,12 +60198,10 @@ p495-503
 p495-506
 p498-499
 p499-504
-p5-11;
 p5-14
 p5-9
 p50-56
 p50-72
-p501-502;
 p501-540
 p502
 p503
@@ -61673,7 +60239,6 @@ p52-57
 p520
 p520-525
 p521
-p521-523;
 p521-527
 p521-531
 p523-525
@@ -61711,7 +60276,6 @@ p553
 p553-4
 p553-554
 p553-568
-p553;
 p554
 p554-555
 p555
@@ -61743,7 +60307,6 @@ p576
 p578
 p58
 p58-60
-p58-61;
 p580
 p581
 p581-598
@@ -61753,7 +60316,6 @@ p583-596
 p585
 p587
 p589-90
-p59-61;
 p59-67
 p590-594
 p591
@@ -61762,7 +60324,6 @@ p591-594
 p593
 p596-601
 p597-603
-p597-614;
 p598-600
 p598-619
 p599
@@ -61784,13 +60345,10 @@ p610
 p610-613
 p611
 p612
-p615-621;
 p617-618
 p618
 p619
 p619-620
-p61;
-p62-65;
 p620-21
 p620-645
 p625-627
@@ -61820,7 +60378,6 @@ p634
 p636
 p637-648
 p639
-p639-647;
 p639-676
 p64
 p64-100
@@ -61904,7 +60461,6 @@ p702
 p703
 p703-4
 p704
-p704;
 p71-74
 p71-78
 p71-80
@@ -61916,7 +60472,6 @@ p715-716
 p717-721
 p72
 p72-77
-p72-79;
 p72-80
 p72-83
 p720-730
@@ -61934,7 +60489,6 @@ p731-733
 p735-736
 p737
 p738
-p738-752;
 p743-745
 p744
 p744-748
@@ -61953,7 +60507,6 @@ p752
 p753
 p759
 p759-761
-p75;
 p76
 p76-80
 p76-86
@@ -61963,7 +60516,6 @@ p764-767
 p764-774
 p765
 p765-767
-p765-767;
 p766
 p767
 p768-774
@@ -61998,7 +60550,6 @@ p8-15
 p8-16
 p80-162
 p80-81
-p80-98;
 p803-814
 p804-815
 p808-822
@@ -62028,7 +60579,6 @@ p837
 p839
 p84
 p84-100
-p84-108;
 p84-97
 p840
 p840-841
@@ -62132,9 +60682,7 @@ p935
 p936-937
 p94-102
 p94-125
-p94-97;
 p94-98
-p94-98;
 p941
 p941-946
 p944
@@ -62173,7 +60721,6 @@ p983-995
 p986
 p988
 p989-990
-p98;
 p99
 p99-104
 p99-111
@@ -62184,12 +60731,7 @@ p995-1004
 p997
 p997-999
 p999
-p<
-p=10
-p=216
-p=3
 pH
-pH+FT-IR
 pa
 paa
 paaci
@@ -62227,7 +60769,6 @@ pacing
 pack
 package
 package-control
-package/data
 packaged
 packages
 packaging
@@ -62806,7 +61347,6 @@ parametersof
 parametric
 parametric-nonparametric
 parametric-select
-parametric/nonparametric
 parametrical
 parametrically
 parametrically-defined
@@ -63006,7 +61546,6 @@ paspatian
 pass
 pass-fail
 pass-through
-pass/fail
 passably
 passage-time
 passages
@@ -63087,7 +61626,6 @@ patidari
 patience
 patient-flow
 patient-physician
-patient/subject
 patients
 patimitheri
 patimuni
@@ -63125,7 +61663,6 @@ pattern-analytic
 pattern-cells
 pattern-reduction
 pattern-specific
-pattern;
 patterned
 patterning
 patterns
@@ -63176,6 +61713,7 @@ pawiyana
 pawnee
 pawneekitsai
 pawri
+pawserv
 pawu
 paxala
 pay
@@ -63245,6 +61783,7 @@ pcm
 pcn
 pcp
 pcr
+pcrd
 pcs
 pcversions
 pcw
@@ -63257,7 +61796,6 @@ pdg
 pdo
 pdp
 pdq
-pdqd=0
 pdr
 pdu
 pe
@@ -63492,7 +62030,6 @@ periodontal
 periods
 peripherals
 perishable
-perishable/non-perishable
 peritoneal
 peritonitis
 perkami
@@ -63530,7 +62067,6 @@ persianized
 persianurdu
 persist
 persistence
-persistence/education
 persistency
 persistent
 person
@@ -64148,7 +62684,6 @@ planningItalian
 plans
 plant-location
 plant-mating
-plant/herbivore
 plantains
 plantations
 planting
@@ -64229,7 +62764,6 @@ plums
 pluralistic
 plurality
 plurality-majority
-plurality/majority
 plurals
 pluripolar
 plus
@@ -64430,7 +62964,6 @@ poli
 policies
 policy
 policy-function
-policy-improvement/Newton-Raphson
 policy-iteration
 policy-making
 policy-relevant
@@ -64593,6 +63126,9 @@ poorer
 poorest
 poorly
 pop
+pop2
+pop3
+pop3s
 popaya
 popayecak
 popendetta
@@ -64607,6 +63143,7 @@ popoloca
 popolocan
 popoluca
 popondetta
+poppassd
 poppe
 popped
 popper
@@ -64737,17 +63274,19 @@ post-surgical
 post-test
 post-transplant
 post-war
+posta
 postal
+postaweb
 postcensal
 postclitic
 postcode
 postdetection
 postdictive
 poster
-posteriori/a
 posteriors
 posters
 postfilters
+postgresql
 postincrement
 postindex
 postintervention
@@ -64997,8 +63536,6 @@ prediction-error
 prediction-horizon
 prediction-interval
 prediction-logic
-prediction/credible
-prediction/verification
 predictions
 predictive
 predictivity
@@ -65011,7 +63548,6 @@ predominantly
 predominately
 predominates
 preelection
-preempt/resume
 preemptability
 preemptable
 preempted
@@ -65028,8 +63564,6 @@ preferably
 prefered
 preference-based
 preference-dissimilarity
-preference/choice
-preference/dominance
 preferences
 preferential-ranking
 preferring
@@ -65100,7 +63634,6 @@ prescribed
 prescriptions
 presence
 presence-absence
-presence/absence
 presenceof
 present
 present-value
@@ -65139,7 +63672,6 @@ presuppositions
 preta
 pretest
 pretest-posttest
-pretest/posttest
 pretesting
 pretests
 preto
@@ -65166,7 +63698,6 @@ prewar
 prewhitening
 prexes
 prey-predator
-prey/predator
 prf
 prh
 pri
@@ -65186,7 +63717,6 @@ price-inflation
 price-statistics
 price-taking
 price-trend
-price/quantity
 priced
 prices
 pricing
@@ -65265,8 +63795,6 @@ probabialities
 probabilisitc
 probabilism
 probabilistic
-probabilistic/deterministic
-probabilistic/statistical
 probabilistically
 probabilists
 probabilities
@@ -65306,8 +63834,6 @@ problem-solving
 problemSTMA
 problems
 problems--Common
-problems/proper
-problems;
 problemsI
 problemsII
 problmens
@@ -65367,13 +63893,10 @@ product-type
 production
 production-frontier-based
 production-inventory
-production/distribution
-production/inventory
 productions
 productive
 products
 productus
-prof.
 professional
 professionalized
 professionals
@@ -65412,7 +63935,6 @@ programmers
 programmes
 programming
 programming-based
-programming/constrained
 programmings
 programs
 progres
@@ -65463,6 +63985,7 @@ pronghorn
 pronounced
 pronouns
 pronunciations
+proofd
 proofreading
 proofs
 propagate
@@ -65480,7 +64003,6 @@ propertiesJapanese
 propertiesof
 property-liability
 property-space
-property/liability
 prophets
 prophylaxis
 proponent
@@ -65512,6 +64034,8 @@ prospectively
 prospects
 prospectuses
 prosperity
+prospero
+prospero-np
 prost
 proteases
 protect
@@ -65846,7 +64370,6 @@ purigpa
 purigskad
 purik
 puriks
-purine/pyrimidine
 purity
 purki
 purko
@@ -65934,6 +64457,7 @@ pwaamei
 pwakanyaw
 pwapwa
 pwata
+pwdgen
 pwe
 pwebo
 pweto
@@ -66099,10 +64623,12 @@ ql
 qlb
 qln
 qm
+qmtp
 qn
 qnl
 qnt
 qo
+qotd
 qottu
 qp
 qq
@@ -66152,8 +64678,6 @@ qualify
 qualifying
 qualitative
 qualitative-cum-quantitative
-qualitative/categorical
-qualitative/quantitative
 qualitatively
 qualities
 quality
@@ -66167,7 +64691,6 @@ quang
 quanta
 quantal
 quantal-response
-quantal/categorical
 quantification
 quantified
 quantifiers
@@ -66359,10 +64882,8 @@ questionably
 questioned
 questioners
 questioning
-questionnaire/test
 questionnaires
 questions
-questions;
 quetelet
 quetta
 quetzaltepec
@@ -66520,12 +65041,9 @@ race-of-interviewer
 race-related
 race-sex
 race-track
-race/ethnic
-race/sex
 racemization
 races
 racha
-racial/ethnic
 racially
 racing
 racket
@@ -66570,8 +65088,11 @@ radiopharmaceutical
 radios
 radiotelemetry
 radiotracking
+radius
+radius-acct
 radix
 radlai
+radmin-port
 radon-nikodym
 radougou
 raepa
@@ -66776,7 +65297,6 @@ rank-sum
 rank-transform
 rank-transformation
 rank-transformed
-rank/tenure
 rankable
 ranked
 ranked-order
@@ -66842,7 +65362,6 @@ rate-distortion
 rate-grouped
 rate-making
 rate-of-spread
-rate;an
 ratees
 ratemaking
 ratemeter
@@ -66954,6 +65473,7 @@ re-identification
 re-immigration
 re-interpreting
 re-interview
+re-mail-ck
 re-order
 re-pairing
 re-parameterizations
@@ -67073,7 +65593,6 @@ receive
 received
 receiver
 receiver-operator
-receiver/boilers
 receivers
 receives
 receiving
@@ -67346,7 +65865,6 @@ regression-discontinuity
 regression-induced
 regression-simple
 regression-type
-regression/correlation
 regressionCorr
 regressionKnown
 regressional
@@ -67365,7 +65883,6 @@ regsubj
 regsum
 regulability
 regular
-regular/irregular
 regularisation
 regularities
 regularity
@@ -67485,10 +66002,6 @@ reliability-growth
 reliability-maintainability
 reliability-related
 reliability-theoretic
-reliability/availability/maintainability
-reliability/availability/repairability
-reliability/survivability
-reliability;
 reliable
 reliably
 relied
@@ -67544,8 +66057,10 @@ remo
 remodelled
 remontado
 remote
+remotefs
 remotely
 remoteness
+remoteping
 remotest
 removable
 removal
@@ -67741,8 +66256,6 @@ rescuing
 research
 research--Quantifying
 research-doctorate
-research/systems
-research;
 researcher
 researchers
 researches
@@ -67791,7 +66304,6 @@ resilience
 resistance
 resistances
 resistancy
-resistant/robust
 resistence
 resistencia
 resistivity
@@ -67854,8 +66366,6 @@ response-stimulating
 response-surface
 response-time
 response-to-dose
-response/dosing
-response/nonresponse
 responses
 responses-multiple
 responsibilities
@@ -67994,7 +66504,6 @@ reversibility
 reversing
 revert
 review
-review;
 reviewPolitical
 reviewed
 reviewer
@@ -68172,7 +66681,6 @@ rindiri
 rindre
 ring
 ring-recovery
-ring/no
 ringed
 ringgou
 ringing
@@ -68186,8 +66694,10 @@ riosinho
 riots
 riouwlingga
 ripan
+ripd
 ripere
 ripey
+ripngd
 riposte
 rir
 riring
@@ -68219,7 +66729,6 @@ risk-taking
 risk-variable
 riskiness
 risks
-risks/multiple
 rissman
 rit
 ritarnugu
@@ -68249,6 +66758,7 @@ rize
 rizzo
 rj
 rjb
+rje
 rji
 rjk
 rjs
@@ -68261,6 +66771,7 @@ rlapska
 rliche
 rll
 rlosen
+rlp
 rlv
 rlvs
 rm
@@ -68272,6 +66783,7 @@ rme
 rmf
 rmg
 rmi
+rmiregistry
 rmk
 rmland
 rmm
@@ -68281,6 +66793,7 @@ rmp
 rmr
 rms
 rmt
+rmtcfg
 rmu
 rmw
 rmy
@@ -68319,7 +66832,6 @@ robustification
 robustifying
 robustly
 robustness
-robustness;
 robustnessI
 robustnessII
 roc
@@ -68429,6 +66941,7 @@ roongas
 roosts
 root
 root-n
+rootd
 rooted
 rooters
 rootfinder
@@ -68448,7 +66961,6 @@ roros
 rorovana
 rosalie
 rose
-rose ear
 roseires
 rosenthal
 roses
@@ -68556,8 +67068,11 @@ rozvi
 rozwi
 rp
 rp-capacity
+rpc2portmap
 rph
+rplay
 rpn
+rptp
 rq
 rquito
 rr
@@ -68581,13 +67096,18 @@ rshift
 rsi
 rsl
 rsw
+rsync
 rt
 rtchi
+rtcm-sc104
+rtelnet
 rth
 rth-nearest-neighbour
 rth-order
 rti
 rtm
+rtmp
+rtsp
 ru
 rua
 ruaba
@@ -68794,11 +67314,11 @@ s-stable
 s-symbol
 s-th
 s-tuples
-s=1
 sI
 sQ
 sS
 sa
+sa-msg-port
 saa
 saab
 saab900
@@ -68916,6 +67436,7 @@ safia
 safisafi
 safroko
 safrontani
+saft
 safwa
 sagada
 sagadin
@@ -69231,8 +67752,6 @@ sampling--A
 sampling-based
 sampling-resampling
 sampling-tagging
-sampling/importance
-sampling;
 samplingCorr
 samplings
 sampolawa
@@ -69289,6 +67808,7 @@ sandstones
 sandu
 sandwe
 sandy
+sane-port
 sanema
 sanfran
 sanfrancisco
@@ -69839,7 +68359,6 @@ screened
 screener
 screenexample
 screening
-screening/efficacy
 screeningand
 screens
 scribe
@@ -69929,7 +68448,6 @@ sechelt
 sechuana
 seco
 second
-second thigh
 second-best
 second-channel
 second-choice
@@ -69999,7 +68517,6 @@ seereer
 sees
 seesaw
 seex
-see|
 sef
 sefardi
 sefardic
@@ -70115,7 +68632,6 @@ selectable
 selected
 selecting
 selection
-selection;
 selectionThe
 selectionapproach
 selections
@@ -70156,7 +68672,6 @@ self-consistent
 self-contained
 self-controlled
 self-correcting
-self-correlations|
 self-decomposability
 self-decomposable
 self-deconvolution
@@ -70574,9 +69089,6 @@ series-cross
 series-econometric
 series-parallel
 series-scheme
-series/dynamic
-series/parallel
-series;
 serim
 sering
 serious
@@ -70757,6 +69269,7 @@ sfl
 sfm
 sfs
 sfsr
+sftp
 sfw
 sg
 sga
@@ -70769,6 +69282,10 @@ sge
 sgeu
 sgh
 sgi
+sgi-cad
+sgi-cmsd
+sgi-crsd
+sgi-gcd
 sgl
 sgm
 sgn
@@ -70878,7 +69395,6 @@ shapes
 shapiro
 shapra
 shapsug
-shar pei
 shar-pei
 sharanahua
 sharchagpakha
@@ -70998,7 +69514,6 @@ sheta
 shete
 shetebo
 shetland
-shetland sheepdog
 sheva
 shewa
 shf
@@ -71008,7 +69523,6 @@ shhowwn
 shi
 shia
 shiba
-shiba inu
 shibarghan
 shibatani
 shibboleths
@@ -71025,7 +69539,6 @@ shifted
 shifting
 shifts
 shighni
-shih tzu
 shihavu
 shihlanganu
 shiho
@@ -71148,7 +69661,6 @@ shongar
 shongawa
 shongo
 shonshe
-shoot up
 shooter
 shooting
 shop-floor
@@ -71202,7 +69714,6 @@ shoulders
 shouning
 shouyu
 show
-show dog
 showed
 showers
 showing
@@ -71321,7 +69832,6 @@ sibendirah
 sibenpopu
 siberi
 siberian
-siberian husky
 siberut
 sibil
 sibilants
@@ -71397,6 +69907,7 @@ siegu
 siemreap
 siemu
 sierras
+sieve
 sievemakers
 sieves
 sieving
@@ -71440,7 +69951,6 @@ signal-plus-noise
 signal-processing
 signal-subspace
 signal-to-noise
-signal/noise
 signaling
 signalized
 signals
@@ -71515,6 +70025,7 @@ silak
 silakau
 silanke
 silat
+silc
 sileibi
 silen
 silence
@@ -71618,9 +70129,6 @@ simulation
 simulation-based
 simulation-generated
 simulation-optimization
-simulation/analytic
-simulation/analytical
-simulation/regression
 simulationThe
 simulations
 simulative
@@ -71806,6 +70314,8 @@ siora
 sioua
 siouan
 siouancaddoan
+sip
+sip-tls
 sipacapa
 sipacapen
 sipacapense
@@ -72022,6 +70532,7 @@ skito
 skitu
 skj
 skk
+skkserv
 skl
 skm
 sko
@@ -72209,15 +70720,17 @@ smoothed-error
 smoother
 smoothers
 smoothing
-smoothing;
 smoothly
 smoothness
 smp
 smq
 smr
 sms
+smsqp
 smt
+smtp
 smu
+smux
 smv
 smw
 smx
@@ -72247,6 +70760,8 @@ snj
 snk
 snl
 snm
+snmp
+snmp-trap
 snn
 sno
 snohomish
@@ -72257,6 +70772,7 @@ snowmelt
 snowmelt-flood
 snowstorms
 snp
+snpp
 snq
 snr
 sns
@@ -72313,7 +70829,7 @@ sociometric
 sociopolitical
 socioreligious
 sociotechnical
-sod off
+socks
 sodankyla
 soddo
 sodemann
@@ -72420,7 +70936,6 @@ solukhumbu
 solutes
 solution
 solutions
-solutions;
 solvability
 solvable
 solve
@@ -72577,7 +71092,6 @@ sorsele
 sorsogon
 sorsogonon
 sort
-sort/search
 sorted
 sorting
 sortings
@@ -72683,6 +71197,7 @@ spacing
 spacing-frequencies
 spacings
 spam
+spamd
 span
 span-contracting
 spanc
@@ -72711,7 +71226,6 @@ spatial-filtering
 spatial-interaction
 spatial-temporal
 spatial-time
-spatial/temporal
 spatially
 spatially-located
 spatially-varying
@@ -72776,7 +71290,6 @@ spectral-temporal-ancillary
 spectrally
 spectrometric
 spectrometry
-spectrometry/mass
 spectrophotometric
 spectrophotometry
 spectroscopic-chromatographic
@@ -72834,7 +71347,6 @@ spinners
 spinning
 spinono
 spinplots
-spiral;
 spirals
 spirant
 spirantal
@@ -72942,7 +71454,6 @@ squares
 squares--Insight
 squares--Uniqueness
 squares-fix
-squares/ridge
 squaresum
 squaring
 squash
@@ -73003,6 +71514,7 @@ ssi
 ssia
 ssj
 ssl
+ssmtp
 ssn
 sso
 ssp
@@ -73145,8 +71657,6 @@ state-specific
 state-to-state
 state-trait
 state-variable
-state/parameter
-state;
 stated
 statement
 statements
@@ -73166,7 +71676,6 @@ stationary-transient
 stations
 statis
 statistic
-statistic#
 statistic--Interaction
 statistic-astronomical
 statistic-epidemiological
@@ -73180,8 +71689,6 @@ statistical-hydrodynamical
 statistical-meteorological
 statistical-model
 statistical-test-complemented
-statistical/database
-statistical/scientific
 statisticalliterature
 statistically
 statisticians
@@ -73207,7 +71714,6 @@ statistik
 stats
 statures
 status
-status/role-sets
 statusdict
 statuses
 stay
@@ -73348,7 +71854,6 @@ stockholders
 stockouts
 stockpiling
 stocks
-stocks/flows
 stokavian
 stokoe
 stol
@@ -73370,7 +71875,6 @@ stopping-rule
 stops
 storage
 storage-efficient
-storage/production
 store
 store-and-forward-type
 stored
@@ -73402,10 +71906,8 @@ stranger
 strat
 strata-matching
 strategies
-strategies/national
 strategy
 stratification
-stratification/control
 stratificational
 stratifications
 stratified
@@ -73440,7 +71942,6 @@ stress
 stress-response
 stress-rupture
 stress-strength
-stress/strength
 stresses
 stretching
 strictly
@@ -73479,7 +71980,6 @@ structural
 structural-equation
 structural-parametric
 structural-stochastic
-structural/statistical
 structuralism
 structurally
 structure
@@ -73492,7 +71992,6 @@ structure-retention
 structured
 structureof
 structures
-structures;
 structuring
 struggles
 struggling
@@ -73509,14 +72008,12 @@ studentization
 studentized
 studentizing
 students
-students;The
 studia
 studied
 studies
 studio
 study
 study-specific
-study/1979-1984
 studying
 stuer
 stuff
@@ -74038,6 +72535,7 @@ sunko
 sunni
 sunnyvale
 sunopi
+sunrpc
 suns
 sunspots
 suntai
@@ -74055,6 +72553,7 @@ supai
 supan
 supari
 supat
+supdup
 super
 super-Bayesian
 super-Brownian
@@ -74123,6 +72622,8 @@ superuser
 supervised
 supervision
 supervisor
+supfiledbg
+supfilesrv
 suphanaburi
 suphanburi
 supi
@@ -74223,13 +72724,11 @@ survey-based
 survey-data
 survey-interview
 survey-sampling
-survey/census
 surveyed
 surveyees
 surveying
 surveys
 surveys-I
-surveys;Some
 surveysI
 surveysII
 surveysIII
@@ -74237,7 +72736,6 @@ surveysIssues
 surveysan
 survivability
 survival-based
-survival/sacrifice
 survivals
 survived
 survives
@@ -74275,6 +72773,7 @@ suti
 suto
 sutu
 suu
+suucp
 suundi
 suv
 suw
@@ -74300,6 +72799,7 @@ svealand
 svelmoe
 svensk
 sverov
+svn
 svo
 svpctx
 svr
@@ -74321,6 +72821,7 @@ swapping
 swapptr
 swaps
 swara
+swat
 swati
 swatow
 swazi
@@ -74410,7 +72911,6 @@ symbols
 symmetric
 symmetric-divergence
 symmetric-simplex
-symmetric/asymmetric
 symmetrical
 symmetrically
 symmetrics
@@ -74421,7 +72921,6 @@ symmetrizations
 symmetrized
 symmetrizing
 symmetry-based
-symmetry;
 symp
 sympom
 symptom
@@ -74448,12 +72947,9 @@ synonyms
 syntactically
 syntax
 synteng
-synthesis'-based
-synthesis/meta-analysis
 synthesised
 synthesizing
 synthetic
-synthetic cocaine
 syo
 syphilis
 syphillis
@@ -74467,6 +72963,9 @@ syryoyo
 sys
 sys5
 syscall
+syslog
+sysrqd
+systat
 system
 system--One
 system-based
@@ -74514,9 +73013,6 @@ szuchi
 szv
 szw
 t
-t'-statistic
-t'-test
-t+3
 t-
 t-2k
 t-PBIB
@@ -74592,8 +73088,6 @@ tabla
 tablas
 table
 table-free
-table/urn
-table;
 tablecolumns
 tablecontinuation
 tabled
@@ -74604,7 +73098,6 @@ tableng
 tablenumber
 tables
 tables-The
-tables;
 tablesGerman
 tabletext
 tabletop
@@ -74639,6 +73132,8 @@ tabun
 tabuyan
 tabwa
 tac
+tacacs
+tacacs-ds
 tacana
 tacanan
 tacaneco
@@ -74674,7 +73169,6 @@ tafire
 tafres
 tag
 tag-recapture
-tag-release/recovery
 tag-resighting
 taga
 tagab
@@ -75526,8 +74020,8 @@ tcn
 tco
 tcp
 tcp-ip
-tcp/ip
 tcpip
+tcpmux
 tcq
 tcr
 tcs
@@ -75597,7 +74091,6 @@ technics
 technique
 techniqueI
 techniques
-techniques;
 technologgy
 technological
 technologies
@@ -75717,6 +74210,7 @@ tellers
 telling
 tells
 telnet
+telnets
 telom
 telu
 telugu
@@ -75770,6 +74264,7 @@ temperatures
 tempiese
 template
 templates
+tempo
 temporally
 temporaries
 temporarily
@@ -75837,7 +74332,6 @@ tentatively
 tenth
 tenths
 tenti
-tenure/promotion
 tenwer
 tenyer
 teo
@@ -75971,7 +74465,6 @@ test-of-independence
 test-oriented
 test-retest
 test-statistics
-test;with
 testability
 testable
 testbed
@@ -75992,7 +74485,6 @@ testipredicting
 testitesting
 testosterone
 tests
-tests;
 testsFrench
 testsV4
 testsfor
@@ -76057,10 +74549,12 @@ tezoatla
 tezoatlan
 tf
 tfi
+tfido
 tfn
 tfo
 tfr
 tft
+tftp
 tfuea
 tg
 tga
@@ -76175,7 +74669,6 @@ theng
 thenumber
 theological
 theorems
-theorems;
 theoret
 theoretical
 theoretically
@@ -76185,9 +74678,6 @@ theory
 theory--Application
 theory--The
 theory-based
-theory/A
-theory;
-theory;with
 theoryEssays
 theoryProneness
 theoryThird
@@ -76664,8 +75154,6 @@ time-warping
 time-weighted
 time-window
 time-wise
-time/customer
-time;Jump
 timeable
 timecourse
 timed
@@ -76678,7 +75166,6 @@ timeouts
 timer
 timers
 times
-times;
 timesand
 timesharing
 timeslice
@@ -76721,6 +75208,7 @@ tinan
 tinangkum
 tinangkung
 tinata
+tinc
 tindakon
 tindal
 tinden
@@ -77014,7 +75502,6 @@ tnx
 tny
 tnz
 to
-to/from
 toa
 toabaita
 toak
@@ -77457,6 +75944,7 @@ tpk
 tpm
 tpn
 tpp
+tproxy
 tpt
 tpy
 tpz
@@ -77469,7 +75957,6 @@ trabzon
 trace
 trace-element
 trace-line
-trace;
 traced
 tracepoints
 tracer
@@ -77521,7 +76008,6 @@ trails
 trainderailment
 trained
 training
-training/support
 trains
 traits
 trajectories
@@ -77556,7 +76042,6 @@ transflybulaka
 transform-based
 transformable
 transformation-based
-transformation/weighting
 transformational
 transformations
 transformed
@@ -77652,7 +76137,6 @@ trd
 tre
 treasury-bill
 treat
-treat/who
 treated
 treaties
 treating
@@ -77981,7 +76465,6 @@ tsimpshean
 tsimshian
 tsinbok
 tsindir
-tsing tao
 tsing-tao
 tsinga
 tsingani
@@ -78541,7 +77024,6 @@ two-level
 two-lift
 two-limit
 two-line
-two-location/two-product
 two-locus
 two-locus-populations
 two-machine
@@ -78970,6 +77452,7 @@ uli
 uliase
 ulingan
 ulipe
+ulistserv
 ulithi
 uliti
 ulk
@@ -79389,7 +77872,6 @@ univ
 univariable
 univariant
 univariate-multivariate
-univariate/multivariate
 universal
 universally
 universes
@@ -79401,6 +77883,7 @@ university-based
 university-wide
 univocal
 unix
+unix-status
 unix-to-unix
 unix-tounix
 unixctour
@@ -79568,7 +78051,6 @@ uolt
 uomo
 uopt
 up
-up'German
 up-and-down
 up-dating
 up-to-date
@@ -79756,7 +78238,6 @@ usbeki
 usc
 uscwm
 use
-use/land
 useable
 useage
 used
@@ -79877,6 +78358,7 @@ utur
 uturupa
 uu
 uucp
+uucp-path
 uuhum
 uuhumgigi
 uuma
@@ -79943,10 +78425,6 @@ v-criterion
 v-fold
 v18
 v44
-v=10
-v=2k
-v=6
-v=8
 va
 vaa
 vaadoo
@@ -80073,7 +78551,6 @@ vambeng
 vamembreme
 vamemora
 van
-van't
 vana
 vanambere
 vanapa
@@ -80129,7 +78606,6 @@ variable-sum
 variables
 variables-sampling
 variables-structural
-variables/The
 variablesStructural
 variablesa
 variaces
@@ -80149,10 +78625,8 @@ variance-stabilizing
 variance-time
 variance-to-mean
 variance-unbiased-estimator
-variance;
 variances
 variances-covariances
-variances;
 variant
 variants
 variate-t
@@ -80220,6 +78694,7 @@ vayu
 vayuchepang
 vazama
 vb
+vboxd
 vc
 vcc
 vd
@@ -80294,7 +78769,6 @@ vengo
 vengoo
 ventilation
 ventilation-perfusion
-ventilation/perfusion
 ventilatory
 ventimiglia
 ventre
@@ -80304,6 +78778,8 @@ ventricularized
 ventuari
 venture
 ventures
+venus
+venus-se
 venustiano
 vep
 veps
@@ -80355,7 +78831,6 @@ vesting
 vetan
 veteng
 veterans
-veterans;
 vettuvan
 vetumboso
 vetweng
@@ -80546,6 +79021,7 @@ vms
 vmssucks
 vmsucks
 vn
+vnetd
 vnk
 vnm
 vnn
@@ -80571,9 +79047,7 @@ voguly
 voh
 vohkone
 voice-based
-voice/data
 voiced
-voiced/unvoiced
 voiceless
 voicelessness
 voices
@@ -80620,6 +79094,7 @@ vonkoro
 vonkutu
 vonun
 voorhoeve
+vopied
 voqtwaq
 vora
 vore
@@ -80650,6 +79125,7 @@ vowelletter
 vowels
 vozel
 vp
+vpn
 vq
 vr
 vregbody
@@ -80714,7 +79190,6 @@ vy
 vyrus
 vz
 w
-w'/w
 w-bar
 wa
 waa
@@ -81376,11 +79851,15 @@ wearing
 wearout
 weasisi
 weavers
+web
+webcache
 weber
 webetoys
 webhead
+webmin
 webo
 webs
+webster
 wec
 weda
 wedani
@@ -81609,6 +80088,7 @@ whitsuntide
 whk
 who
 whoever
+whois
 whole
 whole-ecosystem
 whole-household
@@ -81732,6 +80212,7 @@ wintu
 wintun
 winye
 wipim
+wipld
 wipsini
 wir
 wira
@@ -81841,6 +80322,7 @@ wnc
 wnd
 wne
 wnk
+wnn6
 wno
 wnp
 wnu
@@ -81955,7 +80437,6 @@ work-performance
 work-related
 work-station
 work-welfare
-work/fertility
 workable
 workai
 workaround
@@ -82178,6 +80659,14 @@ x-bar-charts
 x-intercepts
 x-levels
 x-ray
+x11
+x11-1
+x11-2
+x11-3
+x11-4
+x11-5
+x11-6
+x11-7
 x2
 xa
 xaayo
@@ -82239,6 +80728,7 @@ xcol
 xcountry
 xd
 xdead
+xdmcp
 xdy
 xe
 xebero
@@ -82305,6 +80795,7 @@ xiluleke
 xin
 xinalug
 xinca
+xinetd
 xingan
 xinghua
 xingiang
@@ -82358,6 +80849,8 @@ xmk
 xml
 xmn
 xmo
+xmpp-client
+xmpp-server
 xmr
 xms
 xmt
@@ -82389,6 +80882,7 @@ xosa
 xoton
 xoxo
 xp
+xpilot
 xq
 xr
 xra
@@ -82399,6 +80893,9 @@ xrikwa
 xs
 xt
 xtailbox
+xtel
+xtell
+xtelw
 xu
 xuf
 xug
@@ -83237,7 +81734,6 @@ yemchidi
 yemenite
 yemma
 yemsa
-yen/dollar
 yenadi
 yenagoa
 yendam
@@ -83277,7 +81773,6 @@ yerukla
 yerukula
 yerwa
 yes
-yes/no
 yeskwa
 yesno
 yesoum
@@ -83509,7 +82004,6 @@ yote
 yoto
 yotubo
 you
-you'reok
 youanne
 youareok
 yougafsa
@@ -83711,6 +82205,7 @@ z-transformation
 z-transforms
 z-values
 z-variance
+z3950
 za
 zaa
 zaachila
@@ -83861,6 +82356,8 @@ zea
 zealously
 zebak
 zebaki
+zebra
+zebrasrv
 zeddo
 zedong
 zeem
@@ -83890,6 +82387,9 @@ zendi
 zener
 zenerdiode
 zenzontepec
+zephyr-clt
+zephyr-hm
+zephyr-srv
 zeppelin
 zeps
 zer
@@ -84002,6 +82502,7 @@ zinna
 zinza
 zio
 ziogba
+zip
 zira
 ziraha
 zirakboli
@@ -84063,6 +82564,8 @@ zonkar
 zonoids
 zoogocho
 zoono
+zope
+zope-ftp
 zoq
 zoque
 zor
@@ -84116,6 +82619,7 @@ zreg
 zro
 zrp
 zs
+zserv
 zsr
 zt
 ztc

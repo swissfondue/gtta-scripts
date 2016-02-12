@@ -7,4 +7,9 @@ dependencies:
   system:
     - libc-ares2
   deb:
-    - reverseraider_20150422-1_i386.deb
+    - reverseraider_0.7.7-1_amd64.deb
+inputs:
+  - name: word_list
+    type: radio
+    description: "Word list to use."
+    value: "fast\nservices\nfull"
