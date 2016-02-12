@@ -9,38 +9,40 @@ class IG_Network_Ripe(Task):
     """
     Get ripe inetnums
     """
-    target = ''
+    target = ""
     results = []
 
     def _get_soup(self, session, data):
         """
         Get soup object from post request
         """
-        return BeautifulSoup(
-            session.post(
-                'https://apps.db.ripe.net/search/full-text.html',
-                headers={'User-Agent': 'Mozilla/5.0'},
-                data=data
-            ).content)
+        content = session.post(
+            "https://apps.db.ripe.net/search/full-text.html",
+            headers={"User-Agent": "Mozilla/5.0"},
+            data=data
+        ).content
+
+        return BeautifulSoup(content)
 
     def _get_state(self, raw):
         """
         Get javax.faces.ViewState from html page
         """
-        tag = raw.find('input', attrs={'name': 'javax.faces.ViewState', 'type': 'hidden'})
-        return tag.get('value') if tag else None
+        tag = raw.find("input", attrs={"name": "javax.faces.ViewState", "type": "hidden"})
+        return tag.get("value") if tag else None
 
     def _collect_data_from_page(self, raw):
         """
         Collect data from page
         """
         try:
-            fieldset = raw.find('div', attrs={'id': 'form'}).find('fieldset')
-            a_tags = fieldset.findAll('div')[1].findAll('a')
+            a_tags = raw.find("div", attrs={"id": "results"}).findAll("a")
         except:
             return
+
         for tag in a_tags:
-            text = tag.text.replace('inetnum: ', '').replace(" ", "")
+            text = tag.text.replace("inetnum: ", "").replace(" ", "")
+
             if text not in self.results:
                 self.results.append(text)
                 self._write_result(text)
@@ -50,69 +52,71 @@ class IG_Network_Ripe(Task):
         Main function
         """
         advanced_form_data = {
-            'home_search': 'home_search',
-            'home_search:searchform_q:': '',
-            'home_search:switchMode': 'home_search:switchMode'
+            "home_search": "home_search",
+            "home_search:searchform_q:": "",
+            "home_search:switchMode": "home_search:switchMode"
         }
 
         action_form_data = {
-            'home_search': 'home_search',
-            'home_search:doSearch': 'Search',
-            'home_search:searchform_q': self.target,
-            'home_search:searchTypeSubview:typeSelectBox': '1',
-            'home_search:advancedSearch:selectObjectType': 'inetnum',
+            "home_search": "home_search",
+            "home_search:doSearch": "Search",
+            "home_search:searchform_q": self.target,
+            "home_search:advancedSearch:typeSelectBox": "1",
+            "home_search:advancedSearch:selectObjectType": "inetnum",
         }
 
         page_form = {
-            'resultsView:paginationView:paginationForm': 'resultsView:paginationView:paginationForm',
-            'resultsView:paginationView:paginationForm:main:last:last': '>>'
+            "resultsView:paginationView:dpaginationForm": "resultsView:paginationView:dpaginationForm",
+            "resultsView:paginationView:dpaginationForm:main:last:last": ">>"
         }
 
         session = requests.Session()
 
         # first visit the site (get javax.faces.ViewState)
         soup = self._get_soup(session, {})
-        advanced_form_data.update({'javax.faces.ViewState': self._get_state(soup)})
+        advanced_form_data.update({"javax.faces.ViewState": self._get_state(soup)})
 
         # select Advanced Search
         soup = self._get_soup(session, advanced_form_data)
-        action_form_data.update({'javax.faces.ViewState': self._get_state(soup)})
+        action_form_data.update({"javax.faces.ViewState": self._get_state(soup)})
 
         # get first page of results
         soup = self._get_soup(session, action_form_data)
-        page_form.update({'javax.faces.ViewState': self._get_state(soup)})
+        page_form.update({"javax.faces.ViewState": self._get_state(soup)})
 
         # collect data from first page
         self._collect_data_from_page(soup)
 
         # go to last page
         soup = self._get_soup(session, page_form)
-        page_form['javax.faces.ViewState'] = self._get_state(soup)
+        page_form["javax.faces.ViewState"] = self._get_state(soup)
 
         # collect data from current page
         self._collect_data_from_page(soup)
 
         # collect data from prev pages
         try:
-            current = int(soup.find('span', attrs={'id': 'current'}).text)
+            current = soup.find("span", attrs={"id": "current"}).text
+            current = int(current.strip().replace("[", "").replace("]", ""))
         except:
             return
 
-        del page_form['resultsView:paginationView:paginationForm:main:last:last']
+        del page_form["resultsView:paginationView:dpaginationForm:main:last:last"]
 
         while current > 2:
             current -= 1
 
             # find link to previous page in paginator
-            paginator = soup.find('form', attrs={'id': 'resultsView:paginationView:paginationForm'})
-            if paginator:
+            paginator = soup.find("form", attrs={"id": "resultsView:paginationView:dpaginationForm"})
 
-                for page_link in paginator.findAll('input', attrs={'type': 'submit'}):
-                    page_link_val = page_link.get('value')
+            if paginator:
+                for page_link in paginator.findAll("input", attrs={"type": "submit"}):
+                    page_link_val = page_link.get("value")
 
                     if page_link_val == unicode(current):
-                        page_link_name = page_link.get('name')
+                        page_link_name = page_link.get("name")
                         page_form.update({page_link_name: page_link_val})
+
                         break
 
             # get previous page of results
@@ -121,7 +125,7 @@ class IG_Network_Ripe(Task):
             if page_link_name in page_form.keys():
                 del page_form[page_link_name]
 
-            page_form['javax.faces.ViewState'] = self._get_state(soup)
+            page_form["javax.faces.ViewState"] = self._get_state(soup)
 
             self._collect_data_from_page(soup)
 
