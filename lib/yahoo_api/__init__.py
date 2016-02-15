@@ -15,6 +15,16 @@ class YahooAPI(CommonIGEmailParser):
         :param soup:
         :return:
         """
+        error = soup.find("yahoo:error")
+
+        if error:
+            description = error.find("yahoo:description")
+
+            if description:
+                raise RuntimeError(description.text)
+            else:
+                raise RuntimeError("Unknown Yahoo API error.")
+
         tags = soup.findAll("clickurl")
 
         for tag in tags:
