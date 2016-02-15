@@ -82,7 +82,7 @@ class CommonIGEmailParser(object):
             verify=False,
             **kwargs
         )
-        
+
         return BeautifulSoup(req.content)
 
     def _extract_next_link(self, soup):
