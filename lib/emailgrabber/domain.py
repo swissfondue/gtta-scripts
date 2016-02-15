@@ -108,7 +108,7 @@ class CommonIGDomainToolsTask(Task):
         if not self.ip:
             self._search_by_target()
 
-        #  if "search by ip" not needs just redefine as "pass"
+        #  if "search by ip" is not needed, just redefine as "pass"
         self._search_by_ip()
 
         self._output_result()
