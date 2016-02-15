@@ -26,6 +26,9 @@ class BingAPI(CommonIGEmailParser):
         """
         params = {'Query': self.target}
 
+        if not args or not args[0] or not args[0][0]:
+            raise ValueError("Bing API key is required.")
+
         keys = '%s:%s' % (args[0][0], args[0][0])
         encoded = base64.b64encode(keys)
         self.headers.update({'Authorization': 'Basic %s' % encoded})

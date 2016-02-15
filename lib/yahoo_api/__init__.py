@@ -24,6 +24,9 @@ class YahooAPI(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
+        if not args or len(args) < 2 or not args[0] or not args[0][0] or not args[1] or not args[1][0]:
+            raise ValueError("Yahoo API key and client secret are required.")
+
         oauth = OAuth1(args[0][0], client_secret=args[1][0])
         params = {'format': 'xml', 'count': '50'}
         path = '?q=%s' % self.target.replace(' ', '%20').replace(':', '%3A')

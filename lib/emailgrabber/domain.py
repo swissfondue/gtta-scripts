@@ -105,10 +105,14 @@ class CommonIGDomainToolsTask(Task):
 
         self.params = args
 
-        if not self.ip:
-            self._search_by_target()
+        try:
+            if not self.ip:
+                self._search_by_target()
 
-        #  if "search by ip" is not needed, just redefine as "pass"
-        self._search_by_ip()
+            #  if "search by ip" is not needed, just redefine as "pass"
+            self._search_by_ip()
 
-        self._output_result()
+            self._output_result()
+
+        except ValueError as e:
+            self._write_result(e.message)
