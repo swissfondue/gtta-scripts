@@ -14,9 +14,7 @@ class IG_Domain_Bing(CommonIGDomainToolsTask):
         """
         Test function
         """
-        self.target = "clariant.com"
-        self.main()
-        self.target = self.ip = "83.150.1.145"
+        self.target = "microsoft.com"
         self.main()
 
 execute_task(IG_Domain_Bing)

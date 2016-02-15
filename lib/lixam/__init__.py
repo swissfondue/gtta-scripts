@@ -6,7 +6,7 @@ class Lixam(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://lixam.de/search-results.php'
+    HOST = "http://lixam.de/search-results.php"
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,10 +14,11 @@ class Lixam(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('div', attrs={'class': 'searchresultsblocks'})
+        tags = soup.findAll("div", attrs={"class": "searchresultsblocks"})
+
         for tag in tags:
             try:
-                self.results.add(tag.a.get('href'))
+                yield tag.a.get("href")
             except:
                 continue
 
@@ -26,9 +27,7 @@ class Lixam(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        params = {'suche': self.target}
+        soup = self._get_soup(params={"suche": self.target})
 
-        soup = self._get_soup(params=params)
-        self._collect_results_from_soup(soup)
-
-        return self.results
+        for result in self._collect_results_from_soup(soup):
+            yield result

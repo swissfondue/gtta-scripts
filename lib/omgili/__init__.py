@@ -6,7 +6,7 @@ class Omgili(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://omgili.com'
+    HOST = "http://omgili.com"
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,10 +14,11 @@ class Omgili(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('article')
+        tags = soup.findAll("article")
+
         for tag in tags:
             try:
-                self.results.add(tag.a.get('href'))
+                yield tag.a.get("href")
             except:
                 continue
 
@@ -26,9 +27,10 @@ class Omgili(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        path = '/search?siteType=&q=%s' % self.target
+        soup = self._get_soup(path="/search", params={
+            "siteType": "",
+            "q": self.target
+        })
 
-        soup = self._get_soup(path=path)
-        self._collect_results_from_soup(soup)
-
-        return self.results
+        for result in self._collect_results_from_soup(soup):
+            yield result

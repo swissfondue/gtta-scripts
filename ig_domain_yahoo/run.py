@@ -20,7 +20,7 @@ class IG_Domain_Yahoo(CommonIGDomainToolsTask):
         """
         Test function
         """
-        self.target = "netprotect"
+        self.target = "microsoft"
         self.main()
 
 execute_task(IG_Domain_Yahoo)

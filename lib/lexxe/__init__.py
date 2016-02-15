@@ -6,7 +6,7 @@ class Lexxe(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://www.lexxe.com/ct'
+    HOST = "http://www.lexxe.com/ct"
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,9 +14,10 @@ class Lexxe(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('span', attrs={'class': 'resLink'})
+        tags = soup.findAll("span", attrs={"class": "resLink"})
+
         for tag in tags:
-            self.results.add(tag.text)
+            yield tag.text
 
     def _extract_next_link(self, soup):
         """
@@ -25,10 +26,12 @@ class Lexxe(CommonIGEmailParser):
         :return:
         """
         next_link = None
-        paginator = soup.find('ul', attrs={'id': 'pageNav'})
+        paginator = soup.find("ul", attrs={"id": "pageNav"})
+
         if paginator:
-            current = filter(lambda x: not x.a, paginator.findAll('li'))[0]
+            current = filter(lambda x: not x.a, paginator.findAll("li"))[0]
             next_link = current.nextSibling
+
         return next_link
 
     def process(self):
@@ -36,22 +39,23 @@ class Lexxe(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        path = '?sstring=%s&src=hp' % self.target
+        soup = self._get_soup(params={
+            "sstring": self.target,
+            "src": "hp"
+        })
 
-        soup = self._get_soup(path=path)
         self._collect_results_from_soup(soup)
-
         next_link = self._extract_next_link(soup)
 
         while next_link:
             try:
-                next_url = next_link.a.get('href')
+                next_url = next_link.a.get("href")
             except:
                 break
 
             soup = self._get_soup(path=next_url)
-            self._collect_results_from_soup(soup)
+
+            for result in self._collect_results_from_soup(soup):
+                yield result
 
             next_link = self._extract_next_link(soup)
-
-        return self.results

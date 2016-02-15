@@ -6,7 +6,7 @@ class DuckDuckGo(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'https://duckduckgo.com/html/'
+    HOST = "https://duckduckgo.com/html/"
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,9 +14,10 @@ class DuckDuckGo(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('a', attrs={'class': 'large'})
+        tags = soup.findAll("a", attrs={"class": "large"})
+        
         for tag in tags:
-            self.results.add(tag.get('href'))
+            yield tag.get("href")
 
     def _extract_next_link(self, soup):
         """
@@ -24,7 +25,7 @@ class DuckDuckGo(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        return soup.find('input', attrs={'value': 'Next'})
+        return soup.find("input", attrs={"value": "Next"})
 
     def process(self):
         """
@@ -32,22 +33,24 @@ class DuckDuckGo(CommonIGEmailParser):
         :return:
         """
         data = {
-            'q': self.target,
-            'kl': 'us-en',
-            'b': ''}
+            "q": self.target,
+            "kl": "us-en",
+            "b": ""
+        }
 
         soup = self._get_soup(data=data, use_post=True)
         self._collect_results_from_soup(soup)
 
         next_link = self._extract_next_link(soup)
-        del data['b']
+        del data["b"]
 
         while next_link:
-            for tag in next_link.parent.findAll('input', attrs={'type': 'hidden'}):
-                data[tag.get('name')] = tag.get('value')
+            for tag in next_link.parent.findAll("input", attrs={"type": "hidden"}):
+                data[tag.get("name")] = tag.get("value")
+
             soup = self._get_soup(data=data, use_post=True)
 
-            self._collect_results_from_soup(soup)
-            next_link = self._extract_next_link(soup)
+            for result in self._collect_results_from_soup(soup):
+                yield result
 
-        return self.results
+            next_link = self._extract_next_link(soup)

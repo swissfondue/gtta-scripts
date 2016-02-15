@@ -6,7 +6,7 @@ class Bing(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'http://www.bing.com'
+    HOST = "http://www.bing.com"
 
     def _collect_results_from_soup(self, soup):
         """
@@ -14,12 +14,15 @@ class Bing(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('div', attrs={'class': 'b_title'})
+        tags = soup.findAll("div", attrs={"class": "b_title"})
+
         for tag in tags:
             a_tag = tag.a
+
             if not a_tag:
                 continue
-            self.results.add(tag.a.get('href'))
+
+            yield tag.a.get("href")
 
     def _extract_next_link(self, soup):
         """
@@ -27,7 +30,7 @@ class Bing(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        next_link = soup.find('a', attrs={'class': 'sb_pagN'})
+        next_link = soup.find("a", attrs={"class": "sb_pagN"})
         return next_link
 
     def process(self, *args):
@@ -35,11 +38,11 @@ class Bing(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        path = '/search'
+        path = "/search"
         params = {
-            'q': self.target,
-            'qs': 'bs',
-            'form': 'QBRE'
+            "q": self.target,
+            "qs": "bs",
+            "form": "QBRE"
         }
 
         soup = self._get_soup(path=path, params=params)
@@ -48,11 +51,11 @@ class Bing(CommonIGEmailParser):
         next_link = self._extract_next_link(soup)
 
         while next_link:
-            next_url = next_link.get('href')
+            next_url = next_link.get("href")
 
             soup = self._get_soup(path=next_url)
-            self._collect_results_from_soup(soup)
+
+            for result in self._collect_results_from_soup(soup):
+                yield result
 
             next_link = self._extract_next_link(soup)
-
-        return self.results

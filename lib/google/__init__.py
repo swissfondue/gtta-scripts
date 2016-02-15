@@ -7,7 +7,7 @@ class Google(CommonIGEmailParser):
     """
     Class for parsing of results of search
     """
-    HOST = 'https://www.google.com'
+    HOST = "https://www.google.com"
     SEARCH_LIMIT = 1000
     SEARCH_OFFSET = 100
 
@@ -17,22 +17,22 @@ class Google(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll('h3', attrs={'class': 'r'})
+        tags = soup.findAll("h3", attrs={"class": "r"})
 
         for tag in tags:
             try:
-                url_raw = tag.a.get('href')
+                url_raw = tag.a.get("href")
 
-                if not '/url?' in url_raw:
+                if not "/url?" in url_raw:
                     continue
 
-                lsplit = url_raw.split('q=')[1]
-                rsplit = lsplit.split('&')[0]
+                lsplit = url_raw.split("q=")[1]
+                rsplit = lsplit.split("&")[0]
 
             except:
                 continue
 
-            self.results.add(rsplit)
+            yield rsplit
 
     def process(self, *args):
         """
@@ -40,12 +40,12 @@ class Google(CommonIGEmailParser):
         :return:
         """
 
-        path = '/search'
+        path = "/search"
 
         params = {
-            'q': self.target,
-            'num': str(self.SEARCH_OFFSET),
-            'filter': 0
+            "q": self.target,
+            "num": str(self.SEARCH_OFFSET),
+            "filter": 0
         }
 
         soup = self._get_soup(path=path, params=params)
@@ -56,9 +56,8 @@ class Google(CommonIGEmailParser):
         while start <= self.SEARCH_LIMIT:
             sleep(3)
             start += self.SEARCH_OFFSET
-            params['start'] = str(start)
+            params["start"] = str(start)
             soup = self._get_soup(path=path, params=params)
 
-            self._collect_results_from_soup(soup)
-
-        return self.results
+            for result in self._collect_results_from_soup(soup):
+                yield result
