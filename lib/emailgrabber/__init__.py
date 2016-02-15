@@ -24,6 +24,8 @@ class CommonIGEmailTask(Task):
         """
         Main function
         """
+        requests.packages.urllib3.disable_warnings()
+
         if not self.parser:
             self._write_result('It requires a "self.parser".')
             return
@@ -35,14 +37,17 @@ class CommonIGEmailTask(Task):
 
         while urls:
             try:
-                req = requests.get(urls.pop(), headers=self.HEADERS)
+                req = requests.get(urls.pop(), headers=self.HEADERS, verify=False)
+
                 if 'text/html' not in req.headers['content-type']:
                     continue
                 soup = BeautifulSoup(req.content)
+
                 for email in parse_soup(soup):
                     if email not in self.results:
                         self._write_result(email)
                         self.results.append(email)
+
             except Exception as e:
                 continue
 
@@ -62,6 +67,7 @@ class CommonIGEmailParser(object):
         :param target:
         :return:
         """
+        requests.packages.urllib3.disable_warnings()
         self.target = target
 
     def _get_soup(self, path='', use_post=False, **kwargs):
@@ -72,10 +78,11 @@ class CommonIGEmailParser(object):
         :param kwargs:
         :return:
         """
-
         req_method = self.req_source.get
+
         if use_post:
             req_method = self.req_source.post
+
         req = req_method(
             '%s%s' % (self.HOST, path),
             headers=self.headers,
