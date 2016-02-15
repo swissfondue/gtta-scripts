@@ -79,7 +79,10 @@ class CommonIGEmailParser(object):
         req = req_method(
             '%s%s' % (self.HOST, path),
             headers=self.headers,
-            **kwargs)
+            verify=False,
+            **kwargs
+        )
+        
         return BeautifulSoup(req.content)
 
     def _extract_next_link(self, soup):
