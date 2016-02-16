@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 from requests_oauthlib import OAuth1
 from emailgrabber import CommonIGEmailParser
+from urllib import urlencode
 
 
 class YahooAPI(CommonIGEmailParser):
@@ -39,7 +41,7 @@ class YahooAPI(CommonIGEmailParser):
             raise ValueError("Yahoo API key and client secret are required.")
 
         oauth = OAuth1(args[0][0], client_secret=args[1][0])
-        params = {"format": "xml", "count": "50", "q": self.target}
+        params = {"format": "xml", "count": "50", "q": self.target.replace(":", "%3A").replace(" ", "%20")}
         soup = self._get_soup(params=params, auth=oauth)
         self._collect_results_from_soup(soup)
 
