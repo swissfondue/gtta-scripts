@@ -49,7 +49,7 @@ class WWW_Auth_Scanner extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", 80, ["auth", "admin", "login"]);
+        $self->_process("gtta.demo.stellarbit.com", "http", 80, ["auth", "admin", "login"]);
     }
 }
 
