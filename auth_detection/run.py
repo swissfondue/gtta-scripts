@@ -59,10 +59,10 @@ class Auth_Craw(Task):
         if not self.proto:
             self.proto = "http"
 
-        if self.host:
-            target = self.proto + "://" + self.host + "/"
-        else:
-            target = self.proto + "://" + self.ip + "/"
+        if not self.port:
+            self.port = "80"
+
+        target = self.proto + "://" + self.target + ":" + self.port + "/"
 
         link_crawler.process(target)  # Starting recursive process of link crawling on target
         self._check_stop()
@@ -77,8 +77,10 @@ class Auth_Craw(Task):
         """
         Test function
         """
+        self.port = "80"
         self.proto = "http"
-        self.host = "gtta.demo.stellarbit.com"
+        self.target = "gtta.demo.stellarbit.com"
         self.main()
+
 
 execute_task(Auth_Craw)
