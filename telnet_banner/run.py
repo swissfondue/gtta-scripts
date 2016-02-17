@@ -33,7 +33,7 @@ class Telnet_Banner(Task):
         """
         Test function
         """
-        self.target = "localhost"
+        self.target = "demo.stellarbit.com"
         self.main()
 
 execute_task(Telnet_Banner)

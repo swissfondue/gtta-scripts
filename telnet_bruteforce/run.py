@@ -84,7 +84,7 @@ class TelnetBruteforce(Task):
         """
         Test function
         """
-        self.target = "192.168.1.111"
+        self.target = "demo.stellarbit.com"
         self.main()
 
 execute_task(TelnetBruteforce)
