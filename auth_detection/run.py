@@ -4,14 +4,15 @@ import re
 from core.crawler import LinkCrawler
 from core import Task, execute_task
 
+
 class Auth_Craw(Task):
     """
     Searching auth link and form from page by url, using crawler.py
     """
     urls_set = set()
 
-    FORM_PATTERN = '(?i)<form([^>]+)>(.+?)</form>'
-    AUTH_WORDS = ('auth', 'login', 'access', 'admin', 'signin', 'password')
+    FORM_PATTERN = "(?i)<form([^>]+)>(.+?)</form>"
+    AUTH_WORDS = ("auth", "login", "access", "admin", "signin", "password")
 
     def collect_unique_urls(self, url):
         """
@@ -23,7 +24,7 @@ class Auth_Craw(Task):
         """
         Searching 401 http status links
         """
-        if url[:3] == '401' and url not in self.urls_set:
+        if url[:3] == "401" and url not in self.urls_set:
             self.urls_set.add(url)
 
         self._check_stop()
@@ -38,11 +39,11 @@ class Auth_Craw(Task):
 
     def collect_urls_login_forms(self, page):
         """ If we have on page form and form has any auth KEYWORD, then outputting that page url"""
-        for item in re.finditer(self.FORM_PATTERN, page['content'], re.S):
+        for item in re.finditer(self.FORM_PATTERN, page["content"], re.S):
             self._check_stop()
 
             if any(word in item.group(0).lower() for word in self.AUTH_WORDS):
-                self.urls_set.add(page['url'])
+                self.urls_set.add(page["url"])
                 return
 
     def main(self, *args):
@@ -56,27 +57,28 @@ class Auth_Craw(Task):
         link_crawler.error_callback = self.collect_401_url
 
         if not self.proto:
-            self.proto = 'http'
+            self.proto = "http"
 
         if self.host:
-            target = self.proto + '://' + self.host + '/'
+            target = self.proto + "://" + self.host + "/"
         else:
-            target = self.proto + '://' + self.ip + '/'
+            target = self.proto + "://" + self.ip + "/"
 
         link_crawler.process(target)  # Starting recursive process of link crawling on target
         self._check_stop()
 
-        for url in self.urls_set:
-            self._write_result(url)
+        if self.urls_set:
+            for url in self.urls_set:
+                self._write_result(url)
         else:
-            self._write_result('Login links not found.')
+            self._write_result("Login links not found.")
 
     def test(self):
         """
         Test function
         """
         self.proto = "http"
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(Auth_Craw)
