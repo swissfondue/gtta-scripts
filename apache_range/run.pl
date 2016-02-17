@@ -33,14 +33,11 @@ class Apache_Range extends Task {
         my $ua = LWP::UserAgent->new;
         my $url;
 
-        if ($host !~ /http/) {
-            $url = "$proto://$host";
-        } else {
-            $url = $host;
-            $host =~ s{https?//}{};
+        unless ($proto) {
+            $proto = "http";
         }
 
-        my $print_hostname = $host . ": ";
+        $url = "$proto://$host";
         my $range = $self->_make_range_header($range_count);
 
         my $req = HTTP::Request->new(GET => $url);
@@ -56,14 +53,14 @@ class Apache_Range extends Task {
             }
 
             if ($header =~ /bytes/ && $range_count > $warn_range_count) {
-                $self->_write_result("[Warning] " .$print_hostname. "Host can accept more than $warn_range_count ranges.\n");
+                $self->_write_result("[Warning] Host can accept more than $warn_range_count ranges.\n");
             } elsif ($header =~ /bytes/ && $range_count <= $warn_range_count) {
-                $self->_write_result("[Info] " .$print_hostname. "Host can accept $range_count range(s).\n");
+                $self->_write_result("[Info] Host can accept $range_count range(s).\n");
             } else {
-                $self->_write_result("[Info] " .$print_hostname. "Host ignored Range-Header.\n");
+                $self->_write_result("[Info] Host ignored Range-Header.\n");
             }
         } else {
-            $self->_write_result("[Info] " .$print_hostname. "HTTP Request was failed: " .$res->status_line."\n");
+            $self->_write_result("[Info] HTTP request failed: " .$res->status_line."\n");
         }
     }
 
