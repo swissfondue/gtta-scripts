@@ -15,7 +15,7 @@ class Yandex(CommonIGEmailParser):
         :return:
         """
         tags = soup.findAll("span", attrs={"class": "serp-url__item"})
-        
+
         for tag in tags:
             try:
                 yield tag.a.get("href")
