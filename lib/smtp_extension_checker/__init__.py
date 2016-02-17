@@ -19,7 +19,7 @@ class SMTPExtensionChecker(Task):
             self._check_stop()
             smtp = smtplib.SMTP(
                 host=self.host or self.ip,
-                port=25,
+                port=self.port or 25,
                 timeout=self.SOCKET_TIMEOUT
             )
 
