@@ -144,7 +144,7 @@ class NMAP_TCP extends Task {
 
     # Test function
     method test {
-        $self->_process($self->target, "80", 0, 0, 1, 3, 1);
+        $self->_process("gtta.demo.stellarbit.com", "80", 0, 0, 1, 3, 1);
     }
 }
 

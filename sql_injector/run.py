@@ -35,7 +35,7 @@ class Sql_Injector(Task):
         """
         self.proto = "http"
         self.port = 80
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(Sql_Injector)

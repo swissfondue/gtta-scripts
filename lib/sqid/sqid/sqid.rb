@@ -409,7 +409,7 @@ class SqidURL < Sqid
        return if self.checked? url
        return if skipurl? url
        
-       puts "[v] Checking URL %s.\n" % url if $verbose
+       puts "[v] Checking URL %s.\n" % url
        
        get_test_urls(url) { |test_url| 
            http_res = self.get(test_url)
@@ -582,7 +582,7 @@ class SqidPAGE < SqidURL
         return if url == nil
         a = SqidHTTP.new(url,@http_opts)
         r = a.get
-        page =""
+        page = ""
         page = r.body if r
 
         yield_url = URI.parse(url)
@@ -591,6 +591,7 @@ class SqidPAGE < SqidURL
         
         page.scan(/href\s*=\s*["']([^"']+)["']/i) { |link|
             link=URI.escape(link[0])
+
             begin
                 u = URI.parse("#{link}")
                 if u.scheme
@@ -639,8 +640,8 @@ class SqidCRAWL < SqidPAGE
     end
     
     def crawl(url)
-        puts "[v] Getting %s." % url if $verbose
-        get_links(url) { |eurl| 
+        puts "[v] Getting %s." % url
+        get_links(url) { |eurl|
              eurl.gsub!(/#.*/,"")
              eurl_obj=URI.parse(eurl)
              if visited?(eurl) == false and eurl_obj.host == @host

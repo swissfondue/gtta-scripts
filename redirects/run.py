@@ -8,17 +8,17 @@ class RedirectsTask(Task):
     URL-redirects collector
     """
     PATTERNS = ( 
-        'www.', 
-        'http://', 
-        'https://', 
-        'target',
-        'url', 
-        'redirect', 
-        'site', 
-        'website', 
-        'redir', 
-        'go', 
-        'jump' 
+        "www.", 
+        "http://", 
+        "https://", 
+        "target",
+        "url", 
+        "redirect", 
+        "site", 
+        "website", 
+        "redir", 
+        "go", 
+        "jump" 
     )
 
     def __init__(self):
@@ -34,15 +34,15 @@ class RedirectsTask(Task):
         """
         orig_link = link
 
-        if link[:5] == 'https':
+        if link[:5] == "https":
             link = link[8:]
-        elif link[:5] == 'http:':
+        elif link[:5] == "http:":
             link = link[7:]
 
-        if link.find('/') == -1:
+        if link.find("/") == -1:
             return True
 
-        link = link[link.find('/'):].lower()
+        link = link[link.find("/"):].lower()
         found = False
 
         for pattern in self.PATTERNS:
@@ -67,8 +67,8 @@ class RedirectsTask(Task):
         cr.redirect_callback = self._write_redirect
         cr.stop_callback = self._check_stop
 
-        target = '%s://%s' % (
-            self.proto or 'http',
+        target = "%s://%s" % (
+            self.proto or "http",
             self.host or self.ip
         )
 
@@ -76,17 +76,17 @@ class RedirectsTask(Task):
             cr.process(target)
 
             if not self.produced_output:
-                self._write_result('No redirects found.')
+                self._write_result("No redirects found.")
 
         except Exception as e:
-            self._write_result('Error opening %s: %s' % ( target, str(e) ))
+            self._write_result("Error opening %s: %s" % ( target, str(e) ))
 
     def test(self):
         """
         Test function
         """
         self.proto = "http"
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(RedirectsTask)

@@ -19,9 +19,8 @@ class LinkCrawler(object):
     """
     URL-redirects crawler
     """
-    A_TAG_PATTERN = '''(?i)<a([^>]+)>(.+?)</a>'''
-
-    LINK_PATTERN = '''href=[\'"]?([^\'" >]+)'''
+    A_TAG_PATTERN = """(?i)<a([^>]+)>(.+?)</a>"""
+    LINK_PATTERN = """href=[\'"]?([^\'" >]+)"""
 
     def __init__(self, recursive=True):
         """
@@ -51,32 +50,31 @@ class LinkCrawler(object):
 
         def populate(url):
             try:
-                resp = requests.get(url, headers={'User-agent': 'Mozilla/5.0'}, verify=False)
+                resp = requests.get(url, headers={"User-agent": "Mozilla/5.0"}, verify=False)
             except Exception:
                 return
 
+            # handle redirects
+            if any(r.status_code in (301, 302) for r in resp.history):
+                if self.redirect_callback(url):
+                    return
+
             # handle errors
             if resp.status_code >= 400:
-                self.error_callback('%03d: %s' % (resp.status_code, url))
-                return
+                if self.error_callback("%03d: %s" % (resp.status_code, url)):
+                    return
 
             # handle non-html
-            if not resp.headers.get(
-                    'content-type', '').startswith('text/html'):
+            if not resp.headers.get("content-type", "").startswith("text/html"):
                 self.nonhtml_callback(url)
                 return
-
-            # handle redirects
-            if any(r.status_code in ( 301, 302 ) for r in resp.history):
-                if self.redirect_callback(url):
-                    # if callback return "True" - skip parsing of the link
-                    return
 
             # parse pages
             self.link_content_callback(dict(url=url, content=resp.text))
 
             for item in re.finditer(self.LINK_PATTERN, resp.text):
                 link = urlparse.urljoin(url, item.group(1))
+
                 # populate all parsed link (if not cached)
                 if link not in cache:
                     if self.ext_link_test(url, link):

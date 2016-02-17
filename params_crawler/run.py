@@ -25,16 +25,16 @@ class FormsParser(HTMLParser):
         """
         at = dict(attrs)
 
-        if tag == 'form':
+        if tag == "form":
             self.form_attributes = dict()
-            self.form_attributes['action'] = None
-            self.form_attributes['inputs'] = []
+            self.form_attributes["action"] = None
+            self.form_attributes["inputs"] = []
 
             if "action" in at:
                 self.form_attributes["action"] = at["action"]
 
-        if tag in ('input', 'select'):
-            self.form_attributes['inputs'].append(at)
+        if tag in ("input", "select"):
+            self.form_attributes["inputs"].append(at)
 
 
 class Params_Craw(Task):
@@ -45,8 +45,8 @@ class Params_Craw(Task):
     forms_urls_set = set()
     form_parser = FormsParser()
 
-    FORM_PATTERN = '(?i)<form([^>]+)>(.+?)</form>'
-    INPUT_PATTERN = '(?i)<input(.+?)>'
+    FORM_PATTERN = "(?i)<form([^>]+)>(.+?)</form>"
+    INPUT_PATTERN = "(?i)<input(.+?)>"
 
     def collect_unique_urls(self, url):
         """
@@ -64,7 +64,7 @@ class Params_Craw(Task):
                 self._write_result(url)
 
                 for key, value in query_params.items():
-                    self._write_result('\t' + key + '=' + value[0])
+                    self._write_result("\t" + key + "=" + value[0])
                     self._check_stop()
 
                 self._write_result("")
@@ -73,10 +73,10 @@ class Params_Craw(Task):
 
     def collect_form_params(self, page):
         """ If we have on page form, then outputting that form url and params from there"""
-        if page['url'] not in self.forms_urls_set:
-            self.forms_urls_set.add(page['url'])
+        if page["url"] not in self.forms_urls_set:
+            self.forms_urls_set.add(page["url"])
 
-            for item in re.finditer(self.FORM_PATTERN, page['content'], re.S):  # Iterate all forms in page content
+            for item in re.finditer(self.FORM_PATTERN, page["content"], re.S):  # Iterate all forms in page content
                 self._check_stop()
 
                 self.form_parser.feed(item.group(0))  # Parsing form action and inputs params with Form_Parser
@@ -85,17 +85,17 @@ class Params_Craw(Task):
                 if not form_attributes["action"]:
                     form_attributes["action"] = page["url"]
 
-                self._write_result('Form: ' + form_attributes['action'])
+                self._write_result("Form: " + form_attributes["action"])
 
-                for input_params in form_attributes['inputs']:  # Iterating all inputs attributes
+                for input_params in form_attributes["inputs"]:  # Iterating all inputs attributes
                     self._check_stop()
 
-                    if 'name' in input_params:
-                        name = input_params['name']
-                        value = ''
+                    if "name" in input_params:
+                        name = input_params["name"]
+                        value = ""
 
-                        if 'value' in input_params:
-                            value = input_params['value']
+                        if "value" in input_params:
+                            value = input_params["value"]
 
                         self._write_result("\t%s=%s" % (name, value))
 
@@ -111,26 +111,26 @@ class Params_Craw(Task):
         link_crawler.link_content_callback = self.collect_form_params
 
         if not self.proto:
-            self.proto = 'http'
+            self.proto = "http"
 
         if self.host:
-            target = self.proto + '://' + self.host + '/'
+            target = self.proto + "://" + self.host + "/"
         else:
-            target = self.proto + '://' + self.ip + '/'
+            target = self.proto + "://" + self.ip + "/"
 
         link_crawler.process(target)  # Starting recursive process of link crawling on target
 
         self._check_stop()
 
         if not self.produced_output:
-            self._write_result('No variables found.')
+            self._write_result("No variables found.")
 
     def test(self):
         """
         Test function
         """
         self.proto = "http"
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(Params_Craw)
