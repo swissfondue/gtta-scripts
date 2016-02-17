@@ -27,7 +27,7 @@ class WWW_File_Scanner extends Task {
                 "Referer" => "http://its.me.oliver"
             );
 
-            my $output = $request->get("$protocol://$target:$port/$line/");
+            my $output = $request->get("$protocol://$target:$port/$line");
             my $code = $output->code;
             my $size = length ($output->content);
 
@@ -50,7 +50,7 @@ class WWW_File_Scanner extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", 80, ["robots.txt", "index.html", "logon.php"]);
+        $self->_process("gtta.demo.stellarbit.com", "http", 80, ["robots.txt", "index.html", "logon.php"]);
     }
 }
 
