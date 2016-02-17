@@ -5,10 +5,6 @@ dependencies:
   library:
     - core
 inputs:
-  - name: port
-    type: text
-    description: SMTP port
-    value: 25
   - name: timeout
     type: text
     description: TCP timeout
