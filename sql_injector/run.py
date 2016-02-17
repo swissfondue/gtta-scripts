@@ -12,20 +12,16 @@ class Sql_Injector(Task):
         Main function
         """
         if not self.proto:
-            self.proto = 'http'
+            self.proto = "http"
 
         if not self.port:
             self.port = 80
 
-        if self.host:
-            target = self.proto + '://' + self.host + ':' + str(self.port)
-        else:
-            target = self.proto + '://' + self.ip + ':' + str(self.port)
-
-        ok, sqlis = get_injections(target + '/')
+        target = self.proto + "://" + self.target + ":" + str(self.port)
+        ok, sqlis = get_injections(target)
 
         if not ok:
-            self._write_result('SQID call error.')
+            self._write_result("SQID call error.")
         else:
             self._write_result(sqlis)
 
@@ -35,7 +31,7 @@ class Sql_Injector(Task):
         """
         self.proto = "http"
         self.port = 80
-        self.host = "gtta.demo.stellarbit.com"
+        self.target = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(Sql_Injector)

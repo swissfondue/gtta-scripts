@@ -409,7 +409,7 @@ class SqidURL < Sqid
        return if self.checked? url
        return if skipurl? url
        
-       puts "[v] Checking URL %s.\n" % url
+       puts "[v] Checking URL %s.\n" % url if $verbose
        
        get_test_urls(url) { |test_url| 
            http_res = self.get(test_url)
@@ -640,7 +640,7 @@ class SqidCRAWL < SqidPAGE
     end
     
     def crawl(url)
-        puts "[v] Getting %s." % url
+        puts "[v] Getting %s." % url if $verbose
         get_links(url) { |eurl|
              eurl.gsub!(/#.*/,"")
              eurl_obj=URI.parse(eurl)
