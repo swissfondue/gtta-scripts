@@ -28,7 +28,7 @@ class CMSDetectionTask(core.Task):
         Test function
         """
         self.proto = "http"
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 core.execute_task(CMSDetectionTask)
