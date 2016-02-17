@@ -26,14 +26,14 @@ class DNS_NS extends Task {
     }
 
     # Process
-    method _process(Str $host, Int $timeout, Int $debug) {
-        my $res = Net::DNS::Resolver->new("debug" => $debug);
+    method _process(Str $host) {
+        my $res = Net::DNS::Resolver->new();
 
         unless ($host =~ m/^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/) {
             die("Not a valid domain name: $host ");
         }
 
-        $res->tcp_timeout($timeout);
+        $res->tcp_timeout(10);
 
         unless ($res->query($host, "A") || $res->query($host, "CNAME")) {
             die("Host not found: $host");
@@ -57,17 +57,12 @@ class DNS_NS extends Task {
 
     # Main function
     method main($args) {
-        my ($timeout, $debug);
-
-        $timeout = $self->_get_int($args, 0, 120);
-        $debug = $self->_get_int($args, 1, 0);
-
-        $self->_process($self->target, $timeout, $debug);
+        $self->_process($self->target);
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 10, 1);
+        $self->_process("google.com");
     }
 }
 

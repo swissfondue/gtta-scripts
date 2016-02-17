@@ -5,6 +5,10 @@ dependencies:
   library:
     - core
 inputs:
+  - name: tls
+    type: checkbox
+    description: Enable TLS support.
+    value: 1
   - name: recipient
     type: text
     description: Recipient email

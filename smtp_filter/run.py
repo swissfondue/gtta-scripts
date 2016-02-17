@@ -15,7 +15,7 @@ class SMTP_Filter(Task):
     """
     DEFAULT_FOLDER = ["Encrypted"]
 
-    def main(self, recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
+    def main(self, tls=[], recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """
         Main function
         """
@@ -31,6 +31,11 @@ class SMTP_Filter(Task):
             recipient = recipient[0]
         else:
             raise NoRecipient('No recipient specified.')
+
+        if tls and tls[0]:
+            tls = True
+        else:
+            tls = False
 
         if folder and folder[0]:
             folder = folder[0]
@@ -79,7 +84,14 @@ class SMTP_Filter(Task):
                 return
 
             try:
+                if tls:
+                    try:
+                        smtp.starttls()
+                    except:
+                        pass
+
                 smtp.login(login, password)
+
             except Exception:
                 self._write_result('SMTP login failed.')
                 return
@@ -109,6 +121,6 @@ class SMTP_Filter(Task):
         """
         Test function
         """
-        self.main(["test@gmail.com"], ["smtp.gmail.com"], ["johndoe.123@gmail.com"], ["123"], ["johndoe.123@gmail.com"])
+        self.main(["1"], ["test@gmail.com"], ["smtp.gmail.com"], ["johndoe.123@gmail.com"], ["123"], ["johndoe.123@gmail.com"])
 
 execute_task(SMTP_Filter)
