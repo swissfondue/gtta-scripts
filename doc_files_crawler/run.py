@@ -48,7 +48,7 @@ class Doc_Craw(Task):
         """
         Test function
         """
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.main()
 
 execute_task(Doc_Craw)
