@@ -19,12 +19,7 @@ class Wotbox(CommonIGEmailParser):
 
         for tag in tags:
             try:
-                v = tag.get("onclick")[11:-3]
-                redirect_path = self.STATIC_PATH + ("&v=%s" % v)
-                redirect_script = self._get_soup(path=redirect_path)
-                string = redirect_script.script.text.split("\n")[1]
-
-                yield string[7:-3]
+                yield tag.get("href")
 
             except:
                 continue
@@ -37,8 +32,10 @@ class Wotbox(CommonIGEmailParser):
         """
         next_link = None
         paginator = soup.find("td", attrs={"class": "prevnext"})
+
         if paginator:
             next_link = filter(lambda x: not x.text == "Next", paginator.findAll("a"))[0]
+
         return next_link
 
     def process(self):
@@ -63,7 +60,9 @@ class Wotbox(CommonIGEmailParser):
 
         # use it
         soup = self._get_soup(path=string[7:-3])
-        self._collect_results_from_soup(soup)
+
+        for result in self._collect_results_from_soup(soup):
+            yield result
 
         next_link = self._extract_next_link(soup)
 

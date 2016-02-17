@@ -14,8 +14,8 @@ class Yandex(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        tags = soup.findAll("h2", attrs={"class": "serp-item__title"})
-
+        tags = soup.findAll("span", attrs={"class": "serp-url__item"})
+        
         for tag in tags:
             try:
                 yield tag.a.get("href")
@@ -28,8 +28,10 @@ class Yandex(CommonIGEmailParser):
         :param soup:
         :return:
         """
-        next_span = filter(lambda x: x.text == "Next", soup.findAll("span", attrs={"class": "button__text"}))
-        next_link = next_span[0].parent if next_span else None
+        links = soup.findAll("a", attrs={"class": "link link_ajax_yes pager__item pager__item_kind_next i-bem"})
+        next_a = filter(lambda x: x.text == "next", links)
+        next_link = next_a[0].get("href") if next_a else None
+
         return next_link
 
     def process(self):
@@ -37,16 +39,20 @@ class Yandex(CommonIGEmailParser):
         Get results by target from source
         :return:
         """
-        soup = self._get_soup(path="/yandsearch")
-        self._collect_results_from_soup(soup)
+        params = {
+            "lr": "87",
+            "text": self.target
+        }
+
+        soup = self._get_soup(path="/yandsearch", params=params)
+
+        for result in self._collect_results_from_soup(soup):
+            yield result
+
         next_link = self._extract_next_link(soup)
 
         while next_link:
-            next_url = next_link.get("href")
-            soup = self._get_soup(path=next_url, params={
-                "lr": "87",
-                "text": self.target
-            })
+            soup = self._get_soup(path=next_link, params=params)
 
             for result in self._collect_results_from_soup(soup):
                 yield result
