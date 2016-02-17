@@ -26,9 +26,9 @@ class DNS_MX extends Task {
     }
 
     # Process
-    method _process(Str $host, Int $timeout, Int $debug) {
+    method _process(Str $host) {
         no warnings; # no unicode garbage
-        my $res = Net::DNS::Resolver->new('debug' => $debug);
+        my $res = Net::DNS::Resolver->new();
         my $cnt = 1;
 
         unless ($host =~ m/^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/) {
@@ -36,7 +36,7 @@ class DNS_MX extends Task {
         } else {
             $host =~ s/^www\.//;
 
-            $res->tcp_timeout($timeout);
+            $res->tcp_timeout(10);
             my @mx = mx($res, $host);
 
             if (@mx) {
@@ -51,17 +51,12 @@ class DNS_MX extends Task {
 
     # Main function
     method main($args) {
-        my ($timeout, $debug);
-
-        $timeout = $self->_get_int($args, 0, 10);
-        $debug = $self->_get_int($args, 1, 0);
-
-        $self->_process($self->target, $timeout, $debug);
+        $self->_process($self->target);
     }
 
     # Test function
     method test {
-        $self->_process("google.com", 10, 1);
+        $self->_process("google.com");
     }
 }
 
