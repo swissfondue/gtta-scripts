@@ -1,4 +1,4 @@
-# Apache DoS
+# Apache Range
 # ---
 # [Author]
 # Ryusuke Tsuda (InfoAlive Corp.)
@@ -7,8 +7,8 @@
 use MooseX::Declare;
 use core::task qw(execute);
 
-# Apache DoS task
-class ApacheDos extends Task {
+# Apache Range task
+class Apache_Range extends Task {
     use LWP::UserAgent;
 
     # Make range header
@@ -78,4 +78,4 @@ class ApacheDos extends Task {
     }
 }
 
-execute(ApacheDos->new());
+execute(Apache_Range->new());

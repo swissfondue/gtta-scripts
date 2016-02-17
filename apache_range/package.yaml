@@ -1,5 +1,5 @@
 type: script
-name: apache_dos
+name: apache_range
 version: 1.7
 dependencies:
   library:
