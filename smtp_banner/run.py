@@ -25,7 +25,7 @@ class SMTP_Banner(Task):
         try:
             s = socket(AF_INET, SOCK_STREAM)
             s.settimeout(self.SOCKET_TIMEOUT)
-            s.connect(( target, 25 ))
+            s.connect((target, self.port or 25))
 
             file = s.makefile('rb')
 
