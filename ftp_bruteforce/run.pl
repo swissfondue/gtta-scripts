@@ -12,11 +12,6 @@ class FTP_Bruteforce extends Task {
     method _process(Str $target, Int $port, $users, $passw) {
         my ($cnt, $ftp);
 
-        unless ($ftp = Net::FTP->new($target, Port => $port)) {
-            $self->_write_result("Failed to connect to $target.");
-            return;
-        }
-
         $cnt = 0;
 
         map {
@@ -26,6 +21,11 @@ class FTP_Bruteforce extends Task {
             map {
                 my $try = $_;
                 chomp($try);
+
+                unless ($ftp = Net::FTP->new($target, Port => $port)) {
+                    $self->_write_result("Failed to connect to $target.");
+                    return;
+                }
 
                 if ($ftp->login($user, $try)) {
                     $self->_write_result("pair $user:$try is good for $target");
@@ -53,7 +53,7 @@ class FTP_Bruteforce extends Task {
 
     # Test function
     method test {
-        $self->_process("ftp.debian.org", 21, ["root", "test"], ["123", "qwerty"]);
+        $self->_process("gtta.demo.stellarbit.com", 21, ["root", "test"], ["123", "qwerty"]);
     }
 }
 
