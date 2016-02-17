@@ -23,8 +23,8 @@ class TCP_Traceroute(Task):
         self._write_result(
             Popen(
                 [
-                    'tcptraceroute',
-                    '-m',
+                    "/usr/sbin/tcptraceroute",
+                    "-m",
                     str(self.MAX_HOPS),
                     target,
                     str(self.port)
@@ -38,7 +38,7 @@ class TCP_Traceroute(Task):
         self._check_stop()
 
         if not self.produced_output:
-            self._write_result('No result.')
+            self._write_result("No result.")
 
     def test(self):
         """
