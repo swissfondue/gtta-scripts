@@ -1,6 +1,6 @@
 type: script
 name: nmap_udp
-version: 1.7
+version: 2.0
 dependencies:
   system:
     - libxml-libxml-perl

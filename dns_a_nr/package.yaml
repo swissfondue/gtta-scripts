@@ -1,6 +1,6 @@
 type: script
 name: dns_a_nr
-version: 1.7
+version: 2.0
 dependencies:
   library:
     - core

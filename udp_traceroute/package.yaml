@@ -1,6 +1,6 @@
 type: script
 name: udp_traceroute
-version: 1.7
+version: 2.0
 dependencies:
   system:
     - traceroute
