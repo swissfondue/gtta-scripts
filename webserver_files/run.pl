@@ -12,9 +12,8 @@ class Webserver_Files extends Task {
 
     # Process
     method _process(Str $target, Str $proto, $files) {
-        my $url = "$proto://$target";
         my $joined_files = join(" ", @$files);
-        $self->_write_result(call_external("perl webserver_files.pl $url $joined_files"));
+        $self->_write_result(call_external("perl webserver_files.pl $target $joined_files"));
     }
 
     # Main function
@@ -24,7 +23,7 @@ class Webserver_Files extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", ["files/Apache_Web_Server.txt"]);
+        $self->_process("gtta.demo.stellarbit.com", "http", ["files/Apache_Web_Server.txt"]);
     }
 }
 

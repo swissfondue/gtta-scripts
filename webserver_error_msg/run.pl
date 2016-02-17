@@ -10,8 +10,7 @@ class Webserver_Error extends Task {
 
     # Process
     method _process(Str $target, Str $proto) {
-        my $url = "$proto://$target";
-        $self->_write_result(call_external("perl webserver_error_msg.pl $url"));
+        $self->_write_result(call_external("perl webserver_error_msg.pl $target"));
     }
 
     # Main function

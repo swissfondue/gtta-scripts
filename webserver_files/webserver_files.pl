@@ -6,7 +6,6 @@ use LWP::UserAgent;
 use LWP::ConnCache;
 use HTTP::Response;
 use Digest::MD5;
-use encoding "utf-8";
 use strict;
 
 my $Host = $ARGV[0];

@@ -115,6 +115,6 @@ class W3AFScriptLauncher(Task):
         """
         Test function
         """
-        self.host = "google.com"
+        self.host = "gtta.demo.stellarbit.com"
         self.proto = "http"
         self.main()
