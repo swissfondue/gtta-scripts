@@ -55,10 +55,8 @@ class ApacheDos extends Task {
                 $header = "";
             }
 
-            if ($content =~ /Content-range:/ && $range_count > $warn_range_count) {
+            if ($header =~ /bytes/ && $range_count > $warn_range_count) {
                 $self->_write_result("[Warning] " .$print_hostname. "Host can accept more than $warn_range_count ranges.\n");
-            } elsif ($content =~ /Content-range:/ && $range_count <= $warn_range_count) {
-                $self->_write_result("[Info] " .$print_hostname. "Host can accept $range_count ranges.\n");
             } elsif ($header =~ /bytes/ && $range_count <= $warn_range_count) {
                 $self->_write_result("[Info] " .$print_hostname. "Host can accept $range_count range(s).\n");
             } else {
@@ -76,7 +74,7 @@ class ApacheDos extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", 10);
+        $self->_process("gtta.demo.stellarbit.com", "http", 10);
     }
 }
 
