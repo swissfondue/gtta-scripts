@@ -20,22 +20,22 @@ class TheHarvesterEmailsTask(Task):
         ok, output = call.call([
             "python",
             cmd,
-            '-b',
-            'all',
-            '-d',
-            self.host
+            "-b",
+            "all",
+            "-d",
+            self.target
         ])
 
         if ok:
             self._write_result(output)
         else:
-            self._write_result('ERROR CALLING theHarvester script')
+            self._write_result("ERROR CALLING theHarvester script")
 
     def test(self):
         """
         Test function
         """
-        self.host = "google.com"
+        self.target = "lu.ch"
         self.main()
 
 execute_task(TheHarvesterEmailsTask)
