@@ -29,7 +29,7 @@ class ApacheDos extends Task {
 
     # Process host and range count
     method _process(Str $host, Str $proto, Int $range_count) {
-        my $warn_range_count = 5;
+        my $warn_range_count = 200;
         my $ua = LWP::UserAgent->new;
         my $url;
 
