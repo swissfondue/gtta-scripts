@@ -30,7 +30,7 @@ class WWW_Dir_Scanner extends Task {
             my $output = $request->get("$protocol://$target:$port/$line/");
             my $error_code = $output->code;
 
-            if ($error_code == 403) {
+            if ($error_code == 403 || $error_code == 200 || $error_code == 401) {
                 $self->_write_result("Possible Directory found here: $protocol://$target:$port/$line/. The response code was: " . $output->status_line);
                 $found = 1;
             }
@@ -49,7 +49,7 @@ class WWW_Dir_Scanner extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", 80, ["test", "auth", "admin", "login", "mail"]);
+        $self->_process("gtta.demo.stellarbit.com", "http", 80, ["test", "auth", "admin", "login", "mail"]);
     }
 }
 
