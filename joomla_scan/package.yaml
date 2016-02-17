@@ -6,3 +6,5 @@ dependencies:
     - core
   system:
     - libwww-perl
+  perl:
+    - Switch

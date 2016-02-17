@@ -73,7 +73,7 @@ class Grep_URL extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http");
+        $self->_process("gtta.demo.stellarbit.com", "http");
     }
 }
 

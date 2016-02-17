@@ -60,7 +60,6 @@ class Login_Pages extends Task {
                 $UserAgent->timeout(30);
                 my $response = $UserAgent->get($TargetURL);
                 $hasil = $response->status_line;
-                $self->_write_result("\n[+] $TargetURL \n[!] status => $hasil\n");
                 my $View_Source = $UserAgent->request($source);
 
                 if ($View_Source->content =~ /Username/ ||
@@ -80,9 +79,8 @@ class Login_Pages extends Task {
                     $View_Source->content =~ /passe/ ||
                     $View_Source->content =~ /P\/W/
                 ) {
-                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n\n");
-                } else {
-                    $self->_write_result("[!] Admin page Login Possibilities => NO...\n\n");
+                    $self->_write_result("[+] $TargetURL \n[!] status => $hasil");
+                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n");
                 }
             }
         }
@@ -125,7 +123,6 @@ class Login_Pages extends Task {
                 $UserAgent->timeout(30);
                 my $response = $UserAgent->get($TargetURL);
                 $hasil = $response->status_line;
-                $self->_write_result("\n[+] $TargetURL \n[!] status => $hasil\n");
                 my $View_Source = $UserAgent->request($source);
 
                 if ($View_Source->content =~ /Username/ ||
@@ -145,9 +142,8 @@ class Login_Pages extends Task {
                     $View_Source->content =~ /passe/ ||
                     $View_Source->content =~ /P\/W/
                 ) {
-                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n\n");
-                } else {
-                    $self->_write_result("[!] Admin page Login Possibilities => NO...\n\n");
+                    $self->_write_result("[+] $TargetURL \n[!] status => $hasil");
+                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n");
                 }
             }
         }
@@ -183,7 +179,6 @@ class Login_Pages extends Task {
                 $UserAgent->timeout(30);
                 my $response = $UserAgent->get($TargetURL);
                 $hasil = $response->status_line;
-                $self->_write_result("\n[+] $TargetURL \n[!] status => $hasil\n");
                 my $View_Source = $UserAgent->request($source);
 
                 if ($View_Source->content =~ /Username/ ||
@@ -203,9 +198,8 @@ class Login_Pages extends Task {
                     $View_Source->content =~ /passe/ ||
                     $View_Source->content =~ /P\/W/
                 ) {
-                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n\n");
-                } else {
-                    $self->_write_result("[!] Admin page Login Possibilities => NO...\n\n");
+                    $self->_write_result("[+] $TargetURL \n[!] status => $hasil");
+                    $self->_write_result("[!] Admin page Login Possibilities => YES !!\n");
                 }
             }
         }
@@ -219,7 +213,7 @@ class Login_Pages extends Task {
 
     # Test function
     method test {
-        $self->_process("google.com", "http", "php");
+        $self->_process("gtta.demo.stellarbit.com", "http", "php");
     }
 }
 
