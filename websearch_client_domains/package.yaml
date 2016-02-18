@@ -1,6 +1,0 @@
-type: script
-name: websearch_client_domains
-version: 2.0
-dependencies:
-  library:
-    - core

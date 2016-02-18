@@ -1,8 +1,0 @@
-type: script
-name: ig_email_lexxe
-version: 2.0
-dependencies:
-  library:
-    - core
-    - lexxe
-    - emailgrabber

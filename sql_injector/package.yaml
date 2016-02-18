@@ -1,7 +1,0 @@
-type: script
-name: sql_injector
-version: 2.0
-dependencies:
-  library:
-    - core
-    - sqid

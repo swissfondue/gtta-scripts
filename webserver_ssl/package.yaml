@@ -1,9 +1,0 @@
-type: script
-name: webserver_ssl
-version: 2.0
-dependencies:
-  system:
-    - libwww-perl
-    - libxml-simple-perl
-  library:
-    - core
