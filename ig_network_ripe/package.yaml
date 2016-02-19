@@ -1,6 +1,6 @@
 type: script
 name: ig_network_ripe
-version: 2.0
+version: "2.0"
 dependencies:
   library:
     - core

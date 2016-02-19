@@ -1,6 +1,6 @@
 type: script
 name: w3af_collect_cookies
-version: 2.0
+version: "2.0"
 dependencies:
   library:
     - core

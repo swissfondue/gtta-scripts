@@ -1,6 +1,6 @@
 type: script
 name: www_file_scanner
-version: 2.0
+version: "2.0"
 dependencies:
   system:
     - libwww-perl

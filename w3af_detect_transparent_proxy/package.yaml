@@ -1,6 +1,6 @@
 type: script
 name: w3af_detect_transparent_proxy
-version: 2.0
+version: "2.0"
 dependencies:
   library:
     - core

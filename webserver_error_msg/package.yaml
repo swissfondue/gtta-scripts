@@ -1,6 +1,6 @@
 type: script
 name: webserver_error_msg
-version: 2.0
+version: "2.0"
 dependencies:
   system:
     - libwww-perl

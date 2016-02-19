@@ -1,6 +1,6 @@
 type: script
 name: ssl_key_size
-version: 2.0
+version: "2.0"
 dependencies:
   library:
     - core

@@ -1,6 +1,6 @@
 type: script
 name: tcp_timestamp
-version: 2.0
+version: "2.0"
 dependencies:
   system:
     - tcpdump

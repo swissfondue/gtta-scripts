@@ -1,6 +1,6 @@
 type: script
 name: ig_email_exalead
-version: 2.0
+version: "2.0"
 dependencies:
   library:
     - core
