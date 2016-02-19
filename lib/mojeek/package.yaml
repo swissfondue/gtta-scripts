@@ -1,7 +1,0 @@
-type: library
-name: mojeek
-version: 2.0
-dependencies:
-  system:
-    - python-requests
-    - python-beautifulsoup

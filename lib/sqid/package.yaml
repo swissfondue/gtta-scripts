@@ -1,6 +1,0 @@
-type: library
-name: sqid
-version: 2.0
-dependencies:
-  system:
-    - ruby

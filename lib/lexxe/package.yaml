@@ -1,6 +1,0 @@
-type: library
-name: lexxe
-version: 2.0
-dependencies:
-  library:
-    - emailgrabber
