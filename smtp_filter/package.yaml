@@ -12,9 +12,6 @@ inputs:
   - name: recipient
     type: text
     description: Recipient email
-  - name: smtp_server
-    type: text
-    description: SMTP server address
   - name: smtp_login
     type: text
     description: SMTP login

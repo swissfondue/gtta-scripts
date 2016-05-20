@@ -15,7 +15,7 @@ class SMTP_Filter(Task):
     """
     DEFAULT_FOLDER = ["Encrypted"]
 
-    def main(self, tls=[], recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
+    def main(self, tls=[], recipient=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """
         Main function
         """
