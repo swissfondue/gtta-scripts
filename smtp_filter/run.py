@@ -15,18 +15,10 @@ class SMTP_Filter(Task):
     """
     DEFAULT_FOLDER = ["Encrypted"]
 
-    def main(self, tls=[], recipient=[], server=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
+    def main(self, tls=[], recipient=[], login=[], password=[], sender=[], folder=DEFAULT_FOLDER, *args):
         """
         Main function
         """
-        target = None
-
-        if server and server[0]:
-            target = server[0]
-
-        if not target:
-            raise NoMailServer('No mail server specified.')
-
         if recipient and recipient[0]:
             recipient = recipient[0]
         else:
@@ -78,7 +70,7 @@ class SMTP_Filter(Task):
             message.attach(part)
 
             try:
-                smtp = SMTP(target, self.port or 25, timeout=self.SMTP_TIMEOUT)
+                smtp = SMTP(self.target, self.port or 25, timeout=self.SMTP_TIMEOUT)
             except Exception:
                 self._write_result('Error connecting to SMTP server.')
                 return
