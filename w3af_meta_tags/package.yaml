@@ -1,7 +1,0 @@
-type: script
-name: w3af_meta_tags
-version: "2.0"
-dependencies:
-  library:
-    - core
-    - w3af

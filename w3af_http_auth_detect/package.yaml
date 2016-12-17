@@ -1,7 +1,0 @@
-type: script
-name: w3af_http_auth_detect
-version: "2.0"
-dependencies:
-  library:
-    - core
-    - w3af

@@ -1,7 +1,0 @@
-type: script
-name: w3af_bing_spider
-version: "2.0"
-dependencies:
-  library:
-    - core
-    - w3af
